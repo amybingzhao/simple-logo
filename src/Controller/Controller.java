@@ -10,34 +10,27 @@ import Model.Turtle;
  * @author amyzhao
  *
  */
-public class Controller {
-	
-	//private Parser myParser;
+public interface Controller {
+	/*
+	private Parser myParser;
 	private List<Turtle> myTurtles;
 	private List<String> myCommandHistory;
 	private int myCanvasWidth;
 	private int myCanvasHeight;
-
+*/
 	/**
 	 * Initializes the controller.
 	 */
-	public void init(int canvasHeight, int canvasWidth) {
-		
-	}
+	public void init(int canvasHeight, int canvasWidth);
 	
 	/**
 	 * Processes the command.
 	 * @param s: String inputed by user to the command line.
 	 */
-	public void processCommand(String s) {
-		
-	}
+	public void processCommand(String command);
 	
-	private void addCommandToHistory(String s) {
-		
-	}
+	public void addCommandToHistory(String command);
 	
-	public List<String> getCommandHistory() {
-		return myCommandHistory;
-	}
+	public List<String> getCommandHistory();
+	
 }
