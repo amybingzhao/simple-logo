@@ -9,21 +9,11 @@ import Controller.Parser;
  * @author amyzhao
  */
 
-public abstract class EvalFunction extends Function {
-
-	/**
-	 * Constructs a EvalFunction object with a reference to a parser.
-	 * @param parser: parser for the function to use.
-	 */
-	public EvalFunction(Parser parser) {
-		super(parser);
-	}
+public interface EvalFunction extends Function {
 	
 	/**
 	 * Prints the result to the console for the user to see.
 	 * @param output: output to print to the console.
 	 */
-	protected void printToConsole(String output) {
-		
-	}
+	public void printToConsole(String output);
 }
