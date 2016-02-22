@@ -32,12 +32,77 @@ The second tab (implemented using a TabPane) will have the HTML formatted help p
 
 ## API Details
 
-Follow advice from lecture, we have decided to minimize the amount of open code in API interactions. As mentioned early, all Turtle manipulations will be performed using Function subclasses. In our discussions, we noted that it will never be necessary for the view to interact directly with the Function subclasses. We also noted that the Model, View, Controller paradigm could be incredibly useful. We, therefore, decided that all View to Model interactions would happen via the Controller. Therefore, the external API between the front end and back end will happen through the Controller. When a command is typed in, the text will be given to the Controller. From there is will use internal APIs to check for errors, parse it, find the proper command and handle arguments properly. This allows our code to stay well protected yet flexible. Furthermore, the Function subclasses will be based on a Function interface which will only contain the checkForError() and execute() methods. This will allow us to make it so that these two methods will be the only ones accessible by the Controller. All internal logic will remain closed to the outside. Our internal APIs will remain as closed as possible. While there will be plenty of logic going on, the logic’s methodology will remain closed to outside classes. Lastly, interactions between the Function classes and the Turtle will remain internal to the back end. Following the Observer design pattern, the Turtle will be an observable object. We will then have Turtle observer objects that will update any time a specific Turtle experiences a change. This is an external API between the front end and the back end. Changes made on the back end will be able to trigger changes on the front end.
+**Front End API Details**
 
 For the front end external API, we created a GUIInterface that we can pass to back end for the information that we need. The interface contains three methods, getWidth(), getHeight(), and notifyAllObservers(). The back end will need to call these methods to update the Model and Turtle Observable object once they parse the commands. Once called, we can update the GUI to match the changes that the back end make to the Model. By making it an interface, we made the GUI class as closed as possible because the we are only allowing the back end to use certain methods within the GUI class.
 
 For the front end internal API, we have a GUIObject interface that someone can use to add additional features to the GUI. The GUIObject interface contains createNode() and updateNode() methods. This interface is part of an inheritance hierarchy that contains all of the GUI elements, such as the console, the previous commands list, and so on. By creating the inheritance hierarchy, creating additional features is easy. To create a new feature, you would simply create a new subclass in the hierarchy, and the methods that you need are in the interface already. Currently, we also have a GUIFactory class to aid in creating the GUIObjects, but we may find that we won’t need this later on. This way, our code for each of the individual elements stays closed, and only the GUIFactory class would be changed when new elements need to be added. The internal API will use resource files to label all of the elements with their appropriate names.
 
+**Back End API Details**
+Follow advice from lecture, we have decided to minimize the amount of open code in API interactions. As mentioned early, all Turtle manipulations will be performed using Function subclasses. In our discussions, we noted that it will never be necessary for the view to interact directly with the Function subclasses. We also noted that the Model, View, Controller paradigm could be incredibly useful. We, therefore, decided that all View to Model interactions would happen via the Controller. Therefore, the external API between the front end and back end will happen through the Controller. When a command is typed in, the text will be given to the Controller. From there is will use internal APIs to check for errors, parse it, find the proper command and handle arguments properly. This allows our code to stay well protected yet flexible. Furthermore, the Function subclasses will be based on a Function interface which will only contain the checkForError() and execute() methods. This will allow us to make it so that these two methods will be the only ones accessible by the Controller. All internal logic will remain closed to the outside. Our internal APIs will remain as closed as possible. While there will be plenty of logic going on, the logic’s methodology will remain closed to outside classes. Lastly, interactions between the Function classes and the Turtle will remain internal to the back end. Following the Observer design pattern, the Turtle will be an observable object. We will then have Turtle observer objects that will update any time a specific Turtle experiences a change. This is an external API between the front end and the back end. Changes made on the back end will be able to trigger changes on the front end.
+
+*List of Function subclasses:*
+
+  * Turtle Functions
+
+  ```
+  public Fd(Turtle turtle, int dist);
+  public Bk(Turtle turtle, int dist);
+  public Lt(Turtle turtle, int dist);
+  public Rt(Turtle turtle, int dist);
+  public SetH(Turtle turtle, int degree);
+  public Towards(Turtle turtle, int x, int y);
+  public GoToXY(Turtle turtle, int x, int y);
+  public Pd(Turtle turtle);
+  public Pu(Turtle turtle);
+  public St(Turtle turtle);
+  public Ht(Turtle turtle);
+  public Home(Turtle turtle);
+  public Cs(Turtle turtle);
+  public Xcor(Turtle turtle);
+  public Ycor(Turtle turtle);
+  public Heading(Turtle turtle);
+  public PendownP(Turtle turtle);
+  public ShowingP(Turtle turtle);
+  ```
+
+  * Eval Functions
+
+  ```
+  public Sum(Function expr1, Function expr2);
+  public Difference(Function expr1, Function expr2);
+  public Product(Function expr1, Function expr2);
+  public Quotient(Function expr1, Function expr2);
+  public Remainder(Function expr1, Function expr2);
+  public Minus(Function expr);
+  public Random(int max);
+  public Sin(double degrees);
+  public Cos(double degrees);
+  public Tan(double degrees);
+  public Atan(double degrees);
+  public Log(Function expr1);
+  public Pow(int base);
+  public Pi();
+  public LessP(Function expr1, Function expr2);
+  public GreaterP(Function expr1, Function expr2);
+  public EqualP(Function expr1, Function expr2);
+  public NotEqualP(Function expr1, Function expr2);
+  public And(Function expr1, Function expr2);
+  public Or(Function expr1, Function expr2);
+  public Not(Function expr1, Function expr2);
+  ```
+
+  * Control Functions
+
+  ```
+  public Make(String var, Function expr);
+  public Repeat(Function expr, List<Command> commands);
+  public DoTimes(String var, int limit, List<Command> commands);
+  public For(String var, int start, int end, int inc, List<Command> commands);
+  public If(Function expr, List<Command> commands);
+  public IfElse(Function expr, List<Command> trueCommands, List<Command>falseCommands);
+  public To(String commandName, List<Object> vars, List<Command> commands);
+  ```
 ## API Example Code
 
 **The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the environment's history.**
