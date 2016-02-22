@@ -11,39 +11,49 @@ import javafx.scene.image.Image;
  *
  */
 
-public interface Turtle { //extends Observable {
-	/*private Image myImage;
+public class Turtle extends Observable {
+	private Image myImage;
 	private int myVariableName;
 	private int x;
 	private int y;
 	private boolean penUp;
 	private boolean isVisible;
-	private double myDirection;*/
+	private double myDirection;
 	
 	/**
 	 * Moves the turtle towards the specified location in increments of (1,1).
 	 * @param x: x-coordinate of location to move to.
 	 * @param y: y-coordinate of location to move to.
 	 */
-	public void move(int x, int y);
+	public void move(int x, int y) {
+		
+	}
 	
 	/**
 	 * Lifts the turtle's pen up so no trail is drawn when it moves.
 	 */
-	public void penUp();
+	public void penUp() {
+		
+	}
 	
 	/**
 	 * Puts the turtle's pen down so a trail is drawn when it moves.
 	 */
-	public void penDown();
+	public void penDown() {
+		
+	}
 	
 	/**
 	 * Makes the turtle invisible.
 	 */
-	public void hide();
+	public void hide() {
+		
+	}
 	
 	/**
 	 * Makes the turtle visible.
 	 */
-	public void show();
+	public void show() {
+		
+	}
 }

@@ -1,5 +1,7 @@
 package Functions;
 
+import java.util.List;
+
 import Controller.Parser;
 
 /**
@@ -7,6 +9,18 @@ import Controller.Parser;
  * @author amyzhao
  *
  */
-public interface ControlFunction extends Function {
+public class ControlFunction extends Function {
+
+	@Override
+	public void execute(List<Object> args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void checkForError() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
