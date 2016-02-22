@@ -12,7 +12,7 @@ import Functions.Function;
 public class Command {
 
 	private Function myFunction;
-	private List<Object> myArguments;
+	private String myArguments;
 	
 	/**
 	 * Executes the given function with the given arguments.
