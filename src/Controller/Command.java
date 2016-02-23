@@ -9,19 +9,23 @@ import Functions.Function;
  * @author amyzhao
  *
  */
-public interface Command {
-/*
+public class Command {
+
 	private Function myFunction;
-	private List<Object> myArguments;
-*/	
+	private String myArguments;
+	
 	/**
 	 * Executes the given function with the given arguments.
 	 * @return true if successfully executed, false if it threw an error.
 	 */
-	public boolean execute();
+	public boolean execute() {
+		return false;
+	}
 	
 	/**
 	 * Returns the function + argument that was passed in to create this Command object.
 	 */
-	public String toString();
+	public String toString() {
+		return "";
+	}
 }

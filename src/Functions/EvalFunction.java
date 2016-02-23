@@ -9,11 +9,25 @@ import Controller.Parser;
  * @author amyzhao
  */
 
-public interface EvalFunction extends Function {
+public class EvalFunction extends Function {
 	
 	/**
 	 * Prints the result to the console for the user to see.
 	 * @param output: output to print to the console.
 	 */
-	public void printToConsole(String output);
+	public void printToConsole(String output) {
+
+	}
+
+	@Override
+	public void execute(List<Object> args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void checkForError() {
+		// TODO Auto-generated method stub
+		
+	}
 }
