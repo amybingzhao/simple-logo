@@ -9,7 +9,7 @@ import Controller.Parser;
  * @author amyzhao
  */
 
-public class TurtleFunction extends Function {
+public abstract class TurtleFunction extends Function {
 	
 	/**
 	 * Moves the turtle to location (x, y).

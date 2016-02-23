@@ -1,5 +1,6 @@
 package Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.Turtle;
@@ -17,6 +18,15 @@ public class Controller {
 	private List<String> myCommandHistory;
 	private int myCanvasWidth;
 	private int myCanvasHeight;
+
+	public Controller(int width, int height){
+
+        myTurtles = new ArrayList<Turtle>();
+        myCommandHistory = new ArrayList<String>();
+        myParser = new Parser();
+        myCanvasWidth = width;
+        myCanvasHeight = height;
+    }
 
 	/**
 	 * Initializes the controller.

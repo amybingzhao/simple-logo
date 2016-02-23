@@ -20,7 +20,7 @@ public interface GUIObject {
 	 * @param nodeType
 	 * @return
 	 */
-	public Node createNode(Controller c, String nodeType);
+	Node createNode(Controller c, String nodeType);
 	/**
 	 * This method updates the Node based on new information. For example, the 
 	 * environment should keep track of all the commands that the user has used
@@ -28,5 +28,5 @@ public interface GUIObject {
 	 * for the PreviousCommands object so that the GUI can show that that command
 	 * has been called. 
 	 */
-	public void updateNode();
+	void updateNode();
 }

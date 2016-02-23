@@ -11,8 +11,6 @@ import Controller.Parser;
  *
  */
 public abstract class Function implements FunctionInterface {
-	private Parser myParser;
-	
 	/**
 	 * Checks if there is an error in the function call and notifies the UI.
 	 */

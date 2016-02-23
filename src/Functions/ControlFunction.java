@@ -9,7 +9,7 @@ import Controller.Parser;
  * @author amyzhao
  *
  */
-public class ControlFunction extends Function {
+public abstract class ControlFunction extends Function {
 
 	@Override
 	public void execute(List<Object> args) {

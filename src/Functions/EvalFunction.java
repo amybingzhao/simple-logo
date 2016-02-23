@@ -9,7 +9,7 @@ import Controller.Parser;
  * @author amyzhao
  */
 
-public class EvalFunction extends Function {
+public abstract class EvalFunction extends Function {
 	
 	/**
 	 * Prints the result to the console for the user to see.
