@@ -40,7 +40,7 @@ public class Controller {
 		myTurtles = new ArrayList<Turtle>();
 		myVariableList = new ArrayList<Variable>();
 	}
-	
+
 	/**
 	 * Processes the command.
 	 * @param s: String inputed by user to the command line.
@@ -60,7 +60,7 @@ public class Controller {
 			return "";
 		}
 	}
-	
+
 	private void executeCommandTree(List<Node> headNodes) {
 		for (int i = 0; i < headNodes.size(); i++) {
 			Node head = headNodes.get(i);
@@ -70,21 +70,21 @@ public class Controller {
 			myCommandHistory.add(head.toString());
 		}
 	}
-	
+
 	// should add to command history as well
 	private List<Node> createCommandTree(String command) throws ClassNotFoundException {
 		List<Node> headNodes = new ArrayList<Node>();
 		List<String> inputCommandList = getCommandAsList(command);
-		
+
 		while(!inputCommandList.isEmpty()) {
 			String commandToBuild = inputCommandList.get(0);
 			Node head = createClass(commandToBuild, inputCommandList);
 			headNodes.add(head);
 		}
-		
+
 		return headNodes;
 	}
-	
+
 	//returns null if couldn't create the node
 	private Node createClass(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
 		Class className = Class.forName(MODEL + parseText(myParser, commandToBuild));
@@ -95,7 +95,7 @@ public class Controller {
 			node = new Constant(Integer.parseInt(commandToBuild.toString()));
 		} else if (className.getName().equals(MODEL + "Variable")) { // how to handle creating variables..
 			node = myVariableList.get(myVariableList.indexOf(commandToBuild));
-		} else {
+		} else if (!className.getName().equals(MODEL + "comment")){
 			try {
 				node = (Node) className.newInstance();
 			} catch (Exception e) {
@@ -103,7 +103,7 @@ public class Controller {
 			}
 			addChildrenToNode(node, inputCommandList);
 		}
-		
+
 		return node;
 	}
 

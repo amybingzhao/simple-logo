@@ -17,6 +17,6 @@ public class Sum extends Node {
 	
 	public String toString() {
 		List<Node> children = getChildren();
-		return "Sum " + Integer.toString(children.get(0).interpret()) + " + " + Integer.toString(children.get(1).interpret());
+		return "Sum " + children.get(0).toString() + " + " + children.get(1).toString();
 	}
 }
