@@ -1,10 +1,16 @@
 package Controller;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 
 /**
  * This class is used to parse command strings into Command objects.
@@ -12,35 +18,38 @@ import java.util.ResourceBundle;
  *
  */
 public class Parser {
-	private static final String FUNCTION_TO_NUM_ARGS_PROPERTIES = "NumArgsForFunctions.properties";
-	private static final String AVAILABLE_FUNCTIONS = "AvailableFunctions.properties";
-	private ResourceBundle FunctionToNumArgsProperties = ResourceBundle.getBundle(FUNCTION_TO_NUM_ARGS_PROPERTIES);
-	private ResourceBundle myAvailableFunctions = ResourceBundle.getBundle(AVAILABLE_FUNCTIONS);
-	private Map<String, Integer> myNumArgsForUserDefinedCommandsMap;
-	private Map<String, Integer> myUserDefinedCommandsMap;
-	private List<Command> myParsedCommands;
+	private List<Entry<String, Pattern>> mySymbols;
 	
 	public Parser() {
-		myNumArgsForUserDefinedCommandsMap = new HashMap<String, Integer>();
-		myUserDefinedCommandsMap = new HashMap<String, Integer>();
-		myParsedCommands = new ArrayList<Command>();
+		mySymbols = new ArrayList<>();
 	}
 	
 	/**
-	 * Parses a given string of commands into a List of commands.
-	 * @param input: user input 
-	 * @return List of Commands that can be executed in the order that they were inputed by the user.
+	 * From regex example
+	 * @param syntax: path to properties file.
 	 */
-	public List<Command> parseCommand(String input) {
-		// split by white space
-		
-		// assume it starts with a fn name, else throw error "unknown function"
-		// if to fn then call addNewUserDefinedCommand
-		// should we also add a check when getting arguments for whether or not they're an arg or a fn to throw invalid # args error?
-		
-		// add to list of parsed commands
-		
-		return myParsedCommands;
+	public void addPatterns(String syntax) {
+		ResourceBundle resources = ResourceBundle.getBundle(syntax);
+		Enumeration<String> iter = resources.getKeys();
+		while (iter.hasMoreElements()) {
+			String key = iter.nextElement();
+			String regex = resources.getString(key);
+			mySymbols.add(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
+		}
+	}
+	
+	public String getSymbol(String text) {
+		final String ERROR = "NO MATCH";
+		for (Entry<String, Pattern> e : mySymbols) {
+			if (match(text, e.getValue())) {
+				return e.getKey();
+			}
+		}
+		return ERROR;
+	}
+	
+	private boolean match(String text, Pattern regex) {
+		return regex.matcher(text).matches();
 	}
 	
 	private void addNewUserDefinedCommand() {
