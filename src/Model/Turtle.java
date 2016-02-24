@@ -18,7 +18,7 @@ public class Turtle extends Observable {
 	private int myY;
 	private boolean penUp;
 	private boolean isVisible;
-	private double myDirection;
+	private int myDirection;
 	
 	public Turtle() {
 		myX = 0;
@@ -63,5 +63,12 @@ public class Turtle extends Observable {
 	 */
 	public void show() {
 		isVisible = true;
+	}
+	
+	public int getDirection() {
+		return myDirection;
+	}
+	public String getPosition() {
+		return ("(" + Integer.toString(myX) + ", " + Integer.toString(myY) + ")");
 	}
 }

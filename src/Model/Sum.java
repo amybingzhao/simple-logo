@@ -3,11 +3,6 @@ package Model;
 import java.util.List;
 
 public class Sum extends Node {
-	private static final int NUM_CHILDREN = 2;
-
-	public Sum() {
-		setNumChildrenNeeded(NUM_CHILDREN);
-	}
 	
 	@Override
 	public int interpret() {
@@ -17,6 +12,6 @@ public class Sum extends Node {
 	
 	public String toString() {
 		List<Node> children = getChildren();
-		return "Sum " + children.get(0).toString() + " + " + children.get(1).toString();
+		return "Sum " + children.get(0).toString() + " " + children.get(1).toString();
 	}
 }

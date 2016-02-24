@@ -6,9 +6,11 @@ import java.util.List;
 public abstract class Node implements LogoFunctions {
 	private List<Node> myChildren;
 	private int numChildrenNeeded;
+	private Turtle myTurtle;
 	
 	public Node() {
 		myChildren = new ArrayList<Node>();
+		myTurtle = null;
 	}
 	
 	public void addChild(Node child) {
@@ -19,12 +21,25 @@ public abstract class Node implements LogoFunctions {
 		return numChildrenNeeded;
 	}
 	
-	protected void setNumChildrenNeeded(int n) {
+	public void setNumChildrenNeeded(int n) {
 		numChildrenNeeded = n;
 	}
 	
 	public List<Node> getChildren() {
 		return myChildren;
+	}
+	
+	public void addTurtle(Turtle turtle) {
+		myTurtle = turtle;
+	}
+	
+	protected Turtle getTurtle() {
+		if (myTurtle != null) {
+			return myTurtle;
+		} else {
+			//error
+			return null;
+		}
 	}
 	
 	public abstract String toString();
