@@ -12,6 +12,7 @@ import Model.Variable;
  * by processing the commands inputed by the user in the front end.
  *
  * @author amyzhao
+ * @author blakekaplan
  */
 public class Controller {
 
@@ -47,6 +48,7 @@ public class Controller {
     public void processCommand(String command) throws ClassNotFoundException {
         List<Node> commands = myParser.createCommandTree(command, myTurtle);
         executeCommandTree(commands);
+        addCommandToHistory(command);
     }
 
     private void executeCommandTree(List<Node> headNodes) {

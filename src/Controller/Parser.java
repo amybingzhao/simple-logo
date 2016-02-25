@@ -15,6 +15,7 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
  * This class is used to parse command strings into Command objects.
  *
  * @author amyzhao
+ * @author blakekaplan
  */
 public class Parser {
 
