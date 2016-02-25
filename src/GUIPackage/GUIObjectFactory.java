@@ -4,23 +4,49 @@ import java.util.ResourceBundle;
 import javafx.scene.Node;
 
 public class GUIObjectFactory {
-	private static final String GUI_RESOURCE = "XMLs/GUI";
+	private static final String GUI_RESOURCE = "GUI";
 	ResourceBundle myResources;
-	private String nodeType;
 	
 	
-	public GUIObjectFactory(String nodeType){
-		this.nodeType = nodeType; 
+	public GUIObjectFactory(){
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 	}
 	
-	public Node createNewGUIObject(){
+	public GUIObject createNewGUIObject(String nodeTypeKey){
+		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
-			case(""):{
-				return null;
+			case("CommandLineVBox"):{
+				
 			}
-			case(" "):{
-				return null;
+			case("ExceptionHandlerLabeled"):{
+				
+			}
+			case("Canvas"):{
+				
+			}
+			case("ImageVBox"):{
+				
+			}
+			case("BackgroundVBox"):{
+				
+			}
+			case("PenVBox"):{
+				
+			}
+			case("LanguageComboBox"):{
+				
+			}
+			case("VariablesTableView"):{
+				
+			}
+			case("UserCommandsComboBox"):{
+				
+			}
+			case("PreviousCommandsComboBox"):{
+				
+			}
+			case("HelpTabPane"):{
+				
 			}
 		}
 		return null;

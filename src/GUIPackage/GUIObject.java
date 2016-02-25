@@ -23,7 +23,7 @@ public interface GUIObject {
      * @param nodeType
      * @return
      */
-    Node createNode(Controller c, String nodeType);
+    public Node createNode();
 
     /**
      * This method updates the Node based on new information. For example, the
@@ -32,7 +32,14 @@ public interface GUIObject {
      * for the PreviousCommands object so that the GUI can show that that command
      * has been called.
      */
-
     public void updateNode();
+
+    public int getXPos();
+
+    public int getYPos();
+
+    public void setXPos(int val);
+
+    public void setYPos(int val);
 
 }
