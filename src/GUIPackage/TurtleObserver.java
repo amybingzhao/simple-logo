@@ -11,7 +11,7 @@ public class TurtleObserver implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		Turtle turtle = (Turtle) o;
-		myPosition = turtle.getPosition();
+		myPosition = turtle.printPosition();
 		myDirection = turtle.getDirection();
 	}
 
