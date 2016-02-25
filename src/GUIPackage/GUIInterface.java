@@ -17,12 +17,12 @@ public interface GUIInterface {
      */
     public int getWidth();
 
-    public getHeight();
+    public int getHeight();
 
     /**
      * This method notifies the observers of the TurtleObservable object that it
      * has changed. Once the observers see that the object has changed, it can
      * update itself and match the changes of the TurtleObservable object.
      */
-    public notifyAllObservers();
+    public void notifyAllObservers();
 }
