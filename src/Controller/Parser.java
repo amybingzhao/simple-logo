@@ -5,6 +5,7 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
+import Model.CommandList;
 import Model.Constant;
 import Model.Node;
 import Model.Turtle;
@@ -21,7 +22,9 @@ public class Parser {
 
     public static final String CONSTANT = "Constant";
     public static final String VARIABLE = "Variable";
-    public static final String COMMENT = "comment";
+    public static final String COMMENT = "Comment";
+    public static final String LIST_START = "ListStart";
+    public static final String LIST_END = "ListEnd";
     public static final String TURTLE_COMMANDS = "TurtleCommands";
     private List<Entry<String, Pattern>> mySymbols;
     private static final String TURTLE_COMMANDS_RESOURCE = "Controller/TurtleCommands";
@@ -90,23 +93,42 @@ public class Parser {
 
         return headNodes;
     }
+    
+    public CommandList createList(List<String> inputList, Turtle turtle) throws ClassNotFoundException {
+        myTurtle = turtle;
+        CommandList list = new CommandList();
+        String name;
+        // assumes there is a list end; if not we gotta through an error
+        while (!(name = parseText(inputList.get(0))).equals(LIST_END)) {
+            Node head = createClass(inputList.get(0), inputList);
+            list.addChild(head);
+        }
+
+        inputList.remove(0);
+        return list;
+    }
 
     private Node createClass(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
         String name = parseText(commandToBuild);
-        Class className = Class.forName(MODEL + name);
         Node node = null;
         inputCommandList.remove(0);
-
-        switch (className.getName()){
-            case MODEL + CONSTANT:
+        Class className;
+        
+        switch (name){
+            case CONSTANT:
+                className = Class.forName(MODEL + name);
                 node = new Constant(Integer.parseInt(commandToBuild.toString()));
                 break;
-            case MODEL + VARIABLE:
+            case VARIABLE:
                 node = myVariableList.get(myVariableList.indexOf(commandToBuild));
                 break;
-            case MODEL + COMMENT:
+            case COMMENT:
                 break;
+            case LIST_START:
+            	node = createList(inputCommandList, myTurtle);
+            	break;
             default:
+            	className = Class.forName(MODEL + name);
                 try {
                     node = (Node) className.newInstance();
                     node.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));

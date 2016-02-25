@@ -26,5 +26,4 @@ public class Forward extends Node {
 		List<Node> children = getChildren();
 		return "Forward " + children.get(0).toString();
 	}
-
 }
