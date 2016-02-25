@@ -2,7 +2,7 @@ package Model;
 
 import java.util.List;
 
-public class Forward extends Node {
+public class Forward extends Node{
 	
 	@Override
 	public int interpret() {

@@ -144,6 +144,7 @@ public class Parser {
         return node;
     }
 
+
     private void addChildrenToNode(Node node, List<String> inputCommandList) throws ClassNotFoundException {
         for (int i = 0; i < node.getNumChildrenNeeded(); i++) {
             Node childNode = createClass(inputCommandList.get(0), inputCommandList);
@@ -177,4 +178,22 @@ public class Parser {
         //replace parameters with values before giving it back to the controller, e.g. for dash - replace all instances of
         // count and size with vals for count and size, then send that to parseCommand ^
     }
+
+    private String listToString(List<String> input) {
+
+        String expression = "";
+
+        for (String myString : input) {
+            expression += myString;
+            expression += " ";
+        }
+
+        return expression.trim();
+
+    }
+
+    private void handleVariable(String name, List<String> expressionList){
+
+    }
+
 }

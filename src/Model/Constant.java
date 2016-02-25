@@ -1,6 +1,6 @@
 package Model;
 
-public class Constant extends Node {
+public class Constant extends Node{
 
 	private int n;
 	
