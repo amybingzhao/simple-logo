@@ -1,5 +1,4 @@
 package GUIPackage;
-import Controller.Controller;
 import javafx.scene.Node;
 /**
  * This interface is the core of the internal API. In order to add new features, you
