@@ -10,24 +10,24 @@ import java.util.Map;
  */
 public class VariableDictionary {
 
-    private Map<String, Node> variables;
+    public static Map<String, Node> variables;
 
     public VariableDictionary(){
         variables = new HashMap<String, Node>();
     }
 
-    public void makeVariable(String key, Node expression){
+    public static void makeVariable(String key, Node expression){
         variables.put(key, expression);
     }
 
-    public Node getNodeFor(String key){
+    public static Node getNodeFor(String key){
         if (contains(key)){
             return variables.get(key);
         }
        else throw new NullPointerException();
     }
 
-    public boolean contains(String key){
+    public static boolean contains(String key){
 
         if (variables.containsKey(key)) return true;
         return false;

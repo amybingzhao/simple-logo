@@ -5,12 +5,7 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
-import Model.CommandList;
-import Model.Constant;
-import Model.Node;
-import Model.Turtle;
-import Model.Variable;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+import Model.*;
 
 /**
  * This class is used to parse command strings into Command objects.
@@ -26,6 +21,7 @@ public class Parser {
     public static final String LIST_START = "ListStart";
     public static final String LIST_END = "ListEnd";
     public static final String TURTLE_COMMANDS = "TurtleCommands";
+    public static final String MAKE = "MakeVariable";
     private List<Entry<String, Pattern>> mySymbols;
     private static final String TURTLE_COMMANDS_RESOURCE = "Controller/TurtleCommands";
     private static final String NUM_CHILDREN_PER_COMMAND = "Controller/NumChildrenForFunction";
@@ -33,16 +29,15 @@ public class Parser {
     private final String WHITESPACE = "\\p{Space}";
     private ResourceBundle myNumChildrenPerCommand;
     private ResourceBundle myTurtleCommands;
-    private List<Variable> myVariableList;
     private Turtle myTurtle;
+    private VariableDictionary myVars;
 
     public Parser() {
         mySymbols = new ArrayList<>();
         myNumChildrenPerCommand = ResourceBundle.getBundle(NUM_CHILDREN_PER_COMMAND);
         myTurtleCommands = ResourceBundle.getBundle(TURTLE_COMMANDS_RESOURCE);
-        myVariableList = new ArrayList<Variable>();
         myTurtle = new Turtle();
-
+        myVars = new VariableDictionary();
     }
 
     /**
@@ -82,9 +77,14 @@ public class Parser {
 
     public List<Node> createCommandTree(String command, Turtle turtle) throws ClassNotFoundException {
         myTurtle = turtle;
-        List<Node> headNodes = new ArrayList<Node>();
         List<String> inputCommandList = getCommandAsList(command);
 
+        return createCommandTreeFromList(inputCommandList);
+    }
+
+    private List<Node> createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
+
+        List<Node> headNodes = new ArrayList<Node>();
         while (!inputCommandList.isEmpty()) {
             String commandToBuild = inputCommandList.get(0);
             Node head = createClass(commandToBuild, inputCommandList);
@@ -120,13 +120,19 @@ public class Parser {
                 node = new Constant(Integer.parseInt(commandToBuild.toString()));
                 break;
             case VARIABLE:
-                node = myVariableList.get(myVariableList.indexOf(commandToBuild));
+                node = VariableDictionary.getNodeFor(commandToBuild);
                 break;
             case COMMENT:
                 break;
             case LIST_START:
             	node = createList(inputCommandList, myTurtle);
             	break;
+            case MAKE:
+                String varName = inputCommandList.get(0);
+                inputCommandList.remove(0);
+                Node expressionNode = createClass(inputCommandList.get(0), inputCommandList);
+                node = handleMake(varName, expressionNode);
+                break;
             default:
             	className = Class.forName(MODEL + name);
                 try {
@@ -152,6 +158,15 @@ public class Parser {
                 node.addChild(childNode);
             }
         }
+    }
+
+    private Node handleMake(String key, Node expression){
+
+        MakeVariable myMakeNode;
+        myMakeNode = new MakeVariable();
+        myMakeNode.setName(key);
+        myMakeNode.addChild(expression);
+        return myMakeNode;
     }
 
     // converts string command to arraylist
