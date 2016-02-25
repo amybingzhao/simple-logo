@@ -24,6 +24,9 @@ public class Controller {
     private int myCanvasWidth;
     private int myCanvasHeight;
     private Turtle myTurtle;
+    
+    // Global vars
+    public static Integer repCount;
 
     /**
      * Initializes the controller.
@@ -37,6 +40,7 @@ public class Controller {
         myCommandHistory = new ArrayList<String>();
         myTurtles = new ArrayList<Turtle>();
         myTurtle = new Turtle();
+        repCount = null;
     }
 
     /**
