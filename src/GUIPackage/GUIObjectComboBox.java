@@ -10,13 +10,37 @@ public class GUIObjectComboBox implements GUIObject {
 	}
 
 	@Override
-	public Node createNode(Controller c, String nodeType) {
+	public Node createNode() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void updateNode() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getXPos() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getYPos() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setXPos(int val) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setYPos(int val) {
 		// TODO Auto-generated method stub
 		
 	}
