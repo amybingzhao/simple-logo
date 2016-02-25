@@ -37,7 +37,7 @@ public class GUI implements GUIInterface {
 		myRoot = new GridPane();
 		initializeNodes();
 		for (GUIObject object: myNodeList) {
-			myRoot.add(object.createNode(myController, ""), 0, 0);
+			myRoot.add(object.createNode(), 0, 0);
 		}
 		myScene = new Scene(myRoot, windowHeight, windowWidth, Color.WHITE);
 		return myScene;
