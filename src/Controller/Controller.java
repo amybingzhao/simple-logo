@@ -55,9 +55,9 @@ public class Controller {
         for (int i = 0; i < headNodes.size(); i++) {
             Node head = headNodes.get(i);
             System.out.println(head.toString());
-            head.interpret();
+            //head.interpret();
             System.out.println("result: " + Integer.toString(head.interpret()));
-            System.out.println(myTurtle.getPosition());
+            System.out.println(myTurtle.printPosition());
             myCommandHistory.add(head.toString());
         }
     }

@@ -68,7 +68,16 @@ public class Turtle extends Observable {
 	public int getDirection() {
 		return myDirection;
 	}
-	public String getPosition() {
+	
+	public int getCurX() {
+		return myX;
+	}
+	
+	public int getCurY() {
+		return myY;
+	}
+	
+	public String printPosition() {
 		return ("(" + Integer.toString(myX) + ", " + Integer.toString(myY) + ")");
 	}
 }
