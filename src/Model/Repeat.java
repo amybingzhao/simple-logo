@@ -27,7 +27,7 @@ public class Repeat extends Node {
 	@Override
 	public String toString() {
 		List<Node> children = getChildren();
-		return "Repeat " + children.get(0).toString() + " " + children.get(1).interpret();
+		return "Repeat " + children.get(0).toString() + " " + children.get(1).toString();
 	}
 
 	

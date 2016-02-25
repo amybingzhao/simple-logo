@@ -52,7 +52,6 @@ public class Controller {
     public void processCommand(String command) throws ClassNotFoundException {
         List<Node> commands = myParser.createCommandTree(command, myTurtle);
         executeCommandTree(commands);
-        addCommandToHistory(command);
     }
 
     private void executeCommandTree(List<Node> headNodes) {
@@ -62,12 +61,12 @@ public class Controller {
             //head.interpret();
             System.out.println("result: " + Integer.toString(head.interpret()));
             System.out.println(myTurtle.printPosition());
-            myCommandHistory.add(head.toString());
+            addCommandToHistory(head.toString());
         }
     }
 
 
-    public void addCommandToHistory(String command) {
+    private void addCommandToHistory(String command) {
         myCommandHistory.add(command);
     }
 
