@@ -29,4 +29,5 @@ public interface GUIObject {
 	 * has been called. 
 	 */
 	public void updateNode();
+	
 }
