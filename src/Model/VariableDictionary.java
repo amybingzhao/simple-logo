@@ -10,7 +10,7 @@ public class VariableDictionary {
     private static VariableDictionary instance = null;
     private static double DEFAULT = 0;
 
-    public static VariableDictionary getInstance(){
+    public static synchronized VariableDictionary getInstance(){
         if (instance == null){
             instance = new VariableDictionary();
         }
