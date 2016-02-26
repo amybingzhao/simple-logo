@@ -9,7 +9,7 @@ public abstract class Node implements LogoFunctions {
     private Turtle myTurtle;
 
     public Node() {
-        myChildren = new ArrayList<Node>();
+        myChildren = new ArrayList<>();
         myTurtle = null;
     }
 

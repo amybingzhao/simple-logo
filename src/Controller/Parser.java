@@ -112,14 +112,11 @@ public class Parser {
         String name = parseText(commandToBuild);
         Node node = null;
         inputCommandList.remove(0);
-        Class className;
         switch (name){
             case CONSTANT:
-                className = Class.forName(MODEL + name);
-                node = new Constant(Integer.parseInt(commandToBuild.toString()));
+                node = new Constant(Integer.parseInt(commandToBuild));
                 break;
             case VARIABLE:
-                className = Class.forName(MODEL + VARIABLE);
                 node = new Variable(commandToBuild);
                 break;
             case COMMENT:
@@ -128,7 +125,7 @@ public class Parser {
             	node = createList(inputCommandList, myTurtle);
             	break;
             default:
-            	className = Class.forName(MODEL + name);
+            	Class className = Class.forName(MODEL + name);
                 try {
                     node = (Node) className.newInstance();
                     node.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
