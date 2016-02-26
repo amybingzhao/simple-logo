@@ -13,7 +13,7 @@ public class For extends ControlFunction{
     }
 
     @Override
-    public int interpret() {
+    public double interpret() {
         return 0;
     }
 }

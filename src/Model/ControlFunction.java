@@ -8,5 +8,5 @@ public abstract class ControlFunction extends Node{
 
     public abstract String toString();
 
-    public abstract int interpret();
+    public abstract double interpret();
 }

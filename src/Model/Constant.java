@@ -9,7 +9,7 @@ public class Constant extends Node {
     }
 
     @Override
-    public int interpret() {
+    public double interpret() {
         return n;
     }
 

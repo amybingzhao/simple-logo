@@ -5,7 +5,6 @@ import java.util.List;
 
 import Model.Node;
 import Model.Turtle;
-import Model.Variable;
 
 /**
  * This class is the only external-facing back end class. It facilitates the interaction between the front end and back end
@@ -24,9 +23,6 @@ public class Controller {
     private int myCanvasWidth;
     private int myCanvasHeight;
     private Turtle myTurtle;
-    
-    // Global vars
-    public static Integer repCount;
 
     /**
      * Initializes the controller.
@@ -40,7 +36,6 @@ public class Controller {
         myCommandHistory = new ArrayList<String>();
         myTurtles = new ArrayList<Turtle>();
         myTurtle = new Turtle();
-        repCount = null;
     }
 
     /**
@@ -59,7 +54,7 @@ public class Controller {
             Node head = headNodes.get(i);
             System.out.println(head.toString());
             //head.interpret();
-            System.out.println("result: " + Integer.toString(head.interpret()));
+            System.out.println("result: " + Double.toString(head.interpret()));
             System.out.println(myTurtle.printPosition());
             addCommandToHistory(head.toString());
         }

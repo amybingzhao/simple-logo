@@ -19,11 +19,11 @@ public class MakeVariable extends Node {
     }
 
     @Override
-    public int interpret() {
+    public double interpret() {
 
         List<Node> children = getChildren();
         String key = children.get(0).toString();
-        int value = children.get(1).interpret();
+        double value = children.get(1).interpret();
         VariableDictionary.getInstance().makeVariable(key, value);
         return 0;
     }

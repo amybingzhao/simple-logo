@@ -7,17 +7,13 @@ public class Repeat extends Node {
 	// child 0 is number of repeats
 	// child 1 is list to repeat
 	@Override
-	public int interpret() {
+	public double interpret() {
 		List<Node> children = getChildren();
-		int numIter = children.get(0).interpret();
-		int ret = 0;
-		
-		if (Controller.Controller.repCount == null) {
-			Controller.Controller.repCount = 0;
-		}
+		double numIter = children.get(0).interpret();
+		double ret = 0;
 		
 		for (int i = 0; i < numIter; i++) {
-			Controller.Controller.repCount = i;
+			VariableDictionary.getInstance().makeVariable("repCount", 0);
 			ret = children.get(1).interpret();
 		}
 		
