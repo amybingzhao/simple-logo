@@ -3,13 +3,13 @@ package GUIPackage;
 import java.io.File;
 import java.util.ResourceBundle;
 
-import Controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class GUIObjectVBox implements GUIObject {
@@ -19,16 +19,18 @@ public class GUIObjectVBox implements GUIObject {
 	private int xPos;
 	private int yPos;
 	private String nodeType;
-//	private boolean canUpdate;
+	private boolean canUpdate;
 	
 	private TextField userInputFileString;
 	private Button initializeButton;
 	private Labeled fileErrorLabel;
 	private static final double PADDING = 10;
 	
-	public GUIObjectVBox(ResourceBundle myResources, String nodeTypeKey, Controller c) {
+	public GUIObjectVBox(ResourceBundle myResources, String nodeType, int xPos, int yPos) {
 		this.myResources = myResources;
-		this.nodeType = myResources.getString(nodeTypeKey);
+		this.nodeType = nodeType;
+		this.xPos = xPos;
+		this.yPos = yPos;
 	}
 
 	@Override
@@ -40,7 +42,7 @@ public class GUIObjectVBox implements GUIObject {
 		initializeButton = new Button(myResources.getString("InitializeButtonText" + nodeType));
 		initializeButton.setOnAction(evt -> setValidity(nodeType));
 		
-		VBox XMLControls = new VBox();
+		HBox XMLControls = new HBox();
 		XMLControls.getChildren().addAll(userInputFileString, initializeButton,fileErrorLabel);
 		XMLControls.setSpacing(5);
 		XMLControls.setPadding(new Insets(0,PADDING,PADDING,PADDING));
@@ -50,7 +52,7 @@ public class GUIObjectVBox implements GUIObject {
 
 	private void setValidity(String nodeType) {
 		if (isValidFileString(userInputFileString.getText())){
-//			canUpdate = true;
+			canUpdate = true;
 		}
 	}
 	
@@ -65,15 +67,13 @@ public class GUIObjectVBox implements GUIObject {
 		return false;
 	}
 	
-//	public boolean isUpdateable(){
-//		return canUpdate;
-//	}
+	public boolean isUpdateable(){
+		return canUpdate;
+	}
 
 	@Override
 	public void updateNode() {
-		// TODO Auto-generated method stub
-		//possibly nothing here
-		
+		//possibly nothing here	
 	}
 
 	@Override

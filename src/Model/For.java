@@ -1,0 +1,37 @@
+package Model;
+
+import java.util.List;
+
+/**
+ * Created by blakekaplan on 2/25/16.
+ */
+public class For extends Node{
+
+    public static final String FOR = "For";
+
+    public String toString() {
+        return FOR;
+    }
+
+    @Override
+    public double interpret() {
+
+        List<Node> children = getChildren();
+        CommandList argList = (CommandList) children.get(0);
+        List<Node> argsNodes = argList.getEntries();
+        double low = argsNodes.get(1).interpret();
+        double high = argsNodes.get(2).interpret();
+        double increment = argsNodes.get(3).interpret();
+        Variable myVar = (Variable) argsNodes.get(0);
+        String varString = myVar.toString();
+
+        double ret = 0;
+
+        for (double i = low; i < high; i += increment){
+            VariableDictionary.getInstance().makeVariable(varString, i);
+            ret = children.get(1).interpret();
+        }
+
+        return ret;
+    }
+}

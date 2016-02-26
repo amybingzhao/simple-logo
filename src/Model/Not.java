@@ -2,16 +2,21 @@ package Model;
 
 import java.util.List;
 
-public class Sum extends Node{
-	
+public class Not extends Node {
+
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();
-		return children.get(0).interpret() + children.get(1).interpret();
+		if (children.get(0).interpret() == 0) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 	
 	public String toString() {
 		List<Node> children = getChildren();
-		return "Sum " + children.get(0).toString() + " " + children.get(1).toString();
+		return "Not " + children.get(0).toString();
 	}
+	
 }
