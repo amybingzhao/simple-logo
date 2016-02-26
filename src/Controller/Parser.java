@@ -84,7 +84,7 @@ public class Parser {
 
     private List<Node> createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
 
-        List<Node> headNodes = new ArrayList<Node>();
+        List<Node> headNodes = new ArrayList<>();
         while (!inputCommandList.isEmpty()) {
             String commandToBuild = inputCommandList.get(0);
             Node head = createClass(commandToBuild, inputCommandList);
