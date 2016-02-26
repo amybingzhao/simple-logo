@@ -1,5 +1,4 @@
 package GUIPackage;
-
 import Controller.Controller;
 import javafx.scene.Node;
 
@@ -9,7 +8,7 @@ import javafx.scene.Node;
  * create the new element in the GUIObjectFactory, the new feature will essentially
  * be added.
  *
- * @author David
+ * @author David, Annie
  */
 public interface GUIObject {
 

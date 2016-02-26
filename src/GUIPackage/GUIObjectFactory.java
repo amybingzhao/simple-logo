@@ -1,6 +1,7 @@
 package GUIPackage;
 import java.util.ResourceBundle;
 
+import Controller.Controller;
 import javafx.scene.Node;
 
 public class GUIObjectFactory {
@@ -12,7 +13,7 @@ public class GUIObjectFactory {
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 	}
 	
-	public GUIObject createNewGUIObject(String nodeTypeKey){
+	public GUIObject createNewGUIObject(String nodeTypeKey, Controller contr, GUICanvasAndOptions canvas){
 		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
 			case("CommandLineVBox"):{
@@ -21,17 +22,8 @@ public class GUIObjectFactory {
 			case("ExceptionHandlerLabeled"):{
 				
 			}
-			case("Canvas"):{
-				
-			}
 			case("ImageVBox"):{
-				
-			}
-			case("BackgroundVBox"):{
-				
-			}
-			case("PenVBox"):{
-				
+
 			}
 			case("LanguageComboBox"):{
 				
