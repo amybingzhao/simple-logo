@@ -8,6 +8,6 @@ public class TestMain {
 	public static void main(String[] args) throws ClassNotFoundException {
 		Controller c = new Controller();
 		c.init(100, 100);
-		c.processCommand("fd sum 1 2");
+		c.processCommand("forward sum 1 2");
 	}
 }

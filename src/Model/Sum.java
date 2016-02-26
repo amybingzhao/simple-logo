@@ -2,7 +2,7 @@ package Model;
 
 import java.util.List;
 
-public class Sum extends Node {
+public class Sum extends Node{
 	
 	@Override
 	public int interpret() {
