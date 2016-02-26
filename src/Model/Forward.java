@@ -16,9 +16,9 @@ public class Forward extends Node {
             int x = turtle.getCurX() + (int) Math.round(dist * Math.sin(Math.toRadians(dir)));
             int y = turtle.getCurY() + (int) Math.round(dist * Math.cos(Math.toRadians(dir)));
             turtle.move(x, y);
-            return dist;
         }
-        return 0;
+        
+        return dist;
     }
 
     @Override

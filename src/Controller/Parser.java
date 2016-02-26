@@ -97,9 +97,8 @@ public class Parser {
     public CommandList createList(List<String> inputList, Turtle turtle) throws ClassNotFoundException {
         myTurtle = turtle;
         CommandList list = new CommandList();
-        String name;
         // assumes there is a list end; if not we gotta through an error
-        while (!(name = parseText(inputList.get(0))).equals(LIST_END)) {
+        while (!(parseText(inputList.get(0))).equals(LIST_END)) {
             Node head = createClass(inputList.get(0), inputList);
             list.addChild(head);
         }

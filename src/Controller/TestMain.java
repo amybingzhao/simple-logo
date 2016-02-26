@@ -1,8 +1,5 @@
 package Controller;
 
-import Model.Sum;
-import Model.Turtle;
-
 public class TestMain {
 
 	public static void main(String[] args) throws ClassNotFoundException {

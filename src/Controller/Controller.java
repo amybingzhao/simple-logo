@@ -5,7 +5,6 @@ import java.util.List;
 
 import Model.Node;
 import Model.Turtle;
-import Model.Variable;
 
 /**
  * This class is the only external-facing back end class. It facilitates the interaction between the front end and back end
