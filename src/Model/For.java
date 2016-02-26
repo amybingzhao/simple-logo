@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class For extends Node{
 
-    public static final String FOR = "For";
+    private static final String FOR = "For";
 
     public String toString() {
         return FOR;
