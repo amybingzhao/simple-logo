@@ -3,7 +3,6 @@ package GUIPackage;
 import java.io.File;
 import java.util.ResourceBundle;
 
-import Controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -26,9 +25,9 @@ public class GUIObjectVBox implements GUIObject {
 	private Labeled fileErrorLabel;
 	private static final double PADDING = 10;
 	
-	public GUIObjectVBox(ResourceBundle myResources, String nodeTypeKey, Controller c) {
+	public GUIObjectVBox(ResourceBundle myResources, String nodeType) {
 		this.myResources = myResources;
-		this.nodeType = myResources.getString(nodeTypeKey);
+		this.nodeType = nodeType;
 	}
 
 	@Override
@@ -71,9 +70,7 @@ public class GUIObjectVBox implements GUIObject {
 
 	@Override
 	public void updateNode() {
-		// TODO Auto-generated method stub
-		//possibly nothing here
-		
+		//possibly nothing here	
 	}
 
 	@Override
