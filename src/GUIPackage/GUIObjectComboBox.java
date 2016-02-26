@@ -1,48 +1,73 @@
 package GUIPackage;
 
+import java.util.List;
+
 import Controller.Controller;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 
-public class GUIObjectComboBox implements GUIObject {
+/**
+ * Abstract class to implement different types of ComboBoxes. 
+ * "In Java, an abstract class can implement an interface, and not provide implementations of 
+ * all of the interface's methods. It is the responsibility of the first concrete class that 
+ * has that abstract class as an ancestor to implement all of the methods in the interface."
+ * @author AnnieTang
+ */
 
-	public GUIObjectComboBox() {
-		// TODO Auto-generated constructor stub
+abstract class GUIObjectComboBox implements GUIObject {
+	private static final int VISIBLE_ROW_COUNT = 5;
+	private int xPos;
+	private int yPos;
+	protected Controller contr;
+	protected ObservableList<String> options;
+	protected ComboBox<String> comboBox;
+	
+	public GUIObjectComboBox(Controller contr, String nodeType, int xPos, int yPos) {
+		this.xPos = xPos;
+		this.yPos = yPos;
+		this.contr = contr;
 	}
-
+	
 	@Override
 	public Node createNode() {
-		// TODO Auto-generated method stub
-		return null;
+		options = FXCollections.observableArrayList(
+			        optionsList()
+			    );
+		comboBox = new ComboBox<String>(options);
+		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
+		return comboBox;
 	}
 
 	@Override
 	public void updateNode() {
-		// TODO Auto-generated method stub
-		
+		ObservableList<String> newOptions = FXCollections.observableArrayList(
+		        optionsList()
+		    );
+		comboBox.setItems(newOptions);
 	}
 
+	abstract List<String> optionsList();
+	
 	@Override
 	public int getXPos() {
-		// TODO Auto-generated method stub
-		return 0;
+		return xPos;
 	}
 
 	@Override
 	public int getYPos() {
-		// TODO Auto-generated method stub
-		return 0;
+		return yPos;
 	}
 
 	@Override
 	public void setXPos(int val) {
-		// TODO Auto-generated method stub
-		
+		xPos = val;
 	}
 
 	@Override
 	public void setYPos(int val) {
-		// TODO Auto-generated method stub
-		
+		yPos = val;
 	}
 
 }
