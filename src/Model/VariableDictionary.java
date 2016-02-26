@@ -16,17 +16,17 @@ public class VariableDictionary {
         return instance;
     }
 
-    private Map<String, Integer> variables;
+    private Map<String, Double> variables;
 
     public VariableDictionary() {
-        variables = new HashMap<String, Integer>();
+        variables = new HashMap<String, Double>();
     }
 
-    public void makeVariable(String key, int value) {
+    public void makeVariable(String key, double value) {
         variables.put(key, value);
     }
 
-    public int getNodeFor(String key) {
+    public double getNodeFor(String key) {
         if (contains(key)) {
             return variables.get(key);
         } else throw new NullPointerException();

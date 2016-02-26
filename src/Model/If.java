@@ -5,9 +5,9 @@ import java.util.List;
 public class If extends Node {
 
 	@Override
-	public int interpret() {
+	public double interpret() {
 		List<Node> children = getChildren();
-		int ret = 0;
+		double ret = 0;
 		
 		if (children.get(0).interpret() == 1) {
 			ret = children.get(1).interpret();

@@ -10,7 +10,7 @@ public class Variable extends Node {
     }
 
     @Override
-    public int interpret() {
+    public double interpret() {
         return VariableDictionary.getInstance().getNodeFor(name);
     }
 

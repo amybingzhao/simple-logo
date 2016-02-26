@@ -33,7 +33,7 @@ public abstract class Node implements LogoFunctions {
         myTurtle = turtle;
     }
 
-    public abstract int interpret();
+    public abstract double interpret();
 
     protected Turtle getTurtle() {
         if (myTurtle != null) {

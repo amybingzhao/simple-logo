@@ -11,7 +11,7 @@ public class To extends Node {
 
     public static final String TO = "To";
 
-    public int interpret() {
+    public double interpret() {
         //TODO: Interpret To Commands
 
         /**

@@ -5,9 +5,9 @@ import java.util.List;
 public class CommandList extends Node {
 
 	@Override
-	public int interpret() {
+	public double interpret() {
 		List<Node> children = getChildren();
-		int ret = 0;
+		double ret = 0;
 		
 		for (int i = 0; i < children.size(); i++) {
 			ret = children.get(i).interpret();

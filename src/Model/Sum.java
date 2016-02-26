@@ -5,7 +5,7 @@ import java.util.List;
 public class Sum extends Node{
 	
 	@Override
-	public int interpret() {
+	public double interpret() {
 		List<Node> children = getChildren();
 		return children.get(0).interpret() + children.get(1).interpret();
 	}
