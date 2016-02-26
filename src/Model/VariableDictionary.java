@@ -8,6 +8,7 @@ import java.util.*;
 public class VariableDictionary {
 
     private static VariableDictionary instance = null;
+    private static double DEFAULT = 0;
 
     public static VariableDictionary getInstance(){
         if (instance == null){
@@ -26,10 +27,12 @@ public class VariableDictionary {
         variables.put(key, value);
     }
 
+    // if it doesnt contain it, it should create the new variable
     public double getNodeFor(String key) {
-        if (contains(key)) {
-            return variables.get(key);
-        } else throw new NullPointerException();
+        if (!contains(key)) {
+        	variables.put(key, DEFAULT);
+        } //else throw new NullPointerException();
+        return variables.get(key);
     }
 
     public boolean contains(String key) {
