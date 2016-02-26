@@ -8,7 +8,7 @@ import javafx.scene.Node;
  * create the new element in the GUIObjectFactory, the new feature will essentially
  * be added.
  *
- * @author David, Annie
+ * @author David
  */
 public interface GUIObject {
 

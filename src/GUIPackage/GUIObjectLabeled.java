@@ -1,48 +1,56 @@
 package GUIPackage;
 
-import Controller.Controller;
 import javafx.scene.Node;
-
+import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
+/**
+ * Area beneath command line where caught exceptions will print out descriptive messages. 
+ * @author AnnieTang
+ *
+ */
 public class GUIObjectLabeled implements GUIObject {
-
-	public GUIObjectLabeled() {
-		// TODO Auto-generated constructor stub
+	private int xPos;
+	private int yPos;
+	private Labeled label;
+	
+	public GUIObjectLabeled(int xPos, int yPos) {
+		this.xPos = xPos;
+		this.yPos = yPos;
 	}
 
 	@Override
 	public Node createNode() {
-		// TODO Auto-generated method stub
-		return null;
+		label = new Label("Welcome to SLogo!");
+		return label;
 	}
 
+	public void setText(String errorMessage){
+		label.setText(errorMessage);
+	}
+	
 	@Override
 	public void updateNode() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public int getXPos() {
-		// TODO Auto-generated method stub
-		return 0;
+		return xPos;
 	}
 
 	@Override
 	public int getYPos() {
-		// TODO Auto-generated method stub
-		return 0;
+		return yPos;
 	}
 
 	@Override
 	public void setXPos(int val) {
-		// TODO Auto-generated method stub
-		
+		xPos = val;		
 	}
 
 	@Override
 	public void setYPos(int val) {
-		// TODO Auto-generated method stub
-		
+		yPos = val;
 	}
 
 }
