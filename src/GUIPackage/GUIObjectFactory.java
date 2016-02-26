@@ -13,7 +13,7 @@ public class GUIObjectFactory {
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 	}
 	
-	public GUIObject createNewGUIObject(String nodeTypeKey, Controller contr){
+	public GUIObject createNewGUIObject(String nodeTypeKey, Controller contr, GUICanvasAndOptions canvas){
 		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
 			case("CommandLineVBox"):{
@@ -22,17 +22,8 @@ public class GUIObjectFactory {
 			case("ExceptionHandlerLabeled"):{
 				
 			}
-			case("Canvas"):{
-				return new GUIObjectCanvas(contr);
-			}
 			case("ImageVBox"):{
-				return new GUIObjectVBox(myResources, nodeType);
-			}
-			case("BackgroundVBox"):{
-				
-			}
-			case("PenVBox"):{
-				return new GUIObjectVBox(myResources, nodeType);
+
 			}
 			case("LanguageComboBox"):{
 				
