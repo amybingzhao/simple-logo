@@ -11,9 +11,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
+/**
+ * Returns one Node that contains the Turtle Canvas and two ColorPicker objects
+ * (for background and pen)
+ * @author AnnieTang
+ *
+ */
 public class GUICanvasAndOptions {
-	private static final int SIZE = 300; //
+	private static final int SIZE = 300; 
 	private Controller contr;
 	private int xPos;
 	private int yPos;
@@ -66,6 +71,10 @@ public class GUICanvasAndOptions {
 	
 	private void drawPath(){
 		
+	}
+	
+	public void setImage(){
+		//called from GUIObjectVBox for image upload 
 	}
 
 	public int getXPos() {
