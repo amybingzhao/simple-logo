@@ -1,36 +1,45 @@
 package Model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by blakekaplan on 2/25/16.
  */
 public class VariableDictionary {
 
-    public static Map<String, Node> variables;
+    private static VariableDictionary instance = null;
 
-    public VariableDictionary(){
-        variables = new HashMap<String, Node>();
-    }
-
-    public static void makeVariable(String key, Node expression){
-        variables.put(key, expression);
-    }
-
-    public static Node getNodeFor(String key){
-        if (contains(key)){
-            return variables.get(key);
+    public static VariableDictionary getInstance(){
+        if (instance == null){
+            instance = new VariableDictionary();
         }
-       else throw new NullPointerException();
+        return instance;
     }
 
-    public static boolean contains(String key){
+    private Map<String, Integer> variables;
+
+    public VariableDictionary() {
+        variables = new HashMap<String, Integer>();
+    }
+
+    public void makeVariable(String key, int value) {
+        variables.put(key, value);
+    }
+
+    public int getNodeFor(String key) {
+        if (contains(key)) {
+            return variables.get(key);
+        } else throw new NullPointerException();
+    }
+
+    public boolean contains(String key) {
 
         if (variables.containsKey(key)) return true;
         return false;
 
+    }
+
+    public Set<String> getKeySet(){
+        return variables.keySet();
     }
 }

@@ -30,14 +30,14 @@ public class Parser {
     private ResourceBundle myNumChildrenPerCommand;
     private ResourceBundle myTurtleCommands;
     private Turtle myTurtle;
-    private VariableDictionary myVars;
+    private VariableDictionary myVariables;
 
     public Parser() {
         mySymbols = new ArrayList<>();
         myNumChildrenPerCommand = ResourceBundle.getBundle(NUM_CHILDREN_PER_COMMAND);
         myTurtleCommands = ResourceBundle.getBundle(TURTLE_COMMANDS_RESOURCE);
         myTurtle = new Turtle();
-        myVars = new VariableDictionary();
+        myVariables = new VariableDictionary();
     }
 
     /**
@@ -113,26 +113,20 @@ public class Parser {
         Node node = null;
         inputCommandList.remove(0);
         Class className;
-        
         switch (name){
             case CONSTANT:
                 className = Class.forName(MODEL + name);
                 node = new Constant(Integer.parseInt(commandToBuild.toString()));
                 break;
             case VARIABLE:
-                node = VariableDictionary.getNodeFor(commandToBuild);
+                className = Class.forName(MODEL + VARIABLE);
+                node = new Variable(commandToBuild);
                 break;
             case COMMENT:
                 break;
             case LIST_START:
             	node = createList(inputCommandList, myTurtle);
             	break;
-            case MAKE:
-                String varName = inputCommandList.get(0);
-                inputCommandList.remove(0);
-                Node expressionNode = createClass(inputCommandList.get(0), inputCommandList);
-                node = handleMake(varName, expressionNode);
-                break;
             default:
             	className = Class.forName(MODEL + name);
                 try {
@@ -158,15 +152,6 @@ public class Parser {
                 node.addChild(childNode);
             }
         }
-    }
-
-    private Node handleMake(String key, Node expression){
-
-        MakeVariable myMakeNode;
-        myMakeNode = new MakeVariable();
-        myMakeNode.setName(key);
-        myMakeNode.addChild(expression);
-        return myMakeNode;
     }
 
     // converts string command to arraylist
@@ -211,4 +196,7 @@ public class Parser {
 
     }
 
+    public VariableDictionary getVariables(){
+        return myVariables;
+    }
 }
