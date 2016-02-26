@@ -12,12 +12,8 @@ public class Repeat extends Node {
 		double numIter = children.get(0).interpret();
 		double ret = 0;
 		
-		if (Controller.Controller.repCount == null) {
-			Controller.Controller.repCount = 0;
-		}
-		
 		for (int i = 0; i < numIter; i++) {
-			Controller.Controller.repCount = i;
+			VariableDictionary.getInstance().makeVariable("repCount", 0);
 			ret = children.get(1).interpret();
 		}
 		

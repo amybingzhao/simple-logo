@@ -2,6 +2,6 @@ package Model;
 
 public interface LogoFunctions {
 
-		public double interpret();
+		double interpret();
 		
 }
