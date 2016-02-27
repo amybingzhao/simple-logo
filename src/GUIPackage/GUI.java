@@ -2,41 +2,29 @@ package GUIPackage;
 import Controller.Controller;
 import Model.Turtle;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
-
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 public class GUI implements GUIInterface {
-	private static final int CANVAS_ROW_SPAN = 3;
+	private static final String HELP_TAB_TEXT = "Help";
 	private Scene myScene;
 	private TabPane myRoot;
 	private ResourceBundle myResources;
-	private GUIObjectFactory myFactory;
 	private Controller myController;
 	private Turtle myTurtle;
 	private TurtleObserver myObserver;
 	
-	private GUICanvasAndOptions canvas;
+	private GUICanvas canvas;
 	
 	private int windowHeight;
 	private int windowWidth;
-	
-	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
-	
-//	public GUI(int width, int height, String language) {
-//		windowWidth = width;
-//		windowHeight = height;
-//		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-//	}
+
 	public GUI(int width, int height) {
 		windowWidth = width;
 		windowHeight = height;
@@ -50,13 +38,25 @@ public class GUI implements GUIInterface {
 		
 		myRoot = new TabPane();
 		
-		TabMainScreen mainScreenTab = new TabMainScreen(myController, canvas);
-		myRoot.getTabs().add(mainScreenTab.getTab());		
+		Tab mainScreenTab = new TabMainScreen(myController, canvas).getTab();
+		Tab helpTab = createHelpTab();
+		
+		myRoot.getTabs().addAll(mainScreenTab, helpTab);		
 	
 		myScene = new Scene(myRoot, windowHeight, windowWidth, Color.WHITE);
 		return myScene;
 	}
 
+	private Tab createHelpTab(){
+		Tab helpTab = new Tab();
+		WebView browser = new WebView();
+		WebEngine webEngine = browser.getEngine();
+		webEngine.load("http://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/commands.php");
+		helpTab.setContent(browser);
+		helpTab.setText(HELP_TAB_TEXT);
+		return helpTab;
+	}
+	
 	@Override
 	public int getWidth() {
 		return windowWidth;
