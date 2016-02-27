@@ -125,19 +125,25 @@ public class Parser {
             	node = createList(inputCommandList, myTurtle);
             	break;
             case COMMAND:
-                if(CommandDictionary.getInstance().contains(commandToBuild)){
-                    node = CommandDictionary.getInstance().getCommandFor(commandToBuild);
-                    node.setNumChildrenNeeded(CommandDictionary.getInstance().getNumArgsForkey(commandToBuild));
-                    addChildrenToNode(node, inputCommandList);
-                }
-                else {
-                    node = new Command(commandToBuild);
-                }
+                node = handleCommand(commandToBuild, inputCommandList);
                 break;
             default:
             	node = getFunctionObject(name);
                 addChildrenToNode(node, inputCommandList);
                 break;
+        }
+        return node;
+    }
+
+    private Node handleCommand(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
+        Node node;
+        if(CommandDictionary.getInstance().contains(commandToBuild)){
+            node = CommandDictionary.getInstance().getCommandFor(commandToBuild);
+            node.setNumChildrenNeeded(CommandDictionary.getInstance().getNumArgsForkey(commandToBuild));
+            addChildrenToNode(node, inputCommandList);
+        }
+        else {
+            node = new Command(commandToBuild);
         }
         return node;
     }
