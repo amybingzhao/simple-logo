@@ -29,8 +29,4 @@ public class CommandList extends Node {
         return sb.toString();
     }
 
-    public List<Node> getEntries() {
-        return getChildren();
-    }
-
 }
