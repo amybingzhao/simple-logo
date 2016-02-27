@@ -28,14 +28,39 @@ public class Turtle extends Observable {
 		isVisible = true;
 		myDirection = 0;
 	}
+	
 	/**
-	 * Moves the turtle towards the specified location in increments of (1,1).
-	 * @param x: x-coordinate of location to move to.
-	 * @param y: y-coordinate of location to move to.
+	 * Moves the turtle the specified distance in its current direction in increments of (1,1).
+	 * @param dist: distance to move.
 	 */
-	public void move(double x, double y) {
-		myX = x;
-		myY = y;
+	public void move(double dist) {
+		for (double i = 0; i < dist; i++) {
+			myX = myX + Math.sin(Math.toRadians(myDirection));
+			myY = myY + Math.cos(Math.toRadians(myDirection));
+		}
+	}
+	
+	/**
+	 * Turns the turtle towards a given (x, y)
+	 * @param x
+	 * @param y
+	 */
+	public double turnTowards(double x, double y) {
+		double angle = Math.toDegrees(Math.atan2(x, y));
+		double angleDiff = angle - myDirection;
+		setDirection(angle);
+		return angleDiff;
+	}
+	
+	/**
+	 * Determines distance between current position and specified (x, y)
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public double calcDistance(double x, double y) {
+		return y;
+		
 	}
 	
 	public void setDirection(double dir) {

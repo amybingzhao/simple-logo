@@ -4,19 +4,16 @@ import java.util.List;
 
 public class Backward extends Node {
 
+	private static final int DISTANCE = 0;
+
     @Override
     public double interpret() {
         Turtle turtle = getTurtle();
         List<Node> children = getChildren();
 
-        double dist = children.get(0).interpret();
-        double dir = turtle.getDirection();
-
+        double dist = children.get(DISTANCE).interpret();
         if (turtle != null) {
-        	for (int i = 0; i < dist; i++) {
-        		turtle.move(turtle.getCurX() - Math.sin(Math.toRadians(dir)), 
-        				turtle.getCurY() - Math.cos(Math.toRadians(dir)));
-        	}
+        	turtle.move(-dist);
         }
         
         return dist;
@@ -25,6 +22,6 @@ public class Backward extends Node {
     @Override
     public String toString() {
         List<Node> children = getChildren();
-        return "Backward " + children.get(0).toString();
+        return "Backward " + children.get(DISTANCE).toString();
     }
 }
