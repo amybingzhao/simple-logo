@@ -1,6 +1,7 @@
 package GUIPackage;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 import Controller.Controller;
 import javafx.collections.FXCollections;
@@ -20,14 +21,16 @@ abstract class GUIObjectComboBox implements GUIObject {
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private int xPos;
 	private int yPos;
+	protected ResourceBundle myResources;
 	protected Controller contr;
 	protected ObservableList<String> options;
 	protected ComboBox<String> comboBox;
 	
-	public GUIObjectComboBox(Controller contr, String nodeType, int xPos, int yPos) {
+	public GUIObjectComboBox(ResourceBundle myResources, Controller contr, int xPos, int yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.contr = contr;
+		this.myResources = myResources;
 	}
 	
 	@Override

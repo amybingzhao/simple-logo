@@ -1,6 +1,7 @@
 package GUIPackage;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 import Controller.Controller;
 
@@ -11,9 +12,8 @@ import Controller.Controller;
  */
 
 public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {	
-	public GUIObjectComboBoxUserHist(Controller contr, String nodeType, int xPos, int yPos) {
-		super(contr, nodeType, xPos, yPos);
-		// TODO Auto-generated constructor stub
+	public GUIObjectComboBoxUserHist(ResourceBundle myResources, Controller contr, int xPos, int yPos) {
+		super(myResources, contr, xPos, yPos);
 	}
 
 	@Override

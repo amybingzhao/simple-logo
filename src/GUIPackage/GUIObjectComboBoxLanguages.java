@@ -1,6 +1,9 @@
 package GUIPackage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import Controller.Controller;
 
@@ -12,15 +15,13 @@ import Controller.Controller;
 
 public class GUIObjectComboBoxLanguages extends GUIObjectComboBox {
 
-	public GUIObjectComboBoxLanguages(Controller contr, String nodeType, int xPos, int yPos) {
-		super(contr, nodeType, xPos, yPos);
-		// TODO Auto-generated constructor stub
+	public GUIObjectComboBoxLanguages(ResourceBundle myResources, Controller contr, int xPos, int yPos) {
+		super(myResources, contr, xPos, yPos);
 	}
 
 	@Override
 	List<String> optionsList() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<String>(Arrays.asList(myResources.getString("Languages").split(" ")));
 	}
 
 
