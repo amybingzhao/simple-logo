@@ -22,21 +22,21 @@ import javafx.scene.text.Text;
  */
 public class GUICanvas {
 	private static final int CANVAS_WIDTH = 500;
-	private static final int CANVAS_HEIGHT = 500;
-	private Controller contr;
+	private static final int CANVAS_HEIGHT = 600;
+	private Controller myController;
 	private GraphicsContext gc;
 	private Canvas canvas;
 	private ResourceBundle myResources; 
 	
 	public GUICanvas(Controller myController, ResourceBundle myResources) {
-		this.contr = myController;
+		this.myController = myController;
 		this.myResources = myResources;
 	}
 
 	public Node createNode() {
 		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		gc = canvas.getGraphicsContext2D();
-		gc.setFill(Color.ALICEBLUE);
+		gc.setFill(Color.BISQUE);
 		gc.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);		
 		return canvas;
 	}

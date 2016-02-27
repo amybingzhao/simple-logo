@@ -5,10 +5,14 @@ import Model.Turtle;
 import java.util.ResourceBundle;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 public class GUI implements GUIInterface {
+	private static final String HELP_TAB_TEXT = "Help";
 	private Scene myScene;
 	private TabPane myRoot;
 	private ResourceBundle myResources;
@@ -34,13 +38,25 @@ public class GUI implements GUIInterface {
 		
 		myRoot = new TabPane();
 		
-		TabMainScreen mainScreenTab = new TabMainScreen(myController, canvas);
-		myRoot.getTabs().add(mainScreenTab.getTab());		
+		Tab mainScreenTab = new TabMainScreen(myController, canvas).getTab();
+		Tab helpTab = createHelpTab();
+		
+		myRoot.getTabs().addAll(mainScreenTab, helpTab);		
 	
 		myScene = new Scene(myRoot, windowHeight, windowWidth, Color.WHITE);
 		return myScene;
 	}
 
+	private Tab createHelpTab(){
+		Tab helpTab = new Tab();
+		WebView browser = new WebView();
+		WebEngine webEngine = browser.getEngine();
+		webEngine.load("http://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/commands.php");
+		helpTab.setContent(browser);
+		helpTab.setText(HELP_TAB_TEXT);
+		return helpTab;
+	}
+	
 	@Override
 	public int getWidth() {
 		return windowWidth;
