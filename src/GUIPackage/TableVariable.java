@@ -1,13 +1,14 @@
 package GUIPackage;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
-public class Variable {
+public class TableVariable {
 	private final SimpleStringProperty variableName;
-	private final SimpleStringProperty variableValue;
+	private final SimpleDoubleProperty variableValue;
 	
-	protected Variable (String name, String value) {
+	protected TableVariable (String name, Double value) {
 		this.variableName = new SimpleStringProperty(name);
-		this.variableValue = new SimpleStringProperty(value);
+		this.variableValue = new SimpleDoubleProperty(value);
 	}
 
 	public String getVariableName() {
@@ -18,11 +19,11 @@ public class Variable {
 		this.variableName.set(variableName);
 	}
 
-	public String getVariableValue() {
+	public double getVariableValue() {
 		return variableValue.get();
 	}
 
-	public void setVariableValue(String variableValue) {
+	public void setVariableValue(Double variableValue) {
 		this.variableValue.set(variableValue);
 	}
 	
