@@ -20,7 +20,7 @@ public class Turtle extends Observable {
 	private boolean isVisible;
 	private double myDirection;
 	private static final double ONE_REVOLUTION = 360;
-	
+	private static final double INCREMENT = 0.01;
 	public Turtle() {
 		myX = 0;
 		myY = 0;
@@ -34,9 +34,9 @@ public class Turtle extends Observable {
 	 * @param dist: distance to move.
 	 */
 	public void move(double dist) {
-		for (double i = 0; i < dist; i++) {
-			myX = myX + Math.sin(Math.toRadians(myDirection));
-			myY = myY + Math.cos(Math.toRadians(myDirection));
+		for (double i = 0; i < dist; i = i + INCREMENT) {
+			myX = myX + INCREMENT * Math.sin(Math.toRadians(myDirection));
+			myY = myY + INCREMENT * Math.cos(Math.toRadians(myDirection));
 		}
 	}
 	
@@ -54,13 +54,12 @@ public class Turtle extends Observable {
 	
 	/**
 	 * Determines distance between current position and specified (x, y)
-	 * @param x
-	 * @param y
-	 * @return
+	 * @param x: x-coordinate of position of interest
+	 * @param y: y-coordinate of position of interest
+	 * @return distance between current position and (x, y)
 	 */
 	public double calcDistance(double x, double y) {
-		return y;
-		
+		return Math.sqrt(Math.pow(myX - x, 2) + Math.pow(myY - y, 2));
 	}
 	
 	public void setDirection(double dir) {
