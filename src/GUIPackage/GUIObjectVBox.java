@@ -28,7 +28,11 @@ public class GUIObjectVBox implements GUIObject {
 	private TextField userInputFileString;
 	private Button initializeButton;
 	private Labeled fileErrorLabel;
-	private static final double PADDING = 10;
+	private static final int XMLCONTROLS_SPACING = 5;
+	private static final double PADDING_TOP = 0;
+	private static final double PADDING_RIGHT = 10;
+	private static final double PADDING_BOTTOM = 10;
+	private static final double PADDING_LEFT = 10;
 	
 	public GUIObjectVBox(ResourceBundle myResources, GUICanvasAndOptions canvas, String nodeType, int xPos, int yPos) {
 		this.myResources = myResources;
@@ -49,8 +53,8 @@ public class GUIObjectVBox implements GUIObject {
 		
 		VBox XMLControls = new VBox();
 		XMLControls.getChildren().addAll(userInputFileString, initializeButton,fileErrorLabel);
-		XMLControls.setSpacing(5);
-		XMLControls.setPadding(new Insets(0,PADDING,PADDING,PADDING));
+		XMLControls.setSpacing(XMLCONTROLS_SPACING);
+		XMLControls.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
 		
 		return XMLControls;
 	}
