@@ -1,5 +1,6 @@
 package GUIPackage;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -19,7 +20,10 @@ public class GUIObjectComboBoxCommandHist extends GUIObjectComboBox {
 
 	@Override
 	List<String> optionsList() {
-		return contr.getCommandHistory();
+//		return contr.getCommandHistory();
+		List<String> test = new ArrayList<String>();
+		test.add("testing");
+		return test;
 	}
 	
 }

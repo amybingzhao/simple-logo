@@ -9,15 +9,14 @@ import javafx.scene.Node;
  *
  */
 public class GUIObjectFactory {
-	private static final String GUI_RESOURCE = "GUI";
 	private ResourceBundle myResources;
 	private GUICanvasAndOptions canvas;
-	private Controller contr;
+	private Controller myController;
 	
-	public GUIObjectFactory(Controller contr, GUICanvasAndOptions canvas){
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
+	public GUIObjectFactory(ResourceBundle myResources, Controller myController, GUICanvasAndOptions canvas){
+		this.myResources = myResources;
 		this.canvas = canvas; 
-		this.contr = contr;
+		this.myController = myController;
 	}
 	
 	public GUIObject createNewGUIObject(String nodeTypeKey){
@@ -27,11 +26,11 @@ public class GUIObjectFactory {
 				
 			}
 			case("ExceptionHandlerLabeled"):{
-				new GUIObjectLabeled(Integer.parseInt(myResources.getString("ExceptionHandlerX")),
+				return new GUIObjectLabeled(Integer.parseInt(myResources.getString("ExceptionHandlerX")),
 						Integer.parseInt(myResources.getString("ExceptionHandlerX")));
 			}
 			case("ImageVBox"):{
-				new GUIObjectVBox(myResources, canvas, nodeType, 
+				return new GUIObjectVBox(myResources, canvas, nodeType, 
 						Integer.parseInt(myResources.getString("ImageX")), 
 						Integer.parseInt(myResources.getString("ImageY")));
 			}
@@ -45,7 +44,9 @@ public class GUIObjectFactory {
 				
 			}
 			case("PreviousCommandsComboBox"):{
-				
+				return new GUIObjectComboBoxCommandHist(myResources, myController, 
+						Integer.parseInt(myResources.getString("PreviousCommandsX")), 
+						Integer.parseInt(myResources.getString("PreviousCommandsY")));
 			}
 			case("HelpTabPane"):{
 				
