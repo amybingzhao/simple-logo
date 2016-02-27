@@ -37,6 +37,10 @@ public class Turtle extends Observable {
 		myY = y;
 	}
 	
+	public void setDirection(double dir) {
+		myDirection = dir;
+	}
+	
 	/**
 	 * Lifts the turtle's pen up so no trail is drawn when it moves.
 	 */
@@ -78,6 +82,6 @@ public class Turtle extends Observable {
 	}
 	
 	public String printPosition() {
-		return ("(" + Double.toString(myX) + ", " + Double.toString(myY) + ")");
+		return ("(" + Double.toString(myX) + ", " + Double.toString(myY) + "), Direction: " + Double.toString(myDirection));
 	}
 }
