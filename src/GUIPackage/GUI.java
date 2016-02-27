@@ -12,6 +12,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
 
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+
 public class GUI implements GUIInterface {
 	private static final int CANVAS_ROW_SPAN = 3;
 	private Scene myScene;
@@ -44,7 +47,7 @@ public class GUI implements GUIInterface {
 		myTurtle = new Turtle();
 		myObserver = new TurtleObserver();
 		myTurtle.addObserver(myObserver);
-	
+		
 		myRoot = new TabPane();
 		
 		TabMainScreen mainScreenTab = new TabMainScreen(myController, canvas);
