@@ -20,11 +20,9 @@ import javafx.scene.layout.VBox;
 
 public class GUIObjectVBox implements GUIObject {
 	private ResourceBundle myResources;
-	private int xPos;
-	private int yPos;
 	private String nodeType;
 	private boolean canUpdate;
-	private GUICanvasAndOptions canvas;
+	private GUICanvas canvas;
 	private TextField userInputFileString;
 	private Button initializeButton;
 	private Labeled fileErrorLabel;
@@ -34,12 +32,10 @@ public class GUIObjectVBox implements GUIObject {
 	private static final double PADDING_BOTTOM = 10;
 	private static final double PADDING_LEFT = 10;
 	
-	public GUIObjectVBox(ResourceBundle myResources, GUICanvasAndOptions canvas, String nodeType, int xPos, int yPos) {
+	public GUIObjectVBox(ResourceBundle myResources, GUICanvas canvas, String nodeType) {
 		this.myResources = myResources;
 		this.canvas = canvas;
 		this.nodeType = nodeType;
-		this.xPos = xPos;
-		this.yPos = yPos;
 	}
 
 	@Override
@@ -87,26 +83,4 @@ public class GUIObjectVBox implements GUIObject {
 			canvas.setImage();
 		}
 	}
-
-	@Override
-	public int getXPos() {
-		return xPos;
-	}
-
-	@Override
-	public int getYPos() {
-		return yPos;
-	}
-
-	@Override
-	public void setXPos(int val) {
-		xPos = val;
-	}
-
-	@Override
-	public void setYPos(int val) {
-		yPos = val;
-		
-	}
-
 }

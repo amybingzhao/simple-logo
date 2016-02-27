@@ -13,8 +13,8 @@ import Controller.Controller;
  */
 
 public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {	
-	public GUIObjectComboBoxUserHist(ResourceBundle myResources, Controller myController, String promptText, int xPos, int yPos) {
-		super(myResources, myController, promptText, xPos, yPos);
+	public GUIObjectComboBoxUserHist(ResourceBundle myResources, Controller myController, String promptText) {
+		super(myResources, myController, promptText);
 	}
 
 	@Override

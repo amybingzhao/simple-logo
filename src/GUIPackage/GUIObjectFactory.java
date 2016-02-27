@@ -2,7 +2,6 @@ package GUIPackage;
 import java.util.ResourceBundle;
 
 import Controller.Controller;
-import javafx.scene.Node;
 /**
  * Instantiate GUIObjects based on String passed in.
  * @author AnnieTang
@@ -10,10 +9,10 @@ import javafx.scene.Node;
  */
 public class GUIObjectFactory {
 	private ResourceBundle myResources;
-	private GUICanvasAndOptions canvas;
+	private GUICanvas canvas;
 	private Controller myController;
 	
-	public GUIObjectFactory(ResourceBundle myResources, Controller myController, GUICanvasAndOptions canvas){
+	public GUIObjectFactory(ResourceBundle myResources, Controller myController, GUICanvas canvas){
 		this.myResources = myResources;
 		this.canvas = canvas; 
 		this.myController = myController;
@@ -26,43 +25,34 @@ public class GUIObjectFactory {
 				return null;
 			}
 			case("ExceptionHandlerLabeled"):{
-				return new GUIObjectLabeled(Integer.parseInt(myResources.getString("ExceptionHandlerX")),
-						Integer.parseInt(myResources.getString("ExceptionHandlerY")));
+				return new GUIObjectLabeled();
 			}
 			case("ImageVBox"):{
-				return new GUIObjectVBox(myResources, canvas, nodeType, 
-						Integer.parseInt(myResources.getString("ImageX")), 
-						Integer.parseInt(myResources.getString("ImageY")));
+				return new GUIObjectVBox(myResources, canvas, nodeType);
 			}
 			case("LanguageComboBox"):{
 				return new GUIObjectComboBoxLanguages(myResources, myController, 
-						myResources.getString(nodeTypeKey+"PromptText"),
-						Integer.parseInt(myResources.getString("LanguageSelectorX")), 
-						Integer.parseInt(myResources.getString("LanguageSelectorY")));
+						myResources.getString(nodeTypeKey+"PromptText"));
 			}
 			case("VariablesTableView"):{
 				return null;
 			}
 			case("UserCommandsComboBox"):{
 				return new GUIObjectComboBoxUserHist(myResources, myController,
-						myResources.getString(nodeTypeKey+"PromptText"),
-						Integer.parseInt(myResources.getString("UserCommandsX")), 
-						Integer.parseInt(myResources.getString("UserCommandsY")));
+						myResources.getString(nodeTypeKey+"PromptText"));
 			}
 			case("PreviousCommandsComboBox"):{
 				return new GUIObjectComboBoxCommandHist(myResources, myController, 
-						myResources.getString(nodeTypeKey+"PromptText"),
-						Integer.parseInt(myResources.getString("PreviousCommandsX")), 
-						Integer.parseInt(myResources.getString("PreviousCommandsY")));
+						myResources.getString(nodeTypeKey+"PromptText"));
 			}
 			case("HelpTabPane"):{
 				return null;
 			}
 			case("ColorPickerBackground"):{
-				return new GUIObjectColorPickerBackground(canvas,myResources.getString(nodeTypeKey+"Label"), 0,0);
+				return new GUIObjectColorPickerBackground(canvas,myResources.getString(nodeTypeKey+"Label"));
 			}
 			case("ColorPickerPen"):{
-				return new GUIObjectColorPickerPen(canvas,myResources.getString(nodeTypeKey+"Label"), 0,0);
+				return new GUIObjectColorPickerPen(canvas,myResources.getString(nodeTypeKey+"Label"));
 			}
 		}
 		return null;

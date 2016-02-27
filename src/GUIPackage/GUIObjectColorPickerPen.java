@@ -4,8 +4,8 @@ import javafx.scene.control.ColorPicker;
 
 public class GUIObjectColorPickerPen extends GUIObjectColorPicker {
 
-	public GUIObjectColorPickerPen(GUICanvasAndOptions canvas, String pickerLabel, int xPos, int yPos) {
-		super(canvas, pickerLabel, xPos, yPos);
+	public GUIObjectColorPickerPen(GUICanvas canvas, String pickerLabel) {
+		super(canvas, pickerLabel);
 	}
 
 	@Override

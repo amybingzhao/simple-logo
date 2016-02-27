@@ -19,20 +19,16 @@ import javafx.scene.control.ComboBox;
 
 abstract class GUIObjectComboBox implements GUIObject {
 	private static final int VISIBLE_ROW_COUNT = 5;
-	private int xPos;
-	private int yPos;
 	private String promptText;
 	protected ResourceBundle myResources;
 	protected Controller contr;
 	protected ObservableList<String> options;
 	protected ComboBox<String> comboBox;
 	
-	public GUIObjectComboBox(ResourceBundle myResources, Controller myController, String promptText, int xPos, int yPos) {
+	public GUIObjectComboBox(ResourceBundle myResources, Controller myController, String promptText) {
 		this.myResources = myResources;
 		this.contr = myController;
 		this.promptText = promptText;
-		this.xPos = xPos;
-		this.yPos = yPos;
 	}
 	
 	@Override
@@ -55,25 +51,5 @@ abstract class GUIObjectComboBox implements GUIObject {
 	}
 
 	abstract List<String> optionsList();
-	
-	@Override
-	public int getXPos() {
-		return xPos;
-	}
-
-	@Override
-	public int getYPos() {
-		return yPos;
-	}
-
-	@Override
-	public void setXPos(int val) {
-		xPos = val;
-	}
-
-	@Override
-	public void setYPos(int val) {
-		yPos = val;
-	}
 
 }

@@ -11,13 +11,9 @@ import javafx.scene.control.Labeled;
  */
 public class GUIObjectLabeled implements GUIObject {
 	private static final int PADDING = 10;
-	private int xPos;
-	private int yPos;
 	private Labeled label;
 	
-	public GUIObjectLabeled(int xPos, int yPos) {
-		this.xPos = xPos;
-		this.yPos = yPos;
+	public GUIObjectLabeled() {
 	}
 
 	@Override
@@ -33,27 +29,5 @@ public class GUIObjectLabeled implements GUIObject {
 	
 	@Override
 	public void updateNode() {
-		
 	}
-
-	@Override
-	public int getXPos() {
-		return xPos;
-	}
-
-	@Override
-	public int getYPos() {
-		return yPos;
-	}
-
-	@Override
-	public void setXPos(int val) {
-		xPos = val;		
-	}
-
-	@Override
-	public void setYPos(int val) {
-		yPos = val;
-	}
-
 }

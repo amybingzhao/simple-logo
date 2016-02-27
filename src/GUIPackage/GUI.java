@@ -16,7 +16,7 @@ public class GUI implements GUIInterface {
 	private Turtle myTurtle;
 	private TurtleObserver myObserver;
 	
-	private GUICanvasAndOptions canvas;
+	private GUICanvas canvas;
 	
 	private int windowHeight;
 	private int windowWidth;

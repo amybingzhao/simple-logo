@@ -19,11 +19,12 @@ import javafx.scene.layout.BorderPane;
 public class TabMainScreen{
 	private static final String GUI_RESOURCE = "GUI";
 	private static final int CANVAS_ROW_SPAN = 20;
+	private static final int LEFT_PANEL_PADDING = 10;
 	private Tab myRootTab;
 	private BorderPane myMainScreen;
 	private ResourceBundle myResources;
 	private GUIObjectFactory myFactory;
-	private GUICanvasAndOptions canvas;
+	private GUICanvas canvas;
 	private Controller myController;
 	
 	//creating GUIObject instance variables
@@ -41,7 +42,7 @@ public class TabMainScreen{
 	
 	private List<GUIObject> myNodeList;
 	
-	public TabMainScreen(Controller myController, GUICanvasAndOptions canvas) {
+	public TabMainScreen(Controller myController, GUICanvas canvas) {
 		this.myController = myController;
 		this.canvas = canvas;
 	}
@@ -76,13 +77,13 @@ public class TabMainScreen{
 	}
 	
 	private void setCenterPane() {
-		canvas = new GUICanvasAndOptions(myController, myResources, "CanvasX", "CanvasY");
+		canvas = new GUICanvas(myController, myResources);
 		Node canvasNode = canvas.createNode();
 		myMainScreen.setCenter(canvasNode);
 	}
 	
 	private void setLeftPane(){
-		VBox box = new VBox();
+		VBox box = new VBox(LEFT_PANEL_PADDING);
 		colorPickerBackground = myFactory.createNewGUIObject("ColorPickerBackground");
 		colorPickerPen = myFactory.createNewGUIObject("ColorPickerPen");
 		userCommands = myFactory.createNewGUIObject("UserCommands");

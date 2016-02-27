@@ -10,14 +10,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 abstract class GUIObjectColorPicker implements GUIObject {
-	private int xPos;
-	private int yPos;
 	protected String pickerLabel;
-	protected GUICanvasAndOptions canvas;
+	protected GUICanvas canvas;
 	
-	public GUIObjectColorPicker(GUICanvasAndOptions canvas, String pickerLabel, int xPos, int yPos) {
-		this.xPos = xPos;
-		this.yPos = yPos;
+	public GUIObjectColorPicker(GUICanvas canvas, String pickerLabel) {
 		this.pickerLabel = pickerLabel;
 		this.canvas = canvas; 
 	}
@@ -44,25 +40,4 @@ abstract class GUIObjectColorPicker implements GUIObject {
 	@Override
 	public void updateNode() {
 	}
-
-	@Override
-	public int getXPos() {
-		return xPos;
-	}
-
-	@Override
-	public int getYPos() {
-		return yPos;
-	}
-
-	@Override
-	public void setXPos(int val) {
-		xPos = val;	
-	}
-
-	@Override
-	public void setYPos(int val) {
-		yPos = val;
-	}
-
 }
