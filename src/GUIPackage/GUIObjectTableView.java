@@ -1,18 +1,36 @@
 package GUIPackage;
 
 import Controller.Controller;
+
+import java.util.Map.Entry;
+import java.util.ResourceBundle;
 import javafx.scene.Node;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 public class GUIObjectTableView implements GUIObject {
 
-	public GUIObjectTableView() {
-		// TODO Auto-generated constructor stub
+	private Controller myController;
+	private ResourceBundle myResources;
+	private TableView myTableView;
+	
+	public GUIObjectTableView(Controller c, ResourceBundle r) {
+		myController = c;
+		myResources = r;
 	}
 
 	@Override
 	public Node createNode() {
-		// TODO Auto-generated method stub
-		return null;
+		myTableView = new TableView();
+		myTableView.setEditable(true);
+		
+		TableColumn variableCol = new TableColumn(myResources.getString("VariablesColumn"));
+		variableCol.setMinWidth(100);
+		TableColumn valueCol = new TableColumn(myResources.getString("ValuesColumn"));
+		valueCol.setMinWidth(100);
+		
+		myTableView.getColumns().setAll(variableCol, valueCol);
+		return myTableView;
 	}
 
 	@Override

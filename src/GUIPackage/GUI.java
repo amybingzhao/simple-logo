@@ -21,6 +21,7 @@ public class GUI implements GUIInterface {
 	private TurtleObserver myObserver;
 	
 	private GUICanvas canvas;
+	private GUICommandLine commandLine;
 	
 	private int windowHeight;
 	private int windowWidth;
@@ -38,7 +39,7 @@ public class GUI implements GUIInterface {
 		
 		myRoot = new TabPane();
 		
-		Tab mainScreenTab = new TabMainScreen(myController, canvas).getTab();
+		Tab mainScreenTab = new TabMainScreen(myController, canvas, commandLine).getTab();
 		Tab helpTab = createHelpTab();
 		
 		myRoot.getTabs().addAll(mainScreenTab, helpTab);		
