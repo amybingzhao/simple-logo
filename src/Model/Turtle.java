@@ -14,11 +14,11 @@ import javafx.scene.image.Image;
 public class Turtle extends Observable {
 	private Image myImage;
 	private int myVariableName;
-	private int myX;
-	private int myY;
+	private double myX;
+	private double myY;
 	private boolean penUp;
 	private boolean isVisible;
-	private int myDirection;
+	private double myDirection;
 	
 	public Turtle() {
 		myX = 0;
@@ -32,7 +32,7 @@ public class Turtle extends Observable {
 	 * @param x: x-coordinate of location to move to.
 	 * @param y: y-coordinate of location to move to.
 	 */
-	public void move(int x, int y) {
+	public void move(double x, double y) {
 		myX = x;
 		myY = y;
 	}
@@ -65,19 +65,19 @@ public class Turtle extends Observable {
 		isVisible = true;
 	}
 	
-	public int getDirection() {
+	public double getDirection() {
 		return myDirection;
 	}
 	
-	public int getCurX() {
+	public double getCurX() {
 		return myX;
 	}
 	
-	public int getCurY() {
+	public double getCurY() {
 		return myY;
 	}
 	
 	public String printPosition() {
-		return ("(" + Integer.toString(myX) + ", " + Integer.toString(myY) + ")");
+		return ("(" + Double.toString(myX) + ", " + Double.toString(myY) + ")");
 	}
 }

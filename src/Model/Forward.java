@@ -10,12 +10,13 @@ public class Forward extends Node {
         List<Node> children = getChildren();
 
         double dist = children.get(0).interpret();
-        int dir = turtle.getDirection();
+        double dir = turtle.getDirection();
 
         if (turtle != null) {
-            int x = turtle.getCurX() + (int) Math.round(dist * Math.sin(Math.toRadians(dir)));
-            int y = turtle.getCurY() + (int) Math.round(dist * Math.cos(Math.toRadians(dir)));
-            turtle.move(x, y);
+        	for (int i = 0; i < dist; i++) {
+        		turtle.move(turtle.getCurX() + Math.round(1.0 * Math.sin(Math.toRadians(dir))), 
+        				turtle.getCurY() + Math.round(1.0 * Math.cos(Math.toRadians(dir))));
+        	}
         }
         
         return dist;
