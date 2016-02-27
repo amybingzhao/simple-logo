@@ -5,7 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 
 import java.util.ResourceBundle;
 
@@ -16,7 +16,7 @@ public class GUICommandLine {
 	private int myY;
 	
 	private Label commandLabel;
-	private TextField commandInputLine;
+	private TextArea commandInputLine;
 	private Button runButton;
 	
 	private static final int COMMAND_LINE_SPACING = 5;
@@ -25,16 +25,17 @@ public class GUICommandLine {
 	private static final double PADDING_BOTTOM = 10;
 	private static final double PADDING_LEFT = 10;
 	
-	protected GUICommandLine(Controller c, ResourceBundle r, String xPosString, String yPosString) {
+	protected GUICommandLine(Controller c, ResourceBundle r) {
 		myController = c;
 		myResources = r;
-		myX = Integer.valueOf(myResources.getString(xPosString));
-		myY = Integer.valueOf(myResources.getString(yPosString));
+//		myX = Integer.valueOf(myResources.getString(xPosString));
+//		myY = Integer.valueOf(myResources.getString(yPosString));
 	}
 	
 	protected Node createNode() {
-		commandLabel = new Label(myResources.getString("EnterCommand"));
-		commandInputLine = new TextField();
+		commandLabel = new Label(myResources.getString("Command"));
+		commandInputLine = new TextArea();
+		commandInputLine.setPrefRowCount(5);
 		runButton = new Button(myResources.getString("Run"));
 		runButton.setOnAction(evt -> runCommand());
 		

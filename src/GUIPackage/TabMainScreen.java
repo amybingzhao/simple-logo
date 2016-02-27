@@ -20,10 +20,10 @@ public class TabMainScreen{
 	private ResourceBundle myResources;
 	private GUIObjectFactory myFactory;
 	private GUICanvas canvas;
+	private GUICommandLine commandLine;
 	private Controller myController;
 	
 	//creating GUIObject instance variables
-	private GUIObject commandLine;
 	private GUIObject userCommands;
 	private GUIObject previousCommands;
 	private GUIObject variables;
@@ -34,9 +34,10 @@ public class TabMainScreen{
 	private GUIObject colorPickerPen;
 	
 
-	public TabMainScreen(Controller myController, GUICanvas canvas) {
+	public TabMainScreen(Controller myController, GUICanvas canvas, GUICommandLine cLine) {
 		this.myController = myController;
 		this.canvas = canvas;
+		this.commandLine = cLine;
 	}
 
 	public Tab getTab() {
@@ -49,8 +50,8 @@ public class TabMainScreen{
 		myFactory = new GUIObjectFactory(myResources, myController, canvas); 
 		
 		setLeftPane();
-//		setRightPane();
-//		setBottomPane();
+		setRightPane();
+		setBottomPane();
 //		setTopPane();
 		
 		myRootTab.setContent(myMainScreen);
@@ -86,7 +87,7 @@ public class TabMainScreen{
 	}
 	//TODO:	
 	private void setBottomPane(){
-		commandLine = myFactory.createNewGUIObject("CommandLine");
+		commandLine = new GUICommandLine(myController, myResources);
 		myMainScreen.setBottom(commandLine.createNode());
 	}
 	//TODO:	
