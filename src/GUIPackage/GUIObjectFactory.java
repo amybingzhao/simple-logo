@@ -6,14 +6,18 @@ import javafx.scene.Node;
 
 public class GUIObjectFactory {
 	private static final String GUI_RESOURCE = "GUI";
-	ResourceBundle myResources;
+	private ResourceBundle myResources;
+	private GUICanvasAndOptions canvas;
+	private Controller contr; 
 	
 	
-	public GUIObjectFactory(){
+	public GUIObjectFactory(Controller contr, GUICanvasAndOptions canvas){
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
+		this.canvas = canvas;
+		this.contr = contr;
 	}
 	
-	public GUIObject createNewGUIObject(String nodeTypeKey, Controller contr, GUICanvasAndOptions canvas){
+	public GUIObject createNewGUIObject(String nodeTypeKey){
 		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
 			case("CommandLineVBox"):{

@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 public class GUI implements GUIInterface {
+	private static final int CANVAS_ROW_SPAN = 3;
 	private Scene myScene;
 	private GridPane myRoot;
 	private ResourceBundle myResources;
@@ -25,17 +26,17 @@ public class GUI implements GUIInterface {
 	private GUICanvasAndOptions canvas;
 	
 	//creating GUIObject instance variables
-	private Node commandLine;
-	private Node userCommands;
-	private Node previousCommands;
-	private Node variables;
-	private Node exceptionHandler;
-	private Node languageSelector;
-	private Node penInput;
-	private Node backgroundInput;
-	private Node imageInput;
+	private GUIObject commandLine;
+	private GUIObject userCommands;
+	private GUIObject previousCommands;
+	private GUIObject variables;
+	private GUIObject exceptionHandler;
+	private GUIObject languageSelector;
+	private GUIObject penInput;
+	private GUIObject backgroundInput;
+	private GUIObject imageInput;
 	
-	private List<Node> myNodeList;
+	private List<GUIObject> myNodeList;
 	
 	
 	private int windowHeight;
@@ -55,27 +56,34 @@ public class GUI implements GUIInterface {
 		myObserver = new TurtleObserver();
 		myTurtle.addObserver(myObserver);
 		
-		canvas = new GUICanvasAndOptions(myController, myResources, "CanvasX", "CanvasY");
+		myFactory = new GUIObjectFactory(myController, canvas);
 		myRoot = new GridPane();
 		initializeNodes();
-		for (Node node: myNodeList) {
-			myRoot.add(node, 1, 1);
+		for (GUIObject object: myNodeList) {
+			myRoot.add(object.createNode(), object.getXPos(), object.getYPos());
 		}
 		myScene = new Scene(myRoot, windowHeight, windowWidth, Color.WHITE);
 		return myScene;
 	}
 	
+	private void addCanvas() {
+		canvas = new GUICanvasAndOptions(myController, myResources, "CanvasX", "CanvasY");
+		Node canvasNode = canvas.createNode();
+		myRoot.add(canvasNode, canvas.getXPos(), canvas.getYPos());
+		myRoot.setRowSpan(canvasNode, CANVAS_ROW_SPAN);
+	}
+	
 	//TODO: Add in all nodes
 	public void initializeNodes() {
-		commandLine = myFactory.createNewGUIObject("CommandLine").createNode();
-		userCommands = myFactory.createNewGUIObject("UserCommands").createNode();
-		previousCommands = myFactory.createNewGUIObject("PreviousCommands").createNode();
-		variables = myFactory.createNewGUIObject("Variables").createNode();
-		exceptionHandler = myFactory.createNewGUIObject("ExceptionHandler").createNode();
-		languageSelector = myFactory.createNewGUIObject("LanguageSelector").createNode();
-		penInput = myFactory.createNewGUIObject("PenInput").createNode();
-		backgroundInput = myFactory.createNewGUIObject("BackgroundInput").createNode();
-		imageInput = myFactory.createNewGUIObject("ImageInput").createNode();
+		commandLine = myFactory.createNewGUIObject("CommandLine");
+		userCommands = myFactory.createNewGUIObject("UserCommands");
+		previousCommands = myFactory.createNewGUIObject("PreviousCommands");
+		variables = myFactory.createNewGUIObject("Variables");
+		exceptionHandler = myFactory.createNewGUIObject("ExceptionHandler");
+		languageSelector = myFactory.createNewGUIObject("LanguageSelector");
+		penInput = myFactory.createNewGUIObject("PenInput");
+		backgroundInput = myFactory.createNewGUIObject("BackgroundInput");
+		imageInput = myFactory.createNewGUIObject("ImageInput");
 		
 		myNodeList.addAll(Arrays.asList(commandLine, userCommands, previousCommands,
 				variables, exceptionHandler, languageSelector, penInput, backgroundInput, imageInput));
