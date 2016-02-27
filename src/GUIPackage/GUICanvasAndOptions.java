@@ -1,5 +1,4 @@
 package GUIPackage;
-
 import java.util.ResourceBundle;
 
 import Controller.Controller;

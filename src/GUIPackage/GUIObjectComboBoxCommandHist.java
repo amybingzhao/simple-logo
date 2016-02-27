@@ -1,6 +1,8 @@
 package GUIPackage;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import Controller.Controller;
 
@@ -12,14 +14,16 @@ import Controller.Controller;
 
 public class GUIObjectComboBoxCommandHist extends GUIObjectComboBox {
 	
-	public GUIObjectComboBoxCommandHist(Controller contr, String nodeType, int xPos, int yPos) {
-		super(contr, nodeType, xPos, yPos);
-		// TODO Auto-generated constructor stub
+	public GUIObjectComboBoxCommandHist(ResourceBundle myResources, Controller contr, int xPos, int yPos) {
+		super(myResources, contr, xPos, yPos);
 	}
 
 	@Override
 	List<String> optionsList() {
-		return contr.getCommandHistory();
+//		return contr.getCommandHistory();
+		List<String> test = new ArrayList<String>();
+		test.add("testing");
+		return test;
 	}
 	
 }
