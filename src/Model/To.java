@@ -18,7 +18,8 @@ public class To extends Node {
          * Copy of original Make logic - Must be changed
          */
         List<Node> children = getChildren();
-        Node expression = children.get(0);
+        CommandList parameters = (CommandList) children.get(0);
+        CommandList expressions = (CommandList) children.get(1);
         //VariableDictionary.makeVariable(name, expression);
         return 1;
     }
