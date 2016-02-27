@@ -10,6 +10,7 @@ public class Command extends Node {
 
     private String myName;
     private List<String> parameters;
+    private List<Node> myProcedure;
 
     public Command(String name) {
         myName = name;
@@ -30,10 +31,14 @@ public class Command extends Node {
             children.remove(0);
             VariableDictionary.getInstance().makeVariable(myVar, value.interpret());
         }
-        for (Node executionTree : children) {
-            executionTree.interpret();
+        for (Node myNode : myProcedure){
+            myNode.interpret();
         }
         return 0;
+    }
+
+    public void setProcedure(List<Node> procedure){
+        myProcedure = procedure;
     }
 
     @Override

@@ -18,7 +18,7 @@ public class For extends Node{
 
         List<Node> children = getChildren();
         CommandList argList = (CommandList) children.get(0);
-        List<Node> argsNodes = argList.getEntries();
+        List<Node> argsNodes = argList.getChildren();
         double low = argsNodes.get(1).interpret();
         double high = argsNodes.get(2).interpret();
         double increment = argsNodes.get(3).interpret();
