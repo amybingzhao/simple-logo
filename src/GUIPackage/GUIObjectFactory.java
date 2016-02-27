@@ -3,36 +3,36 @@ import java.util.ResourceBundle;
 
 import Controller.Controller;
 import javafx.scene.Node;
-
+/**
+ * Instantiate GUIObjects based on String passed in.
+ * @author AnnieTang
+ *
+ */
 public class GUIObjectFactory {
-	private static final String GUI_RESOURCE = "GUI";
-	ResourceBundle myResources;
+	private ResourceBundle myResources;
+	private GUICanvasAndOptions canvas;
+	private Controller myController;
 	
-	
-	public GUIObjectFactory(){
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
+	public GUIObjectFactory(ResourceBundle myResources, Controller myController, GUICanvasAndOptions canvas){
+		this.myResources = myResources;
+		this.canvas = canvas; 
+		this.myController = myController;
 	}
 	
-	public GUIObject createNewGUIObject(String nodeTypeKey, Controller contr){
+	public GUIObject createNewGUIObject(String nodeTypeKey){
 		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
 			case("CommandLineVBox"):{
 				
 			}
 			case("ExceptionHandlerLabeled"):{
-				
-			}
-			case("Canvas"):{
-				return new GUIObjectCanvas(contr);
+				return new GUIObjectLabeled(Integer.parseInt(myResources.getString("ExceptionHandlerX")),
+						Integer.parseInt(myResources.getString("ExceptionHandlerX")));
 			}
 			case("ImageVBox"):{
-				return new GUIObjectVBox(myResources, nodeType);
-			}
-			case("BackgroundVBox"):{
-				
-			}
-			case("PenVBox"):{
-				return new GUIObjectVBox(myResources, nodeType);
+				return new GUIObjectVBox(myResources, canvas, nodeType, 
+						Integer.parseInt(myResources.getString("ImageX")), 
+						Integer.parseInt(myResources.getString("ImageY")));
 			}
 			case("LanguageComboBox"):{
 				
@@ -44,7 +44,9 @@ public class GUIObjectFactory {
 				
 			}
 			case("PreviousCommandsComboBox"):{
-				
+				return new GUIObjectComboBoxCommandHist(myResources, myController, 
+						Integer.parseInt(myResources.getString("PreviousCommandsX")), 
+						Integer.parseInt(myResources.getString("PreviousCommandsY")));
 			}
 			case("HelpTabPane"):{
 				

@@ -161,7 +161,9 @@ public class Parser {
         List<String> inputCommandList = new ArrayList<String>();
         String[] inputArray = command.split(WHITESPACE);
         for (int i = 0; i < inputArray.length; i++) {
-            inputCommandList.add(inputArray[i]);
+        	if (!inputArray[i].isEmpty()) {
+        		inputCommandList.add(inputArray[i]);
+        	}
         }
         return inputCommandList;
     }

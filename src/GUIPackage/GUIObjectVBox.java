@@ -11,23 +11,31 @@ import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+/**
+ * Load different types of file input (e.g. image file to use for Turtle). File directory is based on
+ * what is specified for the nodeType in the ResourceBundle.  
+ * @author AnnieTang
+ *
+ */
+
 public class GUIObjectVBox implements GUIObject {
-	
-	private static final String FILE_DIRECTORY = "Images/";
 	private ResourceBundle myResources;
 	private int xPos;
 	private int yPos;
 	private String nodeType;
-//	private boolean canUpdate;
-	
+	private boolean canUpdate;
+	private GUICanvasAndOptions canvas;
 	private TextField userInputFileString;
 	private Button initializeButton;
 	private Labeled fileErrorLabel;
 	private static final double PADDING = 10;
 	
-	public GUIObjectVBox(ResourceBundle myResources, String nodeType) {
+	public GUIObjectVBox(ResourceBundle myResources, GUICanvasAndOptions canvas, String nodeType, int xPos, int yPos) {
 		this.myResources = myResources;
+		this.canvas = canvas;
 		this.nodeType = nodeType;
+		this.xPos = xPos;
+		this.yPos = yPos;
 	}
 
 	@Override
@@ -49,12 +57,13 @@ public class GUIObjectVBox implements GUIObject {
 
 	private void setValidity(String nodeType) {
 		if (isValidFileString(userInputFileString.getText())){
-//			canUpdate = true;
+			canUpdate = true;
 		}
 	}
 	
 	private boolean isValidFileString(String fileString){
-		File f = new File(FILE_DIRECTORY + fileString);
+		String fileDirectory = myResources.getString(nodeType + "FileDirectory");
+		File f = new File(fileDirectory + fileString);
 		if (f.isFile()){
 			return true;
 		}else{
@@ -64,13 +73,15 @@ public class GUIObjectVBox implements GUIObject {
 		return false;
 	}
 	
-//	public boolean isUpdateable(){
-//		return canUpdate;
-//	}
+	public boolean isUpdateable(){
+		return canUpdate;
+	}
 
 	@Override
 	public void updateNode() {
-		//possibly nothing here	
+		if(canUpdate){
+			canvas.setImage();
+		}
 	}
 
 	@Override
