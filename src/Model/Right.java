@@ -9,12 +9,9 @@ public class Right extends Node {
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();
-		double degrees = children.get(0).interpret();
-		
+		double degrees = children.get(0).interpret();		
 		Turtle turtle = getTurtle();
-		double newDir = (turtle.getDirection() + degrees) % ONE_REVOLUTION;
-		turtle.setDirection(newDir);
-
+		turtle.setDirection(turtle.getDirection() + degrees);
 		return degrees;
 	}
 

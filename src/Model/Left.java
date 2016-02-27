@@ -11,13 +11,7 @@ public class Left extends Node {
 		List<Node> children = getChildren();
 		double degrees = children.get(0).interpret();
 		Turtle turtle = getTurtle();
-		double newDir = turtle.getDirection() - degrees;
-		
-		if (newDir < 0) {
-			newDir = newDir + ONE_REVOLUTION;
-		}
-		turtle.setDirection(newDir);
-
+		turtle.setDirection(turtle.getDirection() - degrees);
 		return degrees;
 	}
 

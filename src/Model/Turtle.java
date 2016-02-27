@@ -19,6 +19,7 @@ public class Turtle extends Observable {
 	private boolean penUp;
 	private boolean isVisible;
 	private double myDirection;
+	private static final double ONE_REVOLUTION = 360;
 	
 	public Turtle() {
 		myX = 0;
@@ -38,6 +39,12 @@ public class Turtle extends Observable {
 	}
 	
 	public void setDirection(double dir) {
+		if (dir > ONE_REVOLUTION) {
+			dir = dir % ONE_REVOLUTION;
+		} else if (dir < 0) {
+			dir = dir + ONE_REVOLUTION;
+		} 
+		
 		myDirection = dir;
 	}
 	
