@@ -25,14 +25,14 @@ public class GUICommandLine {
 	private static final double PADDING_BOTTOM = 10;
 	private static final double PADDING_LEFT = 10;
 	
-	public GUICommandLine(Controller c, ResourceBundle r, String xPosString, String yPosString) {
+	protected GUICommandLine(Controller c, ResourceBundle r, String xPosString, String yPosString) {
 		myController = c;
 		myResources = r;
 		myX = Integer.valueOf(myResources.getString(xPosString));
 		myY = Integer.valueOf(myResources.getString(yPosString));
 	}
 	
-	public Node createNode() {
+	protected Node createNode() {
 		commandLabel = new Label(myResources.getString("EnterCommand"));
 		commandInputLine = new TextField();
 		runButton = new Button(myResources.getString("Run"));
@@ -47,7 +47,7 @@ public class GUICommandLine {
 		return commandLine;
 	}
 	
-	public void runCommand() {
+	private void runCommand() {
 		try {
 			myController.processCommand(commandInputLine.getText());
 		}
@@ -58,15 +58,15 @@ public class GUICommandLine {
 		clearTextField();
 	}
 	
-	public void clearTextField() {
+	private void clearTextField() {
 		commandInputLine.clear();
 	}
 	
-	public int getXPos() {
+	protected int getXPos() {
 		return myX;
 	}
 
-	public int getYPos() {
+	protected int getYPos() {
 		return myY;
 	}
 }
