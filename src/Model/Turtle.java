@@ -46,10 +46,9 @@ public class Turtle extends Observable {
 	 * @param y
 	 */
 	public double turnTowards(double x, double y) {
-		double angle = Math.toDegrees(Math.atan2(x, y));
-		double angleDiff = angle - myDirection;
+		double angle = Math.toDegrees(Math.atan2(x - myX, y - myY));
 		setDirection(angle);
-		return angleDiff;
+		return angle;
 	}
 	
 	/**
