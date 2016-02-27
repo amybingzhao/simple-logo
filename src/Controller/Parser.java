@@ -125,7 +125,14 @@ public class Parser {
             	node = createList(inputCommandList, myTurtle);
             	break;
             case COMMAND:
-                node = CommandDictionary.getInstance().getCommandFor(commandToBuild);
+                if(CommandDictionary.getInstance().contains(commandToBuild)){
+                    node = CommandDictionary.getInstance().getCommandFor(commandToBuild);
+                    node.setNumChildrenNeeded(CommandDictionary.getInstance().getNumArgsForkey(commandToBuild));
+                    addChildrenToNode(node, inputCommandList);
+                }
+                else {
+                    node = new Command(commandToBuild);
+                }
                 break;
             default:
             	node = getFunctionObject(name);

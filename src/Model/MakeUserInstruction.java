@@ -16,15 +16,17 @@ public class MakeUserInstruction extends Node {
         List<Node> children = getChildren();
         name = children.get(0).toString();
         Command myCommand = new Command(name);
-        CommandList paramList = (CommandList) children.get(0);
+        CommandList paramList = (CommandList) children.get(1);
         List<Node> parameters = paramList.getChildren();
         for (Node myNode : parameters) {
             Variable myVar = (Variable) myNode;
             myCommand.addParam(myVar.toString());
         }
-        CommandList expressions = (CommandList) children.get(1);
+        CommandDictionary.getInstance().setNumArguments(name, parameters.size());
+        CommandList expressions = (CommandList) children.get(2);
         myCommand.setProcedure(expressions.getChildren());
         CommandDictionary.getInstance().createCommand(name, myCommand);
+        CommandDictionary myDict = CommandDictionary.getInstance();
         return 1;
     }
 
