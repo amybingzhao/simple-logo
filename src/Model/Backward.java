@@ -2,7 +2,7 @@ package Model;
 
 import java.util.List;
 
-public class Forward extends Node {
+public class Backward extends Node {
 
     @Override
     public double interpret() {
@@ -14,8 +14,8 @@ public class Forward extends Node {
 
         if (turtle != null) {
         	for (int i = 0; i < dist; i++) {
-        		turtle.move(turtle.getCurX() + Math.sin(Math.toRadians(dir)), 
-        				turtle.getCurY() + Math.cos(Math.toRadians(dir)));
+        		turtle.move(turtle.getCurX() - Math.sin(Math.toRadians(dir)), 
+        				turtle.getCurY() - Math.cos(Math.toRadians(dir)));
         	}
         }
         
@@ -25,6 +25,6 @@ public class Forward extends Node {
     @Override
     public String toString() {
         List<Node> children = getChildren();
-        return "Forward " + children.get(0).toString();
+        return "Backward " + children.get(0).toString();
     }
 }
