@@ -21,16 +21,18 @@ abstract class GUIObjectComboBox implements GUIObject {
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private int xPos;
 	private int yPos;
+	private String promptText;
 	protected ResourceBundle myResources;
 	protected Controller contr;
 	protected ObservableList<String> options;
 	protected ComboBox<String> comboBox;
 	
-	public GUIObjectComboBox(ResourceBundle myResources, Controller contr, int xPos, int yPos) {
+	public GUIObjectComboBox(ResourceBundle myResources, Controller myController, String promptText, int xPos, int yPos) {
+		this.myResources = myResources;
+		this.contr = myController;
+		this.promptText = promptText;
 		this.xPos = xPos;
 		this.yPos = yPos;
-		this.contr = contr;
-		this.myResources = myResources;
 	}
 	
 	@Override
@@ -40,6 +42,7 @@ abstract class GUIObjectComboBox implements GUIObject {
 			    );
 		comboBox = new ComboBox<String>(options);
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
+		comboBox.setPromptText(promptText);
 		return comboBox;
 	}
 

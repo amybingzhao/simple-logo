@@ -4,12 +4,16 @@ import java.util.ResourceBundle;
 import Controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 /**
  * Returns one Node that contains the Turtle Canvas and two ColorPicker objects
  * (for background and pen)
@@ -17,51 +21,30 @@ import javafx.scene.paint.Color;
  *
  */
 public class GUICanvasAndOptions {
-	private static final int SIZE = 300; 
+	private static final int CANVAS_WIDTH = 500;
+	private static final int CANVAS_HEIGHT = 500;
 	private Controller contr;
 	private int xPos;
 	private int yPos;
 	private GraphicsContext gc;
 	private Canvas canvas;
-	private ColorPicker backgroundColorPicker;
-	private ColorPicker penColorPicker;
-	private VBox entireCanvas;
 	private ResourceBundle myResources; 
 	
-	public GUICanvasAndOptions(Controller contr, ResourceBundle myResources, String xPosString, String yPosString) {
-		this.contr = contr;
+	public GUICanvasAndOptions(Controller myController, ResourceBundle myResources, String xPosString, String yPosString) {
+		this.contr = myController;
 		this.myResources = myResources;
 		this.xPos = Integer.parseInt(myResources.getString(xPosString));
 		this.yPos = Integer.parseInt(myResources.getString(yPosString));
-		this.entireCanvas = new VBox();
 	}
 
 	public Node createNode() {
-		canvas = new Canvas(SIZE, SIZE);
+		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		canvas.setLayoutX(xPos);
 		canvas.setLayoutX(yPos);
-		
 		gc = canvas.getGraphicsContext2D();
-		
-		backgroundColorPicker = new ColorPicker(Color.WHITE);
-		backgroundColorPicker.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				gc.setFill(backgroundColorPicker.getValue());
-			}
-        });
-		
-		penColorPicker = new ColorPicker(Color.WHITE);
-		penColorPicker.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				gc.setStroke(penColorPicker.getValue());
-			}
-        });
-		
-		entireCanvas.getChildren().addAll(backgroundColorPicker, penColorPicker, canvas);
-		
-		return entireCanvas;
+		gc.setFill(Color.ALICEBLUE);
+		gc.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);		
+		return canvas;
 	}
 
 	public void updateNode() {		
@@ -73,7 +56,7 @@ public class GUICanvasAndOptions {
 	}
 	
 	public void setImage(){
-		//called from GUIObjectVBox for image upload 
+		//called from GUIObjectVbox for image upload 
 	}
 
 	public int getXPos() {
@@ -90,5 +73,17 @@ public class GUICanvasAndOptions {
 
 	public void setYPos(int val) {
 		yPos = val;
+	}
+	
+	public GraphicsContext getGraphicsContext(){
+		return gc;
+	}
+	
+	public int getWidth(){
+		return CANVAS_WIDTH;
+	}
+	
+	public int getHeight(){
+		return CANVAS_HEIGHT;
 	}
 }
