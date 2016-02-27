@@ -1,18 +1,27 @@
 package GUIPackage;
 
 import Controller.Controller;
-
-import java.util.Map.Entry;
+import Model.VariableDictionary;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class GUIObjectTableView implements GUIObject {
 
+	private static final int TABLE_COLUMN_WIDTH = 130;
 	private Controller myController;
 	private ResourceBundle myResources;
-	private TableView myTableView;
+	private TableView<Variable> myTableView;
+	private VariableDictionary myVariables;
+	
+	private final ObservableList<Variable> data = FXCollections.observableArrayList(
+			new Variable("testing", "testing")
+			);
 	
 	public GUIObjectTableView(Controller c, ResourceBundle r) {
 		myController = c;
@@ -21,21 +30,24 @@ public class GUIObjectTableView implements GUIObject {
 
 	@Override
 	public Node createNode() {
-		myTableView = new TableView();
+		myTableView = new TableView<Variable>();
 		myTableView.setEditable(true);
 		
 		TableColumn variableCol = new TableColumn(myResources.getString("VariablesColumn"));
-		variableCol.setMinWidth(100);
-		TableColumn valueCol = new TableColumn(myResources.getString("ValuesColumn"));
-		valueCol.setMinWidth(100);
+		variableCol.setMinWidth(TABLE_COLUMN_WIDTH);
+		variableCol.setCellValueFactory(new PropertyValueFactory<Variable, String>("variableName"));
 		
-		myTableView.getColumns().setAll(variableCol, valueCol);
+		TableColumn valueCol = new TableColumn(myResources.getString("ValuesColumn"));
+		valueCol.setMinWidth(TABLE_COLUMN_WIDTH);
+		valueCol.setCellValueFactory(new PropertyValueFactory<Variable, String>("variableValue"));
+		
+		myTableView.setItems(data);
+		
+		myTableView.getColumns().addAll(variableCol, valueCol);
 		return myTableView;
 	}
 
 	@Override
 	public void updateNode() {
-		// TODO Auto-generated method stub
-		
 	}
 }
