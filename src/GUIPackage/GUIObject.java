@@ -1,5 +1,4 @@
 package GUIPackage;
-import Controller.Controller;
 import javafx.scene.Node;
 
 /**
@@ -32,13 +31,5 @@ public interface GUIObject {
      * has been called.
      */
     public void updateNode();
-
-    public int getXPos();
-
-    public int getYPos();
-
-    public void setXPos(int val);
-
-    public void setYPos(int val);
 
 }

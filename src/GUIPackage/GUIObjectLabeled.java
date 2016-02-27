@@ -1,5 +1,6 @@
 package GUIPackage;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
@@ -9,18 +10,16 @@ import javafx.scene.control.Labeled;
  *
  */
 public class GUIObjectLabeled implements GUIObject {
-	private int xPos;
-	private int yPos;
+	private static final int PADDING = 10;
 	private Labeled label;
 	
-	public GUIObjectLabeled(int xPos, int yPos) {
-		this.xPos = xPos;
-		this.yPos = yPos;
+	public GUIObjectLabeled() {
 	}
 
 	@Override
 	public Node createNode() {
-		label = new Label("Welcome to SLogo!");
+		label = new Label("Welcome to SLogo! Look here for tips. ");
+		label.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		return label;
 	}
 
@@ -30,27 +29,5 @@ public class GUIObjectLabeled implements GUIObject {
 	
 	@Override
 	public void updateNode() {
-		
 	}
-
-	@Override
-	public int getXPos() {
-		return xPos;
-	}
-
-	@Override
-	public int getYPos() {
-		return yPos;
-	}
-
-	@Override
-	public void setXPos(int val) {
-		xPos = val;		
-	}
-
-	@Override
-	public void setYPos(int val) {
-		yPos = val;
-	}
-
 }
