@@ -6,11 +6,12 @@ package Model;
 public class Cosine extends Node {
 
     public static final String COSINE = "Cosine ";
+    private static final int DEGREES_PER_PI = 180;
 
     @Override
     public double interpret() {
         double degrees = getChildren().get(0).interpret();
-        double radians = degrees * (Math.PI / 180);
+        double radians = degrees * (Math.PI / DEGREES_PER_PI);
         return Math.cos(radians);
     }
 
