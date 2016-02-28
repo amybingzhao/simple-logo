@@ -2,6 +2,7 @@ package Model;
 
 public class Heading extends Node {
 
+	private static final String HEADING = "heading ";
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();
@@ -10,7 +11,7 @@ public class Heading extends Node {
 
 	@Override
 	public String toString() {
-		return "Heading";
+		return HEADING;
 	}
 
 }

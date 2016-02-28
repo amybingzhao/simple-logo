@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Backward extends Node {
 
+	private static final String BACKWARD = "Backward ";
 	private static final int DISTANCE = 0;
 
     @Override
@@ -22,6 +23,6 @@ public class Backward extends Node {
     @Override
     public String toString() {
         List<Node> children = getChildren();
-        return "Backward " + children.get(DISTANCE).toString();
+        return BACKWARD + children.get(DISTANCE).toString();
     }
 }

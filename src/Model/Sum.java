@@ -4,14 +4,18 @@ import java.util.List;
 
 public class Sum extends Node{
 	
+	private static final String SUM = "sum ";
+	private static final int EXPR1 = 0;
+	private static final int EXPR2 = 1;
+	
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();
-		return children.get(0).interpret() + children.get(1).interpret();
+		return children.get(EXPR1).interpret() + children.get(EXPR2).interpret();
 	}
 	
 	public String toString() {
 		List<Node> children = getChildren();
-		return "Sum " + children.get(0).toString() + " " + children.get(1).toString();
+		return SUM + children.get(EXPR1).toString() + " " + children.get(EXPR2).toString();
 	}
 }

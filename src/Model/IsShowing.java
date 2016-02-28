@@ -2,6 +2,8 @@ package Model;
 
 public class IsShowing extends Node {
 
+	private static final String SHOWINGP = "showing? ";
+	
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();
@@ -14,6 +16,6 @@ public class IsShowing extends Node {
 
 	@Override
 	public String toString() {
-		return "Showing?";
+		return SHOWINGP;
 	}
 }

@@ -2,6 +2,8 @@ package Model;
 
 public class IsPenDown extends Node {
 
+	private static final String PENDOWNP = "pendown? ";
+	
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();
@@ -14,6 +16,6 @@ public class IsPenDown extends Node {
 
 	@Override
 	public String toString() {
-		return "PenDown?";
+		return PENDOWNP;
 	}
 }

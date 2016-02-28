@@ -2,6 +2,8 @@ package Model;
 
 public class PenDown extends Node {
 
+	private static final String PENDOWN = "pendown ";
+	
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();
@@ -11,7 +13,7 @@ public class PenDown extends Node {
 
 	@Override
 	public String toString() {
-		return "PenDown";
+		return PENDOWN;
 	}
 
 }

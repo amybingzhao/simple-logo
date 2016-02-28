@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Left extends Node {
 
+	private static final String LEFT = "left ";
 	private static final int ONE_REVOLUTION = 360;
 	private static final int DEGREES = 0;
 
@@ -19,6 +20,6 @@ public class Left extends Node {
 	@Override
 	public String toString() {
 		List<Node> children = getChildren();
-		return "Left " + children.get(DEGREES).interpret();
+		return LEFT + children.get(DEGREES).interpret();
 	}
 }

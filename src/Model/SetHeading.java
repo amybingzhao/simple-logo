@@ -4,6 +4,7 @@ import java.util.List;
 
 public class SetHeading extends Node {
 	
+	private static final String SETHEADING = "setheading ";
 	private static final int DEGREES = 0;
 	
 	@Override
@@ -20,6 +21,6 @@ public class SetHeading extends Node {
 	@Override
 	public String toString() {
 		List<Node> children = getChildren();
-		return "SetHeading " + children.get(DEGREES).toString();
+		return SETHEADING + children.get(DEGREES).toString();
 	}
 }

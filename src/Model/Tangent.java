@@ -5,17 +5,18 @@ package Model;
  */
 public class Tangent extends Node {
 
-    public static final String TANGENT = "Tangent ";
+    public static final String TANGENT = "tan ";
+    private static final int DEGREES = 0;
 
     @Override
     public double interpret() {
-        double degrees = getChildren().get(0).interpret();
+        double degrees = getChildren().get(DEGREES).interpret();
         double radians = degrees * (Math.PI / 180);
         return Math.tan(radians);
     }
 
     @Override
     public String toString() {
-        return TANGENT + getChildren().get(0).toString();
+        return TANGENT + getChildren().get(DEGREES).toString();
     }
 }

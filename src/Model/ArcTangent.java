@@ -5,17 +5,18 @@ package Model;
  */
 public class ArcTangent extends Node {
 
-    public static final String ARC_TANGENT = "ArcTangent ";
-
+    public static final String ARC_TANGENT = "atan ";	// is there a reason why this is public?
+    private static final int DEGREES = 0;
+    
     @Override
     public double interpret() {
-        double degrees = getChildren().get(0).interpret();
+        double degrees = getChildren().get(DEGREES).interpret();
         double radians = degrees * (Math.PI / 180);
         return Math.atan(radians);
     }
 
     @Override
     public String toString() {
-        return ARC_TANGENT + getChildren().get(0).toString();
+        return ARC_TANGENT + getChildren().get(DEGREES).toString();
     }
 }
