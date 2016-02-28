@@ -2,10 +2,10 @@ package Model;
 
 import java.util.List;
 
-public class Forward extends Node {
+public class Backward extends Node {
 
 	private static final int DISTANCE = 0;
-	
+
     @Override
     public double interpret() {
         Turtle turtle = getTurtle();
@@ -13,7 +13,7 @@ public class Forward extends Node {
 
         double dist = children.get(DISTANCE).interpret();
         if (turtle != null) {
-        	turtle.move(dist);
+        	turtle.move(-dist);
         }
         
         return dist;
@@ -22,6 +22,6 @@ public class Forward extends Node {
     @Override
     public String toString() {
         List<Node> children = getChildren();
-        return "Forward " + children.get(DISTANCE).toString();
+        return "Backward " + children.get(DISTANCE).toString();
     }
 }
