@@ -22,6 +22,7 @@ public class TabMainScreen{
 	private GUICanvas canvas;
 	private GUICommandLine commandLine;
 	private Controller myController;
+	private TurtleObserver myTurtle;
 	
 	//creating GUIObject instance variables
 	private GUIObject userCommands;
@@ -34,10 +35,11 @@ public class TabMainScreen{
 	private GUIObject colorPickerPen;
 	
 
-	public TabMainScreen(Controller myController, GUICanvas canvas, GUICommandLine cLine) {
+	public TabMainScreen(Controller myController, GUICanvas canvas, GUICommandLine cLine, TurtleObserver turtle) {
 		this.myController = myController;
 		this.canvas = canvas;
 		this.commandLine = cLine;
+		this.myTurtle = turtle;
 	}
 
 	public Tab getTab() {
@@ -60,7 +62,7 @@ public class TabMainScreen{
 	}
 
 	private void setCenterPane() {
-		canvas = new GUICanvas(myController, myResources);
+		canvas = new GUICanvas(myController, myResources, myTurtle);
 		Node canvasNode = canvas.createNode();
 		myMainScreen.setCenter(canvasNode);
 	}

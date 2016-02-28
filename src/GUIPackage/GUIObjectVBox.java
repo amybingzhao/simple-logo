@@ -26,6 +26,7 @@ public class GUIObjectVBox implements GUIObject {
 	private TextField userInputFileString;
 	private Button initializeButton;
 	private Labeled fileErrorLabel;
+	private File imageFile;
 	private static final int XMLCONTROLS_SPACING = 5;
 	private static final double PADDING_TOP = 0;
 	private static final double PADDING_RIGHT = 10;
@@ -58,6 +59,7 @@ public class GUIObjectVBox implements GUIObject {
 	private void setValidity(String nodeType) {
 		if (isValidFileString(userInputFileString.getText())){
 			canUpdate = true;
+			updateNode();
 		}
 	}
 	
@@ -65,6 +67,7 @@ public class GUIObjectVBox implements GUIObject {
 		String fileDirectory = myResources.getString(nodeType + "FileDirectory");
 		File f = new File(fileDirectory + fileString);
 		if (f.isFile()){
+			imageFile = f;
 			return true;
 		}else{
 			fileErrorLabel.setText(myResources.getString("FileNotFound" + nodeType));
@@ -80,7 +83,7 @@ public class GUIObjectVBox implements GUIObject {
 	@Override
 	public void updateNode() {
 		if(canUpdate){
-			canvas.setImage();
+			canvas.setImage(imageFile);
 		}
 	}
 }
