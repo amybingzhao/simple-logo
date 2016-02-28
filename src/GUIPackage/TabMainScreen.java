@@ -89,12 +89,18 @@ public class TabMainScreen{
 	}
 	//TODO:	
 	private void setBottomPane(){
-		commandLine = new GUICommandLine(myController, myResources);
+		commandLine = new GUICommandLine(myController, myResources, this);
 		myMainScreen.setBottom(commandLine.createNode());
 	}
 	//TODO:	
 	private void setTopPane() {
 		exceptionHandler = myFactory.createNewGUIObject("ExceptionHandler");
 		myMainScreen.setTop(exceptionHandler.createNode());
+	}
+	
+	protected void updateGUI() {
+		userCommands.updateNode();
+		previousCommands.updateNode();
+		variables.updateNode();
 	}
 }
