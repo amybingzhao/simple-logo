@@ -39,7 +39,7 @@ public class GUI implements GUIInterface {
 		
 		myRoot = new TabPane();
 		
-		Tab mainScreenTab = new TabMainScreen(myController, canvas, commandLine).getTab();
+		Tab mainScreenTab = new TabMainScreen(myController, canvas, commandLine, myObserver).getTab();
 		Tab helpTab = createHelpTab();
 		
 		myRoot.getTabs().addAll(mainScreenTab, helpTab);		
