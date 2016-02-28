@@ -6,8 +6,6 @@ import java.util.List;
  * Created by blakekaplan
  */
 
-//TODO: Implement proper logic - this is the logic for MakeUserInstruction
-
 public class MakeVariable extends Node {
 
     public static final String MAKE = "Make";
