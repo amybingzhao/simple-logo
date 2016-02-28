@@ -6,7 +6,7 @@ import java.util.List;
  * Created by blakekaplan
  */
 
-//TODO: Implement proper logic - this is the logic for To
+//TODO: Implement proper logic - this is the logic for MakeUserInstruction
 
 public class MakeVariable extends Node {
 

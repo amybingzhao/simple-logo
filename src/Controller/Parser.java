@@ -22,6 +22,7 @@ public class Parser {
     public static final String LIST_END = "ListEnd";
     public static final String TURTLE_COMMANDS = "TurtleCommands";
     public static final String MAKE = "MakeVariable";
+    public static final String COMMAND = "Command";
     private List<Entry<String, Pattern>> mySymbols;
     private static final String TURTLE_COMMANDS_RESOURCE = "Controller/TurtleCommands";
     private static final String NUM_CHILDREN_PER_COMMAND = "Controller/NumChildrenForFunction";
@@ -123,10 +124,26 @@ public class Parser {
             case LIST_START:
             	node = createList(inputCommandList, myTurtle);
             	break;
+            case COMMAND:
+                node = handleCommand(commandToBuild, inputCommandList);
+                break;
             default:
             	node = getFunctionObject(name);
                 addChildrenToNode(node, inputCommandList);
                 break;
+        }
+        return node;
+    }
+
+    private Node handleCommand(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
+        Node node;
+        if(CommandDictionary.getInstance().contains(commandToBuild)){
+            node = CommandDictionary.getInstance().getCommandFor(commandToBuild);
+            node.setNumChildrenNeeded(CommandDictionary.getInstance().getNumArgsForkey(commandToBuild));
+            addChildrenToNode(node, inputCommandList);
+        }
+        else {
+            node = new Command(commandToBuild);
         }
         return node;
     }

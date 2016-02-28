@@ -14,12 +14,13 @@ import javafx.scene.image.Image;
 public class Turtle extends Observable {
 	private Image myImage;
 	private int myVariableName;
-	private int myX;
-	private int myY;
+	private double myX;
+	private double myY;
 	private boolean penUp;
 	private boolean isVisible;
-	private int myDirection;
-	
+	private double myDirection;
+	private static final double ONE_REVOLUTION = 360;
+	private static final double INCREMENT = 0.01;
 	public Turtle() {
 		myX = 0;
 		myY = 0;
@@ -27,14 +28,47 @@ public class Turtle extends Observable {
 		isVisible = true;
 		myDirection = 0;
 	}
+	
 	/**
-	 * Moves the turtle towards the specified location in increments of (1,1).
-	 * @param x: x-coordinate of location to move to.
-	 * @param y: y-coordinate of location to move to.
+	 * Moves the turtle the specified distance in its current direction in increments of (1,1).
+	 * @param dist: distance to move.
 	 */
-	public void move(int x, int y) {
-		myX = x;
-		myY = y;
+	public void move(double dist) {
+		for (double i = 0; i < dist; i = i + INCREMENT) {
+			myX = myX + INCREMENT * Math.sin(Math.toRadians(myDirection));
+			myY = myY + INCREMENT * Math.cos(Math.toRadians(myDirection));
+		}
+	}
+	
+	/**
+	 * Turns the turtle towards a given (x, y)
+	 * @param x
+	 * @param y
+	 */
+	public double turnTowards(double x, double y) {
+		double angle = Math.toDegrees(Math.atan2(x - myX, y - myY));
+		setDirection(angle);
+		return angle;
+	}
+	
+	/**
+	 * Determines distance between current position and specified (x, y)
+	 * @param x: x-coordinate of position of interest
+	 * @param y: y-coordinate of position of interest
+	 * @return distance between current position and (x, y)
+	 */
+	public double calcDistance(double x, double y) {
+		return Math.sqrt(Math.pow(myX - x, 2) + Math.pow(myY - y, 2));
+	}
+	
+	public void setDirection(double dir) {
+		if (dir > ONE_REVOLUTION) {
+			dir = dir % ONE_REVOLUTION;
+		} else if (dir < 0) {
+			dir = dir + ONE_REVOLUTION;
+		} 
+		
+		myDirection = dir;
 	}
 	
 	/**
@@ -65,19 +99,19 @@ public class Turtle extends Observable {
 		isVisible = true;
 	}
 	
-	public int getDirection() {
+	public double getDirection() {
 		return myDirection;
 	}
 	
-	public int getCurX() {
+	public double getCurX() {
 		return myX;
 	}
 	
-	public int getCurY() {
+	public double getCurY() {
 		return myY;
 	}
 	
 	public String printPosition() {
-		return ("(" + Integer.toString(myX) + ", " + Integer.toString(myY) + ")");
+		return ("(" + Double.toString(myX) + ", " + Double.toString(myY) + "), Direction: " + Double.toString(myDirection));
 	}
 }

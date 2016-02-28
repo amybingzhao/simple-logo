@@ -5,9 +5,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class TurtleObserver implements Observer {
-	private int myX;
-	private int myY;
-	private int myDirection;
+	private double myX;
+	private double myY;
+	private double myDirection;
 	private boolean penDown;
 
 	@Override
@@ -18,15 +18,15 @@ public class TurtleObserver implements Observer {
 		myDirection = turtle.getDirection();
 	}
 	
-	protected int getX() {
+	protected double getX() {
 		return myX;
 	}
 	
-	protected int getY() {
+	protected double getY() {
 		return myY;
 	}
 	
-	protected int getDirection() {
+	protected double getDirection() {
 		return myDirection;
 	}
 
