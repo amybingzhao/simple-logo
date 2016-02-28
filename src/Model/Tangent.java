@@ -5,7 +5,7 @@ package Model;
  */
 public class Tangent extends Node {
 
-    public static final String TANGENT = "tan ";
+    private static final String TANGENT = "tan ";
     private static final int DEGREES = 0;
     private static final int DEGREES_PER_PI = 180;
 

@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class Quotient extends Node {
 
-    public static final String QUOTIENT = "quotient ";
+    private static final String QUOTIENT = "quotient ";
     private static final int EXPR1 = 0;
 	private static final int EXPR2 = 1;
 

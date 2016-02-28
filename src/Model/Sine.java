@@ -5,7 +5,7 @@ package Model;
  */
 public class Sine extends Node {
 
-    public static final String SINE = "sin ";
+    private static final String SINE = "sin ";
     private static final int DEGREES = 0;
     private static final int DEGREES_PER_PI = 180;
 

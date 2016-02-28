@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class Difference extends Node {
 
-    public static final String DIFFERENCE = "Difference ";
+    private static final String DIFFERENCE = "difference ";
     private static final int EXPR1 = 0;
     private static final int EXPR2 = 1;
 

@@ -5,7 +5,7 @@ package Model;
  */
 public class Pi extends Node {
 
-    public static final String PI = "Pi";
+    private static final String PI = "pi ";
 
     @Override
     public double interpret() {

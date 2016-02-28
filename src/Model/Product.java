@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class Product extends Node {
 
-    public static final String PRODUCT = "product ";
+    private static final String PRODUCT = "product ";
     private static final int EXPR1 = 0;
 	private static final int EXPR2 = 1;
 

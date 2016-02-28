@@ -3,6 +3,7 @@ package Model;
 public class ShowTurtle extends Node {
 
 	private static final String SHOWTURTLE = "showturtle ";
+	
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();
