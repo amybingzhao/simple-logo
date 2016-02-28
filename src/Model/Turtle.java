@@ -21,6 +21,7 @@ public class Turtle extends Observable {
 	private double myDirection;
 	private static final double ONE_REVOLUTION = 360;
 	private static final double INCREMENT = 0.01;
+	
 	public Turtle() {
 		myX = 0;
 		myY = 0;
@@ -74,14 +75,14 @@ public class Turtle extends Observable {
 	/**
 	 * Lifts the turtle's pen up so no trail is drawn when it moves.
 	 */
-	public void penUp() {
+	public void lifePenUp() {
 		penUp = true;
 	}
 	
 	/**
 	 * Puts the turtle's pen down so a trail is drawn when it moves.
 	 */
-	public void penDown() {
+	public void putPenDown() {
 		penUp = false;
 	}
 	
@@ -92,11 +93,19 @@ public class Turtle extends Observable {
 		isVisible = false;
 	}
 	
+	public boolean penUp() {
+		return penUp;
+	}
+	
 	/**
 	 * Makes the turtle visible.
 	 */
 	public void show() {
 		isVisible = true;
+	}
+	
+	public boolean showing() {
+		return isVisible;
 	}
 	
 	public double getDirection() {

@@ -1,17 +1,19 @@
 package Model;
 
-public class PenDown extends Node {
+public class IsShowing extends Node {
 
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();
-		turtle.putPenDown();
-		return 1;
+		if (turtle.showing()) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 
 	@Override
 	public String toString() {
-		return "PenDown";
+		return "Showing?";
 	}
-
 }
