@@ -10,6 +10,7 @@ public class TestMain {
        /* c.processCommand("make :distance 50");
         c.processCommand("to mult [ :first :second ] [ repeat :first [ fd :second ] ]");
         c.processCommand("mult 20 30");*/
-        c.processCommand("minus quotient 5 20");
+        //c.processCommand("minus quotient 5 20");
+        c.processCommand("random 20");
     }
 }
