@@ -7,10 +7,6 @@ public class TestMain {
     public static void main(String[] args) throws ClassNotFoundException {
         Controller c = new Controller();
         c.init(100, 100);
-       /* c.processCommand("make :distance 50");
-        c.processCommand("to mult [ :first :second ] [ repeat :first [ fd :second ] ]");
-        c.processCommand("mult 20 30");*/
-        //c.processCommand("minus quotient 5 20");
-        c.processCommand("pi");
+        c.processCommand("goto 3 4 xcor ycor");
     }
 }
