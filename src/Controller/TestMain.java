@@ -11,6 +11,6 @@ public class TestMain {
         c.processCommand("to mult [ :first :second ] [ repeat :first [ fd :second ] ]");
         c.processCommand("mult 20 30");*/
         //c.processCommand("minus quotient 5 20");
-        c.processCommand("log 10");
+        c.processCommand("pow 2 3");
     }
 }
