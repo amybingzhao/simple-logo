@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 import java.util.ResourceBundle;
 
@@ -17,7 +18,7 @@ public class GUICommandLine {
 	private int myY;
 	
 	private Label commandLabel;
-	private TextArea commandInputLine;
+	private TextField commandInputLine;
 	private Button runButton;
 	
 	private static final int COMMAND_LINE_SPACING = 5;
@@ -36,8 +37,8 @@ public class GUICommandLine {
 	
 	protected Node createNode() {
 		commandLabel = new Label(myResources.getString("Command"));
-		commandInputLine = new TextArea();
-		commandInputLine.setPrefRowCount(3);
+		commandInputLine = new TextField();
+//		commandInputLine.setPrefRowCount(3);
 		runButton = new Button(myResources.getString("Run"));
 		runButton.setOnAction(evt -> runCommand());
 		
@@ -50,6 +51,7 @@ public class GUICommandLine {
 	}
 	
 	private void runCommand() {
+		System.out.print(commandInputLine.getText() + "\n");
 		try {
 			myController.processCommand(commandInputLine.getText());
 			myGUI.updateGUI();
