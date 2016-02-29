@@ -31,6 +31,7 @@ public class GUICanvas {
 	private Canvas canvas;
 	private ResourceBundle myResources;
 	private TurtleObserver myTurtle;
+	private Image turtleImage;
 	
 	public GUICanvas(Controller myController, ResourceBundle myResources, TurtleObserver turtle) {
 		this.myController = myController;
@@ -46,17 +47,22 @@ public class GUICanvas {
 		return canvas;
 	}
 
-	public void updateNode() {		
-		//update turtle stuff using controller ----------------------------------
+	public void updateNode() {
+		drawTurtle();
 	}
 	
 	private void drawPath(){
 		
 	}
 	
+	//TODO: get the image from the file
 	public void setImage(File file) {
-		Image img = new Image(getClass().getClassLoader().getResourceAsStream("turtle.jpg"));
-		gc.drawImage(img, myTurtle.getX(), myTurtle.getY(), TURTLE_SIZE, TURTLE_SIZE);
+		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream("turtle.jpg"));
+		drawTurtle();
+	}
+	
+	public void drawTurtle() {
+		gc.drawImage(turtleImage, myTurtle.getX(), myTurtle.getY(), TURTLE_SIZE, TURTLE_SIZE);
 	}
 
 	public GraphicsContext getGraphicsContext(){
