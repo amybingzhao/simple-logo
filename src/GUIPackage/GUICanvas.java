@@ -51,10 +51,6 @@ public class GUICanvas {
 		drawTurtle();
 	}
 	
-	private void drawPath(){
-		
-	}
-	
 	//TODO: get the image from the file
 	public void setImage(File file) {
 		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream("turtle.jpg"));
