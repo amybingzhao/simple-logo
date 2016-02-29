@@ -28,6 +28,10 @@ public class GUICanvas {
 	private static final int CANVAS_WIDTH = 500;
 	private static final int CANVAS_HEIGHT = 600;
 	private static final String PATH_DELIMITER = "/";
+	private double myX;
+	private double myY;
+	private double myOldX;
+	private double myOldY;
 	private Controller myController;
 	private Canvas canvas_background;
 	private Canvas canvas;
@@ -53,8 +57,6 @@ public class GUICanvas {
 
 	public void updateNode() {
 		drawTurtle();
-		System.out.println(myTurtle.getX());
-		System.out.println(myTurtle.getY());
 	}
 	
 	//TODO: get the image from the file
@@ -67,7 +69,12 @@ public class GUICanvas {
 	}
 	
 	public void drawTurtle() {
-		gc.drawImage(turtleImage, myTurtle.getX(), myTurtle.getY(), TURTLE_SIZE, TURTLE_SIZE);
+		gc.clearRect(myOldX, myOldY, TURTLE_SIZE, TURTLE_SIZE);
+		myX = myTurtle.getX() + CANVAS_WIDTH/2;
+		myY = -(myTurtle.getY() - CANVAS_HEIGHT/2);
+		gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+		myOldX = myX;
+		myOldY = myY;
 	}
 
 	public GraphicsContext getBackgroundGraphicsContext(){
