@@ -70,6 +70,10 @@ public class Turtle extends Observable {
 		return Math.sqrt(Math.pow(myX - x, 2) + Math.pow(myY - y, 2));
 	}
 	
+	/**
+	 * Sets the direction the turtle is facing.
+	 * @param dir: the direction the turtle should face in degrees.
+	 */
 	public void setDirection(double dir) {
 		if (dir > ONE_REVOLUTION) {
 			dir = dir % ONE_REVOLUTION;
@@ -103,11 +107,19 @@ public class Turtle extends Observable {
 		isVisible = false;
 	}
 	
+	/**
+	 * Checks if the pen is up.
+	 * @return true if penUp is true; false otherwise.
+	 */
 	public boolean penUp() {
 		return penUp;
 	}
 	
-	protected double moveToHome() {
+	/**
+	 * Moves the turtle to home (0, 0).
+	 * @return distance moved to get back home.
+	 */
+	public double moveToHome() {
 		double dist = calcDistance(0, 0);
 		turnTowards(0, 0);
 		move(dist);
@@ -121,22 +133,42 @@ public class Turtle extends Observable {
 		isVisible = true;
 	}
 	
+	/**
+	 * Checks if the turtle is visible.
+	 * @return true if the turtle's isVisible field is true; false otherwise.
+	 */
 	public boolean showing() {
 		return isVisible;
 	}
 	
+	/**
+	 * Checks the turtle's current direction.
+	 * @return the turtle's current direction in degrees.
+	 */
 	public double getDirection() {
 		return myDirection;
 	}
 	
+	/**
+	 * Checks the turtle's current x-coordinate.
+	 * @return the turtle's current x-coordinate.
+	 */
 	public double getCurX() {
 		return myX;
 	}
-	
+
+	/**
+	 * Checks the turtle's current y-coordinate.
+	 * @return the turtle's current y-coordinate.
+	 */
 	public double getCurY() {
 		return myY;
 	}
 	
+	/**
+	 * Prints the turtle's current position and direction.
+	 * @return a string representing the turtle's current (x, y) position and direction.
+	 */
 	public String printPosition() {
 		return ("(" + Double.toString(myX) + ", " + Double.toString(myY) + "), Direction: " + Double.toString(myDirection));
 	}
