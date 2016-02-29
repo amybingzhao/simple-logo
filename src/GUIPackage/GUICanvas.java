@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 /**
  * Returns one Node that contains the Turtle Canvas and two ColorPicker objects
@@ -26,6 +27,7 @@ public class GUICanvas {
 	private static final int TURTLE_SIZE = 20;
 	private static final int CANVAS_WIDTH = 500;
 	private static final int CANVAS_HEIGHT = 600;
+	private static final String PATH_DELIMITER = "/";
 	private double myX;
 	private double myY;
 	private double myOldX;
@@ -56,8 +58,11 @@ public class GUICanvas {
 	}
 	
 	//TODO: get the image from the file
-	public void setImage(File file) {
-		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream("turtle.jpg"));
+	public void setImage(File file){
+		String filePath = file.getPath();
+		String[] splitFilePath = filePath.split(PATH_DELIMITER);
+		String fileName = splitFilePath[splitFilePath.length - 1];
+		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
 		drawTurtle();
 	}
 	
