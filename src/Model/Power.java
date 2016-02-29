@@ -7,14 +7,18 @@ import java.util.List;
  */
 public class Power extends Node {
 
+	private static final String POWER = "pow ";
+	private static final int BASE = 0;
+	private static final int EXPONENT = 1;
+	
     @Override
     public double interpret() {
         List<Node> children = getChildren();
-        return Math.pow(children.get(0).interpret(), children.get(1).interpret());
+        return Math.pow(children.get(BASE).interpret(), children.get(EXPONENT).interpret());
     }
 
     @Override
     public String toString() {
-        return "Power " + getChildren().get(0).toString() + " " +getChildren().get(1).toString();
+        return POWER + getChildren().get(BASE).toString() + " " +getChildren().get(EXPONENT).toString();
     }
 }

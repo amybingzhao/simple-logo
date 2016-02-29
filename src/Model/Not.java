@@ -4,10 +4,13 @@ import java.util.List;
 
 public class Not extends Node {
 
+	private static final String NOT = "not ";
+	private static final int EXPR = 0;
+	
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();
-		if (children.get(0).interpret() == 0) {
+		if (children.get(EXPR).interpret() == 0) {
 			return 1;
 		} else {
 			return 0;
@@ -16,7 +19,7 @@ public class Not extends Node {
 	
 	public String toString() {
 		List<Node> children = getChildren();
-		return "Not " + children.get(0).toString();
+		return NOT + children.get(EXPR).toString();
 	}
 	
 }

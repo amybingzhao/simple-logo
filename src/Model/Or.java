@@ -4,10 +4,14 @@ import java.util.List;
 
 public class Or extends Node {
 
+	private static final String OR = "or ";
+	private static final int EXPR1 = 0;
+	private static final int EXPR2 = 1;
+	
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();
-		if (children.get(0).interpret() > 0 || children.get(1).interpret() > 0) {
+		if (children.get(EXPR1).interpret() > 0 || children.get(EXPR2).interpret() > 0) {
 			return 1;
 		} else {
 			return 0;
@@ -16,7 +20,7 @@ public class Or extends Node {
 	
 	public String toString() {
 		List<Node> children = getChildren();
-		return "Or " + children.get(0).toString() + " " + children.get(1).toString();
+		return OR + children.get(EXPR1).toString() + " " + children.get(EXPR2).toString();
 	}
 	
 }

@@ -5,15 +5,16 @@ package Model;
  */
 public class Random extends Node {
 
-    public static final String RANDOM = "Random ";
+    private static final String RANDOM = "random ";
+    private static final int MAX = 0;
 
     @Override
     public double interpret() {
-        return Math.random() * getChildren().get(0).interpret();
+        return Math.random() * getChildren().get(MAX).interpret();
     }
 
     @Override
     public String toString() {
-        return RANDOM + getChildren().get(0).toString();
+        return RANDOM + getChildren().get(MAX).toString();
     }
 }

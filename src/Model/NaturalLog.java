@@ -5,15 +5,16 @@ package Model;
  */
 public class NaturalLog extends Node {
 
-    public static final String NATURAL_LOG = "Natural Log ";
+    private static final String NATURAL_LOG = "log ";
+    private static final int EXPR = 0;
 
     @Override
     public double interpret() {
-        return Math.log(getChildren().get(0).interpret());
+        return Math.log(getChildren().get(EXPR).interpret());
     }
 
     @Override
     public String toString() {
-        return NATURAL_LOG + getChildren().get(0).toString();
+        return NATURAL_LOG + getChildren().get(EXPR).toString();
     }
 }

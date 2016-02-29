@@ -4,17 +4,20 @@ import java.util.List;
 
 public class Repeat extends Node {
 
-	// child 0 is number of repeats
-	// child 1 is list to repeat
+	private static final String REPEAT = "repeat ";
+	private static final int EXPR = 0;
+	private static final int COMMANDS = 1;
+	private static final String REPCOUNT_VARIABLE = "repCount";
+	
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();
-		double numIter = children.get(0).interpret();
+		double numIter = children.get(EXPR).interpret();
 		double ret = 0;
 		
 		for (int i = 0; i < numIter; i++) {
-			VariableDictionary.getInstance().makeVariable("repCount", 0);
-			ret = children.get(1).interpret();
+			VariableDictionary.getInstance().makeVariable(REPCOUNT_VARIABLE, i);
+			ret = children.get(COMMANDS).interpret();
 		}
 		
 		return ret;
@@ -23,7 +26,7 @@ public class Repeat extends Node {
 	@Override
 	public String toString() {
 		List<Node> children = getChildren();
-		return "Repeat " + children.get(0).toString() + " " + children.get(1).toString();
+		return REPEAT + children.get(EXPR).toString() + " " + children.get(COMMANDS).toString();
 	}
 
 	
