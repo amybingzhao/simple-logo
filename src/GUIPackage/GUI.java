@@ -13,6 +13,8 @@ import javafx.scene.web.WebView;
 
 public class GUI implements GUIInterface {
 	private static final String HELP_TAB_TEXT = "Help";
+	private static final int CANVAS_WIDTH = 500;
+	private static final int CANVAS_HEIGHT = 600;
 	private Scene myScene;
 	private TabPane myRoot;
 	private ResourceBundle myResources;
@@ -37,7 +39,7 @@ public class GUI implements GUIInterface {
 		myObserver = new TurtleObserver();
 		myTurtle.addObserver(myObserver);
 		myController = new Controller();
-		myController.init(windowHeight, windowWidth, myTurtle);
+		myController.init(CANVAS_HEIGHT, CANVAS_WIDTH, myTurtle);
 		
 		myRoot = new TabPane();
 		
