@@ -17,6 +17,9 @@ public class Power extends Node {
         return Math.pow(children.get(BASE).interpret(), children.get(EXPONENT).interpret());
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return POWER + getChildren().get(BASE).toString() + " " +getChildren().get(EXPONENT).toString();

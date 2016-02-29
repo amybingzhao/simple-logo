@@ -14,6 +14,9 @@ public class IsPenDown extends Node {
 		}
 	}
 
+	/**
+	 * Returns the required user input for this command. 
+	 */
 	@Override
 	public String toString() {
 		return PENDOWNP;

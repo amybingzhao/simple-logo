@@ -18,6 +18,9 @@ public class SetHeading extends Node {
 		return children.get(DEGREES).interpret() - curDir;
 	}
 
+	/**
+	 * Returns the required user input for this command. 
+	 */
 	@Override
 	public String toString() {
 		List<Node> children = getChildren();

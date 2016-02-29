@@ -13,6 +13,9 @@ public class Random extends Node {
         return Math.random() * getChildren().get(MAX).interpret();
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return RANDOM + getChildren().get(MAX).toString();

@@ -10,6 +10,9 @@ public class Heading extends Node {
 		return turtle.getDirection();
 	}
 
+	/**
+	 * Returns the required user input for this command. 
+	 */
 	@Override
 	public String toString() {
 		return HEADING;

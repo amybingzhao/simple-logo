@@ -16,6 +16,9 @@ public class Sine extends Node {
         return Math.sin(radians);
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return SINE + getChildren().get(DEGREES).toString();

@@ -13,6 +13,9 @@ public class Home extends Node {
 		return dist;
 	}
 
+	/**
+	 * Returns the required user input for this command. 
+	 */
 	@Override
 	public String toString() {
 		return HOME;

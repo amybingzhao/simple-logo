@@ -44,5 +44,8 @@ public abstract class Node implements LogoFunctions {
         }
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     public abstract String toString();
 }

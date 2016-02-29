@@ -11,6 +11,9 @@ public class HideTurtle extends Node {
 		return 0;
 	}
 
+	/**
+	 * Returns the required user input for this command. 
+	 */
 	@Override
 	public String toString() {
 		return HIDETURTLE;

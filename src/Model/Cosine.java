@@ -15,6 +15,9 @@ public class Cosine extends Node {
         return Math.cos(radians);
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return COSINE + getChildren().get(0).toString();

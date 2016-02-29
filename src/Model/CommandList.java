@@ -16,6 +16,9 @@ public class CommandList extends Node {
         return ret;
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         List<Node> children = getChildren();

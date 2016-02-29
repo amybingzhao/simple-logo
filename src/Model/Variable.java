@@ -14,6 +14,9 @@ public class Variable extends Node {
         return VariableDictionary.getInstance().getNodeFor(name);
     }
 
+    /**
+	 * Returns the string representing this variable. 
+	 */
     @Override
     public String toString() {
         return name;

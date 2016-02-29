@@ -20,6 +20,9 @@ public class Backward extends Node {
         return dist;
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         List<Node> children = getChildren();

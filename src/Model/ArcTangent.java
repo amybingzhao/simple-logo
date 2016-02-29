@@ -16,6 +16,9 @@ public class ArcTangent extends Node {
         return Math.atan(radians);
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return ARC_TANGENT + getChildren().get(DEGREES).toString();

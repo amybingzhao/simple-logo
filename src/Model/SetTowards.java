@@ -15,6 +15,9 @@ public class SetTowards extends Node {
 		return turtle.turnTowards(children.get(X).interpret(), children.get(Y).interpret());
 	}
 
+	/**
+	 * Returns the required user input for this command. 
+	 */
 	@Override
 	public String toString() {
 		List<Node> children = getChildren();

@@ -17,6 +17,9 @@ public class Product extends Node {
         return children.get(EXPR1).interpret() * children.get(EXPR2).interpret();
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return PRODUCT + getChildren().get(EXPR1).toString() + " " + getChildren().get(EXPR2).toString();

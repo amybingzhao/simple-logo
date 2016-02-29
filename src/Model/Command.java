@@ -41,6 +41,9 @@ public class Command extends Node {
         myProcedure = procedure;
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return myName;

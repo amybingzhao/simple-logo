@@ -13,6 +13,9 @@ public class Minus extends Node {
         return -1 * getChildren().get(EXPR).interpret();
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return MINUS + getChildren().get(EXPR).toString();

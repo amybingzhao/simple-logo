@@ -13,6 +13,9 @@ public class Constant extends Node {
         return n;
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return Integer.toString(n);

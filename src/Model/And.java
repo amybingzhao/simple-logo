@@ -18,6 +18,9 @@ public class And extends Node {
 		}
 	}
 	
+	/**
+	 * Returns the required user input for this command. 
+	 */
 	public String toString() {
 		List<Node> children = getChildren();
 		return AND + children.get(EXPR1).toString() + " " + children.get(EXPR2).toString();

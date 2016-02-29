@@ -12,6 +12,9 @@ public class Pi extends Node {
         return Math.PI;
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return PI;

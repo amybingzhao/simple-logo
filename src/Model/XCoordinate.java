@@ -10,9 +10,11 @@ public class XCoordinate extends Node {
 		return turtle.getCurX();
 	}
 
+	/**
+	 * Returns the required user input for this command. 
+	 */
 	@Override
 	public String toString() {
 		return XCOR;
 	}
-
 }

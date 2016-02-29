@@ -14,6 +14,9 @@ public class Sum extends Node{
 		return children.get(EXPR1).interpret() + children.get(EXPR2).interpret();
 	}
 	
+	/**
+	 * Returns the required user input for this command. 
+	 */
 	public String toString() {
 		List<Node> children = getChildren();
 		return SUM + children.get(EXPR1).toString() + " " + children.get(EXPR2).toString();

@@ -11,6 +11,9 @@ public class ShowTurtle extends Node {
 		return 1;
 	}
 
+	/**
+	 * Returns the required user input for this command. 
+	 */
 	@Override
 	public String toString() {
 		return SHOWTURTLE;

@@ -13,6 +13,9 @@ public class NaturalLog extends Node {
         return Math.log(getChildren().get(EXPR).interpret());
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return NATURAL_LOG + getChildren().get(EXPR).toString();

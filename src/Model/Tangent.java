@@ -16,6 +16,9 @@ public class Tangent extends Node {
         return Math.tan(radians);
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return TANGENT + getChildren().get(DEGREES).toString();
