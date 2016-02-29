@@ -10,7 +10,7 @@ public class GUIObjectColorPickerPen extends GUIObjectColorPicker {
 
 	@Override
 	void handleEvent(ColorPicker colorPicker) {
-		canvas.getGraphicsContext().setStroke(colorPicker.getValue());
+		canvas.getBackgroundGraphicsContext().setStroke(colorPicker.getValue());
 	}
 
 }

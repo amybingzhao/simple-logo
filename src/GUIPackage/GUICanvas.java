@@ -12,6 +12,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -36,8 +37,10 @@ public class GUICanvas {
 	private double myOldX;
 	private double myOldY;
 	private Controller myController;
-	private GraphicsContext gc;
+	private Canvas canvas_background;
 	private Canvas canvas;
+	private GraphicsContext gc_background;
+	private GraphicsContext gc;
 	private ResourceBundle myResources;
 	private TurtleObserver myTurtle;
 	private Image turtleImage;
@@ -50,11 +53,15 @@ public class GUICanvas {
 	}
 
 	public Node createNode() {
+		canvas_background = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+		gc_background = canvas_background.getGraphicsContext2D();
 		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		gc = canvas.getGraphicsContext2D();
-		gc.setFill(Color.BISQUE);
-		gc.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-		return canvas;
+		
+		gc_background.setFill(Color.BISQUE);
+		gc_background.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		Pane root = new Pane(canvas_background, canvas);
+		return root;
 	}
 
 	public void updateNode() {
@@ -84,8 +91,8 @@ public class GUICanvas {
 		myOldY = myY;
 	}
 
-	public GraphicsContext getGraphicsContext(){
-		return gc;
+	public GraphicsContext getBackgroundGraphicsContext(){
+		return gc_background;
 	}
 	
 	public int getWidth(){
