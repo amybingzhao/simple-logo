@@ -5,7 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 /**
- * Area beneath command line where caught exceptions will print out descriptive messages. 
+ * Area beneath command line where solutions to mathematical inputs will be printed. 
  * @author AnnieTang
  *
  */
@@ -18,13 +18,13 @@ public class GUIObjectLabeled implements GUIObject {
 
 	@Override
 	public Node createNode() {
-		label = new Label("Welcome to SLogo! Look here for tips. ");
+		label = new Label("Output:");
 		label.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		return label;
 	}
 
-	public void setText(String errorMessage){
-		label.setText(errorMessage);
+	public void setOutput(int mathResult){
+		label.setText(Integer.toString(mathResult));
 	}
 	
 	@Override
