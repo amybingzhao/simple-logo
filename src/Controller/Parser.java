@@ -55,6 +55,10 @@ public class Parser {
             mySymbols.add(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
     }
+    
+    public void clearAllPatterns() {
+    	mySymbols.clear();
+    }
 
     public String getSymbol(String text) {
         final String ERROR = "NO MATCH";

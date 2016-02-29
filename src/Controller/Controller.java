@@ -16,7 +16,9 @@ import Model.Turtle;
 public class Controller {
 
     private static final String SYNTAX_RESOURCE = "resources/languages/Syntax";
-    private static final String LANGUAGE_RESOURCE = "resources/languages/English";
+    private static final String DEFAULT_LANGUAGE_RESOURCE = "resources/languages/English";
+    private static final String LANGUAGE_RESOURCE_LOCATION = "resources/languages/";
+    private String myLanguageResource;
     private Parser myParser;
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
@@ -31,13 +33,25 @@ public class Controller {
         myCanvasWidth = canvasWidth;
         myCanvasHeight = canvasHeight;
         myParser = new Parser();
-        myParser.addPatterns(LANGUAGE_RESOURCE);
+        myLanguageResource = DEFAULT_LANGUAGE_RESOURCE;
+        myParser.addPatterns(myLanguageResource);
         myParser.addPatterns(SYNTAX_RESOURCE);
         myCommandHistory = new ArrayList<String>();
         myTurtles = new ArrayList<Turtle>();
         myTurtle = t;
     }
 
+    /**
+     * Sets the parser language.
+     * @param lang: user-selected language.
+     */
+    public void setLanguage(String lang) {
+    	myLanguageResource = LANGUAGE_RESOURCE_LOCATION + lang;
+    	myParser.clearAllPatterns();
+    	myParser.addPatterns(myLanguageResource);
+    	myParser.addPatterns(SYNTAX_RESOURCE);
+    }
+    
     /**
      * Processes the command.
      *
