@@ -2,25 +2,15 @@ package GUIPackage;
 import java.util.ResourceBundle;
 
 import Controller.Controller;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
-
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 /**
  * Returns one Node that contains the Turtle Canvas and two ColorPicker objects
  * (for background and pen)
@@ -71,6 +61,7 @@ public class GUICanvas {
 	
 	private void addDefaultTurtle(){
 		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
+		turtleIV = new ImageView(turtleImage);
 		drawTurtle();
 	}
 	
