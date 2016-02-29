@@ -19,7 +19,7 @@ import javafx.scene.control.ComboBox;
 
 abstract class GUIObjectComboBox implements GUIObject {
 	private static final int VISIBLE_ROW_COUNT = 5;
-	private String promptText;
+	protected String promptText;
 	protected ResourceBundle myResources;
 	protected Controller myController;
 	protected ObservableList<String> options;
