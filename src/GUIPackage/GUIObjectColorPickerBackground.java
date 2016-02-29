@@ -10,8 +10,8 @@ public class GUIObjectColorPickerBackground extends GUIObjectColorPicker {
 
 	@Override
 	void handleEvent(ColorPicker colorPicker) {
-		canvas.getGraphicsContext().setFill(colorPicker.getValue());
-		canvas.getGraphicsContext().fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		canvas.getBackgroundGraphicsContext().setFill(colorPicker.getValue());
+		canvas.getBackgroundGraphicsContext().fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 	}
 
 }
