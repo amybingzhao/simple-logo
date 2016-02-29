@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Backward extends Node {
 
-	private static final String BACKWARD = "backward ";
+	private static final String BACKWARD = "back ";
 	private static final int DISTANCE = 0;
 
 	/**
