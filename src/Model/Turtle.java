@@ -83,7 +83,7 @@ public class Turtle extends Observable {
 	/**
 	 * Lifts the turtle's pen up so no trail is drawn when it moves.
 	 */
-	public void lifePenUp() {
+	public void liftPenUp() {
 		penUp = true;
 	}
 	
