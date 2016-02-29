@@ -27,8 +27,10 @@ public class GUICanvas {
 	private static final int CANVAS_WIDTH = 500;
 	private static final int CANVAS_HEIGHT = 600;
 	private Controller myController;
-	private GraphicsContext gc;
+	private Canvas canvas_background;
 	private Canvas canvas;
+	private GraphicsContext gc_background;
+	private GraphicsContext gc;
 	private ResourceBundle myResources;
 	private TurtleObserver myTurtle;
 	private Image turtleImage;
@@ -40,11 +42,11 @@ public class GUICanvas {
 	}
 
 	public Node createNode() {
-		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-		gc = canvas.getGraphicsContext2D();
-		gc.setFill(Color.BISQUE);
-		gc.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-		return canvas;
+		canvas_background = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+		gc_background = canvas_background.getGraphicsContext2D();
+		gc_background.setFill(Color.BISQUE);
+		gc_background.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		return canvas_background;
 	}
 
 	public void updateNode() {
@@ -63,8 +65,8 @@ public class GUICanvas {
 		gc.drawImage(turtleImage, myTurtle.getX(), myTurtle.getY(), TURTLE_SIZE, TURTLE_SIZE);
 	}
 
-	public GraphicsContext getGraphicsContext(){
-		return gc;
+	public GraphicsContext getBackgroundGraphicsContext(){
+		return gc_background;
 	}
 	
 	public int getWidth(){
