@@ -17,8 +17,8 @@ public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
 	private CommandDictionary myUserDefinedCommands;
 	
 	public GUIObjectComboBoxUserHist(ResourceBundle myResources, Controller myController,
-			String promptText, GUICommandLine cLine) {
-		super(myResources, myController, promptText, cLine);
+			String promptText) {
+		super(myResources, myController, promptText);
 	}
 
 	@Override

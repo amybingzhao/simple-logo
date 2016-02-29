@@ -18,7 +18,7 @@ public class GUICommandLine {
 	private int myY;
 	
 	private Label commandLabel;
-	private TextField commandInputLine;
+	private TextArea commandInputLine;
 	private Button runButton;
 	
 	private static final int COMMAND_LINE_SPACING = 5;
@@ -37,8 +37,8 @@ public class GUICommandLine {
 	
 	protected Node createNode() {
 		commandLabel = new Label(myResources.getString("Command"));
-		commandInputLine = new TextField();
-//		commandInputLine.setPrefRowCount(3);
+		commandInputLine = new TextArea();
+		commandInputLine.setPrefRowCount(3);
 		runButton = new Button(myResources.getString("Run"));
 		runButton.setOnAction(evt -> runCommand(commandInputLine.getText()));
 		

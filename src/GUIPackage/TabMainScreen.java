@@ -23,6 +23,7 @@ public class TabMainScreen{
 	private GUICommandLine commandLine;
 	private Controller myController;
 	private TurtleObserver myTurtle;
+	private GUIOutput myOutput;
 	
 	//creating GUIObject instance variables
 	private GUIObject userCommands;
@@ -48,13 +49,13 @@ public class TabMainScreen{
 		myMainScreen = new BorderPane();
 		
 		setCenterPane();
-		setBottomPane();
 		//must be after setCenterPane, or canvas will not have been instantiated yet 
-		myFactory = new GUIObjectFactory(myResources, myController, canvas, commandLine); 
+		myFactory = new GUIObjectFactory(myResources, myController, canvas); 
 		
 		setLeftPane();
 		setRightPane();
-//		setTopPane();
+		setBottomPane();
+		setTopPane();
 		
 		myRootTab.setContent(myMainScreen);
 		myRootTab.setText(TAB_TEXT);
@@ -94,8 +95,9 @@ public class TabMainScreen{
 	}
 	//TODO:	
 	private void setTopPane() {
-		exceptionHandler = myFactory.createNewGUIObject("ExceptionHandler");
-		myMainScreen.setTop(exceptionHandler.createNode());
+		myOutput = myController.getGUIOutput();
+//		exceptionHandler = myFactory.createNewGUIObject("ExceptionHandler");
+		myMainScreen.setTop(myOutput.createNode());
 	}
 	
 	protected void updateGUI() {

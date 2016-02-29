@@ -27,11 +27,10 @@ abstract class GUIObjectComboBox implements GUIObject {
 	protected GUICommandLine myCommandLine;
 	
 	public GUIObjectComboBox(ResourceBundle myResources, Controller myController,
-			String promptText, GUICommandLine cLine) {
+			String promptText) {
 		this.myResources = myResources;
 		this.myController = myController;
 		this.promptText = promptText;
-		this.myCommandLine = cLine;
 	}
 	
 	@Override

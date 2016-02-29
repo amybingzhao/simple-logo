@@ -15,8 +15,8 @@ import Controller.Controller;
 public class GUIObjectComboBoxCommandHist extends GUIObjectComboBox {
 	
 	public GUIObjectComboBoxCommandHist(ResourceBundle myResources, Controller myController,
-			String promptText, GUICommandLine cLine) {
-		super(myResources, myController, promptText, cLine);
+			String promptText) {
+		super(myResources, myController, promptText);
 	}
 
 	@Override

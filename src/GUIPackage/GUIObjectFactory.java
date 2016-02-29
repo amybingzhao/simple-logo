@@ -11,14 +11,11 @@ public class GUIObjectFactory {
 	private ResourceBundle myResources;
 	private GUICanvas canvas;
 	private Controller myController;
-	private GUICommandLine myCommandLine;
 	
-	public GUIObjectFactory(ResourceBundle myResources, Controller myController,
-			GUICanvas canvas, GUICommandLine cLine){
+	public GUIObjectFactory(ResourceBundle myResources, Controller myController, GUICanvas canvas){
 		this.myResources = myResources;
 		this.canvas = canvas; 
 		this.myController = myController;
-		this.myCommandLine = cLine;
 	}
 	
 	public GUIObject createNewGUIObject(String nodeTypeKey){
@@ -35,18 +32,18 @@ public class GUIObjectFactory {
 			}
 			case("LanguageComboBox"):{
 				return new GUIObjectComboBoxLanguages(myResources, myController, 
-						myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
+						myResources.getString(nodeTypeKey+"PromptText"));
 			}
 			case("VariablesTableView"):{
 				return new GUIObjectTableView(myController, myResources);
 			}
 			case("UserCommandsComboBox"):{
 				return new GUIObjectComboBoxUserHist(myResources, myController,
-						myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
+						myResources.getString(nodeTypeKey+"PromptText"));
 			}
 			case("PreviousCommandsComboBox"):{
 				return new GUIObjectComboBoxCommandHist(myResources, myController, 
-						myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
+						myResources.getString(nodeTypeKey+"PromptText"));
 			}
 			case("HelpTabPane"):{
 				return null;
