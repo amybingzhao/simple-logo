@@ -49,6 +49,8 @@ public class GUICanvas {
 
 	public void updateNode() {
 		drawTurtle();
+		System.out.println(myTurtle.getX());
+		System.out.println(myTurtle.getY());
 	}
 	
 	//TODO: get the image from the file

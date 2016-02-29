@@ -36,6 +36,8 @@ public class GUI implements GUIInterface {
 		myTurtle = new Turtle();
 		myObserver = new TurtleObserver();
 		myTurtle.addObserver(myObserver);
+		myController = new Controller();
+		myController.init(windowHeight, windowWidth, myTurtle);
 		
 		myRoot = new TabPane();
 		
