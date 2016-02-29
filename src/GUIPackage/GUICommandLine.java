@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 public class GUICommandLine {
 	private Controller myController;
 	private ResourceBundle myResources;
+	private TabMainScreen myGUI;
 	private int myX;
 	private int myY;
 	
@@ -25,9 +26,10 @@ public class GUICommandLine {
 	private static final double PADDING_BOTTOM = 10;
 	private static final double PADDING_LEFT = 10;
 	
-	protected GUICommandLine(Controller c, ResourceBundle r) {
+	protected GUICommandLine(Controller c, ResourceBundle r, TabMainScreen t) {
 		myController = c;
 		myResources = r;
+		myGUI = t;
 //		myX = Integer.valueOf(myResources.getString(xPosString));
 //		myY = Integer.valueOf(myResources.getString(yPosString));
 	}
@@ -35,14 +37,13 @@ public class GUICommandLine {
 	protected Node createNode() {
 		commandLabel = new Label(myResources.getString("Command"));
 		commandInputLine = new TextArea();
-		commandInputLine.setPrefRowCount(5);
+		commandInputLine.setPrefRowCount(3);
 		runButton = new Button(myResources.getString("Run"));
 		runButton.setOnAction(evt -> runCommand());
 		
 		VBox commandLine = new VBox();
 		commandLine.getChildren().addAll(commandLabel, commandInputLine, runButton);
 		commandLine.setSpacing(COMMAND_LINE_SPACING);
-		//TODO: remove magic numbers 
 		commandLine.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
 		
 		return commandLine;
@@ -51,6 +52,7 @@ public class GUICommandLine {
 	private void runCommand() {
 		try {
 			myController.processCommand(commandInputLine.getText());
+			myGUI.updateGUI();
 		}
 		catch (ClassNotFoundException e) {
 			//TODO: Find out what exceptions back end throws
