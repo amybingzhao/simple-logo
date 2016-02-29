@@ -48,12 +48,12 @@ public class TabMainScreen{
 		myMainScreen = new BorderPane();
 		
 		setCenterPane();
+		setBottomPane();
 		//must be after setCenterPane, or canvas will not have been instantiated yet 
-		myFactory = new GUIObjectFactory(myResources, myController, canvas); 
+		myFactory = new GUIObjectFactory(myResources, myController, canvas, commandLine); 
 		
 		setLeftPane();
 		setRightPane();
-		setBottomPane();
 //		setTopPane();
 		
 		myRootTab.setContent(myMainScreen);
