@@ -78,6 +78,8 @@ public class Turtle extends Observable {
 		} 
 		
 		myDirection = dir;
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**
