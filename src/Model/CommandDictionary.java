@@ -3,6 +3,7 @@ package Model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by blakekaplan on 2/26/16.
@@ -44,5 +45,9 @@ public class CommandDictionary {
 
     public int getNumArgsForkey(String key) {
         return numArguments.get(key);
+    }
+
+    public Set<String> getCommandKeySet(){
+        return commands.keySet();
     }
 }
