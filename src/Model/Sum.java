@@ -8,6 +8,9 @@ public class Sum extends Node{
 	private static final int EXPR1 = 0;
 	private static final int EXPR2 = 1;
 	
+	/**
+	 * Returns the sum of expr1 and expr2.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();

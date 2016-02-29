@@ -7,6 +7,9 @@ public class Forward extends Node {
 	private static final String FORWARD = "forward ";
 	private static final int DISTANCE = 0;
 	
+	/**
+	 * Moves the turtle forward the given distance.
+	 */
     @Override
     public double interpret() {
         Turtle turtle = getTurtle();

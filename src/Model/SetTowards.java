@@ -8,6 +8,9 @@ public class SetTowards extends Node {
 	private static final int X = 0;
 	private static final int Y = 1;
 	
+	/**
+	 * Turns the turtle to face the given (x, y) position.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();

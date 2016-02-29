@@ -11,9 +11,11 @@ public class For extends Node{
     private static final int VARIABLE_AND_LIMITS = 0;
     private static final int COMMANDS = 1;
 
+    /**
+     * Repeats the given commands for the given start and end limits and the given increment.
+     */
     @Override
     public double interpret() {
-
         List<Node> children = getChildren();
         CommandList argList = (CommandList) children.get(VARIABLE_AND_LIMITS);
         List<Node> argsNodes = argList.getChildren();

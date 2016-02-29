@@ -9,6 +9,9 @@ public class IfElse extends Node {
 	private static final int TRUE_COMMANDS = 1;
 	private static final int FALSE_COMMANDS = 2;
 	
+	/**
+	 * If the given expression is true, executes the true commands; else executes the false commands.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();

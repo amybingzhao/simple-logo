@@ -5,7 +5,7 @@ public class PenUp extends Node {
 	private static final String PENUP = "penup ";
 	
 	/**
-	 * Lifts pen up for current turtle.
+	 * Lifts pen up for current turtle so trail will no longer show.
 	 */
 	@Override
 	public double interpret() {

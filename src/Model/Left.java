@@ -7,6 +7,9 @@ public class Left extends Node {
 	private static final String LEFT = "left ";
 	private static final int DEGREES = 0;
 
+	/**
+	 * Rotates the turtle CCW the given number of degrees.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();

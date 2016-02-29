@@ -7,6 +7,9 @@ public class Backward extends Node {
 	private static final String BACKWARD = "Backward ";
 	private static final int DISTANCE = 0;
 
+	/**
+	 * Moves the turtle backwards a given distance and returns the distance moved.
+	 */
     @Override
     public double interpret() {
         Turtle turtle = getTurtle();

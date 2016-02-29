@@ -4,6 +4,9 @@ public class XCoordinate extends Node {
 
 	private static final String XCOR = "xcor ";
 	
+	/**
+	 * Returns the turtle's current x-coordinate.
+	 */
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();

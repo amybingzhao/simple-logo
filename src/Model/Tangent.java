@@ -9,6 +9,9 @@ public class Tangent extends Node {
     private static final int DEGREES = 0;
     private static final int DEGREES_PER_PI = 180;
 
+    /**
+     * Returns the tangent of the expression, where the expression is given in degrees.
+     */
     @Override
     public double interpret() {
         double degrees = getChildren().get(DEGREES).interpret();

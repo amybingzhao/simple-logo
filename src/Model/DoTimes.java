@@ -8,6 +8,9 @@ public class DoTimes extends Node {
 	private static final int VARIABLE_AND_LIMIT = 0;
 	private static final int COMMANDS = 1;
 	
+	/**
+	 * Executes the given command the given number of times. 
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();

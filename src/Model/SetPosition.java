@@ -8,6 +8,9 @@ public class SetPosition extends Node {
 	private static final int X = 0;
 	private static final int Y = 1;
 	
+	/**
+	 * Moves the turtle to the given position and returns the distance moved.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();

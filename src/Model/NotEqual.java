@@ -8,6 +8,9 @@ public class NotEqual extends Node {
 	private static final int EXPR1 = 0;
 	private static final int EXPR2 = 1;
 	
+	/**
+	 * If the expr1 and expr2 are not equal, returns 1; else 0.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();

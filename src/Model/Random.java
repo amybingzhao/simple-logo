@@ -8,6 +8,9 @@ public class Random extends Node {
     private static final String RANDOM = "random ";
     private static final int MAX = 0;
 
+    /**
+     * Returns a random value between 0 and the given max.
+     */
     @Override
     public double interpret() {
         return Math.random() * getChildren().get(MAX).interpret();

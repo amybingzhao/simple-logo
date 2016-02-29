@@ -11,6 +11,9 @@ public class Difference extends Node {
     private static final int EXPR1 = 0;
     private static final int EXPR2 = 1;
 
+    /**
+     * Returns the difference between the two expressions.
+     */
     @Override
     public double interpret() {
         List<Node> children = getChildren();

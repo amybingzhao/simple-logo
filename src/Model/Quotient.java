@@ -11,6 +11,9 @@ public class Quotient extends Node {
     private static final int EXPR1 = 0;
 	private static final int EXPR2 = 1;
 
+	/**
+	 * Returns the quotient of expr1 divided by expr2.
+	 */
     @Override
     public double interpret() {
         List<Node> children = getChildren();

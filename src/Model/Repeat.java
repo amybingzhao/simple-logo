@@ -9,6 +9,9 @@ public class Repeat extends Node {
 	private static final int COMMANDS = 1;
 	private static final String REPCOUNT_VARIABLE = "repCount";
 	
+	/**
+	 * Repeats the given commands a given number of times.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();

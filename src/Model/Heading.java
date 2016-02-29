@@ -4,6 +4,9 @@ public class Heading extends Node {
 
 	private static final String HEADING = "heading ";
 	
+	/**
+	 * Returns the turtle's current direction.
+	 */
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();

@@ -8,6 +8,9 @@ public class GreaterThan extends Node {
 	private static final int EXPR1 = 0;
 	private static final int EXPR2 = 1;
 	
+	/**
+	 * Returns 1 if expr1 is greater than expr2; 0 otherwise.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();

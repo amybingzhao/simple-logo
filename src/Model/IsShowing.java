@@ -4,6 +4,9 @@ public class IsShowing extends Node {
 
 	private static final String SHOWINGP = "showing? ";
 	
+	/**
+	 * Returns 1 if the turtle is showing on the canvas; 0 otherwise.
+	 */
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();

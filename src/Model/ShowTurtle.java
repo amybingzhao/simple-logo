@@ -4,6 +4,9 @@ public class ShowTurtle extends Node {
 
 	private static final String SHOWTURTLE = "showturtle ";
 	
+	/**
+	 * Sets the turtle to visible and returns 1.
+	 */
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();

@@ -8,6 +8,9 @@ public class Minus extends Node {
     private static final String MINUS = "minus ";
     private static final int EXPR = 0;
 
+    /**
+     * Negates the given expression.
+     */
     @Override
     public double interpret() {
         return -1 * getChildren().get(EXPR).interpret();

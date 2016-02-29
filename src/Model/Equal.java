@@ -8,6 +8,9 @@ public class Equal extends Node {
 	private static final int EXPR1 = 0;
 	private static final int EXPR2 = 0;
 	
+	/**
+	 * Returns 1 if the two expressions are equal; 0 otherwise.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();

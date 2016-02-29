@@ -7,6 +7,9 @@ public class Pi extends Node {
 
     private static final String PI = "pi ";
 
+    /**
+     * Returns the value of pi.
+     */
     @Override
     public double interpret() {
         return Math.PI;

@@ -4,6 +4,9 @@ public class YCoordinate extends Node {
 
 	private static final String YCOR = "ycor ";
 	
+	/**
+	 * Returns the turtle's current y-coordinate.
+	 */
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();

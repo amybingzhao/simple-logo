@@ -8,6 +8,9 @@ public class LessThan extends Node {
 	private static final int EXPR1 = 0;
 	private static final int EXPR2 = 1;
 	
+	/**
+	 * If expr1 is less than expr2, returns 1; else returns 0.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();

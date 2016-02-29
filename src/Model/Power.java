@@ -11,6 +11,9 @@ public class Power extends Node {
 	private static final int BASE = 0;
 	private static final int EXPONENT = 1;
 	
+	/**
+	 * Raises the given base to the given exponent.
+	 */
     @Override
     public double interpret() {
         List<Node> children = getChildren();

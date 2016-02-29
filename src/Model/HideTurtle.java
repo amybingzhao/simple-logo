@@ -4,6 +4,9 @@ public class HideTurtle extends Node {
 
 	private static final String HIDETURTLE = "hideturtle ";
 	
+	/**
+	 * Sets the turtle to invisible.
+	 */
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();

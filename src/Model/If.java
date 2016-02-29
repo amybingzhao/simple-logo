@@ -8,6 +8,9 @@ public class If extends Node {
 	private static final int EXPR = 0;
 	private static final int COMMANDS = 1;
 	
+	/**
+	 * Executes the given command if the given expression is true.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();

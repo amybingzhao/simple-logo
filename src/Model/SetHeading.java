@@ -7,6 +7,9 @@ public class SetHeading extends Node {
 	private static final String SETHEADING = "setheading ";
 	private static final int DEGREES = 0;
 	
+	/**
+	 * Turns the turtle towards to the given degrees, where 0 is facing north and rotating CW is positive.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();
