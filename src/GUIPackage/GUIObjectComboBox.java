@@ -21,26 +21,29 @@ abstract class GUIObjectComboBox implements GUIObject {
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private String promptText;
 	protected ResourceBundle myResources;
-	protected Controller contr;
+	protected Controller myController;
 	protected ObservableList<String> options;
 	protected ComboBox<String> comboBox;
 	
 	public GUIObjectComboBox(ResourceBundle myResources, Controller myController, String promptText) {
 		this.myResources = myResources;
-		this.contr = myController;
+		this.myController = myController;
 		this.promptText = promptText;
 	}
 	
 	@Override
-	public Node createNode() {
+	public Node createNode(){
 		options = FXCollections.observableArrayList(
 			        optionsList()
 			    );
 		comboBox = new ComboBox<String>(options);
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPromptText(promptText);
+		setComboBoxAction();
 		return comboBox;
 	}
+	
+	abstract void setComboBoxAction();
 
 	@Override
 	public void updateNode() {

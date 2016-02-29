@@ -16,7 +16,9 @@ import Model.Turtle;
 public class Controller {
 
     private static final String SYNTAX_RESOURCE = "resources/languages/Syntax";
-    private static final String LANGUAGE_RESOURCE = "resources/languages/English";
+    private static final String DEFAULT_LANGUAGE_RESOURCE = "resources/languages/English";
+    private static final String LANGUAGE_RESOURCE_LOCATION = "resources/languages/";
+    private String myLanguageResource;
     private Parser myParser;
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
@@ -31,7 +33,8 @@ public class Controller {
         myCanvasWidth = canvasWidth;
         myCanvasHeight = canvasHeight;
         myParser = new Parser();
-        myParser.addPatterns(LANGUAGE_RESOURCE);
+        myLanguageResource = DEFAULT_LANGUAGE_RESOURCE;
+        myParser.addPatterns(myLanguageResource);
         myParser.addPatterns(SYNTAX_RESOURCE);
         myCommandHistory = new ArrayList<String>();
         myTurtles = new ArrayList<Turtle>();
@@ -39,14 +42,30 @@ public class Controller {
     }
 
     /**
+     * Sets the parser language.
+     * @param lang: user-selected language.
+     */
+    public void setLanguage(String lang) {
+    	myLanguageResource = LANGUAGE_RESOURCE_LOCATION + lang;
+    	myParser.clearAllPatterns();
+    	myParser.addPatterns(myLanguageResource);
+    	myParser.addPatterns(SYNTAX_RESOURCE);
+    }
+    
+    /**
      * Processes the command.
      *
      * @param command: String inputed by user to the command line.
      * @throws ClassNotFoundException
      */
-    public void processCommand(String command) throws ClassNotFoundException {
-        List<Node> commands = myParser.createCommandTree(command, myTurtle);
-        executeCommandTree(commands);
+    public void processCommand(String command){
+    	try{
+    		List<Node> commands = myParser.createCommandTree(command, myTurtle);
+            executeCommandTree(commands);
+    	}
+    	catch(ClassNotFoundException e){
+    		System.out.println("Could not process command.");
+    	}
     }
 
     private void executeCommandTree(List<Node> headNodes) {
