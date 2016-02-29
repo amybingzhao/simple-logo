@@ -26,7 +26,7 @@ public class GUIObjectComboBoxLanguages extends GUIObjectComboBox {
 
 	@Override
 	void setComboBoxAction() {
-		comboBox.setOnAction(event -> myController.setLanguage());
+		comboBox.setOnAction(event -> myController.setLanguage(comboBox.getValue()));
 	}
 
 }

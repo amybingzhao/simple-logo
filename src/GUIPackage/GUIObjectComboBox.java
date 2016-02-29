@@ -32,7 +32,7 @@ abstract class GUIObjectComboBox implements GUIObject {
 	}
 	
 	@Override
-	public Node createNode() {
+	public Node createNode(){
 		options = FXCollections.observableArrayList(
 			        optionsList()
 			    );

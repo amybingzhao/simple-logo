@@ -20,6 +20,7 @@ public interface GUIObject {
      * @param c
      * @param nodeType
      * @return
+     * @throws ClassNotFoundException 
      */
     public Node createNode();
 
