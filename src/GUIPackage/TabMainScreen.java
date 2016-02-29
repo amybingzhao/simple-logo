@@ -99,6 +99,7 @@ public class TabMainScreen{
 	}
 	
 	protected void updateGUI() {
+		canvas.updateNode();
 		userCommands.updateNode();
 		previousCommands.updateNode();
 		variables.updateNode();

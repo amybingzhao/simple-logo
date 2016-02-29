@@ -27,7 +27,7 @@ public class Controller {
     /**
      * Initializes the controller.
      */
-    public void init(int canvasHeight, int canvasWidth) {
+    public void init(int canvasHeight, int canvasWidth, Turtle t) {
         myCanvasWidth = canvasWidth;
         myCanvasHeight = canvasHeight;
         myParser = new Parser();
@@ -35,7 +35,7 @@ public class Controller {
         myParser.addPatterns(SYNTAX_RESOURCE);
         myCommandHistory = new ArrayList<String>();
         myTurtles = new ArrayList<Turtle>();
-        myTurtle = new Turtle();
+        myTurtle = t;
     }
 
     /**
