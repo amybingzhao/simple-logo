@@ -29,6 +29,7 @@ public class GUICanvas {
 	private static final int CANVAS_WIDTH = 500;
 	private static final int CANVAS_HEIGHT = 600;
 	private static final String PATH_DELIMITER = "/";
+	private static final String DEFAULT_TURTLE = "turtle.jpg";
 	private double myX;
 	private double myY;
 	private double myOldX;
@@ -53,14 +54,19 @@ public class GUICanvas {
 		gc_background = canvas_background.getGraphicsContext2D();
 		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		gc = canvas.getGraphicsContext2D();
-		
 		gc_background.setFill(Color.BISQUE);
 		gc_background.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		addDefaultTurtle();
 		Pane root = new Pane(canvas_background, canvas);
 		return root;
 	}
 
 	public void updateNode() {
+		drawTurtle();
+	}
+	
+	private void addDefaultTurtle(){
+		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
 		drawTurtle();
 	}
 	
