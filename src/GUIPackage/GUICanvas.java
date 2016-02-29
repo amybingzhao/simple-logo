@@ -11,10 +11,13 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Rotate;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -42,6 +45,7 @@ public class GUICanvas {
 	private ResourceBundle myResources;
 	private TurtleObserver myTurtle;
 	private Image turtleImage;
+	private ImageView turtleIV;
 	
 	public GUICanvas(Controller myController, ResourceBundle myResources, TurtleObserver turtle) {
 		this.myController = myController;
@@ -76,6 +80,7 @@ public class GUICanvas {
 		String[] splitFilePath = filePath.split(PATH_DELIMITER);
 		String fileName = splitFilePath[splitFilePath.length - 1];
 		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
+		turtleIV = new ImageView(turtleImage);
 		drawTurtle();
 	}
 	
@@ -83,7 +88,11 @@ public class GUICanvas {
 		gc.clearRect(myOldX, myOldY, TURTLE_SIZE, TURTLE_SIZE);
 		myX = myTurtle.getX() + CANVAS_WIDTH/2;
 		myY = -(myTurtle.getY() - CANVAS_HEIGHT/2);
-		gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+		gc.save(); // saves the current state on stack, including the current transform
+		Rotate r = new Rotate(myTurtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
+		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+		gc.drawImage(turtleIV.getImage(), myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+		gc.restore();
 		myOldX = myX;
 		myOldY = myY;
 	}
