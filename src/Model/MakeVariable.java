@@ -9,21 +9,17 @@ import java.util.List;
 public class MakeVariable extends Node {
 
     private static final String MAKE = "make ";
+    private static final int VARIABLE_NAME = 0;
+    private static final int EXPRESSION = 1;
     private String name;
 
     @Override
-    public String toString() {
-        return MAKE;
-    }
-
-    @Override
     public double interpret() {
-
         List<Node> children = getChildren();
-        String key = children.get(0).toString();
-        double value = children.get(1).interpret();
+        String key = children.get(VARIABLE_NAME).toString();
+        double value = children.get(EXPRESSION).interpret();
         VariableDictionary.getInstance().makeVariable(key, value);
-        return 0;
+        return value;
     }
 
     public String getName(){
@@ -32,5 +28,11 @@ public class MakeVariable extends Node {
 
     public void setName(String newName){
         name = newName;
+    }
+    
+    @Override
+    public String toString() {
+        List<Node> children = getChildren();
+        return MAKE + children.get(VARIABLE_NAME).toString() + " " + children.get(EXPRESSION).toString();
     }
 }
