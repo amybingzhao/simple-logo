@@ -11,6 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -50,9 +51,13 @@ public class GUICanvas {
 	public Node createNode() {
 		canvas_background = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		gc_background = canvas_background.getGraphicsContext2D();
+		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+		gc = canvas.getGraphicsContext2D();
+		
 		gc_background.setFill(Color.BISQUE);
 		gc_background.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-		return canvas_background;
+		Pane root = new Pane(canvas_background, canvas);
+		return root;
 	}
 
 	public void updateNode() {
