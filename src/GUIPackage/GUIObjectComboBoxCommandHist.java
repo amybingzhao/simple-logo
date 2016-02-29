@@ -20,10 +20,15 @@ public class GUIObjectComboBoxCommandHist extends GUIObjectComboBox {
 
 	@Override
 	List<String> optionsList() {
-//		return contr.getCommandHistory();
-		List<String> test = new ArrayList<String>();
-		test.add("testing");
-		return test;
+		return myController.getCommandHistory();
+//		List<String> test = new ArrayList<String>();
+//		test.add("testing");
+//		return test;
+	}
+
+	@Override
+	void setComboBoxAction() {
+		// TODO Auto-generated method stub
 	}
 	
 }
