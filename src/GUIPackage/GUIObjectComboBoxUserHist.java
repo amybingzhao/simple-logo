@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import Controller.Controller;
+import Model.CommandDictionary;
 
 /**
  * Create ComboBox to hold history of user defined commands. 
@@ -13,16 +14,20 @@ import Controller.Controller;
  */
 
 public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {	
+	private CommandDictionary myUserDefinedCommands;
+	
 	public GUIObjectComboBoxUserHist(ResourceBundle myResources, Controller myController, String promptText) {
 		super(myResources, myController, promptText);
 	}
 
 	@Override
 	List<String> optionsList() {
-//		return myController.getUserDefinedCommands();
-		List<String> test = new ArrayList<String>();
-		test.add("testing");
-		return test;
+		myUserDefinedCommands = CommandDictionary.getInstance();
+		List<String> userDefinedCommands = new ArrayList<String>();
+		for(String s: myUserDefinedCommands.getCommandKeySet()){
+			userDefinedCommands.add(s);
+		}
+		return userDefinedCommands;
 	}
 
 	@Override
