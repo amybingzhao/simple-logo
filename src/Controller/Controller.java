@@ -65,7 +65,7 @@ public class Controller {
     public void processCommand(String command){
     	try{
     		System.out.println("command: " + command);
-    		List<IFunctions> commands = myParser.createCommandTree(command, myTurtle);
+    		List<Node> commands = myParser.createCommandTree(command, myTurtle);
             double result = executeCommandTree(commands);
             myOutput.setOutputText(Double.toString(result));
     	}
@@ -74,10 +74,10 @@ public class Controller {
     	}
     }
 
-    private double executeCommandTree(List<IFunctions> headNodes) {
+    private double executeCommandTree(List<Node> headNodes) {
     	double result = 0;
         for (int i = 0; i < headNodes.size(); i++) {
-            IFunctions head = headNodes.get(i);
+            Node head = headNodes.get(i);
             System.out.println(head.toString());
             result = head.interpret();
             System.out.println(myTurtle.printPosition());

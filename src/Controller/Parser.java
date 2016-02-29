@@ -80,16 +80,16 @@ public class Parser {
         }
     }
 
-    public List<IFunctions> createCommandTree(String command, Turtle turtle) throws ClassNotFoundException {
+    public List<Node> createCommandTree(String command, Turtle turtle) throws ClassNotFoundException {
         myTurtle = turtle;
         List<String> inputCommandList = getCommandAsList(command);
 
         return createCommandTreeFromList(inputCommandList);
     }
 
-    private List<IFunctions> createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
+    private List<Node> createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
 
-        List<IFunctions> headNodes = new ArrayList<>();
+        List<Node> headNodes = new ArrayList<>();
         while (!inputCommandList.isEmpty()) {
             String commandToBuild = inputCommandList.get(0);
             Node head = createClass(commandToBuild, inputCommandList);
