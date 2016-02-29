@@ -26,5 +26,11 @@ public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
 		return test;
 	}
 
+	@Override
+	void setComboBoxAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

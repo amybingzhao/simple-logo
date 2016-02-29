@@ -9,6 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+/**
+ * @author AnnieTang
+ */
+
 abstract class GUIObjectColorPicker implements GUIObject {
 	protected String pickerLabel;
 	protected GUICanvas canvas;
