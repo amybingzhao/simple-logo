@@ -107,6 +107,13 @@ public class Turtle extends Observable {
 		return penUp;
 	}
 	
+	protected double moveToHome() {
+		double dist = calcDistance(0, 0);
+		turnTowards(0, 0);
+		move(dist);
+		return dist;
+	}
+	
 	/**
 	 * Makes the turtle visible.
 	 */
