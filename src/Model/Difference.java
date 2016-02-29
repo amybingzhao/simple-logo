@@ -3,6 +3,7 @@ package Model;
 import java.util.List;
 
 /**
+ * Difference function.
  * Created by blakekaplan on 2/27/16.
  */
 public class Difference extends Node {

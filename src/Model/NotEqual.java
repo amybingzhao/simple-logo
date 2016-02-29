@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * NotEqual function.
+ * @author amyzhao
+ *
+ */
 public class NotEqual extends Node {
 
 	private static final String NOTEQUAL = "notequal? ";

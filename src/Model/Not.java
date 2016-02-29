@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Not function.
+ * @author amyzhao
+ *
+ */
 public class Not extends Node {
 
 	private static final String NOT = "not ";

@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * LessThan function.
+ * @author amyzhao
+ *
+ */
 public class LessThan extends Node {
 
 	private static final String LESS = "less? ";

@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * SetTowards function.
+ * @author amyzhao
+ *
+ */
 public class SetTowards extends Node {
 
 	private static final String TOWARDS = "towards ";

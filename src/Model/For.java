@@ -3,6 +3,7 @@ package Model;
 import java.util.List;
 
 /**
+ * For function.
  * Created by blakekaplan on 2/25/16.
  */
 public class For extends Node{

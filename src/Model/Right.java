@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Right function.
+ * @author amyzhao
+ *
+ */
 public class Right extends Node {
 
 	private static final String RIGHT = "right ";

@@ -1,6 +1,7 @@
 package Model;
 
 /**
+ * Random number function.
  * Created by blakekaplan on 2/27/16.
  */
 public class Random extends Node {

@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Backward function.
+ * @author amyzhao
+ *
+ */
 public class Backward extends Node {
 
 	private static final String BACKWARD = "Backward ";

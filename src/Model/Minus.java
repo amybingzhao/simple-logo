@@ -1,6 +1,7 @@
 package Model;
 
 /**
+ * Minus function.
  * Created by blakekaplan on 2/27/16.
  */
 public class Minus extends Node {

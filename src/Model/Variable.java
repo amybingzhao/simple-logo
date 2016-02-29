@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * Variable object.
+ * @author blakekaplan
+ *
+ */
 public class Variable extends Node {
 
     private String name;

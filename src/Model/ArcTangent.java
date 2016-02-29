@@ -1,6 +1,7 @@
 package Model;
 
 /**
+ * ArcTangent function.
  * Created by blakekaplan on 2/27/16.
  */
 public class ArcTangent extends Node {

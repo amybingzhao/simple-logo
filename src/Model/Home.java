@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * Home function.
+ * @author amyzhao
+ *
+ */
 public class Home extends Node {
 
 	private static final String HOME = "home ";

@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * Heading function.
+ * @author amyzhao
+ *
+ */
 public class Heading extends Node {
 
 	private static final String HEADING = "heading ";

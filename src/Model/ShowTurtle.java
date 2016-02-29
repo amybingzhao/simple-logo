@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * ShowTurtle function.
+ * @author amyzhao
+ *
+ */
 public class ShowTurtle extends Node {
 
 	private static final String SHOWTURTLE = "showturtle ";

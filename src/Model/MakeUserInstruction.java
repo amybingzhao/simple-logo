@@ -3,6 +3,7 @@ package Model;
 import java.util.List;
 
 /**
+ * MakeUserInstruction function to implement To.
  * Created by blakekaplan on 2/25/16.
  */
 public class MakeUserInstruction extends Node {

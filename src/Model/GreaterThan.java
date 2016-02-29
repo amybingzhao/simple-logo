@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * GreaterThan function.
+ * @author amyzhao
+ *
+ */
 public class GreaterThan extends Node {
 
 	private static final String GREATER = "greater? ";

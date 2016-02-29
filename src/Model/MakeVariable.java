@@ -3,6 +3,7 @@ package Model;
 import java.util.List;
 
 /**
+ * MakeVariable function to implement Make.
  * Created by blakekaplan
  */
 

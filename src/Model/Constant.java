@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * Constant object.
+ * @author amyzhao
+ *
+ */
 public class Constant extends Node {
 
     private int val;

@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * SetPosition function.
+ * @author amyzhao
+ *
+ */
 public class SetPosition extends Node {
 
 	private static final String SETXY = "setxy ";

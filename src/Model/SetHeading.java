@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * SetHeading function.
+ * @author amyzhao
+ *
+ */
 public class SetHeading extends Node {
 	
 	private static final String SETHEADING = "setheading ";

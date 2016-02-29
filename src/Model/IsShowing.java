@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * IsShowing function.
+ * @author amyzhao
+ *
+ */
 public class IsShowing extends Node {
 
 	private static final String SHOWINGP = "showing? ";

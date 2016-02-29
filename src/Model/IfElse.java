@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * IfElse function.
+ * @author amyzhao
+ *
+ */
 public class IfElse extends Node {
 
 	private static final String IFELSE = "ifelse ";

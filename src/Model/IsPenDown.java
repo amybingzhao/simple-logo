@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * IsPenDown function.
+ * @author amyzhao
+ *
+ */
 public class IsPenDown extends Node {
 
 	private static final String PENDOWNP = "pendown? ";

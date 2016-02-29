@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * YCoordinate function.
+ * @author amyzhao
+ *
+ */
 public class YCoordinate extends Node {
 
 	private static final String YCOR = "ycor ";

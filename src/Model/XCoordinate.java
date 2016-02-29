@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * XCoordinate function.
+ * @author amyzhao
+ *
+ */
 public class XCoordinate extends Node {
 
 	private static final String XCOR = "xcor ";

@@ -3,6 +3,11 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Node object to make expression tree.
+ * @author amyzhao
+ *
+ */
 public abstract class Node implements LogoFunctions {
     private List<Node> myChildren;
     private int numChildrenNeeded;

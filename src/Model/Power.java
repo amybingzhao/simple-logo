@@ -3,6 +3,7 @@ package Model;
 import java.util.List;
 
 /**
+ * Power function.
  * Created by blakekaplan on 2/27/16.
  */
 public class Power extends Node {

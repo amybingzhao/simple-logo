@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * HideTurtle function.
+ * @author amyzhao
+ *
+ */
 public class HideTurtle extends Node {
 
 	private static final String HIDETURTLE = "hideturtle ";

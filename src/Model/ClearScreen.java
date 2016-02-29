@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * Clearscreen function.
+ * @author amyzhao
+ *
+ */
 public class ClearScreen extends Node {
 
 	private static final String CLEARSCREEN = "clearscreen ";

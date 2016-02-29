@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Equal function.
+ * @author amyzhao
+ *
+ */
 public class Equal extends Node {
 	
 	private static final String EQUAL = "equal? ";

@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Dotimes function.
+ * @author amyzhao
+ *
+ */
 public class DoTimes extends Node {
 
 	private static final String DOTIMES = "dotimes ";

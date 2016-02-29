@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Repeat function.
+ * @author amyzhao
+ *
+ */
 public class Repeat extends Node {
 
 	private static final String REPEAT = "repeat ";

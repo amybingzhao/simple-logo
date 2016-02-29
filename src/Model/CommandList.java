@@ -2,8 +2,16 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Object representing a list of commands.
+ * @author amyzhao
+ *
+ */
 public class CommandList extends Node {
 
+	/**
+	 * Interprets a list of commands, executing each command within the list.
+	 */
     @Override
     public double interpret() {
         List<Node> children = getChildren();

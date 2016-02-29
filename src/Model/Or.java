@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Or function.
+ * @author amyzhao
+ *
+ */
 public class Or extends Node {
 
 	private static final String OR = "or ";

@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Sum function.
+ * @author amyzhao
+ *
+ */
 public class Sum extends Node{
 	
 	private static final String SUM = "sum ";

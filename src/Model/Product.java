@@ -3,6 +3,7 @@ package Model;
 import java.util.List;
 
 /**
+ * Product function.
  * Created by blakekaplan on 2/27/16.
  */
 public class Product extends Node {

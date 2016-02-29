@@ -1,6 +1,7 @@
 package Model;
 
 /**
+ * Sine function.
  * Created by blakekaplan on 2/27/16.
  */
 public class Sine extends Node {

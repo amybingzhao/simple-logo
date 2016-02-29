@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * And function.
+ * @author amyzhao
+ *
+ */
 public class And extends Node {
 	
 	private static final String AND = "and ";

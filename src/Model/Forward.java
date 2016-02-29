@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Forward function.
+ * @author amyzhao
+ *
+ */
 public class Forward extends Node {
 
 	private static final String FORWARD = "forward ";

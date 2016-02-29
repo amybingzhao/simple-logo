@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * If function.
+ * @author amyzhao
+ *
+ */
 public class If extends Node {
 
 	private static final String IF = "if ";

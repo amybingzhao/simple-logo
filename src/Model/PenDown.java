@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * PenDown function.
+ * @author amyzhao
+ *
+ */
 public class PenDown extends Node {
 
 	private static final String PENDOWN = "pendown ";

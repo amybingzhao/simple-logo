@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Left function.
+ * @author amyzhao
+ *
+ */
 public class Left extends Node {
 
 	private static final String LEFT = "left ";
