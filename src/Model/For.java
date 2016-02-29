@@ -7,7 +7,9 @@ import java.util.List;
  */
 public class For extends Node{
 
-    private static final String FOR = "For";
+    private static final String FOR = "for ";
+    private static final int VARIABLE_AND_LIMITS = 0;
+    private static final int COMMANDS = 1;
 
     public String toString() {
         return FOR;
@@ -17,7 +19,7 @@ public class For extends Node{
     public double interpret() {
 
         List<Node> children = getChildren();
-        CommandList argList = (CommandList) children.get(0);
+        CommandList argList = (CommandList) children.get(VARIABLE_AND_LIMITS);
         List<Node> argsNodes = argList.getChildren();
         double low = argsNodes.get(1).interpret();
         double high = argsNodes.get(2).interpret();
@@ -29,7 +31,7 @@ public class For extends Node{
 
         for (double i = low; i < high; i += increment){
             VariableDictionary.getInstance().makeVariable(varString, i);
-            ret = children.get(1).interpret();
+            ret = children.get(COMMANDS).interpret();
         }
 
         return ret;

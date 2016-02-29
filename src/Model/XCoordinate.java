@@ -1,19 +1,18 @@
 package Model;
 
-public class PenUp extends Node {
+public class XCoordinate extends Node {
 
-	private static final String PENUP = "penup";
+	private static final String XCOR = "xcor ";
 	
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();
-		turtle.lifePenUp();
-		return 0;
+		return turtle.getCurX();
 	}
 
 	@Override
 	public String toString() {
-		return PENUP;
+		return XCOR;
 	}
 
 }

@@ -2,6 +2,8 @@ package Model;
 
 public class ShowTurtle extends Node {
 
+	private static final String SHOWTURTLE = "showturtle ";
+	
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();
@@ -11,7 +13,7 @@ public class ShowTurtle extends Node {
 
 	@Override
 	public String toString() {
-		return "ShowTurtle";
+		return SHOWTURTLE;
 	}
 
 }

@@ -5,15 +5,16 @@ package Model;
  */
 public class Minus extends Node {
 
-    public static final String MINUS = "Minus ";
+    private static final String MINUS = "minus ";
+    private static final int EXPR = 0;
 
     @Override
     public double interpret() {
-        return -1 * getChildren().get(0).interpret();
+        return -1 * getChildren().get(EXPR).interpret();
     }
 
     @Override
     public String toString() {
-        return MINUS + getChildren().get(0).toString();
+        return MINUS + getChildren().get(EXPR).toString();
     }
 }

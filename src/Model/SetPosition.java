@@ -4,6 +4,7 @@ import java.util.List;
 
 public class SetPosition extends Node {
 
+	private static final String SETXY = "setxy ";
 	private static final int X = 0;
 	private static final int Y = 1;
 	
@@ -20,7 +21,7 @@ public class SetPosition extends Node {
 	@Override
 	public String toString() {
 		List<Node> children = getChildren();
-		return "SetXY " + children.get(X).toString() + " " + children.get(Y).toString();
+		return SETXY + children.get(X).toString() + " " + children.get(Y).toString();
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class SetTowards extends Node {
 
+	private static final String TOWARDS = "towards ";
 	private static final int X = 0;
 	private static final int Y = 1;
 	
@@ -17,6 +18,6 @@ public class SetTowards extends Node {
 	@Override
 	public String toString() {
 		List<Node> children = getChildren();
-		return "Towards " + children.get(X).toString() + " " + children.get(Y).toString();
+		return TOWARDS + children.get(X).toString() + " " + children.get(Y).toString();
 	}
 }

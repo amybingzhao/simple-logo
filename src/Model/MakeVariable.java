@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MakeVariable extends Node {
 
-    public static final String MAKE = "Make";
+    private static final String MAKE = "make ";
     private String name;
 
     @Override

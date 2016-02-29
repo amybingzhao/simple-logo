@@ -4,10 +4,14 @@ import java.util.List;
 
 public class Equal extends Node {
 	
+	private static final String EQUAL = "equal? ";
+	private static final int EXPR1 = 0;
+	private static final int EXPR2 = 0;
+	
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();
-		if (children.get(0).interpret() == children.get(1).interpret()) {
+		if (children.get(EXPR1).interpret() == children.get(EXPR2).interpret()) {
 			return 1;
 		} else {
 			return 0;
@@ -16,6 +20,6 @@ public class Equal extends Node {
 	
 	public String toString() {
 		List<Node> children = getChildren();
-		return "Equal? " + children.get(0).toString() + " " + children.get(1).toString();
+		return EQUAL + children.get(EXPR1).toString() + " " + children.get(EXPR2).toString();
 	}
 }
