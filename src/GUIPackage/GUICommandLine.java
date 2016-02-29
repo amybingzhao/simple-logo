@@ -51,14 +51,9 @@ public class GUICommandLine {
 	}
 	
 	private void runCommand() {
-		try {
-			myController.processCommand(commandInputLine.getText());
-			myGUI.updateGUI();
-		}
-		catch (ClassNotFoundException e) {
-			//TODO: Find out what exceptions back end throws
-			//do something with exception
-		}
+		System.out.print(commandInputLine.getText() + "\n");
+		myController.processCommand(commandInputLine.getText());
+		myGUI.updateGUI();
 		clearTextField();
 	}
 	

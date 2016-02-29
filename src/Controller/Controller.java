@@ -58,9 +58,14 @@ public class Controller {
      * @param command: String inputed by user to the command line.
      * @throws ClassNotFoundException
      */
-    public void processCommand(String command) throws ClassNotFoundException {
-        List<Node> commands = myParser.createCommandTree(command, myTurtle);
-        executeCommandTree(commands);
+    public void processCommand(String command){
+    	try{
+    		List<Node> commands = myParser.createCommandTree(command, myTurtle);
+            executeCommandTree(commands);
+    	}
+    	catch(ClassNotFoundException e){
+    		System.out.println("Could not process command.");
+    	}
     }
 
     private void executeCommandTree(List<Node> headNodes) {
