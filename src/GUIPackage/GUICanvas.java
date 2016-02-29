@@ -2,25 +2,15 @@ package GUIPackage;
 import java.util.ResourceBundle;
 
 import Controller.Controller;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
-
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 /**
  * Returns one Node that contains the Turtle Canvas and two ColorPicker objects
  * (for background and pen)
@@ -32,6 +22,7 @@ public class GUICanvas {
 	private static final int CANVAS_WIDTH = 500;
 	private static final int CANVAS_HEIGHT = 600;
 	private static final String PATH_DELIMITER = "/";
+	private static final String DEFAULT_TURTLE = "turtle.jpg";
 	private double myX;
 	private double myY;
 	private double myOldX;
@@ -57,14 +48,20 @@ public class GUICanvas {
 		gc_background = canvas_background.getGraphicsContext2D();
 		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		gc = canvas.getGraphicsContext2D();
-		
 		gc_background.setFill(Color.BISQUE);
 		gc_background.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		addDefaultTurtle();
 		Pane root = new Pane(canvas_background, canvas);
 		return root;
 	}
 
 	public void updateNode() {
+		drawTurtle();
+	}
+	
+	private void addDefaultTurtle(){
+		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
+		turtleIV = new ImageView(turtleImage);
 		drawTurtle();
 	}
 	
