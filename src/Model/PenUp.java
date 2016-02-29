@@ -7,7 +7,7 @@ public class PenUp extends Node {
 	@Override
 	public double interpret() {
 		Turtle turtle = getTurtle();
-		turtle.lifePenUp();
+		turtle.liftPenUp();
 		return 0;
 	}
 
