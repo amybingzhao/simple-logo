@@ -39,6 +39,8 @@ public class Turtle extends Observable {
 			myX = myX + INCREMENT * Math.sin(Math.toRadians(myDirection));
 			myY = myY + INCREMENT * Math.cos(Math.toRadians(myDirection));
 		}
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**
