@@ -2,12 +2,20 @@ package Model;
 
 import java.util.List;
 
+/**
+ * SetPosition function.
+ * @author amyzhao
+ *
+ */
 public class SetPosition extends Node {
 
 	private static final String SETXY = "setxy ";
 	private static final int X = 0;
 	private static final int Y = 1;
 	
+	/**
+	 * Moves the turtle to the given position and returns the distance moved.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();
@@ -18,6 +26,9 @@ public class SetPosition extends Node {
 		return dist;
 	}
 
+	/**
+	 * Returns the required user input for this command. 
+	 */
 	@Override
 	public String toString() {
 		List<Node> children = getChildren();

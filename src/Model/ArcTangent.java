@@ -1,6 +1,7 @@
 package Model;
 
 /**
+ * ArcTangent function.
  * Created by blakekaplan on 2/27/16.
  */
 public class ArcTangent extends Node {
@@ -9,6 +10,9 @@ public class ArcTangent extends Node {
     private static final int DEGREES = 0;
     private static final int DEGREES_PER_PI = 180;
     
+    /**
+     * Returns the arctangent of the expression, where the expression is given in degrees.
+     */
     @Override
     public double interpret() {
         double degrees = getChildren().get(DEGREES).interpret();
@@ -16,6 +20,9 @@ public class ArcTangent extends Node {
         return Math.atan(radians);
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         return ARC_TANGENT + getChildren().get(DEGREES).toString();

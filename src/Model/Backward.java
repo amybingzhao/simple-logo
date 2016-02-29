@@ -2,11 +2,19 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Backward function.
+ * @author amyzhao
+ *
+ */
 public class Backward extends Node {
 
-	private static final String BACKWARD = "Backward ";
+	private static final String BACKWARD = "backward ";
 	private static final int DISTANCE = 0;
 
+	/**
+	 * Moves the turtle backwards a given distance and returns the distance moved.
+	 */
     @Override
     public double interpret() {
         Turtle turtle = getTurtle();
@@ -20,6 +28,9 @@ public class Backward extends Node {
         return dist;
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
         List<Node> children = getChildren();

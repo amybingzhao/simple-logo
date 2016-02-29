@@ -2,6 +2,11 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Repeat function.
+ * @author amyzhao
+ *
+ */
 public class Repeat extends Node {
 
 	private static final String REPEAT = "repeat ";
@@ -9,6 +14,9 @@ public class Repeat extends Node {
 	private static final int COMMANDS = 1;
 	private static final String REPCOUNT_VARIABLE = "repCount";
 	
+	/**
+	 * Repeats the given commands a given number of times.
+	 */
 	@Override
 	public double interpret() {
 		List<Node> children = getChildren();
@@ -23,6 +31,9 @@ public class Repeat extends Node {
 		return ret;
 	}
 
+	/**
+	 * Returns the required user input for this command. 
+	 */
 	@Override
 	public String toString() {
 		List<Node> children = getChildren();
