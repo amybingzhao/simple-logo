@@ -11,7 +11,7 @@ public class ClearScreen extends Node {
 	public double interpret() {
 		Turtle turtle = getTurtle();
 		double dist = turtle.moveToHome();
-		//clear screen
+		//TODO: clear screen somehow
 		return dist;
 	}
 
