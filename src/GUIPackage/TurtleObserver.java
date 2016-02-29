@@ -16,6 +16,7 @@ public class TurtleObserver implements Observer {
 		myX = turtle.getCurX();
 		myY = turtle.getCurY();
 		myDirection = turtle.getDirection();
+		System.out.println("hello");
 	}
 	
 	protected double getX() {

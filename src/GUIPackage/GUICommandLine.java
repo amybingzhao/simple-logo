@@ -51,7 +51,6 @@ public class GUICommandLine {
 	}
 	
 	private void runCommand() {
-		System.out.print(commandInputLine.getText() + "\n");
 		try {
 			myController.processCommand(commandInputLine.getText());
 			myGUI.updateGUI();
