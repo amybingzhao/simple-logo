@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import GUIPackage.GUIOutput;
+import Model.IFunctions;
 import Model.Node;
 import Model.Turtle;
 
@@ -63,7 +64,8 @@ public class Controller {
      */
     public void processCommand(String command){
     	try{
-    		List<Node> commands = myParser.createCommandTree(command, myTurtle);
+    		System.out.println("command: " + command);
+    		List<IFunctions> commands = myParser.createCommandTree(command, myTurtle);
             double result = executeCommandTree(commands);
             myOutput.setOutputText(Double.toString(result));
     	}
@@ -72,12 +74,11 @@ public class Controller {
     	}
     }
 
-    private double executeCommandTree(List<Node> headNodes) {
+    private double executeCommandTree(List<IFunctions> headNodes) {
     	double result = 0;
         for (int i = 0; i < headNodes.size(); i++) {
-            Node head = headNodes.get(i);
+            IFunctions head = headNodes.get(i);
             System.out.println(head.toString());
-            //head.interpret();
             result = head.interpret();
             System.out.println(myTurtle.printPosition());
             addCommandToHistory(head.toString());

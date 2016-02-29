@@ -25,6 +25,7 @@ public class GUIObjectComboBoxCommandHist extends GUIObjectComboBox {
 
 	@Override
 	void setComboBoxAction(){
+		String val = comboBox.getValue();
 		comboBox.setOnAction(event -> myController.processCommand(comboBox.getValue()));
 	}
 	
