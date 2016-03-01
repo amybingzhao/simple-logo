@@ -24,11 +24,13 @@ abstract class GUIObjectComboBox implements IGUIObject {
 	protected Controller myController;
 	protected ObservableList<String> options;
 	protected ComboBox<String> comboBox;
+	protected GUICommandLine myCommandLine;
 	
-	public GUIObjectComboBox(ResourceBundle myResources, Controller myController, String promptText) {
+	public GUIObjectComboBox(ResourceBundle myResources, Controller myController, String promptText, GUICommandLine cLine) {
 		this.myResources = myResources;
 		this.myController = myController;
 		this.promptText = promptText;
+		this.myCommandLine = cLine;
 	}
 	
 	@Override

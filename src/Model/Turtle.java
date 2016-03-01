@@ -20,7 +20,7 @@ public class Turtle extends Observable {
 	private boolean isVisible;
 	private double myDirection;
 	private static final double ONE_REVOLUTION = 360;
-	private static final double INCREMENT = 0.01;
+	private static final double INCREMENT = 0.1;
 	
 	public Turtle() {
 		myX = 0;
@@ -47,7 +47,6 @@ public class Turtle extends Observable {
 			setChanged();
 			notifyObservers();
 		}
-		System.out.println("hello");
 	}
 	
 	/**

@@ -16,8 +16,9 @@ import Model.CommandDictionary;
 public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {	
 	private CommandDictionary myUserDefinedCommands;
 	
-	public GUIObjectComboBoxUserHist(ResourceBundle myResources, Controller myController, String promptText) {
-		super(myResources, myController, promptText);
+	public GUIObjectComboBoxUserHist(ResourceBundle myResources, Controller myController,
+			String promptText, GUICommandLine cLine) {
+		super(myResources, myController, promptText, cLine);
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
 
 	@Override
 	void setComboBoxAction() {
-		comboBox.setOnAction(event -> myController.processCommand(comboBox.getValue()));
+		comboBox.setOnAction(event -> myCommandLine.runCommand(comboBox.getValue()));
 	}
 
 

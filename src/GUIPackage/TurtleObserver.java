@@ -8,7 +8,7 @@ public class TurtleObserver implements Observer {
 	private double myX;
 	private double myY;
 	private double myDirection;
-	private boolean penDown;
+	private boolean penUp;
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -16,6 +16,7 @@ public class TurtleObserver implements Observer {
 		myX = turtle.getCurX();
 		myY = turtle.getCurY();
 		myDirection = turtle.getDirection();
+		penUp = turtle.penUp();
 	}
 	
 	protected double getX() {
@@ -29,5 +30,8 @@ public class TurtleObserver implements Observer {
 	protected double getDirection() {
 		return myDirection;
 	}
-
+	
+	protected boolean isPenUp() {
+		return penUp;
+	}
 }
