@@ -1,5 +1,7 @@
 package GUIPackage;
 import Controller.Controller;
+import Model.Turtle;
+
 import java.util.ResourceBundle;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
@@ -15,6 +17,8 @@ public class TabMainScreen {
 	private static final String GUI_RESOURCE = "GUI";
 	private static final int LEFT_PANEL_PADDING = 10;
 	private static final String TAB_TEXT = "Main";
+	private static final int CANVAS_WIDTH = 500;
+	private static final int CANVAS_HEIGHT = 600;
 	private Tab myRootTab;
 	private BorderPane myMainScreen;
 	private ResourceBundle myResources;
@@ -22,7 +26,8 @@ public class TabMainScreen {
 	private GUICanvas canvas;
 	private GUICommandLine commandLine;
 	private Controller myController;
-	private TurtleObserver myTurtle;
+	private Turtle myTurtle;
+	private TurtleObserver myObserver;
 	private GUIOutput myOutput;
 	
 	//creating GUIObject instance variables
@@ -36,14 +41,21 @@ public class TabMainScreen {
 	private GUIObject colorPickerPen;
 	
 
-	public TabMainScreen(Controller myController, GUICanvas canvas, GUICommandLine cLine, TurtleObserver turtle) {
-		this.myController = myController;
-		this.canvas = canvas;
-		this.commandLine = cLine;
-		this.myTurtle = turtle;
+	public TabMainScreen() {
+		
+	}
+	
+	private void initializeTab() {
+		//create Turtle and Observer
+		myTurtle = new Turtle();
+		canvas = new GUICanvas();
+		myTurtle.addObserver(canvas);
+		myController = new Controller();
+		myController.init(CANVAS_HEIGHT, CANVAS_WIDTH, myTurtle);
 	}
 
 	public Tab getTab() {
+		initializeTab();
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myRootTab = new Tab();
 		myMainScreen = new BorderPane();
@@ -63,7 +75,6 @@ public class TabMainScreen {
 	}
 
 	private void setCenterPane() {
-		canvas = new GUICanvas(myController, myResources, myTurtle);
 		Node canvasNode = canvas.createNode();
 		myMainScreen.setCenter(canvasNode);
 	}
@@ -101,7 +112,6 @@ public class TabMainScreen {
 	}
 	
 	protected void updateGUI() {
-		canvas.updateNode();
 		userCommands.updateNode();
 		previousCommands.updateNode();
 		variables.updateNode();
