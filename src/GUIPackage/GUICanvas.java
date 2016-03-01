@@ -22,7 +22,7 @@ public class GUICanvas {
 	private static final int CANVAS_WIDTH = 500;
 	private static final int CANVAS_HEIGHT = 600;
 	private static final String PATH_DELIMITER = "/";
-	private static final String DEFAULT_TURTLE = "turtle.jpg";
+	private static final String DEFAULT_TURTLE = "turtle_outline.png";
 	private double myX;
 	private double myY;
 	private double myOldX;
