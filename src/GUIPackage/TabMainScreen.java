@@ -12,7 +12,6 @@ import javafx.scene.layout.BorderPane;
  */
 
 public class TabMainScreen{
-	private static final String GUI_RESOURCE = "GUI";
 	private static final int LEFT_PANEL_PADDING = 10;
 	private static final String TAB_TEXT = "Main";
 	private Tab myRootTab;
@@ -25,26 +24,25 @@ public class TabMainScreen{
 	private TurtleObserver myTurtle;
 	private GUIOutput myOutput;
 	
-	//creating GUIObject instance variables
-	private GUIObject userCommands;
-	private GUIObject previousCommands;
-	private GUIObject variables;
-	private GUIObject exceptionHandler;
-	private GUIObject languageSelector;
-	private GUIObject imageInput;
-	private GUIObject colorPickerBackground;
-	private GUIObject colorPickerPen;
+	//GUIObject instance variables
+	private IGUIObject userCommands;
+	private IGUIObject previousCommands;
+	private IGUIObject variables;
+	private IGUIObject languageSelector;
+	private IGUIObject imageInput;
+	private IGUIObject colorPickerBackground;
+	private IGUIObject colorPickerPen;
 	
 
-	public TabMainScreen(Controller myController, GUICanvas canvas, GUICommandLine cLine, TurtleObserver turtle) {
+	public TabMainScreen(Controller myController, GUICanvas canvas, GUICommandLine cLine, TurtleObserver turtle, ResourceBundle myResources) {
 		this.myController = myController;
 		this.canvas = canvas;
 		this.commandLine = cLine;
 		this.myTurtle = turtle;
+		this.myResources = myResources;
 	}
 
 	public Tab getTab() {
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myRootTab = new Tab();
 		myMainScreen = new BorderPane();
 		
@@ -83,20 +81,18 @@ public class TabMainScreen{
 		myMainScreen.setLeft(box);
 	}
 	
-	//TODO:
 	private void setRightPane() {
 		variables = myFactory.createNewGUIObject("Variables");
 		myMainScreen.setRight(variables.createNode());
 	}
-	//TODO:	
+	
 	private void setBottomPane(){
 		commandLine = new GUICommandLine(myController, myResources, this);
 		myMainScreen.setBottom(commandLine.createNode());
 	}
-	//TODO:	
+
 	private void setTopPane() {
 		myOutput = myController.getGUIOutput();
-//		exceptionHandler = myFactory.createNewGUIObject("ExceptionHandler");
 		myMainScreen.setTop(myOutput.createNode());
 	}
 	

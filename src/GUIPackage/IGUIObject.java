@@ -9,7 +9,7 @@ import javafx.scene.Node;
  *
  * @author David
  */
-public interface GUIObject {
+public interface IGUIObject {
 
     /**
      * This method creates the GUI element and passes it to the GUI class as a Node
