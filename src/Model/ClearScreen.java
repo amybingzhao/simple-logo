@@ -13,7 +13,7 @@ public class ClearScreen extends Node {
 	 * Moves the turtle back to (0, 0) and erases its trails; returns the distance the turtle moved to get back to (0, 0).
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		Turtle turtle = getTurtle();
 		double dist = turtle.moveToHome();
 		//TODO: clear screen somehow

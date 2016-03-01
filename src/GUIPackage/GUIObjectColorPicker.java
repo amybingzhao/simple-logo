@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
  * @author AnnieTang
  */
 
-abstract class GUIObjectColorPicker implements GUIObject {
+abstract class GUIObjectColorPicker implements IGUIObject {
 	protected String pickerLabel;
 	protected GUICanvas canvas;
 	

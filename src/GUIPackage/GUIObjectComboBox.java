@@ -17,7 +17,7 @@ import javafx.scene.control.ComboBox;
  * @author AnnieTang
  */
 
-abstract class GUIObjectComboBox implements GUIObject {
+abstract class GUIObjectComboBox implements IGUIObject {
 	private static final int VISIBLE_ROW_COUNT = 5;
 	protected String promptText;
 	protected ResourceBundle myResources;

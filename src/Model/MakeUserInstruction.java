@@ -18,7 +18,7 @@ public class MakeUserInstruction extends Node {
      * Creates a new user-defined command with the given name and parameters list that executes the given commands list.
      */
     //TODO: must return 0 if command not successfully defined
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
         name = children.get(NAME).toString();
         Command myCommand = new Command(name);

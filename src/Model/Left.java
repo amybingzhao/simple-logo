@@ -16,7 +16,7 @@ public class Left extends Node {
 	 * Rotates the turtle CCW the given number of degrees.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		double degrees = children.get(DEGREES).interpret();
 		Turtle turtle = getTurtle();

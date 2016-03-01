@@ -64,7 +64,7 @@ public abstract class Node implements IFunctions {
     /**
      * Interprets the function.
      */
-    public abstract double interpret();
+    public abstract double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
 
     /**
      * Gets this node's turtle.

@@ -21,7 +21,7 @@ public class Constant extends Node {
      * Returns the value of this constant.
      */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         return val;
     }
 

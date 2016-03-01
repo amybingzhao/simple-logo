@@ -214,7 +214,6 @@ public class Parser {
         }
 
         return expression.trim();
-
     }
 
     private void handleVariable(String name, List<String> expressionList){

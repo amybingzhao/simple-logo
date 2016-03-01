@@ -17,7 +17,7 @@ public class DoTimes extends Node {
 	 * Executes the given command the given number of times. 
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		Node iterVar = children.get(VARIABLE_AND_LIMIT);
 		String var = iterVar.getChildren().get(0).toString(); // first child in command list should be varaible;

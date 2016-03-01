@@ -7,7 +7,7 @@ package GUIPackage;
  *
  * @author David
  */
-public interface GUIInterface {
+public interface IGUI {
 
     /**
      * Gives the backend the dimensions for the canvas so that they can create and

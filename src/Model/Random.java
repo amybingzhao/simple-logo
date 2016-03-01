@@ -13,7 +13,7 @@ public class Random extends Node {
      * Returns a random value between 0 and the given max.
      */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         return Math.random() * getChildren().get(MAX).interpret();
     }
 

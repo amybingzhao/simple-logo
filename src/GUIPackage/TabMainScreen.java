@@ -30,17 +30,14 @@ public class TabMainScreen {
 	private TurtleObserver myObserver;
 	private GUIOutput myOutput;
 	
-	//creating GUIObject instance variables
-	private GUIObject userCommands;
-	private GUIObject previousCommands;
-	private GUIObject variables;
-	private GUIObject exceptionHandler;
-	private GUIObject languageSelector;
-	private GUIObject imageInput;
-	private GUIObject colorPickerBackground;
-	private GUIObject colorPickerPen;
-	
-
+	//GUIObject instance variables
+	private IGUIObject userCommands;
+	private IGUIObject previousCommands;
+	private IGUIObject variables;
+	private IGUIObject languageSelector;
+	private IGUIObject imageInput;
+	private IGUIObject colorPickerBackground;
+	private IGUIObject colorPickerPen;
 	public TabMainScreen() {
 		
 	}
@@ -94,20 +91,18 @@ public class TabMainScreen {
 		myMainScreen.setLeft(box);
 	}
 	
-	//TODO:
 	private void setRightPane() {
 		variables = myFactory.createNewGUIObject("Variables");
 		myMainScreen.setRight(variables.createNode());
 	}
-	//TODO:	
+	
 	private void setBottomPane(){
 		commandLine = new GUICommandLine(myController, myResources, this);
 		myMainScreen.setBottom(commandLine.createNode());
 	}
-	//TODO:	
+
 	private void setTopPane() {
 		myOutput = myController.getGUIOutput();
-//		exceptionHandler = myFactory.createNewGUIObject("ExceptionHandler");
 		myMainScreen.setTop(myOutput.createNode());
 	}
 	

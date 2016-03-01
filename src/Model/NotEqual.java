@@ -17,7 +17,7 @@ public class NotEqual extends Node {
 	 * If the expr1 and expr2 are not equal, returns 1; else 0.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		if (children.get(EXPR1).interpret() != children.get(EXPR2).interpret()) {
 			return 1;

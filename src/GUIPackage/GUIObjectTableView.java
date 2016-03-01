@@ -15,7 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
-public class GUIObjectTableView implements GUIObject {
+public class GUIObjectTableView implements IGUIObject {
 
 	private static final int TABLE_COLUMN_WIDTH = 130;
 	private Controller myController;
