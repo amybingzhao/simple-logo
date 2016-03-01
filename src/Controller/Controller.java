@@ -33,6 +33,7 @@ public class Controller {
     private Turtle myTurtle;
     private GUIOutput myOutput;
     private GUIAlert myAlert;
+    private final String WHITESPACE = "\\p{Space}";
 
     /**
      * Initializes the controller.
@@ -69,33 +70,46 @@ public class Controller {
      * @throws ClassNotFoundException
      */
     public void processCommand(String command){
-    	try{
-    		System.out.println("command: " + command);
-    		List<IFunctions> commands = myParser.createCommandTree(command, myTurtle);
-            double result = executeCommandTree(commands);
-            myOutput.setOutputText(Double.toString(result));
-            addCommandToHistory(command);
+    	List<String> commandAsList = getCommandAsList(command);
+    	while (!commandAsList.isEmpty()) {
+    		try{
+    			//System.out.println("command: " + command);
+    			//List<IFunctions> commands = myParser.createCommandTree(command, myTurtle);
+    			IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myTurtle);
+    			double result = executeCommandTree(commandToExecute);
+    			myOutput.setOutputText(Double.toString(result));
+    			addCommandToHistory(command);
+    		}
+    		catch(ClassNotFoundException e){
+    			myAlert.displayAlert(DOES_NOT_EXIST);
+    		}
+    		catch(IndexOutOfBoundsException e){
+    			myAlert.displayAlert(INVALID_SYNTAX);
+    		}
+    		catch(NullPointerException e){
+    			myAlert.displayAlert(EXECUTION_ERROR);
+    		}
     	}
-    	catch(ClassNotFoundException e){
-    		myAlert.displayAlert(DOES_NOT_EXIST);
-    	}
-        catch(IndexOutOfBoundsException e){
-            myAlert.displayAlert(INVALID_SYNTAX);
-        }
-        catch(NullPointerException e){
-            myAlert.displayAlert(EXECUTION_ERROR);
-        }
     }
 
-    private double executeCommandTree(List<IFunctions> headNodes) throws ClassNotFoundException {
-    	double result = 0;
-        for (int i = 0; i < headNodes.size(); i++) {
-        	IFunctions head = headNodes.get(i);
-            System.out.println(head.toString());
-            result = head.interpret();
-            System.out.println(myTurtle.printPosition());
+    // converts string command to arraylist
+    private List<String> getCommandAsList(String command) {
+        List<String> inputCommandList = new ArrayList<String>();
+        String[] inputArray = command.split(WHITESPACE);
+        for (int i = 0; i < inputArray.length; i++) {
+        	if (!inputArray[i].isEmpty()) {
+        		inputCommandList.add(inputArray[i]);
+        	}
         }
-        return result;
+        return inputCommandList;
+    }
+
+    private double executeCommandTree(IFunctions head) throws ClassNotFoundException {
+    	double result = 0;
+    	System.out.println(head.toString());
+    	result = head.interpret();
+    	System.out.println(myTurtle.printPosition());
+    	return result;
     }
 
 
