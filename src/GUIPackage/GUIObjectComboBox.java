@@ -7,7 +7,9 @@ import Controller.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.VBox;
 
 /**
  * Abstract class to implement different types of ComboBoxes. 
@@ -25,6 +27,7 @@ abstract class GUIObjectComboBox implements IGUIObject {
 	protected ObservableList<String> options;
 	protected ComboBox<String> comboBox;
 	protected GUICommandLine myCommandLine;
+	protected Button comboButton;
 	
 	public GUIObjectComboBox(ResourceBundle myResources, Controller myController, String promptText, GUICommandLine cLine) {
 		this.myResources = myResources;
@@ -35,17 +38,20 @@ abstract class GUIObjectComboBox implements IGUIObject {
 	
 	@Override
 	public Node createNode(){
+		VBox vbox = new VBox();
 		options = FXCollections.observableArrayList(
 			        optionsList()
 			    );
 		comboBox = new ComboBox<String>(options);
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPromptText(promptText);
-		setComboBoxAction();
-		return comboBox;
+		comboButton = new Button("Go");
+		setButtonAction();
+		vbox.getChildren().addAll(comboBox, comboButton);
+		return vbox;
 	}
 	
-	abstract void setComboBoxAction();
+	abstract void setButtonAction();
 
 	@Override
 	public void updateNode() {

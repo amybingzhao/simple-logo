@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import Controller.Controller;
+import javafx.scene.control.ComboBox;
 
 /**
  * Create a ComboBox to hold command history. 
@@ -24,9 +25,10 @@ public class GUIObjectComboBoxCommandHist extends GUIObjectComboBox {
 	}
 
 	@Override
-	void setComboBoxAction(){
-		String val = comboBox.getValue();
-		comboBox.setOnAction(event -> myCommandLine.runCommand(comboBox.getValue()));
+	void setButtonAction(){
+		comboButton.setOnAction(event -> {
+			myCommandLine.runCommand(comboBox.getValue());
+		});
 	}
 	
 }

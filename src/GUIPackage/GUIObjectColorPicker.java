@@ -26,7 +26,7 @@ abstract class GUIObjectColorPicker implements IGUIObject {
 	public Node createNode() {
 		VBox box = new VBox();
         box.setPadding(new Insets(5, 5, 5, 5));          
-    	ColorPicker colorPicker = new ColorPicker(Color.WHITE);
+    	ColorPicker colorPicker = new ColorPicker(getStartColor());
 		colorPicker.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -38,6 +38,8 @@ abstract class GUIObjectColorPicker implements IGUIObject {
         box.getChildren().addAll(text, colorPicker);
         return box;
 	}
+	
+	abstract Color getStartColor();
 
 	abstract void handleEvent(ColorPicker colorPicker);
 	

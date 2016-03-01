@@ -32,9 +32,10 @@ public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
 	}
 
 	@Override
-	void setComboBoxAction() {
-		comboBox.setOnAction(event -> myCommandLine.runCommand(comboBox.getValue()));
+	void setButtonAction(){
+		comboButton.setOnAction(event -> {
+			myCommandLine.runCommand(comboBox.getValue());
+		});
 	}
-
 
 }
