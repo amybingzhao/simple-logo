@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import Controller.Controller;
+import Model.Command;
 import Model.CommandDictionary;
+import javafx.scene.control.TextInputDialog;
 
 /**
  * Create ComboBox to hold history of user defined commands. 
@@ -15,6 +17,7 @@ import Model.CommandDictionary;
 
 public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {	
 	private CommandDictionary myUserDefinedCommands;
+	private TextInputDialog dialog;
 	
 	public GUIObjectComboBoxUserHist(ResourceBundle myResources, Controller myController,
 			String promptText, GUICommandLine cLine) {
@@ -34,9 +37,27 @@ public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
 	@Override
 	void setButtonAction(){
 		comboButton.setOnAction(event -> {
-			System.out.println(comboBox.getValue());
-			myCommandLine.runCommand(comboBox.getValue());
+			createDialog();
+			dialog.showAndWait();
+			myController.processCommand(getCommandToRun());
 		});
 	}
-
+	
+	private void createDialog(){
+		Command command = myUserDefinedCommands.getCommandFor(comboBox.getValue());
+		int numArgs = command.getParams().size();
+		dialog = new TextInputDialog();
+		dialog.setTitle(numArgs + " " + myResources.getString("ArgumentMessage") + " " + command);
+		dialog.setHeaderText(myResources.getString("ArgumentsNeeded") + command.getParams());
+		dialog.setContentText(myResources.getString("RequestArguments"));
+	}
+	
+	private String getCommandToRun(){
+		String commandToRun = comboBox.getValue();
+		String[] parameters = dialog.getResult().split(" ");
+		for(String parameter: parameters){
+			commandToRun = commandToRun + " " + parameter;
+		}
+		return commandToRun;
+	}
 }
