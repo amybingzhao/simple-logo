@@ -19,6 +19,7 @@ public class Turtle extends Observable {
 	private boolean penUp;
 	private boolean isVisible;
 	private double myDirection;
+	private boolean reset;
 	private static final double ONE_REVOLUTION = 360;
 	private static final double INCREMENT = 0.1;
 	
@@ -44,8 +45,7 @@ public class Turtle extends Observable {
 		for (double i = 0; i < limit; i = i + INCREMENT) {
 			myX = myX + inc * Math.sin(Math.toRadians(myDirection));
 			myY = myY + inc * Math.cos(Math.toRadians(myDirection));
-			setChanged();
-			notifyObservers();
+			updateObservers();
 		}
 	}
 	
@@ -82,6 +82,13 @@ public class Turtle extends Observable {
 		} 
 		
 		myDirection = dir;
+		updateObservers();
+	}
+	
+	/**
+	 * Lets the observers know that the turtle has changed.
+	 */
+	public void updateObservers() {
 		setChanged();
 		notifyObservers();
 	}
@@ -105,6 +112,7 @@ public class Turtle extends Observable {
 	 */
 	public void hide() {
 		isVisible = false;
+		updateObservers();
 	}
 	
 	/**
@@ -113,6 +121,22 @@ public class Turtle extends Observable {
 	 */
 	public boolean penUp() {
 		return penUp;
+	}
+	
+	/**
+	 * Resets the Canvas.
+	 */
+	public void resetTurtle() {
+		reset = true;
+		updateObservers();
+	}
+	
+	/**
+	 * Checks if turtle wants to be reset
+	 * @return true if reset is true; false otherwise.
+	 */
+	public boolean getReset() {
+		return reset;
 	}
 	
 	/**
@@ -131,6 +155,7 @@ public class Turtle extends Observable {
 	 */
 	public void show() {
 		isVisible = true;
+		updateObservers();
 	}
 	
 	/**
