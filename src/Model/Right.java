@@ -31,6 +31,6 @@ public class Right extends Node {
 	@Override
 	public String toString() {
 		List<Node> children = getChildren();
-		return RIGHT + children.get(DEGREES).interpret();
+		return RIGHT + children.get(DEGREES).toString();
 	}
 }

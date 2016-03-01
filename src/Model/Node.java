@@ -8,7 +8,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public abstract class Node implements LogoFunctions {
+public abstract class Node implements IFunctions {
     private List<Node> myChildren;
     private int numChildrenNeeded;
     private Turtle myTurtle;

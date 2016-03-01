@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import GUIPackage.GUIOutput;
+import Model.IFunctions;
 import Model.Node;
 import Model.Turtle;
 
@@ -63,9 +64,11 @@ public class Controller {
      */
     public void processCommand(String command){
     	try{
+    		System.out.println("command: " + command);
     		List<Node> commands = myParser.createCommandTree(command, myTurtle);
             double result = executeCommandTree(commands);
             myOutput.setOutputText(Double.toString(result));
+            addCommandToHistory(command);
     	}
     	catch(ClassNotFoundException e){
     		System.out.println("Could not process command.");
@@ -77,10 +80,8 @@ public class Controller {
         for (int i = 0; i < headNodes.size(); i++) {
             Node head = headNodes.get(i);
             System.out.println(head.toString());
-            //head.interpret();
             result = head.interpret();
             System.out.println(myTurtle.printPosition());
-            addCommandToHistory(head.toString());
         }
         return result;
     }

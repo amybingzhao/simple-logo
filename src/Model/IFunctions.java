@@ -5,6 +5,6 @@ package Model;
  * @author amyzhao
  *
  */
-public interface LogoFunctions {
+public interface IFunctions {
 		double interpret();
 }
