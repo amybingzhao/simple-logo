@@ -16,7 +16,7 @@ public class Difference extends Node {
      * Returns the difference between the two expressions.
      */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         List<Node> children = getChildren();
 
         return children.get(EXPR1).interpret() - children.get(EXPR2).interpret();

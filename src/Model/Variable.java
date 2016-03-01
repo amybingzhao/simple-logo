@@ -22,7 +22,7 @@ public class Variable extends Node {
      * Returns the value for the given variable.
      */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         return VariableDictionary.getInstance().getNodeFor(name);
     }
 

@@ -74,7 +74,7 @@ public class Controller {
             addCommandToHistory(command);
     	}
     	catch(ClassNotFoundException e){
-    		System.out.println("Could not process command.");
+    		myAlert.displayAlert("Could not process command.");
     	}
     }
 

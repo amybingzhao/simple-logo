@@ -17,7 +17,7 @@ public class Right extends Node {
 	 * Rotates the turtle CW by the given number of degrees.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException {
 		List<Node> children = getChildren();
 		double degrees = children.get(DEGREES).interpret();		
 		Turtle turtle = getTurtle();

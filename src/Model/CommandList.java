@@ -13,7 +13,7 @@ public class CommandList extends Node {
 	 * Interprets a list of commands, executing each command within the list.
 	 */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         List<Node> children = getChildren();
         double ret = 0;
 

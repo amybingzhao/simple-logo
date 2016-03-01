@@ -16,7 +16,7 @@ public class For extends Node{
      * Repeats the given commands for the given start and end limits and the given increment.
      */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         List<Node> children = getChildren();
         CommandList argList = (CommandList) children.get(VARIABLE_AND_LIMITS);
         List<Node> argsNodes = argList.getChildren();

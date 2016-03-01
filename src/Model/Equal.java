@@ -17,7 +17,7 @@ public class Equal extends Node {
 	 * Returns 1 if the two expressions are equal; 0 otherwise.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException {
 		List<Node> children = getChildren();
 		if (children.get(EXPR1).interpret() == children.get(EXPR2).interpret()) {
 			return 1;

@@ -12,7 +12,7 @@ public class Pi extends Node {
      * Returns the value of pi.
      */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         return Math.PI;
     }
 

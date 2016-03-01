@@ -13,7 +13,7 @@ public class NaturalLog extends Node {
      * Evaluates the natural logarithm of the given expression.
      */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         return Math.log(getChildren().get(EXPR).interpret());
     }
 
