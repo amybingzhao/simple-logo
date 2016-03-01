@@ -24,10 +24,10 @@ public class GUIObjectComboBoxLanguages extends GUIObjectComboBox {
 	List<String> optionsList() {
 		return new ArrayList<String>(Arrays.asList(myResources.getString("Languages").split(" ")));
 	}
-
+	
 	@Override
-	void setComboBoxAction() {
-		comboBox.setOnAction(event -> myController.setLanguage(comboBox.getValue()));
+	void setButtonAction(){
+		comboButton.setOnAction(event -> myController.setLanguage(comboBox.getValue()));
 	}
 
 }
