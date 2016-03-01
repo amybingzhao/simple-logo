@@ -1,7 +1,4 @@
 package GUIPackage;
-import java.util.ResourceBundle;
-
-import Controller.Controller;
 import Model.Turtle;
 
 import java.util.Observable;
@@ -10,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;

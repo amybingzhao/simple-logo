@@ -34,7 +34,7 @@ public class GUIObjectFactory {
 						myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
 			}
 			case("VariablesTableView"):{
-				return new GUIObjectTableView(myController, myResources);
+				return new GUIObjectTableView(myResources);
 			}
 			case("UserCommandsComboBox"):{
 				return new GUIObjectComboBoxUserHist(myResources, myController,

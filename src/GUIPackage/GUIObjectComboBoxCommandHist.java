@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import Controller.Controller;
-import javafx.scene.control.ComboBox;
 
 /**
  * Create a ComboBox to hold command history. 
