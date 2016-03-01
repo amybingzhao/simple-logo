@@ -17,7 +17,7 @@ public class If extends Node {
 	 * Executes the given command if the given expression is true.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException {
 		List<Node> children = getChildren();
 		double ret = 0;
 		

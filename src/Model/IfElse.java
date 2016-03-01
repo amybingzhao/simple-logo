@@ -18,7 +18,7 @@ public class IfElse extends Node {
 	 * If the given expression is true, executes the true commands; else executes the false commands.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException {
 		List<Node> children = getChildren();
 		double ret = 0;
 		

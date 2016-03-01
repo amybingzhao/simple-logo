@@ -16,7 +16,7 @@ public class Not extends Node {
 	 * If the given expression is false, return 1; else return 0.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException {
 		List<Node> children = getChildren();
 		if (children.get(EXPR).interpret() == 0) {
 			return 1;

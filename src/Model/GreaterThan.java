@@ -17,7 +17,7 @@ public class GreaterThan extends Node {
 	 * Returns 1 if expr1 is greater than expr2; 0 otherwise.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException {
 		List<Node> children = getChildren();
 		if (children.get(EXPR1).interpret() > children.get(EXPR2).interpret()) {
 			return 1;

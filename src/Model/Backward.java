@@ -16,7 +16,7 @@ public class Backward extends Node {
 	 * Moves the turtle backwards a given distance and returns the distance moved.
 	 */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         Turtle turtle = getTurtle();
         List<Node> children = getChildren();
 

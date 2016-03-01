@@ -34,7 +34,7 @@ public class Command extends Node {
      * Executes the command using the given parameters.
      */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         List<Node> children = getChildren();
         for (int i = 0; i < parameters.size(); i++) {
             String myVar = parameters.get(i);

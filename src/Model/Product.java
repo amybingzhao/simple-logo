@@ -16,7 +16,7 @@ public class Product extends Node {
 	 * Returns the product of expr1 and expr2.
 	 */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         List<Node> children = getChildren();
         return children.get(EXPR1).interpret() * children.get(EXPR2).interpret();
     }

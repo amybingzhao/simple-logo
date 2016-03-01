@@ -13,7 +13,7 @@ public class Minus extends Node {
      * Negates the given expression.
      */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         return -1 * getChildren().get(EXPR).interpret();
     }
 
