@@ -18,17 +18,14 @@ public class GUIObjectFactory {
 		this.myController = myController;
 	}
 	
-	public GUIObject createNewGUIObject(String nodeTypeKey){
+	public IGUIObject createNewGUIObject(String nodeTypeKey){
 		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
 			case("CommandLineVBox"):{
 				return null;
 			}
-			case("ExceptionHandlerLabeled"):{
-				return new GUIObjectLabeled();
-			}
 			case("ImageVBox"):{
-				return new GUIObjectVBox(myResources, canvas, nodeType);
+				return new GUIObjectVBox(myResources, myController, canvas, nodeType);
 			}
 			case("LanguageComboBox"):{
 				return new GUIObjectComboBoxLanguages(myResources, myController, 

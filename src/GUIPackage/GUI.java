@@ -11,7 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
-public class GUI implements GUIInterface {
+public class GUI implements IGUI {
+	private static final String GUI_RESOURCE = "GUI";
 	private static final String HELP_TAB_TEXT = "Help";
 	private static final int CANVAS_WIDTH = 500;
 	private static final int CANVAS_HEIGHT = 600;
@@ -28,9 +29,10 @@ public class GUI implements GUIInterface {
 	private int windowHeight;
 	private int windowWidth;
 
-	public GUI(int width, int height) {
-		windowWidth = width;
-		windowHeight = height;
+	public GUI(int windowWidth, int windowHeight) {
+		this.windowWidth = windowWidth;
+		this.windowHeight = windowHeight;
+		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 	}
 	
 	public Scene createScene() {
@@ -43,7 +45,7 @@ public class GUI implements GUIInterface {
 		
 		myRoot = new TabPane();
 		
-		Tab mainScreenTab = new TabMainScreen(myController, canvas, commandLine, myObserver).getTab();
+		Tab mainScreenTab = new TabMainScreen(myController, canvas, commandLine, myObserver, myResources).getTab();
 		Tab helpTab = createHelpTab();
 		
 		myRoot.getTabs().addAll(mainScreenTab, helpTab);		
@@ -56,7 +58,7 @@ public class GUI implements GUIInterface {
 		Tab helpTab = new Tab();
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
-		webEngine.load("http://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/commands.php");
+		webEngine.load(myResources.getString("HelpTabURL"));
 		helpTab.setContent(browser);
 		helpTab.setText(HELP_TAB_TEXT);
 		return helpTab;

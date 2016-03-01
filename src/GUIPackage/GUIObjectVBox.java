@@ -1,9 +1,11 @@
 package GUIPackage;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
+import Controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -19,11 +21,13 @@ import javafx.scene.layout.VBox;
  *
  */
 
-public class GUIObjectVBox implements GUIObject {
+public class GUIObjectVBox implements IGUIObject {
+	private static final String IMAGE_FILE_TYPES = "png jpg tif gif";
 	private ResourceBundle myResources;
 	private String nodeType;
 	private boolean canUpdate;
 	private GUICanvas canvas;
+	private Controller myController;
 	private TextField userInputFileString;
 	private Button initializeButton;
 	private Labeled fileErrorLabel;
@@ -34,8 +38,9 @@ public class GUIObjectVBox implements GUIObject {
 	private static final double PADDING_BOTTOM = 10;
 	private static final double PADDING_LEFT = 10;
 	
-	public GUIObjectVBox(ResourceBundle myResources, GUICanvas canvas, String nodeType) {
+	public GUIObjectVBox(ResourceBundle myResources, Controller myController, GUICanvas canvas, String nodeType) {
 		this.myResources = myResources;
+		this.myController = myController;
 		this.canvas = canvas;
 		this.nodeType = nodeType;
 	}
@@ -71,10 +76,20 @@ public class GUIObjectVBox implements GUIObject {
 			imageFile = f;
 			return true;
 		}else{
-			fileErrorLabel.setText(myResources.getString("FileNotFound" + nodeType));
+			if(!isValidImageFormat(fileString)){
+				myController.displayAlert("InvalidImageFormat");
+		}else{
+			myController.displayAlert("ImageNotFound");
 		}
 		fileErrorLabel.setVisible(true);
 		return false;
+		}
+	}
+	
+	private boolean isValidImageFormat(String fileString){
+		ArrayList<String> validFormats = new ArrayList<String>(Arrays.asList(IMAGE_FILE_TYPES.split(" ")));
+		String attemptedFormat = fileString.substring(fileString.length()-3, fileString.length());
+		return validFormats.contains(attemptedFormat.toLowerCase());
 	}
 	
 	public boolean isUpdateable(){
