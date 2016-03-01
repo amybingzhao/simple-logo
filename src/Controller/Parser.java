@@ -104,7 +104,13 @@ public class Parser {
         CommandList list = new CommandList();
         // assumes there is a list end; if not we gotta through an error
         while (!(parseText(inputList.get(0))).equals(LIST_END)) {
-            Node head = createClass(inputList.get(0), inputList);
+        	Node head;
+        	if (parseText(inputList.get(0)).equals(LIST_START)) {
+        		inputList.remove(0);
+        		head = createList(inputList, turtle);
+        	} else {
+        		head = createClass(inputList.get(0), inputList);
+        	}
             list.addChild(head);
         }
 
