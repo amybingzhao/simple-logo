@@ -13,7 +13,7 @@ public class IsPenDown extends Node {
 	 * If the turtle's pen is down, returns 1; else returns 0.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException {
 		Turtle turtle = getTurtle();
 		if (turtle.penUp()) {
 			return 0;

@@ -16,7 +16,7 @@ public class Power extends Node {
 	 * Raises the given base to the given exponent.
 	 */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         List<Node> children = getChildren();
         return Math.pow(children.get(BASE).interpret(), children.get(EXPONENT).interpret());
     }

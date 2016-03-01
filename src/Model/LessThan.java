@@ -17,7 +17,7 @@ public class LessThan extends Node {
 	 * If expr1 is less than expr2, returns 1; else returns 0.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException {
 		List<Node> children = getChildren();
 		if (children.get(EXPR1).interpret() < children.get(EXPR2).interpret()) {
 			return 1;

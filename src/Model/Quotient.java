@@ -16,7 +16,7 @@ public class Quotient extends Node {
 	 * Returns the quotient of expr1 divided by expr2.
 	 */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         List<Node> children = getChildren();
         return children.get(EXPR1).interpret() / children.get(EXPR2).interpret();
     }

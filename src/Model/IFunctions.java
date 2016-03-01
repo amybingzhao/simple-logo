@@ -6,5 +6,5 @@ package Model;
  *
  */
 public interface IFunctions {
-		double interpret();
+		double interpret() throws ClassNotFoundException;
 }

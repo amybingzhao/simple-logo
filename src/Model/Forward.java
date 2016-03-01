@@ -16,7 +16,7 @@ public class Forward extends Node {
 	 * Moves the turtle forward the given distance.
 	 */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException {
         Turtle turtle = getTurtle();
         List<Node> children = getChildren();
 

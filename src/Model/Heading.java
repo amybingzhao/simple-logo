@@ -13,7 +13,7 @@ public class Heading extends Node {
 	 * Returns the turtle's current direction.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException {
 		Turtle turtle = getTurtle();
 		return turtle.getDirection();
 	}
