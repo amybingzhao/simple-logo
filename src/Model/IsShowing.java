@@ -13,7 +13,7 @@ public class IsShowing extends Node {
 	 * Returns 1 if the turtle is showing on the canvas; 0 otherwise.
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		Turtle turtle = getTurtle();
 		if (turtle.showing()) {
 			return 1;

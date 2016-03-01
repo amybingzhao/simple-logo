@@ -13,7 +13,7 @@ public class ShowTurtle extends Node {
 	 * Sets the turtle to visible and returns 1.
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		Turtle turtle = getTurtle();
 		turtle.show();;
 		return 1;

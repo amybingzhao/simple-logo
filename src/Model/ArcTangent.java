@@ -14,7 +14,7 @@ public class ArcTangent extends Node {
      * Returns the arctangent of the expression, where the expression is given in degrees.
      */
     @Override
-    public double interpret() throws ClassNotFoundException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         double degrees = getChildren().get(DEGREES).interpret();
         double radians = degrees * (Math.PI / DEGREES_PER_PI);
         return Math.atan(radians);

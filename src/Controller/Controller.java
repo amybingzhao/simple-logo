@@ -5,7 +5,6 @@ import java.util.List;
 
 import GUIPackage.GUIAlert;
 import GUIPackage.GUIOutput;
-import Model.IFunctions;
 import Model.Node;
 import Model.Turtle;
 
@@ -21,6 +20,9 @@ public class Controller {
     private static final String SYNTAX_RESOURCE = "resources/languages/Syntax";
     private static final String DEFAULT_LANGUAGE_RESOURCE = "resources/languages/English";
     private static final String LANGUAGE_RESOURCE_LOCATION = "resources/languages/";
+    public static final String DOES_NOT_EXIST = "DoesNotExist";
+    public static final String EXECUTION_ERROR = "ExecutionError";
+    public static final String INVALID_SYNTAX = "InvalidSyntax";
     private String myLanguageResource;
     private Parser myParser;
     private List<Turtle> myTurtles;
@@ -74,11 +76,17 @@ public class Controller {
             addCommandToHistory(command);
     	}
     	catch(ClassNotFoundException e){
-    		myAlert.displayAlert("Could not process command.");
+    		myAlert.displayAlert(DOES_NOT_EXIST);
     	}
+        catch(IndexOutOfBoundsException e){
+            myAlert.displayAlert(INVALID_SYNTAX);
+        }
+        catch(NullPointerException e){
+            myAlert.displayAlert(EXECUTION_ERROR);
+        }
     }
 
-    private double executeCommandTree(List<Node> headNodes) {
+    private double executeCommandTree(List<Node> headNodes) throws ClassNotFoundException {
     	double result = 0;
         for (int i = 0; i < headNodes.size(); i++) {
             Node head = headNodes.get(i);
