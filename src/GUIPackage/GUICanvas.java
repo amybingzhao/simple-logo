@@ -59,8 +59,17 @@ public class GUICanvas implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		myTurtle = (Turtle) o;
-		clearPreviousTurtle();
-		drawTurtle();
+		if (myTurtle.getReset()) {
+			resetCanvas();
+		} else {
+			clearPreviousTurtle();
+			drawTurtle();
+		}
+	}
+	
+	public void resetCanvas() {
+		gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		gcDrawing.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
 	
 	public void clearPreviousTurtle() {
@@ -101,7 +110,9 @@ public class GUICanvas implements Observer{
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(myTurtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-		gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+		if (myTurtle.showing()) {
+			gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+		}
 		if (!myTurtle.penUp()) {
 			gcDrawing.fillOval(myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2, 3, 3);
 		}
