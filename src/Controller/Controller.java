@@ -3,6 +3,7 @@ package Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import GUIPackage.GUIAlert;
 import GUIPackage.GUIOutput;
 import Model.IFunctions;
 import Model.Node;
@@ -28,6 +29,7 @@ public class Controller {
     private int myCanvasHeight;
     private Turtle myTurtle;
     private GUIOutput myOutput;
+    private GUIAlert myAlert;
 
     /**
      * Initializes the controller.
@@ -43,6 +45,7 @@ public class Controller {
         myTurtles = new ArrayList<Turtle>();
         myTurtle = t;
         myOutput = new GUIOutput();
+        myAlert = new GUIAlert();
     }
 
     /**
@@ -97,6 +100,10 @@ public class Controller {
     
     public GUIOutput getGUIOutput(){
     	return myOutput;
+    }
+    
+    public void displayAlert(String errorResourceKey){
+    	myAlert.displayAlert(errorResourceKey);
     }
 
 }

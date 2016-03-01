@@ -47,6 +47,7 @@ public class Turtle extends Observable {
 			setChanged();
 			notifyObservers();
 		}
+		System.out.println("hello");
 	}
 	
 	/**
