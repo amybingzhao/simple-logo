@@ -17,12 +17,7 @@ public class GUI implements IGUI {
 	private Scene myScene;
 	private TabPane myRoot;
 	private ResourceBundle myResources;
-	private Controller myController;
 	private Turtle myTurtle;
-	private TurtleObserver myObserver;
-	
-	private GUICanvas canvas;
-	private GUICommandLine commandLine;
 	
 	private int windowHeight;
 	private int windowWidth;

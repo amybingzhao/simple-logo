@@ -53,7 +53,6 @@ public class GUICanvas implements Observer{
 		gcDrawing = canvasDrawing.getGraphicsContext2D();
 		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		gc = canvas.getGraphicsContext2D();
-		gc.setStroke(Color.BLACK);
 		gcBackground.setFill(Color.BISQUE);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		addDefaultTurtle();
@@ -117,6 +116,10 @@ public class GUICanvas implements Observer{
 
 	public GraphicsContext getBackgroundGraphicsContext(){
 		return gcBackground;
+	}
+	
+	protected void setPenColor(Color c) {
+		gcDrawing.setFill(c);
 	}
 	
 	public int getWidth(){

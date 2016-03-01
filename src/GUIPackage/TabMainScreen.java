@@ -27,7 +27,6 @@ public class TabMainScreen {
 	private GUICommandLine commandLine;
 	private Controller myController;
 	private Turtle myTurtle;
-	private TurtleObserver myObserver;
 	private GUIOutput myOutput;
 	
 	//GUIObject instance variables
