@@ -11,7 +11,7 @@ import javafx.scene.layout.BorderPane;
  *
  */
 
-public class TabMainScreen{
+public class TabMainScreen {
 	private static final String GUI_RESOURCE = "GUI";
 	private static final int LEFT_PANEL_PADDING = 10;
 	private static final String TAB_TEXT = "Main";
@@ -49,12 +49,12 @@ public class TabMainScreen{
 		myMainScreen = new BorderPane();
 		
 		setCenterPane();
+		setBottomPane();
 		//must be after setCenterPane, or canvas will not have been instantiated yet 
-		myFactory = new GUIObjectFactory(myResources, myController, canvas); 
+		myFactory = new GUIObjectFactory(myResources, myController, canvas, commandLine); 
 		
 		setLeftPane();
 		setRightPane();
-		setBottomPane();
 		setTopPane();
 		
 		myRootTab.setContent(myMainScreen);

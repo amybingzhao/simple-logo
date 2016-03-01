@@ -22,7 +22,7 @@ public class GUICanvas {
 	private static final int CANVAS_WIDTH = 500;
 	private static final int CANVAS_HEIGHT = 600;
 	private static final String PATH_DELIMITER = "/";
-	private static final String DEFAULT_TURTLE = "turtle.jpg";
+	private static final String DEFAULT_TURTLE = "turtle_outline.png";
 	private double myX;
 	private double myY;
 	private double myOldX;
@@ -35,7 +35,6 @@ public class GUICanvas {
 	private ResourceBundle myResources;
 	private TurtleObserver myTurtle;
 	private Image turtleImage;
-	private ImageView turtleIV;
 	
 	public GUICanvas(Controller myController, ResourceBundle myResources, TurtleObserver turtle) {
 		this.myController = myController;
@@ -48,6 +47,7 @@ public class GUICanvas {
 		gc_background = canvas_background.getGraphicsContext2D();
 		canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		gc = canvas.getGraphicsContext2D();
+		gc.setStroke(Color.BLACK);
 		gc_background.setFill(Color.BISQUE);
 		gc_background.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		addDefaultTurtle();
@@ -57,11 +57,15 @@ public class GUICanvas {
 
 	public void updateNode() {
 		drawTurtle();
+		if (!myTurtle.isPenUp()) {
+			gc.strokeLine(myOldX, myOldY, myX, myY);
+		}
+		myOldX = myX;
+		myOldY = myY;
 	}
 	
 	private void addDefaultTurtle(){
 		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
-		turtleIV = new ImageView(turtleImage);
 		drawTurtle();
 	}
 	
@@ -71,21 +75,18 @@ public class GUICanvas {
 		String[] splitFilePath = filePath.split(PATH_DELIMITER);
 		String fileName = splitFilePath[splitFilePath.length - 1];
 		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
-		turtleIV = new ImageView(turtleImage);
 		drawTurtle();
 	}
 	
 	public void drawTurtle() {
-		gc.clearRect(myOldX, myOldY, TURTLE_SIZE, TURTLE_SIZE);
+		gc.clearRect(myX, myY, TURTLE_SIZE, TURTLE_SIZE);
 		myX = myTurtle.getX() + CANVAS_WIDTH/2;
 		myY = -(myTurtle.getY() - CANVAS_HEIGHT/2);
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(myTurtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-		gc.drawImage(turtleIV.getImage(), myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+		gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
 		gc.restore();
-		myOldX = myX;
-		myOldY = myY;
 	}
 
 	public GraphicsContext getBackgroundGraphicsContext(){

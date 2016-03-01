@@ -40,7 +40,7 @@ public class GUICommandLine {
 		commandInputLine = new TextField();
 //		commandInputLine.setPrefRowCount(3);
 		runButton = new Button(myResources.getString("Run"));
-		runButton.setOnAction(evt -> runCommand());
+		runButton.setOnAction(evt -> runCommand(commandInputLine.getText()));
 		
 		VBox commandLine = new VBox();
 		commandLine.getChildren().addAll(commandLabel, commandInputLine, runButton);
@@ -50,9 +50,8 @@ public class GUICommandLine {
 		return commandLine;
 	}
 	
-	private void runCommand() {
-		System.out.print(commandInputLine.getText() + "\n");
-		myController.processCommand(commandInputLine.getText());
+	protected void runCommand(String command) {
+		myController.processCommand(command);
 		myMainScreen.updateGUI();
 		clearTextField();
 	}
