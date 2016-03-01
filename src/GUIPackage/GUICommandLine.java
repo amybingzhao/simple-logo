@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 public class GUICommandLine {
 	private Controller myController;
 	private ResourceBundle myResources;
-	private TabMainScreen myGUI;
+	private TabMainScreen myMainScreen;
 	private int myX;
 	private int myY;
 	
@@ -30,7 +30,7 @@ public class GUICommandLine {
 	protected GUICommandLine(Controller c, ResourceBundle r, TabMainScreen t) {
 		myController = c;
 		myResources = r;
-		myGUI = t;
+		myMainScreen = t;
 //		myX = Integer.valueOf(myResources.getString(xPosString));
 //		myY = Integer.valueOf(myResources.getString(yPosString));
 	}
@@ -53,7 +53,7 @@ public class GUICommandLine {
 	private void runCommand() {
 		System.out.print(commandInputLine.getText() + "\n");
 		myController.processCommand(commandInputLine.getText());
-		myGUI.updateGUI();
+		myMainScreen.updateGUI();
 		clearTextField();
 	}
 	
