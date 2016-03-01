@@ -27,7 +27,11 @@ public class Command extends Node {
      * @param var: name of variable to add.
      */
     public void addParam(String var) {
-        parameters.add(var);
+    	parameters.add(var);
+    }
+    
+    public List<String> getParams() {
+    	return parameters;
     }
 
     /**
@@ -60,6 +64,10 @@ public class Command extends Node {
         myProcedure = procedure;
     }
 
+    public List<Node> getProcedure() {
+    	return myProcedure;
+    }
+    
     /**
 	 * Returns the name of this command. 
 	 */

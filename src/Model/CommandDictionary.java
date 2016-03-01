@@ -49,7 +49,13 @@ public class CommandDictionary {
      * @return command object for the given command name.
      */
     public Command getCommandFor(String key) {
-        return myCommands.get(key);
+    	Command commandToGet = myCommands.get(key);
+    	Command ret = new Command(key);
+    	for (int i = 0; i < commandToGet.getParams().size(); i++) {
+    		ret.addParam(commandToGet.getParams().get(i));
+    	}
+    	ret.setProcedure(commandToGet.getProcedure());
+        return ret;
     }
 
     /**
