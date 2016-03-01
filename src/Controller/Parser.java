@@ -80,16 +80,16 @@ public class Parser {
         }
     }
 
-    public List<Node> createCommandTree(String command, Turtle turtle) throws ClassNotFoundException {
+    public List<IFunctions> createCommandTree(String command, Turtle turtle) throws ClassNotFoundException {
         myTurtle = turtle;
         List<String> inputCommandList = getCommandAsList(command);
 
         return createCommandTreeFromList(inputCommandList);
     }
 
-    private List<Node> createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
+    private List<IFunctions> createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
 
-        List<Node> headNodes = new ArrayList<>();
+        List<IFunctions> headNodes = new ArrayList<>();
         while (!inputCommandList.isEmpty()) {
             String commandToBuild = inputCommandList.get(0);
             Node head = createClass(commandToBuild, inputCommandList);
@@ -104,7 +104,13 @@ public class Parser {
         CommandList list = new CommandList();
         // assumes there is a list end; if not we gotta through an error
         while (!(parseText(inputList.get(0))).equals(LIST_END)) {
-            Node head = createClass(inputList.get(0), inputList);
+        	Node head;
+        	if (parseText(inputList.get(0)).equals(LIST_START)) {
+        		inputList.remove(0);
+        		head = createList(inputList, turtle);
+        	} else {
+        		head = createClass(inputList.get(0), inputList);
+        	}
             list.addChild(head);
         }
 
