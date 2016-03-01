@@ -80,23 +80,17 @@ public class Parser {
         }
     }
 
-    public List<IFunctions> createCommandTree(String command, Turtle turtle) throws ClassNotFoundException {
+    public IFunctions createCommandTree(List commandList, Turtle turtle) throws ClassNotFoundException {
         myTurtle = turtle;
-        List<String> inputCommandList = getCommandAsList(command);
-
-        return createCommandTreeFromList(inputCommandList);
+        return createCommandTreeFromList(commandList);
     }
 
-    private List<IFunctions> createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
+    private IFunctions createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
+    	IFunctions head = null;
+    	String commandToBuild = inputCommandList.get(0);
+    	head = createClass(commandToBuild, inputCommandList);
 
-        List<IFunctions> headNodes = new ArrayList<>();
-        while (!inputCommandList.isEmpty()) {
-            String commandToBuild = inputCommandList.get(0);
-            Node head = createClass(commandToBuild, inputCommandList);
-            headNodes.add(head);
-        }
-
-        return headNodes;
+    	return head;
     }
     
     public CommandList createList(List<String> inputList, Turtle turtle) throws ClassNotFoundException {
@@ -183,31 +177,8 @@ public class Parser {
         }
     }
 
-    // converts string command to arraylist
-    private List<String> getCommandAsList(String command) {
-        List<String> inputCommandList = new ArrayList<String>();
-        String[] inputArray = command.split(WHITESPACE);
-        for (int i = 0; i < inputArray.length; i++) {
-        	if (!inputArray[i].isEmpty()) {
-        		inputCommandList.add(inputArray[i]);
-        	}
-        }
-        return inputCommandList;
-    }
-
     private boolean match(String text, Pattern regex) {
         return regex.matcher(text).matches();
-    }
-
-    private void addNewUserDefinedCommand() {
-        // add name of new command + # args to numargs map
-
-        // add string of the entire command to userdefinedcommands map
-    }
-
-    private void executeUserDefinedCommand() {
-        //replace parameters with values before giving it back to the controller, e.g. for dash - replace all instances of
-        // count and size with vals for count and size, then send that to parseCommand ^
     }
 
     private String listToString(List<String> input) {
