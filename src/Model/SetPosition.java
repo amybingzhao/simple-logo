@@ -17,7 +17,7 @@ public class SetPosition extends Node {
 	 * Moves the turtle to the given position and returns the distance moved.
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		Turtle turtle = getTurtle();
 		double dist = turtle.calcDistance(children.get(X).interpret(), children.get(Y).interpret());

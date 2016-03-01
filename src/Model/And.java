@@ -17,7 +17,7 @@ public class And extends Node {
 	 * If expr1 and expr2 are both true, returns 1; else return 0.
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		if (children.get(EXPR1).interpret() > 0 && children.get(EXPR2).interpret() > 0) {
 			return 1;

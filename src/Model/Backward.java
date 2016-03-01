@@ -13,10 +13,10 @@ public class Backward extends Node {
 	private static final int DISTANCE = 0;
 
 	/**
-	 * Moves the turtle backwards a given distance and returns the distance moved.
-	 */
+     * Moves the turtle backwards a given distance and returns the distance moved.
+     */
     @Override
-    public double interpret() throws ClassNotFoundException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         Turtle turtle = getTurtle();
         List<Node> children = getChildren();
 

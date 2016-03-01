@@ -13,7 +13,7 @@ public class PenDown extends Node {
 	 * Puts the turtle's pen down so trail will now show.
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		Turtle turtle = getTurtle();
 		turtle.putPenDown();
 		return 1;

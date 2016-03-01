@@ -13,10 +13,10 @@ public class Quotient extends Node {
 	private static final int EXPR2 = 1;
 
 	/**
-	 * Returns the quotient of expr1 divided by expr2.
-	 */
+     * Returns the quotient of expr1 divided by expr2.
+     */
     @Override
-    public double interpret() throws ClassNotFoundException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
         return children.get(EXPR1).interpret() / children.get(EXPR2).interpret();
     }

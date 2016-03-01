@@ -13,7 +13,7 @@ public class XCoordinate extends Node {
 	 * Returns the turtle's current x-coordinate.
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		Turtle turtle = getTurtle();
 		return turtle.getCurX();
 	}

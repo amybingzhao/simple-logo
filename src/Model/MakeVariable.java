@@ -15,7 +15,7 @@ public class MakeVariable extends Node {
     private String name;
 
     @Override
-    public double interpret() throws ClassNotFoundException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
         String key = children.get(VARIABLE_NAME).toString();
         double value = children.get(EXPRESSION).interpret();

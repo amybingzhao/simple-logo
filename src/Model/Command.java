@@ -34,7 +34,7 @@ public class Command extends Node {
      * Executes the command using the given parameters.
      */
     @Override
-    public double interpret() throws ClassNotFoundException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 
         if (!CommandDictionary.getInstance().contains(myName)){
             throw new ClassNotFoundException();

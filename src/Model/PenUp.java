@@ -13,7 +13,7 @@ public class PenUp extends Node {
 	 * Lifts pen up for current turtle so trail will no longer show.
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		Turtle turtle = getTurtle();
 		turtle.liftPenUp();
 		return 0;

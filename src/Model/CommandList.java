@@ -10,10 +10,10 @@ import java.util.List;
 public class CommandList extends Node {
 
 	/**
-	 * Interprets a list of commands, executing each command within the list.
-	 */
+     * Interprets a list of commands, executing each command within the list.
+     */
     @Override
-    public double interpret() throws ClassNotFoundException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
         double ret = 0;
 
