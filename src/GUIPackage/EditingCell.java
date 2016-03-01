@@ -4,7 +4,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
-import Model.VariableDictionary;
 
 public class EditingCell extends TableCell<TableVariable, Double>{
 	private TextField textField;
