@@ -21,6 +21,7 @@ public class Controller {
     private static final String SYNTAX_RESOURCE = "resources/languages/Syntax";
     private static final String DEFAULT_LANGUAGE_RESOURCE = "resources/languages/English";
     private static final String LANGUAGE_RESOURCE_LOCATION = "resources/languages/";
+    public static final String DOES_NOT_EXIST = "DoesNotExist";
     private String myLanguageResource;
     private Parser myParser;
     private List<Turtle> myTurtles;
@@ -74,11 +75,11 @@ public class Controller {
             addCommandToHistory(command);
     	}
     	catch(ClassNotFoundException e){
-    		myAlert.displayAlert("Could not process command.");
+    		myAlert.displayAlert(DOES_NOT_EXIST);
     	}
     }
 
-    private double executeCommandTree(List<Node> headNodes) {
+    private double executeCommandTree(List<Node> headNodes) throws ClassNotFoundException {
     	double result = 0;
         for (int i = 0; i < headNodes.size(); i++) {
             Node head = headNodes.get(i);
