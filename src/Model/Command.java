@@ -43,8 +43,7 @@ public class Command extends Node {
         List<Node> children = getChildren();
         for (int i = 0; i < parameters.size(); i++) {
         		String myVar = parameters.get(i);
-        		double value = children.get(0).interpret();
-        		children.remove(0);
+        		double value = children.get(i).interpret();
         		VariableDictionary.getInstance().makeVariable(myVar, value);
         }
         for (Node myNode : myProcedure){
