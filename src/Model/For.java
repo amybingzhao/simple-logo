@@ -3,6 +3,7 @@ package Model;
 import java.util.List;
 
 /**
+ * For function.
  * Created by blakekaplan on 2/25/16.
  */
 public class For extends Node{
@@ -11,13 +12,11 @@ public class For extends Node{
     private static final int VARIABLE_AND_LIMITS = 0;
     private static final int COMMANDS = 1;
 
-    public String toString() {
-        return FOR;
-    }
-
+    /**
+     * Repeats the given commands for the given start and end limits and the given increment.
+     */
     @Override
     public double interpret() {
-
         List<Node> children = getChildren();
         CommandList argList = (CommandList) children.get(VARIABLE_AND_LIMITS);
         List<Node> argsNodes = argList.getChildren();
@@ -35,5 +34,12 @@ public class For extends Node{
         }
 
         return ret;
+    }
+    
+    /**
+	 * Returns the required user input for this command. 
+	 */
+    public String toString() {
+        return FOR;
     }
 }

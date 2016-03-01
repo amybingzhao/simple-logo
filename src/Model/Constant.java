@@ -1,21 +1,36 @@
 package Model;
 
+/**
+ * Constant object.
+ * @author amyzhao
+ *
+ */
 public class Constant extends Node {
 
-    private int n;
+    private int val;
 
-    public Constant(int n) {
-        this.n = n;
+    /**
+     * Sets the value of this constant.
+     * @param val: value of the constant.
+     */
+    public Constant(int val) {
+        this.val = val;
     }
 
+    /**
+     * Returns the value of this constant.
+     */
     @Override
     public double interpret() {
-        return n;
+        return val;
     }
 
+    /**
+	 * Returns the required user input for this command. 
+	 */
     @Override
     public String toString() {
-        return Integer.toString(n);
+        return Integer.toString(val);
     }
 
 }

@@ -10,16 +10,23 @@ import java.util.Set;
  */
 public class CommandDictionary {
 
-    private Map<String, Command> commands;
-    private Map<String, Integer> numArguments;
-
-    public CommandDictionary() {
-        commands = new HashMap<>();
-        numArguments = new HashMap<>();
-    }
+    private Map<String, Command> myCommands;
+    private Map<String, Integer> myNumArguments;
 
     private static CommandDictionary instance;
 
+    /**
+     * Initializes the myCommands and myNumArguments maps.
+     */
+    public CommandDictionary() {
+        myCommands = new HashMap<>();
+        myNumArguments = new HashMap<>();
+    }
+
+    /**
+     * Gets the instance of CommandDictionary; creates one if one does not yet exist.
+     * @return the instance of CommandDictionary.
+     */
     public static synchronized CommandDictionary getInstance() {
         if (instance == null) {
             instance = new CommandDictionary();
@@ -27,27 +34,56 @@ public class CommandDictionary {
         return instance;
     }
 
+    /**
+     * Creates a new command with the given command name.
+     * @param key: command name.
+     * @param newCommand: command object representing the command.
+     */
     public void createCommand(String key, Command newCommand) {
-        commands.put(key, newCommand);
+        myCommands.put(key, newCommand);
     }
 
+    /**
+     * Gets the command associated with a given command name.
+     * @param key: command name.
+     * @return command object for the given command name.
+     */
     public Command getCommandFor(String key) {
-        return commands.get(key);
+        return myCommands.get(key);
     }
 
+    /**
+     * Checks if a command of the given name already exists.
+     * @param key: command name to check.
+     * @return true if command name already exists; false otherwise.
+     */
     public boolean contains(String key) {
-        return commands.containsKey(key);
+        return myCommands.containsKey(key);
     }
 
+    /**
+     * Sets the number of arguments required for a given command.
+     * @param key: command name.
+     * @param numArgs: number of arguments required.
+     */
     public void setNumArguments(String key, int numArgs) {
-        numArguments.put(key, numArgs);
+        myNumArguments.put(key, numArgs);
     }
 
+    /**
+     * Gets the number of arguments required for a given command.
+     * @param key: command name.
+     * @return number of arguments required.
+     */
     public int getNumArgsForkey(String key) {
-        return numArguments.get(key);
+        return myNumArguments.get(key);
     }
 
+    /**
+     * Gets the set of command names already defined.
+     * @return existing set of command names.
+     */
     public Set<String> getCommandKeySet(){
-        return commands.keySet();
+        return myCommands.keySet();
     }
 }
