@@ -17,7 +17,7 @@ public class SetTowards extends Node {
 	 * Turns the turtle to face the given (x, y) position.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		Turtle turtle = getTurtle();
 		return turtle.turnTowards(children.get(X).interpret(), children.get(Y).interpret());

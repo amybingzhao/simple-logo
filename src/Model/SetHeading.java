@@ -16,7 +16,7 @@ public class SetHeading extends Node {
 	 * Turns the turtle towards to the given degrees, where 0 is facing north and rotating CW is positive.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		Turtle turtle = getTurtle();
 		double curDir = turtle.getDirection();

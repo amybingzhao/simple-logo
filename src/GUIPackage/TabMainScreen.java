@@ -1,5 +1,7 @@
 package GUIPackage;
 import Controller.Controller;
+import Model.Turtle;
+
 import java.util.ResourceBundle;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
@@ -11,9 +13,12 @@ import javafx.scene.layout.BorderPane;
  *
  */
 
-public class TabMainScreen{
+public class TabMainScreen {
+	private static final String GUI_RESOURCE = "GUI";
 	private static final int LEFT_PANEL_PADDING = 10;
 	private static final String TAB_TEXT = "Main";
+	private static final int CANVAS_WIDTH = 500;
+	private static final int CANVAS_HEIGHT = 600;
 	private Tab myRootTab;
 	private BorderPane myMainScreen;
 	private ResourceBundle myResources;
@@ -21,7 +26,7 @@ public class TabMainScreen{
 	private GUICanvas canvas;
 	private GUICommandLine commandLine;
 	private Controller myController;
-	private TurtleObserver myTurtle;
+	private Turtle myTurtle;
 	private GUIOutput myOutput;
 	
 	//GUIObject instance variables
@@ -32,27 +37,32 @@ public class TabMainScreen{
 	private IGUIObject imageInput;
 	private IGUIObject colorPickerBackground;
 	private IGUIObject colorPickerPen;
+	public TabMainScreen() {
+		
+	}
 	
-
-	public TabMainScreen(Controller myController, GUICanvas canvas, GUICommandLine cLine, TurtleObserver turtle, ResourceBundle myResources) {
-		this.myController = myController;
-		this.canvas = canvas;
-		this.commandLine = cLine;
-		this.myTurtle = turtle;
-		this.myResources = myResources;
+	private void initializeTab() {
+		//create Turtle and Observer
+		myTurtle = new Turtle();
+		canvas = new GUICanvas();
+		myTurtle.addObserver(canvas);
+		myController = new Controller();
+		myController.init(CANVAS_HEIGHT, CANVAS_WIDTH, myTurtle);
 	}
 
 	public Tab getTab() {
+		initializeTab();
+		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myRootTab = new Tab();
 		myMainScreen = new BorderPane();
 		
 		setCenterPane();
+		setBottomPane();
 		//must be after setCenterPane, or canvas will not have been instantiated yet 
-		myFactory = new GUIObjectFactory(myResources, myController, canvas); 
+		myFactory = new GUIObjectFactory(myResources, myController, canvas, commandLine); 
 		
 		setLeftPane();
 		setRightPane();
-		setBottomPane();
 		setTopPane();
 		
 		myRootTab.setContent(myMainScreen);
@@ -61,7 +71,6 @@ public class TabMainScreen{
 	}
 
 	private void setCenterPane() {
-		canvas = new GUICanvas(myController, myResources, myTurtle);
 		Node canvasNode = canvas.createNode();
 		myMainScreen.setCenter(canvasNode);
 	}
@@ -97,7 +106,6 @@ public class TabMainScreen{
 	}
 	
 	protected void updateGUI() {
-		canvas.updateNode();
 		userCommands.updateNode();
 		previousCommands.updateNode();
 		variables.updateNode();

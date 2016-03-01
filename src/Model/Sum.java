@@ -17,7 +17,7 @@ public class Sum extends Node{
 	 * Returns the sum of expr1 and expr2.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		return children.get(EXPR1).interpret() + children.get(EXPR2).interpret();
 	}

@@ -16,7 +16,7 @@ public class For extends Node{
      * Repeats the given commands for the given start and end limits and the given increment.
      */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
         CommandList argList = (CommandList) children.get(VARIABLE_AND_LIMITS);
         List<Node> argsNodes = argList.getChildren();
@@ -40,6 +40,7 @@ public class For extends Node{
 	 * Returns the required user input for this command. 
 	 */
     public String toString() {
-        return FOR;
+        List<Node> children = getChildren();
+        return FOR + children.get(VARIABLE_AND_LIMITS).toString() + " " + children.get(COMMANDS).toString();
     }
 }

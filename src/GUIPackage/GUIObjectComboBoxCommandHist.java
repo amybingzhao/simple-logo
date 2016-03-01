@@ -13,8 +13,9 @@ import Controller.Controller;
 
 public class GUIObjectComboBoxCommandHist extends GUIObjectComboBox {
 	
-	public GUIObjectComboBoxCommandHist(ResourceBundle myResources, Controller myController, String promptText) {
-		super(myResources, myController, promptText);
+	public GUIObjectComboBoxCommandHist(ResourceBundle myResources, Controller myController,
+			String promptText, GUICommandLine cLine) {
+		super(myResources, myController, promptText, cLine);
 	}
 
 	@Override
@@ -24,7 +25,8 @@ public class GUIObjectComboBoxCommandHist extends GUIObjectComboBox {
 
 	@Override
 	void setComboBoxAction(){
-		comboBox.setOnAction(event -> myController.processCommand(comboBox.getValue()));
+		String val = comboBox.getValue();
+		comboBox.setOnAction(event -> myCommandLine.runCommand(comboBox.getValue()));
 	}
 	
 }

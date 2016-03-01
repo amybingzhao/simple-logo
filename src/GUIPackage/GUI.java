@@ -14,17 +14,10 @@ import javafx.scene.web.WebView;
 public class GUI implements IGUI {
 	private static final String GUI_RESOURCE = "GUI";
 	private static final String HELP_TAB_TEXT = "Help";
-	private static final int CANVAS_WIDTH = 500;
-	private static final int CANVAS_HEIGHT = 600;
 	private Scene myScene;
 	private TabPane myRoot;
 	private ResourceBundle myResources;
-	private Controller myController;
 	private Turtle myTurtle;
-	private TurtleObserver myObserver;
-	
-	private GUICanvas canvas;
-	private GUICommandLine commandLine;
 	
 	private int windowHeight;
 	private int windowWidth;
@@ -36,16 +29,9 @@ public class GUI implements IGUI {
 	}
 	
 	public Scene createScene() {
-		//create Turtle and Observer
-		myTurtle = new Turtle();
-		myObserver = new TurtleObserver();
-		myTurtle.addObserver(myObserver);
-		myController = new Controller();
-		myController.init(CANVAS_HEIGHT, CANVAS_WIDTH, myTurtle);
-		
 		myRoot = new TabPane();
-		
-		Tab mainScreenTab = new TabMainScreen(myController, canvas, commandLine, myObserver, myResources).getTab();
+
+		Tab mainScreenTab = new TabMainScreen().getTab();
 		Tab helpTab = createHelpTab();
 		
 		myRoot.getTabs().addAll(mainScreenTab, helpTab);		

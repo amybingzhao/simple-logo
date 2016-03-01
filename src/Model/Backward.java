@@ -9,14 +9,14 @@ import java.util.List;
  */
 public class Backward extends Node {
 
-	private static final String BACKWARD = "backward ";
+	private static final String BACKWARD = "back ";
 	private static final int DISTANCE = 0;
 
 	/**
-	 * Moves the turtle backwards a given distance and returns the distance moved.
-	 */
+     * Moves the turtle backwards a given distance and returns the distance moved.
+     */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         Turtle turtle = getTurtle();
         List<Node> children = getChildren();
 

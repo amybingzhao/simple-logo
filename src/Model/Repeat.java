@@ -18,7 +18,7 @@ public class Repeat extends Node {
 	 * Repeats the given commands a given number of times.
 	 */
 	@Override
-	public double interpret() {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		double numIter = children.get(EXPR).interpret();
 		double ret = 0;

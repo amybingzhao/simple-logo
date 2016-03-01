@@ -13,10 +13,10 @@ public class Product extends Node {
 	private static final int EXPR2 = 1;
 
 	/**
-	 * Returns the product of expr1 and expr2.
-	 */
+     * Returns the product of expr1 and expr2.
+     */
     @Override
-    public double interpret() {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
         return children.get(EXPR1).interpret() * children.get(EXPR2).interpret();
     }
