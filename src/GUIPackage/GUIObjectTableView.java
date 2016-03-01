@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
@@ -55,6 +56,8 @@ public class GUIObjectTableView implements IGUIObject {
 	                public void handle(CellEditEvent<TableVariable, Double> t) {
 	                    ((TableVariable) t.getTableView().getItems().get(t.getTablePosition().getRow()))
 	                    .setVariableValue(t.getNewValue());
+	            		myVariables.makeVariable(t.getTableView().getItems().get(t.getTablePosition().getRow())
+	            				.getVariableName(), t.getNewValue());
 	                }
 	            }
 		);
@@ -72,5 +75,8 @@ public class GUIObjectTableView implements IGUIObject {
 		for (String s: myVariables.getKeySet()) {
 			data.add(new TableVariable(s, myVariables.getNodeFor(s)));
 		}
+	}
+	
+	public void updateMap() {
 	}
 }
