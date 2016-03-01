@@ -5,6 +5,7 @@ import java.util.List;
 
 import GUIPackage.GUIAlert;
 import GUIPackage.GUIOutput;
+import Model.IFunctions;
 import Model.Node;
 import Model.Turtle;
 
@@ -70,7 +71,7 @@ public class Controller {
     public void processCommand(String command){
     	try{
     		System.out.println("command: " + command);
-    		List<Node> commands = myParser.createCommandTree(command, myTurtle);
+    		List<IFunctions> commands = myParser.createCommandTree(command, myTurtle);
             double result = executeCommandTree(commands);
             myOutput.setOutputText(Double.toString(result));
             addCommandToHistory(command);
@@ -86,10 +87,10 @@ public class Controller {
         }
     }
 
-    private double executeCommandTree(List<Node> headNodes) throws ClassNotFoundException {
+    private double executeCommandTree(List<IFunctions> headNodes) throws ClassNotFoundException {
     	double result = 0;
         for (int i = 0; i < headNodes.size(); i++) {
-            Node head = headNodes.get(i);
+        	IFunctions head = headNodes.get(i);
             System.out.println(head.toString());
             result = head.interpret();
             System.out.println(myTurtle.printPosition());
