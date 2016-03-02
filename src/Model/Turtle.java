@@ -148,6 +148,7 @@ public class Turtle extends Observable {
 		double dist = calcDistance(0, 0);
 		turnTowards(0, 0);
 		move(dist);
+		setDirection(0);
 		return dist;
 	}
 	

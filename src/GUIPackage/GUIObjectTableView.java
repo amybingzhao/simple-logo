@@ -1,14 +1,12 @@
 package GUIPackage;
 
-import Controller.Controller;
 import Model.VariableDictionary;
-import java.util.ResourceBundle;
 
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
@@ -16,37 +14,45 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
+/**
+ * Creates TableView to display variables and allow editing of variables.
+ * @author David
+ *
+ */
 public class GUIObjectTableView implements IGUIObject {
 
 	private static final int TABLE_COLUMN_WIDTH = 130;
-	private Controller myController;
 	private ResourceBundle myResources;
 	private TableView<TableVariable> myTableView;
 	private VariableDictionary myVariables;
 	
 	private ObservableList<TableVariable> data = FXCollections.observableArrayList();
 	
-	public GUIObjectTableView(Controller c, ResourceBundle r) {
-		myController = c;
+	public GUIObjectTableView(ResourceBundle r) {
 		myResources = r;
 	}
-
+	
+	/**
+	 * Creates TableVariable node and populates it with cells that are editable. 
+	 */
 	@Override
 	public Node createNode() {
 		myTableView = new TableView<TableVariable>();
 		myTableView.setEditable(true);
-		Callback<TableColumn, TableCell> cellFactory =
-	             new Callback<TableColumn, TableCell>() {
-	                 public TableCell call(TableColumn p) {
+		Callback<TableColumn<TableVariable, Double>, TableCell<TableVariable, Double>> cellFactory =
+	             new Callback<TableColumn<TableVariable, Double>, TableCell<TableVariable, Double>>() {
+	                 public TableCell<TableVariable, Double> call(TableColumn<TableVariable, Double> p) {
 	                    return new EditingCell();
 	                 }
 	             };
 		
-		TableColumn variableCol = new TableColumn(myResources.getString("VariablesColumn"));
+		TableColumn<TableVariable, String> variableCol = 
+				new TableColumn<TableVariable, String>(myResources.getString("VariablesColumn"));
 		variableCol.setMinWidth(TABLE_COLUMN_WIDTH);
 		variableCol.setCellValueFactory(new PropertyValueFactory<TableVariable, String>("variableName"));
 		
-		TableColumn valueCol = new TableColumn(myResources.getString("ValuesColumn"));
+		TableColumn<TableVariable, Double> valueCol = 
+				new TableColumn<TableVariable, Double>(myResources.getString("ValuesColumn"));
 		valueCol.setMinWidth(TABLE_COLUMN_WIDTH);
 		valueCol.setCellValueFactory(new PropertyValueFactory<TableVariable, Double>("variableValue"));
 		valueCol.setCellFactory(cellFactory);
@@ -67,7 +73,10 @@ public class GUIObjectTableView implements IGUIObject {
 		myTableView.getColumns().addAll(variableCol, valueCol);
 		return myTableView;
 	}
-
+	
+	/**
+	 * Updates node when new data is available.
+	 */
 	@Override
 	public void updateNode() {
 		myVariables = VariableDictionary.getInstance();
@@ -75,8 +84,5 @@ public class GUIObjectTableView implements IGUIObject {
 		for (String s: myVariables.getKeySet()) {
 			data.add(new TableVariable(s, myVariables.getNodeFor(s)));
 		}
-	}
-	
-	public void updateMap() {
 	}
 }

@@ -17,7 +17,11 @@ public class GUIAlert {
     public GUIAlert() {
         myErrorResources = ResourceBundle.getBundle(ERROR_RESOURCE);
     }
-
+    
+    /**
+     * Displays the Alert based on the passed in String onto the GUI.
+     * @param String to be shown in Alert
+     */
     public void displayAlert(String message) {
         System.out.println(message);
         String[] errorData = myErrorResources.getString(message).split(",");
