@@ -40,9 +40,6 @@ public class GUICanvas implements Observer{
 	private Turtle myTurtle;
 	private Image turtleImage;
 	
-	public GUICanvas() {
-	}
-	
 	/**
 	 * Creates the Canvas Node to be displayed.
 	 * @return Canvas Node
@@ -81,7 +78,7 @@ public class GUICanvas implements Observer{
 	public void resetCanvas() {
 		gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		gcDrawing.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-		addDefaultTurtle();
+		drawTurtle();
 	}
 	
 	/**
