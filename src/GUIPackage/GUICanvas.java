@@ -1,6 +1,6 @@
 package GUIPackage;
-import Model.Turtle;
 
+import Model.Turtle;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.scene.Node;
