@@ -14,6 +14,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
+/**
+ * Creates TableView to display variables and allow editing of variables.
+ * @author David
+ *
+ */
 public class GUIObjectTableView implements IGUIObject {
 
 	private static final int TABLE_COLUMN_WIDTH = 130;
@@ -26,7 +31,10 @@ public class GUIObjectTableView implements IGUIObject {
 	public GUIObjectTableView(ResourceBundle r) {
 		myResources = r;
 	}
-
+	
+	/**
+	 * Creates TableVariable node and populates it with cells that are editable. 
+	 */
 	@Override
 	public Node createNode() {
 		myTableView = new TableView<TableVariable>();
@@ -65,7 +73,10 @@ public class GUIObjectTableView implements IGUIObject {
 		myTableView.getColumns().addAll(variableCol, valueCol);
 		return myTableView;
 	}
-
+	
+	/**
+	 * Updates node when new data is available.
+	 */
 	@Override
 	public void updateNode() {
 		myVariables = VariableDictionary.getInstance();
@@ -73,8 +84,5 @@ public class GUIObjectTableView implements IGUIObject {
 		for (String s: myVariables.getKeySet()) {
 			data.add(new TableVariable(s, myVariables.getNodeFor(s)));
 		}
-	}
-	
-	public void updateMap() {
 	}
 }

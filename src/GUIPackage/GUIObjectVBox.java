@@ -44,7 +44,10 @@ public class GUIObjectVBox implements IGUIObject {
 		this.canvas = canvas;
 		this.nodeType = nodeType;
 	}
-
+	
+	/**
+	 * Create Node for VBox
+	 */
 	@Override
 	public Node createNode() {
 		fileErrorLabel = new Label();
@@ -61,7 +64,11 @@ public class GUIObjectVBox implements IGUIObject {
 		
 		return XMLControls;
 	}
-
+	
+	/**
+	 * Sets the canUpdate boolean to true.
+	 * @param nodeType
+	 */
 	private void setValidity(String nodeType) {
 		if (isValidFileString(userInputFileString.getText())){
 			canUpdate = true;
@@ -69,6 +76,11 @@ public class GUIObjectVBox implements IGUIObject {
 		}
 	}
 	
+	/**
+	 * Checks if fileString is an actual file
+	 * @param fileString
+	 * @return
+	 */
 	private boolean isValidFileString(String fileString){
 		String fileDirectory = myResources.getString(nodeType + "FileDirectory");
 		File f = new File(fileDirectory + fileString);
@@ -86,16 +98,28 @@ public class GUIObjectVBox implements IGUIObject {
 		}
 	}
 	
+	/**
+	 * Checks if fileString is an Image format
+	 * @param fileString
+	 * @return
+	 */
 	private boolean isValidImageFormat(String fileString){
 		ArrayList<String> validFormats = new ArrayList<String>(Arrays.asList(IMAGE_FILE_TYPES.split(" ")));
 		String attemptedFormat = fileString.substring(fileString.length()-3, fileString.length());
 		return validFormats.contains(attemptedFormat.toLowerCase());
 	}
 	
-	public boolean isUpdateable(){
+	/**
+	 * Returns canUpdate when called.
+	 * @return true if  canUpdate is true, false if canUpdate is false
+	 */
+	protected boolean isUpdateable(){
 		return canUpdate;
 	}
-
+	
+	/**
+	 * Updates VBox Node when called.
+	 */
 	@Override
 	public void updateNode() {
 		if(canUpdate){

@@ -37,10 +37,10 @@ public class TabMainScreen {
 	private IGUIObject imageInput;
 	private IGUIObject colorPickerBackground;
 	private IGUIObject colorPickerPen;
-	public TabMainScreen() {
-		
-	}
 	
+	/**
+	 * Initializes Tab with all necessary components.
+	 */
 	private void initializeTab() {
 		//create Turtle and Observer
 		myTurtle = new Turtle();
@@ -49,8 +49,12 @@ public class TabMainScreen {
 		myController = new Controller();
 		myController.init(CANVAS_HEIGHT, CANVAS_WIDTH, myTurtle);
 	}
-
-	public Tab getTab() {
+	
+	/**
+	 * Sets up all elements on Tab and returns the Tab
+	 * @return
+	 */
+	protected Tab getTab() {
 		initializeTab();
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myRootTab = new Tab();
@@ -69,7 +73,10 @@ public class TabMainScreen {
 		myRootTab.setText(TAB_TEXT);
 		return myRootTab;
 	}
-
+	
+	/**
+	 * Next 5 methods all place GUIObjects on the Pane.
+	 */
 	private void setCenterPane() {
 		Node canvasNode = canvas.createNode();
 		myMainScreen.setCenter(canvasNode);
@@ -105,6 +112,9 @@ public class TabMainScreen {
 		myMainScreen.setTop(myOutput.createNode());
 	}
 	
+	/**
+	 * Updates the necessary GUI elements when called.
+	 */
 	protected void updateGUI() {
 		userCommands.updateNode();
 		previousCommands.updateNode();
