@@ -21,6 +21,7 @@ import java.io.File;
  *
  * @author AnnieTang
  */
+
 public class GUICanvas implements Observer {
     private static final int TURTLE_SIZE = 20;
     private static final int CANVAS_WIDTH = 500;
@@ -43,9 +44,11 @@ public class GUICanvas implements Observer {
     private Turtle myTurtle;
     private Image turtleImage;
 
-    public GUICanvas() {
-    }
-
+    /**
+     * Creates the Canvas Node to be displayed.
+     *
+     * @return Canvas Node
+     */
     public Node createNode() {
         canvasBackground = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         gcBackground = canvasBackground.getGraphicsContext2D();
@@ -60,6 +63,9 @@ public class GUICanvas implements Observer {
         return root;
     }
 
+    /**
+     * Updates the Canvas when the Turtle is updated.
+     */
     @Override
     public void update(Observable o, Object arg) {
         myTurtle = (Turtle) o;
@@ -71,12 +77,18 @@ public class GUICanvas implements Observer {
         }
     }
 
+    /**
+     * Resets Canvas. Deletes all of the Turtle's trails and changes the Turtle back to default.
+     */
     public void resetCanvas() {
         gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         gcDrawing.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        addDefaultTurtle();
+        drawTurtle();
     }
 
+    /**
+     * Clears the previous instance of the Turtle on the canvas.
+     */
     public void clearPreviousTurtle() {
         gc.save(); // saves the current state on stack, including the current transform
         Rotate r = new Rotate(myOldDirection, myOldX + TURTLE_SIZE / 2, myOldY + TURTLE_SIZE / 2);
@@ -85,11 +97,17 @@ public class GUICanvas implements Observer {
         gc.restore();
     }
 
+    /**
+     * Keeps track of the old coordinates after updating the Turtle.
+     */
     public void setOldCoordinates() {
         myOldX = myX;
         myOldY = myY;
     }
 
+    /**
+     * Places default turtle on canvas.
+     */
     private void addDefaultTurtle() {
         myX = STARTING_X;
         myY = STARTING_Y;
@@ -98,7 +116,11 @@ public class GUICanvas implements Observer {
         setOldCoordinates();
     }
 
-    //TODO: get the image from the file
+    /**
+     * Sets user-inputed image as the Canvas turtle.
+     *
+     * @param file that contains image
+     */
     public void setImage(File file) {
         String filePath = file.getPath();
         String[] splitFilePath = filePath.split(PATH_DELIMITER);
@@ -109,6 +131,9 @@ public class GUICanvas implements Observer {
         else drawTurtle();
     }
 
+    /**
+     * Draws the turtle onto canvas based on turtle's X and Y values and its direction.
+     */
     public void drawTurtle() {
         myX = myTurtle.getCurX() + CANVAS_WIDTH / 2;
         myY = -(myTurtle.getCurY() - CANVAS_HEIGHT / 2);
@@ -126,10 +151,18 @@ public class GUICanvas implements Observer {
         myOldDirection = myTurtle.getDirection();
     }
 
+    /**
+     * @return GraphicsContext for Canvas Background
+     */
     public GraphicsContext getBackgroundGraphicsContext() {
         return gcBackground;
     }
 
+    /**
+     * Sets Pen color based on User preference.
+     *
+     * @param c that user chose.
+     */
     protected void setPenColor(Color c) {
         gcDrawing.setFill(c);
     }
@@ -141,4 +174,5 @@ public class GUICanvas implements Observer {
     public int getHeight() {
         return CANVAS_HEIGHT;
     }
+
 }

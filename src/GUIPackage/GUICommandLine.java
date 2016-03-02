@@ -9,12 +9,15 @@ import javafx.scene.control.TextArea;
 
 import java.util.ResourceBundle;
 
+/**
+ * Class for Command Line Node on GUI.
+ * @author David
+ *
+ */
 public class GUICommandLine {
 	private Controller myController;
 	private ResourceBundle myResources;
 	private TabMainScreen myMainScreen;
-	private int myX;
-	private int myY;
 	
 	private Label commandLabel;
 	private TextArea commandInputLine;
@@ -32,6 +35,10 @@ public class GUICommandLine {
 		myMainScreen = t;
 	}
 	
+	/**
+	 * Creates all necessary elements of the Node for the Command Line.
+	 * @return Command Line Node
+	 */
 	protected Node createNode() {
 		commandLabel = new Label(myResources.getString("Command"));
 		commandInputLine = new TextArea();
@@ -47,21 +54,20 @@ public class GUICommandLine {
 		return commandLine;
 	}
 	
+	/**
+	 * Runs the command that user inputs into the TextArea.
+	 * @param User command
+	 */
 	protected void runCommand(String command) {
 		myController.processCommand(command);
 		myMainScreen.updateGUI();
 		clearTextField();
 	}
 	
+	/**
+	 * Clears the command line
+	 */
 	private void clearTextField() {
 		commandInputLine.clear();
-	}
-	
-	protected int getXPos() {
-		return myX;
-	}
-
-	protected int getYPos() {
-		return myY;
 	}
 }

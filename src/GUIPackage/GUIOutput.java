@@ -6,14 +6,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.HBox;
 
+/**
+ * Creates the Output label on the GUI.
+ * @author Annie
+ *
+ */
 public class GUIOutput{
 	private static final int PADDING = 10;
 	private Labeled outputLabel;
 	private Labeled outputText;
 	
-	public GUIOutput() {
-	}
-	
+	/**
+	 * Creates Node for the output element of the GUI.
+	 * @return Output HBox Node
+	 */
 	public Node createNode(){
 		HBox hbox = new HBox();
 		outputLabel = new Label("Output: ");
@@ -25,11 +31,19 @@ public class GUIOutput{
 		return hbox;
 	}
 	
+	/**
+	 * sets the output text as the passed in parameter.
+	 * @param val
+	 */
 	public void setOutputText(String val){
 		outputText.setText(val);
 	}
 	
-	public String getOutputText(){
+	/**
+	 * Returns the string within the output.
+	 * @return output text String
+	 */
+	protected String getOutputText(){
 		return outputText.getText();
 	}
 

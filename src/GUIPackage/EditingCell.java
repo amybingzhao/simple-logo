@@ -5,9 +5,18 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 
+/**
+ * TableView editable cell
+ * @author based off code found on Oracle JavaFX tutorials
+ *
+ */
+
 public class EditingCell extends TableCell<TableVariable, Double>{
 	private TextField textField;
 	
+	/**
+	 * Lets the user edit the cell.
+	 */
 	@Override
     public void startEdit() {
         if (!isEmpty()) {
@@ -18,7 +27,10 @@ public class EditingCell extends TableCell<TableVariable, Double>{
             textField.selectAll();
         }
     }
-
+	
+	/**
+	 * Closes the edit when user clicks elsewhere.
+	 */
     @Override
     public void cancelEdit() {
         super.cancelEdit();
@@ -27,6 +39,9 @@ public class EditingCell extends TableCell<TableVariable, Double>{
         setGraphic(null);
     }
 
+    /**
+     * Sets the TextField with the new inputted data.
+     */
     @Override
     public void updateItem(Double item, boolean empty) {
         super.updateItem(item, empty);
@@ -47,7 +62,10 @@ public class EditingCell extends TableCell<TableVariable, Double>{
             }
         }
     }
-
+    
+    /**
+     * Initializes TextField for each cell.
+     */
     private void createTextField() {
         textField = new TextField(getString());
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()* 2);
@@ -61,7 +79,11 @@ public class EditingCell extends TableCell<TableVariable, Double>{
             }
         });
     }
-
+    
+    /**
+     * Returns string within TextField
+     * @return String in TextField
+     */
     private String getString() {
         return getItem() == null ? "" : getItem().toString();
     }

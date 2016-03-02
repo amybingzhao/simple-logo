@@ -19,7 +19,7 @@ import javafx.scene.layout.VBox;
  * @author AnnieTang
  */
 
-abstract class GUIObjectComboBox implements IGUIObject {
+public abstract class GUIObjectComboBox implements IGUIObject {
 	private static final int VISIBLE_ROW_COUNT = 5;
 	protected String promptText;
 	protected ResourceBundle myResources;
@@ -36,6 +36,9 @@ abstract class GUIObjectComboBox implements IGUIObject {
 		this.myCommandLine = cLine;
 	}
 	
+	/**
+	 * Creates ComboBox Node.
+	 */
 	@Override
 	public Node createNode(){
 		VBox vbox = new VBox();
@@ -51,8 +54,14 @@ abstract class GUIObjectComboBox implements IGUIObject {
 		return vbox;
 	}
 	
-	abstract void setButtonAction();
+	/**
+	 * Sets action when button is pressed.
+	 */
+	protected abstract void setButtonAction();
 
+	/**
+	 * Updates Node whenever new information or data is available.
+	 */
 	@Override
 	public void updateNode() {
 		ObservableList<String> newOptions = FXCollections.observableArrayList(
@@ -60,7 +69,11 @@ abstract class GUIObjectComboBox implements IGUIObject {
 		    );
 		comboBox.setItems(newOptions);
 	}
-
-	abstract List<String> optionsList();
+	
+	/**
+	 * List that contains Data for each ComboBox.
+	 * @return
+	 */
+	protected abstract List<String> optionsList();
 
 }

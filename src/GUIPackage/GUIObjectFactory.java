@@ -20,7 +20,12 @@ public class GUIObjectFactory {
 		this.myCommandLine = cLine;
 	}
 	
-	public IGUIObject createNewGUIObject(String nodeTypeKey){
+	/**
+	 * Creates new GUIObject based on nodeType passed in. 
+	 * @param nodeTypeKey
+	 * @return Specified IGUIObject
+	 */
+	protected IGUIObject createNewGUIObject(String nodeTypeKey){
 		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
 			case("CommandLineVBox"):{
@@ -34,7 +39,7 @@ public class GUIObjectFactory {
 						myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
 			}
 			case("VariablesTableView"):{
-				return new GUIObjectTableView(myController, myResources);
+				return new GUIObjectTableView(myResources);
 			}
 			case("UserCommandsComboBox"):{
 				return new GUIObjectComboBoxUserHist(myResources, myController,

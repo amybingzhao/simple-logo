@@ -10,6 +10,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+/**
+ * Main GUI class. Creates main JavaFX components for GUI.
+ * @author 
+ *
+ */
 public class GUI implements IGUI {
 	private static final String GUI_RESOURCE = "GUI";
 	private static final String HELP_TAB_TEXT = "Help";
@@ -27,6 +32,10 @@ public class GUI implements IGUI {
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 	}
 	
+	/**
+	 * Creates the scene to be put on the stage.
+	 * @return GUI Scene
+	 */
 	public Scene createScene() {
 		myRoot = new TabPane();
 
@@ -38,7 +47,11 @@ public class GUI implements IGUI {
 		myScene = new Scene(myRoot, windowHeight, windowWidth, Color.WHITE);
 		return myScene;
 	}
-
+	
+	/**
+	 * Creates Help Tab for the user.
+	 * @return Tab with all the commands
+	 */
 	private Tab createHelpTab(){
 		Tab helpTab = new Tab();
 		WebView browser = new WebView();
@@ -49,16 +62,25 @@ public class GUI implements IGUI {
 		return helpTab;
 	}
 	
+	/**
+	 * Returns width of window
+	 */
 	@Override
 	public int getWidth() {
 		return windowWidth;
 	}
 
+	/**
+	 * Returns height of window
+	 */
 	@Override
 	public int getHeight() {
 		return windowHeight;
 	}
-
+	
+	/**
+	 * Notifies the turtle's observers that the turtle has changed.
+	 */
 	@Override
 	public void notifyAllObservers() {
 		myTurtle.notifyObservers();

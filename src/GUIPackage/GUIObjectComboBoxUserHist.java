@@ -25,7 +25,7 @@ public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
 	}
 
 	@Override
-	List<String> optionsList() {
+	protected List<String> optionsList() {
 		myUserDefinedCommands = CommandDictionary.getInstance();
 		List<String> userDefinedCommands = new ArrayList<String>();
 		for(String s: myUserDefinedCommands.getCommandKeySet()){
@@ -35,7 +35,7 @@ public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
 	}
 
 	@Override
-	void setButtonAction(){
+	protected void setButtonAction(){
 		comboButton.setOnAction(event -> {
 			createDialog();
 			dialog.showAndWait();

@@ -19,12 +19,12 @@ public class GUIObjectComboBoxCommandHist extends GUIObjectComboBox {
 	}
 
 	@Override
-	List<String> optionsList() {
+	protected List<String> optionsList() {
 		return myController.getCommandHistory();
 	}
 
 	@Override
-	void setButtonAction(){
+	protected void setButtonAction(){
 		comboButton.setOnAction(event -> {
 			myCommandLine.runCommand(comboBox.getValue());
 		});
