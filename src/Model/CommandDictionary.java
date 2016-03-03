@@ -40,7 +40,12 @@ public class CommandDictionary {
      * @param newCommand: command object representing the command.
      */
     public void createCommand(String key, Command newCommand) {
-        myCommands.put(key, newCommand);
+    	if (!myCommands.containsKey(key)) {
+    		myCommands.put(key, newCommand);
+    	} else {
+    		myCommands.remove(key);
+    		myCommands.put(key, newCommand);
+    	}
     }
 
     /**

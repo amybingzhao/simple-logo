@@ -15,14 +15,15 @@ import Model.*;
  */
 public class Parser {
 
-    public static final String CONSTANT = "Constant";
-    public static final String VARIABLE = "Variable";
-    public static final String COMMENT = "Comment";
-    public static final String LIST_START = "ListStart";
-    public static final String LIST_END = "ListEnd";
-    public static final String TURTLE_COMMANDS = "TurtleCommands";
-    public static final String MAKE = "MakeVariable";
-    public static final String COMMAND = "Command";
+	private static final String CONSTANT = "Constant";
+    private static final String VARIABLE = "Variable";
+    private static final String COMMENT = "Comment";
+    private static final String LIST_START = "ListStart";
+    private static final String LIST_END = "ListEnd";
+    private static final String TURTLE_COMMANDS = "TurtleCommands";
+    private static final String MAKE = "MakeVariable";
+    private static final String COMMAND = "Command";
+    private static final String MAKE_USER_INSTRUCTION = "MakeUserInstruction";
     private List<Entry<String, Pattern>> mySymbols;
     private static final String TURTLE_COMMANDS_RESOURCE = "Controller/TurtleCommands";
     private static final String NUM_CHILDREN_PER_COMMAND = "Controller/NumChildrenForFunction";
@@ -131,6 +132,12 @@ public class Parser {
             case COMMAND:
                 node = handleCommand(commandToBuild, inputCommandList);
                 break;
+            case MAKE_USER_INSTRUCTION:
+            	node = new MakeUserInstruction(inputCommandList.get(0));
+                node.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
+            	inputCommandList.remove(0);
+                addChildrenToNode(node, inputCommandList);
+            	break;
             default:
             	node = getFunctionObject(name);
                 addChildrenToNode(node, inputCommandList);
