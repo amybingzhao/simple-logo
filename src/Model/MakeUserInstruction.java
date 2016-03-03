@@ -9,30 +9,31 @@ import java.util.List;
 public class MakeUserInstruction extends Node {
 
     private static final String TO = "to ";
-    private static final int NAME = 0;
-    private static final int VARIABLES = 1;
-    private static final int COMMANDS = 2;
-    private String name;
+    private static final int VARIABLES = 0;
+    private static final int PROCEDURE = 1;
+    private String myName;
 
+    public MakeUserInstruction(String name) {
+    	myName = name;
+    }
+    
     /**
      * Creates a new user-defined command with the given name and parameters list that executes the given commands list.
      */
     //TODO: must return 0 if command not successfully defined
     public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
-        name = children.get(NAME).toString();
-        Command myCommand = new Command(name);
+        Command myCommand = new Command(myName);
         CommandList paramList = (CommandList) children.get(VARIABLES);
         List<Node> parameters = paramList.getChildren();
         for (Node myNode : parameters) {
             Variable myVar = (Variable) myNode;
             myCommand.addParam(myVar.toString());
         }
-        CommandDictionary.getInstance().setNumArguments(name, parameters.size());
-        CommandList expressions = (CommandList) children.get(COMMANDS);
+        CommandList expressions = (CommandList) children.get(PROCEDURE);
         myCommand.setProcedure(expressions.getChildren());
-        CommandDictionary.getInstance().createCommand(name, myCommand);
-        CommandDictionary myDict = CommandDictionary.getInstance();
+        CommandDictionary.getInstance().createCommand(myName, myCommand);
+        CommandDictionary.getInstance().setNumArguments(myName, parameters.size());
         return 1;
     }
 
@@ -41,15 +42,7 @@ public class MakeUserInstruction extends Node {
      * @return command name.
      */
     public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the name of the command.
-     * @param newName: new name for the command.
-     */
-    public void setName(String newName) {
-        name = newName;
+        return myName;
     }
     
     /**
@@ -57,7 +50,8 @@ public class MakeUserInstruction extends Node {
 	 */
     @Override
     public String toString() {
-    	List<Node> children = getChildren();
-        return TO + children.get(NAME).toString() + " " + children.get(VARIABLES).toString() + " " + children.get(COMMANDS).toString();
+    	//List<Node> children = getChildren();
+        //return TO + myName + " " + children.get(VARIABLES).toString() + " " + children.get(PROCEDURE).toString();
+    	return TO + myName;
     }
 }
