@@ -32,14 +32,16 @@ public class Parser {
     private ResourceBundle myNumChildrenPerCommand;
     private ResourceBundle myTurtleCommands;
     private Turtle myTurtle;
-    private VariableDictionary myVariables;
+    private VariableDictionary varDict;
+    private CommandDictionary commandDict;
 
     public Parser() {
         mySymbols = new ArrayList<>();
         myNumChildrenPerCommand = ResourceBundle.getBundle(NUM_CHILDREN_PER_COMMAND);
         myTurtleCommands = ResourceBundle.getBundle(TURTLE_COMMANDS_RESOURCE);
         myTurtle = new Turtle();
-        myVariables = new VariableDictionary();
+        varDict = new VariableDictionary();
+        commandDict = new CommandDictionary();
     }
 
     /**
@@ -148,9 +150,9 @@ public class Parser {
 
     private Node handleCommand(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
         Node node;
-        if (CommandDictionary.getInstance().contains(commandToBuild)) {
-            node = CommandDictionary.getInstance().getCommandFor(commandToBuild);
-            node.setNumChildrenNeeded(CommandDictionary.getInstance().getNumArgsForkey(commandToBuild));
+        if (commandDict.contains(commandToBuild)) {
+            node = commandDict.getCommandFor(commandToBuild);
+            node.setNumChildrenNeeded(commandDict.getNumArgsForkey(commandToBuild));
             addChildrenToNode(node, inputCommandList);
         } else {
             node = new Command(commandToBuild);
@@ -188,6 +190,6 @@ public class Parser {
     }
 
     public VariableDictionary getVariables() {
-        return myVariables;
+        return varDict;
     }
 }

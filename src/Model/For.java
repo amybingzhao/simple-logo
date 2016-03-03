@@ -32,7 +32,7 @@ public class For extends Node {
         double ret = 0;
 
         for (double i = low; i < high; i += increment) {
-            VariableDictionary.getInstance().makeVariable(varString, i);
+            varDict.makeVariable(varString, i);
             ret = children.get(COMMANDS).interpret(commandDict, varDict);
         }
 

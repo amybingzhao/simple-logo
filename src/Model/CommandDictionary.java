@@ -16,55 +16,39 @@ public class CommandDictionary {
     private static CommandDictionary instance;
 
     /**
-     * Initializes the myCommands and myNumArguments maps.
-     */
-    public CommandDictionary() {
-        myCommands = new HashMap<>();
-        myNumArguments = new HashMap<>();
-    }
-
-    /**
-     * Gets the instance of CommandDictionary; creates one if one does not yet exist.
-     * @return the instance of CommandDictionary.
-     */
-    public static synchronized CommandDictionary getInstance() {
-        if (instance == null) {
-            instance = new CommandDictionary();
-        }
-        return instance;
-    }
-
-    /**
      * Creates a new command with the given command name.
-     * @param key: command name.
+     *
+     * @param key:        command name.
      * @param newCommand: command object representing the command.
      */
     public void createCommand(String key, Command newCommand) {
-    	if (!myCommands.containsKey(key)) {
-    		myCommands.put(key, newCommand);
-    	} else {
-    		myCommands.remove(key);
-    		myCommands.put(key, newCommand);
-    	}
+        if (!myCommands.containsKey(key)) {
+            myCommands.put(key, newCommand);
+        } else {
+            myCommands.remove(key);
+            myCommands.put(key, newCommand);
+        }
     }
 
     /**
      * Gets the command associated with a given command name.
+     *
      * @param key: command name.
      * @return command object for the given command name.
      */
     public Command getCommandFor(String key) {
-    	Command commandToGet = myCommands.get(key);
-    	Command ret = new Command(key);
-    	for (int i = 0; i < commandToGet.getParams().size(); i++) {
-    		ret.addParam(commandToGet.getParams().get(i));
-    	}
-    	ret.setProcedure(commandToGet.getProcedure());
+        Command commandToGet = myCommands.get(key);
+        Command ret = new Command(key);
+        for (int i = 0; i < commandToGet.getParams().size(); i++) {
+            ret.addParam(commandToGet.getParams().get(i));
+        }
+        ret.setProcedure(commandToGet.getProcedure());
         return ret;
     }
 
     /**
      * Checks if a command of the given name already exists.
+     *
      * @param key: command name to check.
      * @return true if command name already exists; false otherwise.
      */
@@ -74,7 +58,8 @@ public class CommandDictionary {
 
     /**
      * Sets the number of arguments required for a given command.
-     * @param key: command name.
+     *
+     * @param key:     command name.
      * @param numArgs: number of arguments required.
      */
     public void setNumArguments(String key, int numArgs) {
@@ -83,6 +68,7 @@ public class CommandDictionary {
 
     /**
      * Gets the number of arguments required for a given command.
+     *
      * @param key: command name.
      * @return number of arguments required.
      */
@@ -92,9 +78,10 @@ public class CommandDictionary {
 
     /**
      * Gets the set of command names already defined.
+     *
      * @return existing set of command names.
      */
-    public Set<String> getCommandKeySet(){
+    public Set<String> getCommandKeySet() {
         return myCommands.keySet();
     }
 }

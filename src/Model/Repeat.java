@@ -27,7 +27,7 @@ public class Repeat extends Node {
         double ret = 0;
 
         for (int i = 0; i < numIter; i++) {
-            VariableDictionary.getInstance().makeVariable(REPCOUNT_VARIABLE, i);
+            varDict.makeVariable(REPCOUNT_VARIABLE, i);
             ret = children.get(COMMANDS).interpret(commandDict, varDict);
         }
 

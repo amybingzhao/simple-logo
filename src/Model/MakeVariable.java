@@ -19,7 +19,7 @@ public class MakeVariable extends Node {
         List<Node> children = getChildren();
         String key = children.get(VARIABLE_NAME).toString();
         double value = children.get(EXPRESSION).interpret(commandDict, varDict);
-        VariableDictionary.getInstance().makeVariable(key, value);
+        varDict.makeVariable(key, value);
         return value;
     }
 
