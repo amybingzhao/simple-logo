@@ -15,7 +15,7 @@ import Model.*;
  */
 public class Parser {
 
-	private static final String CONSTANT = "Constant";
+    private static final String CONSTANT = "Constant";
     private static final String VARIABLE = "Variable";
     private static final String COMMENT = "Comment";
     private static final String LIST_START = "ListStart";
@@ -56,9 +56,9 @@ public class Parser {
             mySymbols.add(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
     }
-    
+
     public void clearAllPatterns() {
-    	mySymbols.clear();
+        mySymbols.clear();
     }
 
     public String getSymbol(String text) {
@@ -87,25 +87,25 @@ public class Parser {
     }
 
     private IFunctions createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
-    	IFunctions head = null;
-    	String commandToBuild = inputCommandList.get(0);
-    	head = createClass(commandToBuild, inputCommandList);
+        IFunctions head = null;
+        String commandToBuild = inputCommandList.get(0);
+        head = createClass(commandToBuild, inputCommandList);
 
-    	return head;
+        return head;
     }
-    
+
     public CommandList createList(List<String> inputList, Turtle turtle) throws ClassNotFoundException {
         myTurtle = turtle;
         CommandList list = new CommandList();
         // assumes there is a list end; if not we gotta through an error
         while (!(parseText(inputList.get(0))).equals(LIST_END)) {
-        	Node head;
-        	if (parseText(inputList.get(0)).equals(LIST_START)) {
-        		inputList.remove(0);
-        		head = createList(inputList, turtle);
-        	} else {
-        		head = createClass(inputList.get(0), inputList);
-        	}
+            Node head;
+            if (parseText(inputList.get(0)).equals(LIST_START)) {
+                inputList.remove(0);
+                head = createList(inputList, turtle);
+            } else {
+                head = createClass(inputList.get(0), inputList);
+            }
             list.addChild(head);
         }
 
@@ -117,7 +117,7 @@ public class Parser {
         String name = parseText(commandToBuild);
         Node node = null;
         inputCommandList.remove(0);
-        switch (name){
+        switch (name) {
             case CONSTANT:
                 node = new Constant(Integer.parseInt(commandToBuild));
                 break;
@@ -127,19 +127,19 @@ public class Parser {
             case COMMENT:
                 break;
             case LIST_START:
-            	node = createList(inputCommandList, myTurtle);
-            	break;
+                node = createList(inputCommandList, myTurtle);
+                break;
             case COMMAND:
                 node = handleCommand(commandToBuild, inputCommandList);
                 break;
             case MAKE_USER_INSTRUCTION:
-            	node = new MakeUserInstruction(inputCommandList.get(0));
+                node = new MakeUserInstruction(inputCommandList.get(0));
                 node.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
-            	inputCommandList.remove(0);
+                inputCommandList.remove(0);
                 addChildrenToNode(node, inputCommandList);
-            	break;
+                break;
             default:
-            	node = getFunctionObject(name);
+                node = getFunctionObject(name);
                 addChildrenToNode(node, inputCommandList);
                 break;
         }
@@ -148,12 +148,11 @@ public class Parser {
 
     private Node handleCommand(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
         Node node;
-        if(CommandDictionary.getInstance().contains(commandToBuild)){
+        if (CommandDictionary.getInstance().contains(commandToBuild)) {
             node = CommandDictionary.getInstance().getCommandFor(commandToBuild);
             node.setNumChildrenNeeded(CommandDictionary.getInstance().getNumArgsForkey(commandToBuild));
             addChildrenToNode(node, inputCommandList);
-        }
-        else {
+        } else {
             node = new Command(commandToBuild);
         }
         return node;
@@ -188,7 +187,7 @@ public class Parser {
         return regex.matcher(text).matches();
     }
 
-    public VariableDictionary getVariables(){
+    public VariableDictionary getVariables() {
         return myVariables;
     }
 }

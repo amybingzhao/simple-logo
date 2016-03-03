@@ -11,15 +11,18 @@ public class NaturalLog extends Node {
 
     /**
      * Evaluates the natural logarithm of the given expression.
+     *
+     * @param commandDict
+     * @param varDict
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        return Math.log(getChildren().get(EXPR).interpret());
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+        return Math.log(getChildren().get(EXPR).interpret(commandDict, varDict));
     }
 
     /**
-	 * Returns the required user input for this command. 
-	 */
+     * Returns the required user input for this command.
+     */
     @Override
     public String toString() {
         return NATURAL_LOG + getChildren().get(EXPR).toString();

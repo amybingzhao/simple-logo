@@ -20,9 +20,11 @@ public class Variable extends Node {
 
     /**
      * Returns the value for the given variable.
+     * @param commandDict
+     * @param varDict
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 
         return VariableDictionary.getInstance().getNodeFor(name);
     }

@@ -5,9 +5,10 @@ import java.util.List;
 
 import GUIPackage.GUIAlert;
 import GUIPackage.GUIOutput;
+import Model.CommandDictionary;
 import Model.IFunctions;
-import Model.Node;
 import Model.Turtle;
+import Model.VariableDictionary;
 
 /**
  * This class is the only external-facing back end class. It facilitates the interaction between the front end and back end
@@ -34,6 +35,8 @@ public class Controller {
     private GUIOutput myOutput;
     private GUIAlert myAlert;
     private final String WHITESPACE = "\\p{Space}";
+    private CommandDictionary commandDict;
+    private VariableDictionary varDict;
 
     /**
      * Initializes the controller.
@@ -50,6 +53,8 @@ public class Controller {
         myTurtle = t;
         myOutput = new GUIOutput();
         myAlert = new GUIAlert();
+        commandDict = new CommandDictionary();
+        varDict = new VariableDictionary();
     }
 
     /**
@@ -73,8 +78,6 @@ public class Controller {
     	List<String> commandAsList = getCommandAsList(command);
     	while (!commandAsList.isEmpty()) {
     		try{
-    			//System.out.println("command: " + command);
-    			//List<IFunctions> commands = myParser.createCommandTree(command, myTurtle);
     			IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myTurtle);
     			double result = executeCommandTree(commandToExecute);
     			myOutput.setOutputText(Double.toString(result));
@@ -107,7 +110,7 @@ public class Controller {
     private double executeCommandTree(IFunctions head) throws ClassNotFoundException {
     	double result = 0;
     	System.out.println(head.toString());
-    	result = head.interpret();
+    	result = head.interpret(commandDict, varDict);
     	System.out.println(myTurtle.printPosition());
     	return result;
     }

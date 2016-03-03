@@ -15,11 +15,13 @@ public class Right extends Node {
 
 	/**
 	 * Rotates the turtle CW by the given number of degrees.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
-		double degrees = children.get(DEGREES).interpret();		
+		double degrees = children.get(DEGREES).interpret(commandDict, varDict);
 		Turtle turtle = getTurtle();
 		turtle.setDirection(turtle.getDirection() + degrees);
 		return degrees;

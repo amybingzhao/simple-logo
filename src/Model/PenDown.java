@@ -11,9 +11,11 @@ public class PenDown extends Node {
 	
 	/**
 	 * Puts the turtle's pen down so trail will now show.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		Turtle turtle = getTurtle();
 		turtle.putPenDown();
 		return 1;

@@ -36,9 +36,11 @@ public class Command extends Node {
 
     /**
      * Executes the command using the given parameters.
+     * @param commandDict
+     * @param varDict
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 
         if (!CommandDictionary.getInstance().contains(myName)){
             throw new ClassNotFoundException();
@@ -47,11 +49,11 @@ public class Command extends Node {
         List<Node> children = getChildren();
         for (int i = 0; i < parameters.size(); i++) {
         		String myVar = parameters.get(i);
-        		double value = children.get(i).interpret();
+        		double value = children.get(i).interpret(commandDict, varDict);
         		VariableDictionary.getInstance().makeVariable(myVar, value);
         }
         for (Node myNode : myProcedure){
-            myNode.interpret();
+            myNode.interpret(commandDict, varDict);
         }
         return 0;
     }

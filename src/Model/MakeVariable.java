@@ -15,22 +15,22 @@ public class MakeVariable extends Node {
     private String name;
 
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
         String key = children.get(VARIABLE_NAME).toString();
-        double value = children.get(EXPRESSION).interpret();
+        double value = children.get(EXPRESSION).interpret(commandDict, varDict);
         VariableDictionary.getInstance().makeVariable(key, value);
         return value;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public void setName(String newName){
+    public void setName(String newName) {
         name = newName;
     }
-    
+
     @Override
     public String toString() {
         List<Node> children = getChildren();

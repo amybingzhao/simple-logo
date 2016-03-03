@@ -11,9 +11,11 @@ public class PenUp extends Node {
 	
 	/**
 	 * Lifts pen up for current turtle so trail will no longer show.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		Turtle turtle = getTurtle();
 		turtle.liftPenUp();
 		return 0;
