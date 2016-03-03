@@ -188,22 +188,6 @@ public class Parser {
         return regex.matcher(text).matches();
     }
 
-    private String listToString(List<String> input) {
-
-        String expression = "";
-
-        for (String myString : input) {
-            expression += myString;
-            expression += " ";
-        }
-
-        return expression.trim();
-    }
-
-    private void handleVariable(String name, List<String> expressionList){
-
-    }
-
     public VariableDictionary getVariables(){
         return myVariables;
     }
