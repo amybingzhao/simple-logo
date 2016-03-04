@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * HideTurtle function.
  * @author amyzhao
@@ -14,8 +16,10 @@ public class HideTurtle extends Node {
 	 */
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getActiveTurtle();
-		turtle.hide();
+		List<Turtle> turtles = getActiveTurtles();
+		for (int i = 0; i < turtles.size(); i++) {
+			turtles.get(i).hide();
+		}
 		return 0;
 	}
 

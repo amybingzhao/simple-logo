@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * XCoordinate function.
  * @author amyzhao
@@ -14,8 +16,12 @@ public class XCoordinate extends Node {
 	 */
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
-		return turtle.getCurX();
+		List<Turtle> turtles = getActiveTurtles();
+		double curX = 0;
+		for (int i = 0; i < turtles.size(); i++) {
+			curX = turtles.get(i).getCurX();
+		}
+		return curX;
 	}
 
 	/**

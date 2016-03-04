@@ -19,8 +19,14 @@ public class SetTowards extends Node {
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
-		Turtle turtle = getTurtle();
-		return turtle.turnTowards(children.get(X).interpret(), children.get(Y).interpret());
+		List<Turtle> turtles = getActiveTurtles();
+		double degree = 0;
+		
+		for (int i = 0; i < turtles.size(); i++) {
+			degree = turtles.get(i).turnTowards(children.get(X).interpret(), children.get(Y).interpret());
+		}
+		
+		return degree;
 	}
 
 	/**

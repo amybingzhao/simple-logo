@@ -14,15 +14,13 @@ public abstract class Node implements IFunctions {
     private List<Node> myChildren;
     private int numChildrenNeeded;
     private List<Turtle> myActiveTurtles;
-    private Turtle myActiveTurtle;
 
     /**
      * Initializes the node's turtle and list of children nodes.
      */
     public Node() {
-        myChildren = new ArrayList<>();
-        myActiveTurtles = null;
-        myActiveTurtle = null;
+        myChildren = new ArrayList<Node>();
+        myActiveTurtles = new ArrayList<Turtle>();
     }
 
     /**
@@ -78,9 +76,9 @@ public abstract class Node implements IFunctions {
      * Gets this node's turtle.
      * @return the turtle assigned to this node.
      */
-    protected Turtle getActiveTurtle() {
-        if (myActiveTurtle != null) {
-            return myActiveTurtle;
+    protected List<Turtle> getActiveTurtles() {
+        if (myActiveTurtles != null) {
+            return myActiveTurtles;
         } else {
             //error
             return null;
@@ -95,7 +93,7 @@ public abstract class Node implements IFunctions {
             return null;
         }
     }
-
+/*
     protected double applyToActiveTurtles(Class nodeClass, String methodName, Node obj) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
     	double ret = 0;
     	Class noparams[] = {};
@@ -105,7 +103,7 @@ public abstract class Node implements IFunctions {
     		method.invoke(obj, null);
     	}
     	return ret;
-    }
+    }*/
     
     /**
 	 * Returns the required user input for this command. 

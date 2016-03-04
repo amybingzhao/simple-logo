@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * PenUp function.
  * @author amyzhao
@@ -14,8 +16,10 @@ public class PenUp extends Node {
 	 */
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
-		turtle.liftPenUp();
+		List<Turtle> turtles = getActiveTurtles();
+		for (int i = 0; i < turtles.size(); i++) {
+			turtles.get(i).liftPenUp();
+		}
 		return 0;
 	}
 

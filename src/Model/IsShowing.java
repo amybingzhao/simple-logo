@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * IsShowing function.
  * @author amyzhao
@@ -14,12 +16,16 @@ public class IsShowing extends Node {
 	 */
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getActiveTurtle();
-		if (turtle.showing()) {
-			return 1;
-		} else {
-			return 0;
+		List<Turtle> turtles = getActiveTurtles();
+		double ret = 0;
+		for (int i = 0; i < turtles.size(); i++) {
+			if (turtles.get(i).showing()) {
+				ret = 1;
+			} else {
+				ret = 0;
+			}
 		}
+		return ret;
 	}
 
 	/**

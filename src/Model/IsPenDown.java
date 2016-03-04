@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * IsPenDown function.
  * @author amyzhao
@@ -14,12 +16,16 @@ public class IsPenDown extends Node {
 	 */
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getActiveTurtle();
-		if (turtle.penUp()) {
-			return 0;
-		} else {
-			return 1;
+		List<Turtle> turtles = getActiveTurtles();
+		double ret = 0;
+		for (int i = 0; i < turtles.size(); i++) {
+			if (turtles.get(i).penUp()) {
+				ret = 0;
+			} else {
+				ret = 1;
+			}
 		}
+		return ret;
 	}
 
 	/**

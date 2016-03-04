@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * Home function.
  * @author amyzhao
@@ -14,8 +16,12 @@ public class Home extends Node {
 	 */
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getActiveTurtle();
-		return turtle.moveToHome();
+		List<Turtle> turtles = getActiveTurtles();
+		double dist = 0;
+		for (int i = 0; i < turtles.size(); i++) {
+			dist = turtles.get(i).moveToHome();
+		}
+		return dist;
 	}
 
 	/**

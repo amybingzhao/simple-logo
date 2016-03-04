@@ -20,8 +20,10 @@ public class Right extends Node {
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		double degrees = children.get(DEGREES).interpret();		
-		Turtle turtle = getTurtle();
-		turtle.setDirection(turtle.getDirection() + degrees);
+		List<Turtle> turtles = getActiveTurtles();
+		for (int i = 0; i < turtles.size(); i++) {
+			turtles.get(i).setDirection(turtles.get(i).getDirection() + degrees);
+		}
 		return degrees;
 	}
 

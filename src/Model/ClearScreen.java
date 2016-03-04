@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * Clearscreen function.
  * @author amyzhao
@@ -14,9 +16,12 @@ public class ClearScreen extends Node {
 	 */
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getActiveTurtle();
-		double dist = turtle.moveToHome();
-		turtle.resetTurtle();
+		List<Turtle> turtles = getActiveTurtles();
+		double dist = 0;
+		for (int i = 0; i < turtles.size(); i++) {
+			dist = turtles.get(i).moveToHome();
+			turtles.get(i).resetTurtle();
+		}
 		return dist;
 	}
 

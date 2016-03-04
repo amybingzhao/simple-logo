@@ -19,10 +19,15 @@ public class SetPosition extends Node {
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
-		Turtle turtle = getTurtle();
-		double dist = turtle.calcDistance(children.get(X).interpret(), children.get(Y).interpret());
-		turtle.turnTowards(children.get(X).interpret(), children.get(Y).interpret());
-		turtle.move(dist);
+		List<Turtle> turtles = getActiveTurtles();
+		double dist = 0;
+		
+		for (int i = 0; i < turtles.size(); i++) {
+			dist = turtles.get(i).calcDistance(children.get(X).interpret(), children.get(Y).interpret());
+			turtles.get(i).turnTowards(children.get(X).interpret(), children.get(Y).interpret());
+			turtles.get(i).move(dist);
+		}
+		
 		return dist;
 	}
 
