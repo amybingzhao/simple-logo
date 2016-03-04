@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class PenDown extends Node {
+public class PenDown extends TurtleNode {
 
 	private static final String PENDOWN = "pendown ";
 
@@ -17,14 +17,12 @@ public class PenDown extends Node {
 	 * @param varDict
 	 */
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Turtle> turtles = getActiveTurtles();
-		for (int i = 0; i < turtles.size(); i++) {
-			turtles.get(i).putPenDown();
-		}
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		turtle.putPenDown();
 		return 1;
 	}
-
+	
 	/**
 	 * Returns the required user input for this command. 
 	 */
@@ -32,5 +30,4 @@ public class PenDown extends Node {
 	public String toString() {
 		return PENDOWN;
 	}
-
 }

@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class SetPosition extends Node {
+public class SetPosition extends TurtleNode {
 
     private static final String SETXY = "setxy ";
     private static final int X = 0;
@@ -19,20 +19,18 @@ public class SetPosition extends Node {
      * @param commandDict
      * @param varDict
      */
-    @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-    	List<Node> children = getChildren();
-		List<Turtle> turtles = getActiveTurtles();
+	@Override
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		List<Node> children = getChildren();
 		double dist = 0;
-		
-		for (int i = 0; i < turtles.size(); i++) {
-			dist = turtles.get(i).calcDistance(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
-			turtles.get(i).turnTowards(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
-			turtles.get(i).move(dist);
-		}
-		
+
+		dist = turtle.calcDistance(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
+		turtle.turnTowards(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
+		turtle.move(dist);
+
 		return dist;
-    }
+	}
 
     /**
      * Returns the required user input for this command.
@@ -42,5 +40,4 @@ public class SetPosition extends Node {
         List<Node> children = getChildren();
         return SETXY + children.get(X).toString() + " " + children.get(Y).toString();
     }
-
 }

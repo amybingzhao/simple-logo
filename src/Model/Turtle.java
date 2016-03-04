@@ -20,6 +20,7 @@ public class Turtle extends Observable {
 	private boolean isVisible;
 	private double myDirection;
 	private boolean isActive;
+	private boolean isCurrentTurtle;
 	private boolean reset;
 	private static final double ONE_REVOLUTION = 360;
 	private static final double INCREMENT = 0.1;
@@ -31,6 +32,7 @@ public class Turtle extends Observable {
 		penUp = true;
 		isVisible = true;
 		myDirection = 0;
+		isCurrentTurtle = false;
 	}
 	
 	/**
@@ -60,6 +62,18 @@ public class Turtle extends Observable {
 		double angle = Math.toDegrees(Math.atan2(x - myX, y - myY));
 		setDirection(angle);
 		return angle;
+	}
+	
+	public void setAsCurrentTurtle() {
+		isCurrentTurtle = true;
+	}
+	
+	public void noLongerCurrentTurtle() {
+		isCurrentTurtle = false;
+	}
+	
+	public boolean isCurrentTurtle() {
+		return isCurrentTurtle;
 	}
 	
 	/**
