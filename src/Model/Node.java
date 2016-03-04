@@ -1,5 +1,7 @@
 package Model;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +13,16 @@ import java.util.List;
 public abstract class Node implements IFunctions {
     private List<Node> myChildren;
     private int numChildrenNeeded;
-    private Turtle myTurtle;
+    private List<Turtle> myActiveTurtles;
+    private Turtle myActiveTurtle;
 
     /**
      * Initializes the node's turtle and list of children nodes.
      */
     public Node() {
         myChildren = new ArrayList<>();
-        myTurtle = null;
+        myActiveTurtles = null;
+        myActiveTurtle = null;
     }
 
     /**
@@ -57,28 +61,57 @@ public abstract class Node implements IFunctions {
      * Adds a turtle to this node.
      * @param turtle: turtle to add.
      */
-    public void addTurtle(Turtle turtle) {
-        myTurtle = turtle;
+    public void addActiveTurtles(List<Turtle> turtles) {
+    	for (int i = 0; i < turtles.size(); i++) {
+    		if (!myActiveTurtles.contains(turtles.get(i))) {
+    			myActiveTurtles.add(turtles.get(i));
+    		}
+    	}
     }
 
     /**
      * Interprets the function.
+     * @throws InvocationTargetException 
+     * @throws IllegalArgumentException 
+     * @throws IllegalAccessException 
+     * @throws SecurityException 
+     * @throws NoSuchMethodException 
      */
-    public abstract double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
+    public abstract double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
 
     /**
      * Gets this node's turtle.
      * @return the turtle assigned to this node.
      */
-    protected Turtle getTurtle() {
-        if (myTurtle != null) {
-            return myTurtle;
+    protected Turtle getActiveTurtle() {
+        if (myActiveTurtle != null) {
+            return myActiveTurtle;
+        } else {
+            //error
+            return null;
+        }
+    }
+    
+    protected List<Turtle> getTurtles() {
+        if (myActiveTurtles != null) {
+            return myActiveTurtles;
         } else {
             //error
             return null;
         }
     }
 
+    protected double applyToActiveTurtles(Class nodeClass, String methodName, Node obj) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    	double ret = 0;
+    	Class noparams[] = {};
+		Method method = nodeClass.getDeclaredMethod(methodName, noparams);
+    	for (int i = 0; i < myActiveTurtles.size(); i++) {
+    		myActiveTurtle = myActiveTurtles.get(i);
+    		method.invoke(obj, null);
+    	}
+    	return ret;
+    }
+    
     /**
 	 * Returns the required user input for this command. 
 	 */

@@ -1,5 +1,6 @@
 package Model;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -14,12 +15,17 @@ public class Left extends Node {
 
 	/**
 	 * Rotates the turtle CCW the given number of degrees.
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		List<Node> children = getChildren();
 		double degrees = children.get(DEGREES).interpret();
-		Turtle turtle = getTurtle();
+		Turtle turtle = getActiveTurtle();
 		turtle.setDirection(turtle.getDirection() - degrees);
 		return degrees;
 	}

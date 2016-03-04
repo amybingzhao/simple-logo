@@ -1,5 +1,6 @@
 package Model;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -15,9 +16,14 @@ public class DoTimes extends Node {
 	
 	/**
 	 * Executes the given command the given number of times. 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		List<Node> children = getChildren();
 		Node iterVar = children.get(VARIABLE_AND_LIMIT);
 		String var = iterVar.getChildren().get(0).toString(); // first child in command list should be varaible;

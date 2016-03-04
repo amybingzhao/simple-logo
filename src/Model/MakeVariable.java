@@ -1,5 +1,6 @@
 package Model;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class MakeVariable extends Node {
     private String name;
 
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         List<Node> children = getChildren();
         String key = children.get(VARIABLE_NAME).toString();
         double value = children.get(EXPRESSION).interpret();

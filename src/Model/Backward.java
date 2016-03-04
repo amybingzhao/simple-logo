@@ -1,5 +1,6 @@
 package Model;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -14,20 +15,28 @@ public class Backward extends Node {
 
 	/**
      * Moves the turtle backwards a given distance and returns the distance moved.
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        Turtle turtle = getTurtle();
-        List<Node> children = getChildren();
-
-        double dist = children.get(DISTANCE).interpret();
-        if (turtle != null) {
-        	turtle.move(-dist);
-        }
-        
-        return dist;
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    	return applyToActiveTurtles(this.getClass(), "moveBackward", this);
     }
 
+    private double moveBackward() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    	Turtle turtle = getActiveTurtle();
+    	List<Node> children = getChildren();
+
+    	double dist = children.get(DISTANCE).interpret();
+    	if (turtle != null) {
+    		turtle.move(-dist);
+    	}
+    	return dist;
+    }
+    
     /**
 	 * Returns the required user input for this command. 
 	 */

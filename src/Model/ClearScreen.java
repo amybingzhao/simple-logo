@@ -14,7 +14,7 @@ public class ClearScreen extends Node {
 	 */
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
+		Turtle turtle = getActiveTurtle();
 		double dist = turtle.moveToHome();
 		turtle.resetTurtle();
 		return dist;

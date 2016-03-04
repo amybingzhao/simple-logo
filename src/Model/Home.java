@@ -14,7 +14,7 @@ public class Home extends Node {
 	 */
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
+		Turtle turtle = getActiveTurtle();
 		return turtle.moveToHome();
 	}
 

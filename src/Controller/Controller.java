@@ -85,7 +85,7 @@ public class Controller {
     	List<String> commandAsList = getCommandAsList(command);
     	while (!commandAsList.isEmpty()) {
     		try{
-    			IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myCurTurtle);
+    			IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myTurtles);
     			double result = executeCommandTree(commandToExecute);
     			myOutput.setOutputText(Double.toString(result));
     			addCommandToHistory(command);

@@ -1,5 +1,6 @@
 package Model;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -14,9 +15,14 @@ public class For extends Node{
 
     /**
      * Repeats the given commands for the given start and end limits and the given increment.
+     * @throws InvocationTargetException 
+     * @throws IllegalArgumentException 
+     * @throws IllegalAccessException 
+     * @throws SecurityException 
+     * @throws NoSuchMethodException 
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         List<Node> children = getChildren();
         CommandList argList = (CommandList) children.get(VARIABLE_AND_LIMITS);
         List<Node> argsNodes = argList.getChildren();

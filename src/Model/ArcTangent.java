@@ -1,5 +1,7 @@
 package Model;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * ArcTangent function.
  * Created by blakekaplan on 2/27/16.
@@ -12,9 +14,14 @@ public class ArcTangent extends Node {
     
     /**
      * Returns the arctangent of the expression, where the expression is given in degrees.
+     * @throws InvocationTargetException 
+     * @throws IllegalArgumentException 
+     * @throws IllegalAccessException 
+     * @throws SecurityException 
+     * @throws NoSuchMethodException 
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         double degrees = getChildren().get(DEGREES).interpret();
         double radians = degrees * (Math.PI / DEGREES_PER_PI);
         return Math.atan(radians);

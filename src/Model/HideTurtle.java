@@ -14,7 +14,7 @@ public class HideTurtle extends Node {
 	 */
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
+		Turtle turtle = getActiveTurtle();
 		turtle.hide();
 		return 0;
 	}

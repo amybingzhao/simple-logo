@@ -1,5 +1,6 @@
 package Model;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -14,15 +15,22 @@ public class Forward extends Node {
 	
 	/**
      * Moves the turtle forward the given distance.
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        Turtle turtle = getTurtle();
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		List<Turtle> turtles = getTurtles();
         List<Node> children = getChildren();
-
         double dist = children.get(DISTANCE).interpret();
-        if (turtle != null) {
-        	turtle.move(dist);
+        
+        for (int i = 0; i < turtles.size(); i++) {
+        	if (turtles.get(i) != null) {
+        		turtles.get(i).move(dist);
+        	}
         }
         
         return dist;

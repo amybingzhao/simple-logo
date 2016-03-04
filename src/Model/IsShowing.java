@@ -14,7 +14,7 @@ public class IsShowing extends Node {
 	 */
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
+		Turtle turtle = getActiveTurtle();
 		if (turtle.showing()) {
 			return 1;
 		} else {

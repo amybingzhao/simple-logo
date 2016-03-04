@@ -19,6 +19,7 @@ public class Turtle extends Observable {
 	private boolean penUp;
 	private boolean isVisible;
 	private double myDirection;
+	private boolean isActive;
 	private boolean reset;
 	private static final double ONE_REVOLUTION = 360;
 	private static final double INCREMENT = 0.1;
@@ -191,6 +192,14 @@ public class Turtle extends Observable {
 	 */
 	public double getCurY() {
 		return myY;
+	}
+	
+	public void activate() {
+		isActive = true;
+	}
+	
+	public void inactivate() {
+		isActive = false;
 	}
 	
 	/**

@@ -14,7 +14,7 @@ public class IsPenDown extends Node {
 	 */
 	@Override
 	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
+		Turtle turtle = getActiveTurtle();
 		if (turtle.penUp()) {
 			return 0;
 		} else {
