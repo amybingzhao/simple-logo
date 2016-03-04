@@ -30,7 +30,6 @@ public class GUIObjectTableView implements IGUIObject {
     private TableView<TableVariable> myTableView;
     private TableColumn<TableVariable, String> myVariableColumn;
     private TableColumn<TableVariable, Double> myValueColumn;
-    private VariableDictionary myVariables;
     private CommandDictionary commandDict;
     private VariableDictionary varDict;
 	private static final double PADDING_TOP = 0;
@@ -94,7 +93,7 @@ public class GUIObjectTableView implements IGUIObject {
                     public void handle(CellEditEvent<TableVariable, Double> t) {
                         ((TableVariable) t.getTableView().getItems().get(t.getTablePosition().getRow()))
                                 .setVariableValue(t.getNewValue());
-                        myVariables.makeVariable(t.getTableView().getItems().get(t.getTablePosition().getRow())
+                        varDict.makeVariable(t.getTableView().getItems().get(t.getTablePosition().getRow())
                                 .getVariableName(), t.getNewValue());
                     }
                 }
