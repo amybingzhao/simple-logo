@@ -15,11 +15,13 @@ public class Or extends Node {
 	
 	/**
 	 * If expr1 or expr2 is true, returns 1; else 0.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
-		if (children.get(EXPR1).interpret() > 0 || children.get(EXPR2).interpret() > 0) {
+		if (children.get(EXPR1).interpret(commandDict, varDict) > 0 || children.get(EXPR2).interpret(commandDict, varDict) > 0) {
 			return 1;
 		} else {
 			return 0;

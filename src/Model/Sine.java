@@ -12,17 +12,20 @@ public class Sine extends Node {
 
     /**
      * Returns the sine of the expression, where the expression is given in degrees.
+     *
+     * @param commandDict
+     * @param varDict
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        double degrees = getChildren().get(DEGREES).interpret();
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+        double degrees = getChildren().get(DEGREES).interpret(commandDict, varDict);
         double radians = degrees * (Math.PI / DEGREES_PER_PI);
         return Math.sin(radians);
     }
 
     /**
-	 * Returns the required user input for this command. 
-	 */
+     * Returns the required user input for this command.
+     */
     @Override
     public String toString() {
         return SINE + getChildren().get(DEGREES).toString();

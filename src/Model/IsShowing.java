@@ -11,9 +11,11 @@ public class IsShowing extends Node {
 	
 	/**
 	 * Returns 1 if the turtle is showing on the canvas; 0 otherwise.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		Turtle turtle = getTurtle();
 		if (turtle.showing()) {
 			return 1;
