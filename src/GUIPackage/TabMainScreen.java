@@ -17,8 +17,6 @@ import javafx.scene.layout.HBox;
 public class TabMainScreen {
 	private static final String GUI_RESOURCE = "GUI";
 	private static final int PANEL_PADDING = 10;
-	private static final int CANVAS_WIDTH = 600;
-	private static final int CANVAS_HEIGHT = 600;
 	private Tab myRootTab;
 	private BorderPane myMainScreen;
 	private ResourceBundle myResources;
@@ -26,7 +24,6 @@ public class TabMainScreen {
 	private GUICanvas canvas;
 	private GUICommandLine commandLine;
 	private Controller myController;
-	private Turtle myTurtle;
 	private GUIObjectLabeled myOutput;
 	
 	//GUIObject instance variables
@@ -77,7 +74,7 @@ public class TabMainScreen {
 		Node canvasNode = canvas.createNode();
 		turtleState = myFactory.createNewGUIObject("TurtleState");
 		Node turtleStateVBox = turtleState.createNode();
-		hbox.getChildren().addAll(canvasNode);
+		hbox.getChildren().addAll(canvasNode, turtleStateVBox);
 		myMainScreen.setCenter(hbox);
 	}
 
