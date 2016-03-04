@@ -28,8 +28,10 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 	protected ComboBox<String> comboBox;
 	protected GUICommandLine myCommandLine;
 	protected Button comboButton;
+	protected GUICanvas canvas;
 	
-	public GUIObjectComboBox(ResourceBundle myResources, Controller myController, String promptText, GUICommandLine cLine) {
+	public GUIObjectComboBox(GUICanvas canvas, ResourceBundle myResources, Controller myController, String promptText, GUICommandLine cLine) {
+		this.canvas = canvas;
 		this.myResources = myResources;
 		this.myController = myController;
 		this.promptText = promptText;
@@ -48,6 +50,7 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 		comboBox = new ComboBox<String>(options);
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPromptText(promptText);
+		setCellFactory();
 		comboButton = new Button("Go");
 		setButtonAction();
 		vbox.getChildren().addAll(comboBox, comboButton);
@@ -58,7 +61,11 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 	 * Sets action when button is pressed.
 	 */
 	protected abstract void setButtonAction();
-
+	
+	/**
+	 * Sets cell factory of ComboBox.
+	 */
+	protected abstract void setCellFactory();
 	/**
 	 * Updates Node whenever new information or data is available.
 	 */

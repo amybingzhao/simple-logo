@@ -123,7 +123,7 @@ public class GUIObjectImageVBox implements IGUIObject {
 	@Override
 	public void updateNode() {
 		if(canUpdate){
-			canvas.setImage(imageFile);
+			canvas.setTurtleImage(imageFile);
 		}
 	}
 }
