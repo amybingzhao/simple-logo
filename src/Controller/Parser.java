@@ -31,17 +31,16 @@ public class Parser {
     private final String WHITESPACE = "\\p{Space}";
     private ResourceBundle myNumChildrenPerCommand;
     private ResourceBundle myTurtleCommands;
-    private Turtle myTurtle;
+    private Turtle myCurTurtle;
     private VariableDictionary myVariables;
 
     public Parser() {
         mySymbols = new ArrayList<>();
         myNumChildrenPerCommand = ResourceBundle.getBundle(NUM_CHILDREN_PER_COMMAND);
         myTurtleCommands = ResourceBundle.getBundle(TURTLE_COMMANDS_RESOURCE);
-        myTurtle = new Turtle();
         myVariables = new VariableDictionary();
     }
-
+    
     /**
      * From regex example
      *
@@ -82,7 +81,7 @@ public class Parser {
     }
 
     public IFunctions createCommandTree(List commandList, Turtle turtle) throws ClassNotFoundException {
-        myTurtle = turtle;
+        myCurTurtle = turtle;
         return createCommandTreeFromList(commandList);
     }
 
@@ -95,7 +94,7 @@ public class Parser {
     }
     
     public CommandList createList(List<String> inputList, Turtle turtle) throws ClassNotFoundException {
-        myTurtle = turtle;
+        myCurTurtle = turtle;
         CommandList list = new CommandList();
         // assumes there is a list end; if not we gotta through an error
         while (!(parseText(inputList.get(0))).equals(LIST_END)) {
@@ -127,7 +126,7 @@ public class Parser {
             case COMMENT:
                 break;
             case LIST_START:
-            	node = createList(inputCommandList, myTurtle);
+            	node = createList(inputCommandList, myCurTurtle);
             	break;
             case COMMAND:
                 node = handleCommand(commandToBuild, inputCommandList);
@@ -166,7 +165,7 @@ public class Parser {
             myNode = (Node) className.newInstance();
             myNode.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
             if (Arrays.asList(myTurtleCommands.getString(TURTLE_COMMANDS).split(",")).contains(name)) {
-                myNode.addTurtle(myTurtle);
+                myNode.addTurtle(myCurTurtle);
             }
             return myNode;
         } catch (Exception e) {

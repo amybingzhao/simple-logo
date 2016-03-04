@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import GUIPackage.GUIAlert;
+import GUIPackage.GUICanvas;
 import GUIPackage.GUIOutput;
 import Model.IFunctions;
 import Model.Node;
@@ -28,28 +29,39 @@ public class Controller {
     private Parser myParser;
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
-    private int myCanvasWidth;
-    private int myCanvasHeight;
-    private Turtle myTurtle;
+    private Turtle myCurTurtle;
+    private int myNumTurtles;
     private GUIOutput myOutput;
     private GUIAlert myAlert;
     private final String WHITESPACE = "\\p{Space}";
-
+    private GUICanvas myCanvas;
+    
+    public Controller(GUICanvas canvas) {
+    	myCanvas = canvas;
+    	init();
+    }
     /**
      * Initializes the controller.
      */
-    public void init(int canvasHeight, int canvasWidth, Turtle t) {
-        myCanvasWidth = canvasWidth;
-        myCanvasHeight = canvasHeight;
+    public void init() {
         myParser = new Parser();
         myLanguageResource = DEFAULT_LANGUAGE_RESOURCE;
         myParser.addPatterns(myLanguageResource);
         myParser.addPatterns(SYNTAX_RESOURCE);
         myCommandHistory = new ArrayList<String>();
+        myNumTurtles = 0;
         myTurtles = new ArrayList<Turtle>();
-        myTurtle = t;
+        myCurTurtle = createTurtle(myNumTurtles + 1);
+        myTurtles.add(myCurTurtle);
         myOutput = new GUIOutput();
         myAlert = new GUIAlert();
+    }
+    
+    public Turtle createTurtle(int ID) {
+    	Turtle turtle = new Turtle(ID);
+    	turtle.addObserver(myCanvas);
+    	myTurtles.add(turtle);
+    	return turtle;
     }
 
     /**
@@ -73,9 +85,7 @@ public class Controller {
     	List<String> commandAsList = getCommandAsList(command);
     	while (!commandAsList.isEmpty()) {
     		try{
-    			//System.out.println("command: " + command);
-    			//List<IFunctions> commands = myParser.createCommandTree(command, myTurtle);
-    			IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myTurtle);
+    			IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myCurTurtle);
     			double result = executeCommandTree(commandToExecute);
     			myOutput.setOutputText(Double.toString(result));
     			addCommandToHistory(command);
@@ -108,7 +118,7 @@ public class Controller {
     	double result = 0;
     	System.out.println(head.toString());
     	result = head.interpret();
-    	System.out.println(myTurtle.printPosition());
+    	System.out.println(myCurTurtle.printPosition());
     	return result;
     }
 

@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 
 public class Turtle extends Observable {
 	private Image myImage;
-	private int myVariableName;
+	private int myID;
 	private double myX;
 	private double myY;
 	private boolean penUp;
@@ -23,7 +23,8 @@ public class Turtle extends Observable {
 	private static final double ONE_REVOLUTION = 360;
 	private static final double INCREMENT = 0.1;
 	
-	public Turtle() {
+	public Turtle(int ID) {
+		myID = ID;
 		myX = 0;
 		myY = 0;
 		penUp = true;
