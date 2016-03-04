@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class YCoordinate extends Node {
+public class YCoordinate extends TurtleNode {
 
 	private static final String YCOR = "ycor ";
 

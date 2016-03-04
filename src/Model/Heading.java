@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class Heading extends Node {
+public class Heading extends TurtleNode {
 
 	private static final String HEADING = "heading ";
 

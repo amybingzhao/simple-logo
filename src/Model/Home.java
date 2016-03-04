@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class Home extends Node {
+public class Home extends TurtleNode {
 
 	private static final String HOME = "home ";
 

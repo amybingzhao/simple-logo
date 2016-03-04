@@ -13,14 +13,12 @@ import java.util.List;
 public abstract class Node implements IFunctions {
     private List<Node> myChildren;
     private int numChildrenNeeded;
-    private List<Turtle> myTurtles;
 
     /**
      * Initializes the node's turtle and list of children nodes.
      */
     public Node() {
         myChildren = new ArrayList<Node>();
-        myTurtles = null;
     }
 
     /**
@@ -62,49 +60,7 @@ public abstract class Node implements IFunctions {
      */
     public abstract double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
 
-    public void setTurtleList(List<Turtle> curTurtles) {
-    	myTurtles = curTurtles;
-    }
-    /**
-     * Gets this node's turtle.
-     * @return the turtle assigned to this node.
-     */
-    protected List<Turtle> getActiveTurtles() {
-    	List<Turtle> curTurtles = getTurtles();
-        List<Turtle> activeTurtles = new ArrayList<Turtle>();
-        for (int i = 0; i < curTurtles.size(); i++) {
-        	if (curTurtles.get(i).isActive()) {
-        		activeTurtles.add(curTurtles.get(i));
-        	}
-        }
-        return activeTurtles;
-    }
     
-    
-    public void createTurtle(double ID) {
-    	Turtle turtle = new Turtle(ID);
-		turtle.activate();
-    	myTurtles.add(turtle);
-    }
-    
-    public List<Turtle> getTurtles() {
-    	if (myTurtles != null) {
-    		if (myTurtles.isEmpty()) {
-    			createTurtle(0);
-    		}
-    		return myTurtles;
-    	}
-    	return null;
-    }
-    
-    public Turtle getTurtleByID(double ID) {
-    	for (int i = 0; i < myTurtles.size(); i++) {
-    		if (myTurtles.get(i).getID() == ID) {
-    			return myTurtles.get(i);
-    		}
-    	}
-    	return null;
-    }
     
     public List<Double> createListFromCommandList(CommandList commandList, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
     	List<Double> list = new ArrayList<Double>();

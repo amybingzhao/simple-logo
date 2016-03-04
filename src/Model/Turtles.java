@@ -1,6 +1,6 @@
 package Model;
 
-public class Turtles extends Node {
+public class Turtles extends TurtleNode {
 
 	private static final String TURTLES = "turtles ";
 	@Override

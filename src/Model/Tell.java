@@ -3,7 +3,7 @@ package Model;
 import java.util.Collections;
 import java.util.List;
 
-public class Tell extends Node {
+public class Tell extends TurtleNode {
 
 	private static final String TELL = "tell ";
 	private static final int TURTLE_IDS = 0;

@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class SetPosition extends Node {
+public class SetPosition extends TurtleNode {
 
     private static final String SETXY = "setxy ";
     private static final int X = 0;

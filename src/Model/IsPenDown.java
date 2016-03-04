@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class IsPenDown extends Node {
+public class IsPenDown extends TurtleNode {
 
 	private static final String PENDOWNP = "pendown? ";
 

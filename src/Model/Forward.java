@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class Forward extends Node {
+public class Forward extends TurtleNode {
 
 	private static final String FORWARD = "forward ";
 	private static final int DISTANCE = 0;

@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class HideTurtle extends Node {
+public class HideTurtle extends TurtleNode {
 
 	private static final String HIDETURTLE = "hideturtle ";
 

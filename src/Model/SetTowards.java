@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class SetTowards extends Node {
+public class SetTowards extends TurtleNode {
 
 	private static final String TOWARDS = "towards ";
 	private static final int X = 0;

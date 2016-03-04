@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class SetHeading extends Node {
+public class SetHeading extends TurtleNode {
 	
 	private static final String SETHEADING = "setheading ";
 	private static final int DEGREES = 0;

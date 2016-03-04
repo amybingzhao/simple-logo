@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class ClearScreen extends Node {
+public class ClearScreen extends TurtleNode {
 
 	private static final String CLEARSCREEN = "clearscreen ";
 

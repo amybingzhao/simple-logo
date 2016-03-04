@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class IsShowing extends Node {
+public class IsShowing extends TurtleNode {
 
 	private static final String SHOWINGP = "showing? ";
 

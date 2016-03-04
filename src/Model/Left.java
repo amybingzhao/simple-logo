@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class Left extends Node {
+public class Left extends TurtleNode {
 
     private static final String LEFT = "left ";
     private static final int DEGREES = 0;

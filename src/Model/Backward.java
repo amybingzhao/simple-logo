@@ -8,7 +8,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class Backward extends Node {
+public class Backward extends TurtleNode {
 
 	private static final String BACKWARD = "back ";
 	private static final int DISTANCE = 0;
