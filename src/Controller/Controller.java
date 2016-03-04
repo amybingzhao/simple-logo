@@ -30,8 +30,6 @@ public class Controller {
     private Parser myParser;
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
-    private Turtle myCurTurtle;
-    private int myNumTurtles;
     private GUIOutput myOutput;
     private GUIAlert myAlert;
     private final String WHITESPACE = "\\p{Space}";
@@ -50,10 +48,7 @@ public class Controller {
     public void init() {
         myLanguageResource = DEFAULT_LANGUAGE_RESOURCE;
         myCommandHistory = new ArrayList<String>();
-        myNumTurtles = 0;
         myTurtles = new ArrayList<Turtle>();
-        myCurTurtle = createTurtle(myNumTurtles + 1);
-        myTurtles.add(myCurTurtle);
         myOutput = new GUIOutput();
         myAlert = new GUIAlert();
         commandDict = new CommandDictionary();
@@ -61,13 +56,6 @@ public class Controller {
         myParser = new Parser(commandDict, varDict);
         myParser.addPatterns(myLanguageResource);
         myParser.addPatterns(SYNTAX_RESOURCE);
-    }
-    
-    public Turtle createTurtle(int ID) {
-    	Turtle turtle = new Turtle(ID);
-    	turtle.addObserver(myCanvas);
-    	myTurtles.add(turtle);
-    	return turtle;
     }
 
     /**
@@ -123,10 +111,16 @@ public class Controller {
     private double executeCommandTree(IFunctions head) throws ClassNotFoundException {
     	double result = 0;
     	System.out.println(head.toString());
+    	addObserverToNewTurtles();
     	result = head.interpret(commandDict, varDict);
     	return result;
     }
 
+    private void addObserverToNewTurtles() {
+    	for (int i = 0; i < myTurtles.size(); i++) {
+    		myTurtles.get(i).addObserver(myCanvas);
+    	}
+    }
 
     private void addCommandToHistory(String command) {
         myCommandHistory.add(command);

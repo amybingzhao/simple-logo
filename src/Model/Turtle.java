@@ -202,6 +202,10 @@ public class Turtle extends Observable {
 		isActive = false;
 	}
 	
+	public boolean isActive() {
+		return isActive;
+	}
+	
 	/**
 	 * Prints the turtle's current position and direction.
 	 * @return a string representing the turtle's current (x, y) position and direction.

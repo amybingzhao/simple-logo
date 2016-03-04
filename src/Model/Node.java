@@ -13,14 +13,14 @@ import java.util.List;
 public abstract class Node implements IFunctions {
     private List<Node> myChildren;
     private int numChildrenNeeded;
-    private List<Turtle> myActiveTurtles;
+    private List<Turtle> myTurtles;
 
     /**
      * Initializes the node's turtle and list of children nodes.
      */
     public Node() {
         myChildren = new ArrayList<Node>();
-        myActiveTurtles = new ArrayList<Turtle>();
+        myTurtles = null;
     }
 
     /**
@@ -56,44 +56,45 @@ public abstract class Node implements IFunctions {
     }
 
     /**
-     * Adds a turtle to this node.
-     * @param turtle: turtle to add.
-     */
-    public void addActiveTurtles(List<Turtle> turtles) {
-    	for (int i = 0; i < turtles.size(); i++) {
-    		if (!myActiveTurtles.contains(turtles.get(i))) {
-    			myActiveTurtles.add(turtles.get(i));
-    		}
-    	}
-    }
-
-    /**
      * Interprets the function.
      * @param commandDict
      * @param varDict
      */
     public abstract double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
 
+    public void setTurtleList(List<Turtle> curTurtles) {
+    	myTurtles = curTurtles;
+    }
     /**
      * Gets this node's turtle.
      * @return the turtle assigned to this node.
      */
     protected List<Turtle> getActiveTurtles() {
-        if (myActiveTurtles != null) {
-            return myActiveTurtles;
-        } else {
-            //error
-            return null;
+    	List<Turtle> curTurtles = getTurtles();
+        List<Turtle> activeTurtles = new ArrayList<Turtle>();
+        for (int i = 0; i < curTurtles.size(); i++) {
+        	if (curTurtles.get(i).isActive()) {
+        		activeTurtles.add(curTurtles.get(i));
+        	}
         }
+        return activeTurtles;
     }
     
-    protected List<Turtle> getTurtles() {
-        if (myActiveTurtles != null) {
-            return myActiveTurtles;
-        } else {
-            //error
-            return null;
-        }
+    
+    public Turtle createTurtle(int ID) {
+    	return new Turtle(ID);
+    }
+    
+    public List<Turtle> getTurtles() {
+    	if (myTurtles != null) {
+    		if (myTurtles.isEmpty()) {
+    			Turtle turtle = createTurtle(0);
+    			turtle.activate();
+    	    	myTurtles.add(turtle);
+    		}
+    		return myTurtles;
+    	}
+    	return null;
     }
 /*
     protected double applyToActiveTurtles(Class nodeClass, String methodName, Node obj) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {

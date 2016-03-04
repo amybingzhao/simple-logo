@@ -20,7 +20,7 @@ public class Forward extends Node {
 	 */
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Turtle> turtles = getTurtles();
+		List<Turtle> turtles = getActiveTurtles();
 		List<Node> children = getChildren();
 		double dist = children.get(DISTANCE).interpret(commandDict, varDict);
 
