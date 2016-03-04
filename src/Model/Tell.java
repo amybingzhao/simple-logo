@@ -23,7 +23,7 @@ public class Tell extends Node {
 			}
 		}
 		
-		return 0;
+		return turtleIDs.get(turtleIDs.size() - 1);
 	}
 
 	@Override
