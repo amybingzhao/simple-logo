@@ -80,7 +80,7 @@ public class TabMainScreen {
 		Node canvasNode = canvas.createNode();
 		turtleState = myFactory.createNewGUIObject("TurtleState");
 		Node turtleStateVBox = turtleState.createNode();
-		hbox.getChildren().addAll(canvasNode);
+		hbox.getChildren().addAll(canvasNode, turtleStateVBox);
 		myMainScreen.setCenter(hbox);
 	}
 
