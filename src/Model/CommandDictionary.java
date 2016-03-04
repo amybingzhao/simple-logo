@@ -13,7 +13,10 @@ public class CommandDictionary {
     private Map<String, Command> myCommands;
     private Map<String, Integer> myNumArguments;
 
-    private static CommandDictionary instance;
+    public CommandDictionary(){
+        myCommands = new HashMap<>();
+        myNumArguments = new HashMap<>();
+    }
 
     /**
      * Creates a new command with the given command name.

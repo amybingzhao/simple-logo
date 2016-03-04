@@ -35,13 +35,13 @@ public class Parser {
     private VariableDictionary varDict;
     private CommandDictionary commandDict;
 
-    public Parser() {
+    public Parser(CommandDictionary myComDict, VariableDictionary myVarDict) {
         mySymbols = new ArrayList<>();
         myNumChildrenPerCommand = ResourceBundle.getBundle(NUM_CHILDREN_PER_COMMAND);
         myTurtleCommands = ResourceBundle.getBundle(TURTLE_COMMANDS_RESOURCE);
         myTurtle = new Turtle();
-        varDict = new VariableDictionary();
-        commandDict = new CommandDictionary();
+        varDict = myVarDict;
+        commandDict = myComDict;
     }
 
     /**

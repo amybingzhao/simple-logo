@@ -12,6 +12,10 @@ public class VariableDictionary {
     private static double DEFAULT = 0;
     private Map<String, Double> myVariables;
 
+    public VariableDictionary() {
+        myVariables = new HashMap<>();
+    }
+
     /**
      * Makes a variable key/value pair.
      *

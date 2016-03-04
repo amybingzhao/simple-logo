@@ -45,8 +45,6 @@ public class Controller {
         myCanvasWidth = canvasWidth;
         myCanvasHeight = canvasHeight;
         myLanguageResource = DEFAULT_LANGUAGE_RESOURCE;
-        myParser.addPatterns(myLanguageResource);
-        myParser.addPatterns(SYNTAX_RESOURCE);
         myCommandHistory = new ArrayList<String>();
         myTurtles = new ArrayList<Turtle>();
         myTurtle = t;
@@ -54,7 +52,9 @@ public class Controller {
         myAlert = new GUIAlert();
         commandDict = new CommandDictionary();
         varDict = new VariableDictionary();
-        myParser = new Parser();
+        myParser = new Parser(commandDict, varDict);
+        myParser.addPatterns(myLanguageResource);
+        myParser.addPatterns(SYNTAX_RESOURCE);
     }
 
     /**

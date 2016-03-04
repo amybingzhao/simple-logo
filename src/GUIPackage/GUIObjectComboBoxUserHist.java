@@ -19,20 +19,19 @@ import javafx.scene.control.TextInputDialog;
 public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
     private CommandDictionary myUserDefinedCommands;
     private TextInputDialog dialog;
-    private CommandDictionary commandDict;
     private VariableDictionary varDict;
 
     public GUIObjectComboBoxUserHist(ResourceBundle myResources, Controller myController,
                                      String promptText, GUICommandLine cLine, CommandDictionary myComDict, VariableDictionary myVarDict) {
         super(myResources, myController, promptText, cLine);
-        commandDict = myComDict;
+        myUserDefinedCommands = myComDict;
         varDict = myVarDict;
     }
 
     @Override
     protected List<String> optionsList() {
         List<String> userDefinedCommands = new ArrayList<String>();
-        for (String s : commandDict.getCommandKeySet()) {
+        for (String s : myUserDefinedCommands.getCommandKeySet()) {
             userDefinedCommands.add(s);
         }
         return userDefinedCommands;
