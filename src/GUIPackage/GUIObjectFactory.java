@@ -32,7 +32,7 @@ public class GUIObjectFactory {
 				return null;
 			}
 			case("ImageVBox"):{
-				return new GUIObjectVBox(myResources, myController, canvas, nodeType);
+				return new GUIObjectImageVBox(myResources, myController, canvas, nodeType);
 			}
 			case("LanguageComboBox"):{
 				return new GUIObjectComboBoxLanguages(myResources, myController, 
@@ -57,6 +57,22 @@ public class GUIObjectFactory {
 			}
 			case("ColorPickerPen"):{
 				return new GUIObjectColorPickerPen(canvas,myResources.getString(nodeTypeKey+"Label"));
+			}
+//			case("TurtleLocation"):{
+//				return new GUIObjectLabeled(myResources, myResources.getString(nodeTypeKey));
+//			}
+//			case("TurtleHeading"):{
+//				return new GUIObjectLabeled(myResources, myResources.getString(nodeTypeKey));
+//			}
+//			case("TurtlePen"):{
+//				return new GUIObjectLabeled(myResources, myResources.getString(nodeTypeKey));
+//			}
+			case("TurtleState"):{
+				return new GUIObjectTurtleState(myResources,
+						new GUIObjectLabeled(myResources, myResources.getString("TurtleLocation")),
+						new GUIObjectLabeled(myResources, myResources.getString("TurtleHeading")), 
+						new GUIObjectLabeled(myResources, myResources.getString("TurtlePen")),
+						canvas);
 			}
 		}
 		return null;

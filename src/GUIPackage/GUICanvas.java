@@ -64,7 +64,7 @@ public class GUICanvas implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		myTurtle = (Turtle) o;
-		if (myTurtle.getReset()) {
+		if (myTurtle.shouldReset()) {
 			resetCanvas();
 		} else {
 			clearPreviousTurtle();
@@ -137,7 +137,7 @@ public class GUICanvas implements Observer{
 		if (myTurtle.showing()) {
 			gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
 		}
-		if (!myTurtle.penUp()) {
+		if (!myTurtle.isPenUp()) {
 			gcDrawing.fillOval(myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2, 3, 3);
 		}
 		gc.restore();
@@ -166,5 +166,17 @@ public class GUICanvas implements Observer{
 	
 	public int getHeight(){
 		return CANVAS_HEIGHT;
+	}
+	
+	public String getCoordinateString(){
+		return Math.round(myTurtle.getCurX()) + "," + Math.round(myTurtle.getCurY());
+	}
+	
+	public String getHeadingString(){
+		return "" + myOldDirection%360;
+	}
+	
+	public boolean getPenDownStatus(){
+		return !myTurtle.isPenUp();
 	}
 }

@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 /**
  * Create tab for main screen (canvas, command line, options, etc.) 
  * @author AnnieTang
@@ -27,7 +28,7 @@ public class TabMainScreen {
 	private GUICommandLine commandLine;
 	private Controller myController;
 	private Turtle myTurtle;
-	private GUIOutput myOutput;
+	private GUIObjectLabeled myOutput;
 	
 	//GUIObject instance variables
 	private IGUIObject userCommands;
@@ -37,6 +38,7 @@ public class TabMainScreen {
 	private IGUIObject imageInput;
 	private IGUIObject colorPickerBackground;
 	private IGUIObject colorPickerPen;
+	private IGUIObject turtleState;
 	
 	/**
 	 * Initializes Tab with all necessary components.
@@ -59,12 +61,10 @@ public class TabMainScreen {
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myRootTab = new Tab();
 		myMainScreen = new BorderPane();
+		myFactory = new GUIObjectFactory(myResources, myController, canvas, commandLine); 
 		
 		setCenterPane();
 		setBottomPane();
-		//must be after setCenterPane, or canvas will not have been instantiated yet 
-		myFactory = new GUIObjectFactory(myResources, myController, canvas, commandLine); 
-		
 		setLeftPane();
 		setRightPane();
 		setTopPane();
@@ -78,8 +78,12 @@ public class TabMainScreen {
 	 * Next 5 methods all place GUIObjects on the Pane.
 	 */
 	private void setCenterPane() {
+		HBox hbox = new HBox();
 		Node canvasNode = canvas.createNode();
-		myMainScreen.setCenter(canvasNode);
+		turtleState = myFactory.createNewGUIObject("TurtleState");
+		Node turtleStateVBox = turtleState.createNode();
+		hbox.getChildren().addAll(canvasNode, turtleStateVBox);
+		myMainScreen.setCenter(hbox);
 	}
 
 	private void setLeftPane() {
@@ -119,5 +123,6 @@ public class TabMainScreen {
 		userCommands.updateNode();
 		previousCommands.updateNode();
 		variables.updateNode();
+		turtleState.updateNode();
 	}
 }

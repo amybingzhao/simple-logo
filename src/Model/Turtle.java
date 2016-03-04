@@ -119,7 +119,7 @@ public class Turtle extends Observable {
 	 * Checks if the pen is up.
 	 * @return true if penUp is true; false otherwise.
 	 */
-	public boolean penUp() {
+	public boolean isPenUp() {
 		return penUp;
 	}
 	
@@ -136,7 +136,7 @@ public class Turtle extends Observable {
 	 * Checks if turtle wants to be reset
 	 * @return true if reset is true; false otherwise.
 	 */
-	public boolean getReset() {
+	public boolean shouldReset() {
 		return reset;
 	}
 	
