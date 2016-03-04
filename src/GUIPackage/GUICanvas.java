@@ -119,11 +119,18 @@ public class GUICanvas implements Observer{
 	 * Sets user-inputed image as the Canvas turtle.
 	 * @param file that contains image
 	 */
-	public void setImage(File file){
+	public void setTurtleImage(File file){
 		String filePath = file.getPath();
 		String[] splitFilePath = filePath.split(PATH_DELIMITER);
 		String fileName = splitFilePath[splitFilePath.length - 1];
 		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
+		if (myTurtle == null) 
+			gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+		else drawTurtle();
+	}
+	
+	public void setTurtleImage(Image image){
+		turtleImage = image;
 		if (myTurtle == null) 
 			gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
 		else drawTurtle();

@@ -41,8 +41,10 @@ public class TabMainScreen {
 	 */
 	private void initializeTab() {
 		//create Turtle and Observer
+		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		canvas = new GUICanvas();
 		myController = new Controller(canvas);
+		commandLine = new GUICommandLine(myController, myResources, this);
 	}
 	
 	/**
@@ -51,7 +53,6 @@ public class TabMainScreen {
 	 */
 	protected Tab getTab() {
 		initializeTab();
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myRootTab = new Tab();
 		myMainScreen = new BorderPane();
 		myFactory = new GUIObjectFactory(myResources, myController, canvas, commandLine); 
@@ -85,7 +86,8 @@ public class TabMainScreen {
 		userCommands = myFactory.createNewGUIObject("UserCommands");
 		previousCommands = myFactory.createNewGUIObject("PreviousCommands");
 		languageSelector = myFactory.createNewGUIObject("LanguageSelector");
-		imageInput = myFactory.createNewGUIObject("ImageInput");
+//		imageInput = myFactory.createNewGUIObject("ImageVBox");
+		imageInput = myFactory.createNewGUIObject("ImageComboBox");
 		leftPanel.getChildren().addAll(colorPickerBackground.createNode(),
 				colorPickerPen.createNode(),userCommands.createNode(), 
 				previousCommands.createNode(), languageSelector.createNode(), 
@@ -101,7 +103,6 @@ public class TabMainScreen {
 	}
 	
 	private void setBottomPane(){
-		commandLine = new GUICommandLine(myController, myResources, this);
 		myMainScreen.setBottom(commandLine.createNode());
 	}
 

@@ -21,9 +21,9 @@ public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
     private TextInputDialog dialog;
     private VariableDictionary varDict;
 
-    public GUIObjectComboBoxUserHist(ResourceBundle myResources, Controller myController,
+    public GUIObjectComboBoxUserHist(GUICanvas canvas, ResourceBundle myResources, Controller myController,
                                      String promptText, GUICommandLine cLine, CommandDictionary myComDict, VariableDictionary myVarDict) {
-        super(myResources, myController, promptText, cLine);
+        super(canvas, myResources, myController, promptText, cLine);
         myUserDefinedCommands = myComDict;
         varDict = myVarDict;
     }
@@ -63,4 +63,8 @@ public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
         }
         return commandToRun;
     }
+
+	@Override
+	protected void setCellFactory() {
+	}
 }

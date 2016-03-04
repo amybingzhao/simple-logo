@@ -157,21 +157,24 @@ public class Parser {
     }
 
     private Node getFunctionObject(String name) throws ClassNotFoundException {
-        Node myNode;
         Class className = Class.forName(MODEL + name);
         try {
-            myNode = (Node) className.newInstance();
-            myNode.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
             if (Arrays.asList(myTurtleCommands.getString(TURTLE_COMMANDS).split(",")).contains(name)) {
+            	TurtleNode myNode = (TurtleNode) className.newInstance();
                 myNode.setTurtleList(myCurTurtles);
+                myNode.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
+                return myNode;
+            } else {
+            	Node myNode = (Node) className.newInstance();
+                myNode.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
+                return myNode;
             }
-            return myNode;
         } catch (Exception e) {
             //error
         }
         return null;
     }
-
+    
     private void addChildrenToNode(Node node, List<String> inputCommandList) throws ClassNotFoundException {
         for (int i = 0; i < node.getNumChildrenNeeded(); i++) {
             Node childNode = createClass(inputCommandList.get(0), inputCommandList);

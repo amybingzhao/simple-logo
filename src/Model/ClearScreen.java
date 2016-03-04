@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class ClearScreen extends Node {
+public class ClearScreen extends TurtleNode {
 
 	private static final String CLEARSCREEN = "clearscreen ";
 
@@ -17,13 +17,11 @@ public class ClearScreen extends Node {
 	 * @param varDict
 	 */
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Turtle> turtles = getActiveTurtles();
-		double dist = 0;
-		for (int i = 0; i < turtles.size(); i++) {
-			dist = turtles.get(i).moveToHome();
-			turtles.get(i).resetTurtle();
-		}
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		double dist = turtle.moveToHome();
+		turtle.resetTurtle();
+
 		return dist;
 	}
 
@@ -34,5 +32,4 @@ public class ClearScreen extends Node {
 	public String toString() {
 		return CLEARSCREEN;
 	}
-
 }

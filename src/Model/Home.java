@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class Home extends Node {
+public class Home extends TurtleNode {
 
 	private static final String HOME = "home ";
 
@@ -17,13 +17,9 @@ public class Home extends Node {
 	 * @param varDict
 	 */
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Turtle> turtles = getActiveTurtles();
-		double dist = 0;
-		for (int i = 0; i < turtles.size(); i++) {
-			dist = turtles.get(i).moveToHome();
-		}
-		return dist;
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		return turtle.moveToHome();
 	}
 
 	/**
@@ -33,5 +29,4 @@ public class Home extends Node {
 	public String toString() {
 		return HOME;
 	}
-
 }

@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class XCoordinate extends Node {
+public class XCoordinate extends TurtleNode {
 
 	private static final String XCOR = "xcor ";
 
@@ -17,13 +17,9 @@ public class XCoordinate extends Node {
 	 * @param varDict
 	 */
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Turtle> turtles = getActiveTurtles();
-		double curX = 0;
-		for (int i = 0; i < turtles.size(); i++) {
-			curX = turtles.get(i).getCurX();
-		}
-		return curX;
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		return turtle.getCurX();
 	}
 
 	/**

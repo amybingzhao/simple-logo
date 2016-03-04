@@ -34,7 +34,7 @@ public class CommandList extends Node {
     public String toString() {
         List<Node> children = getChildren();
         StringBuilder sb = new StringBuilder();
-        sb.append("[");
+        sb.append("[ ");
         for (int i = 0; i < children.size(); i++) {
             sb.append(children.get(i).toString());
             sb.append(" ");

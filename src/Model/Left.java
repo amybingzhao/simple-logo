@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class Left extends Node {
+public class Left extends TurtleNode {
 
     private static final String LEFT = "left ";
     private static final int DEGREES = 0;
@@ -18,18 +18,13 @@ public class Left extends Node {
      * @param commandDict
      * @param varDict
      */
-    @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-    	List<Node> children = getChildren();
-    	double degrees = children.get(DEGREES).interpret(commandDict, varDict);
-    	List<Turtle> turtles = getActiveTurtles();
-
-    	for (int i = 0; i < turtles.size(); i++) {
-    		turtles.get(i).setDirection(turtles.get(i).getDirection() - degrees);
-    	}
-
-    	return degrees;
-    }
+	@Override
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		double degrees = getChildren().get(DEGREES).interpret(commandDict, varDict);
+		turtle.setDirection(turtle.getDirection() - degrees);
+		return degrees;
+	}
 
     /**
      * Returns the required user input for this command.

@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class IsShowing extends Node {
+public class IsShowing extends TurtleNode {
 
 	private static final String SHOWINGP = "showing? ";
 
@@ -17,19 +17,17 @@ public class IsShowing extends Node {
 	 * @param varDict
 	 */
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Turtle> turtles = getActiveTurtles();
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		double ret = 0;
-		for (int i = 0; i < turtles.size(); i++) {
-			if (turtles.get(i).showing()) {
-				ret = 1;
-			} else {
-				ret = 0;
-			}
+		if (turtle.showing()) {
+			ret = 1;
+		} else {
+			ret = 0;
 		}
 		return ret;
 	}
-
+	
 	/**
 	 * Returns the required user input for this command. 
 	 */
