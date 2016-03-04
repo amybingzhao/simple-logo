@@ -132,4 +132,12 @@ public class Controller {
     	myAlert.displayAlert(errorResourceKey);
     }
 
+    public CommandDictionary getCommandDictionary(){
+        return commandDict;
+    }
+
+    public VariableDictionary getVariableDictionary(){
+        return varDict;
+    }
+
 }
