@@ -15,18 +15,18 @@ public class Ask extends TurtleNode {
 		double maxID = Collections.max(turtleIDs);
 
 		for (int i = 0; i <= maxID; i++) {
-			Turtle turtle = getTurtleByID(turtleIDs.get(i));
+			Turtle turtle = getTurtleByID(i);
 			if (turtle != null) {
 				turtle.activate();
 			} else {
-				createTurtle(turtleIDs.get(i));
+				createTurtle(i);
 			}
 		}
 		
 		double ret = getChildren().get(COMMANDS).interpret(commandDict, varDict);
 		
 		for (int i = 0; i <= maxID; i++) {
-			Turtle turtle = getTurtleByID(turtleIDs.get(i));
+			Turtle turtle = getTurtleByID(i);
 			if (origActiveList.contains(turtle)) {
 				turtle.activate();
 			} else {
