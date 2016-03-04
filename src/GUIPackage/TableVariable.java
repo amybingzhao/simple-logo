@@ -11,7 +11,7 @@ public class TableVariable {
 	private final SimpleStringProperty variableName;
 	private final SimpleDoubleProperty variableValue;
 	
-	protected TableVariable (String name, Double value) {
+	public TableVariable (String name, Double value) {
 		this.variableName = new SimpleStringProperty(name);
 		this.variableValue = new SimpleDoubleProperty(value);
 	}
@@ -20,7 +20,7 @@ public class TableVariable {
 	 * Returns variable name as a String.
 	 * @return Variable name
 	 */
-	protected String getVariableName() {
+	public String getVariableName() {
 		return variableName.get();
 	}
 	
@@ -28,7 +28,7 @@ public class TableVariable {
 	 * Sets the variable name as specified String
 	 * @param variableName
 	 */
-	protected void setVariableName(String variableName) {
+	public void setVariableName(String variableName) {
 		this.variableName.set(variableName);
 	}
 	
@@ -36,7 +36,7 @@ public class TableVariable {
 	 * Returns variable value as a String.
 	 * @return Variable value
 	 */
-	protected double getVariableValue() {
+	public double getVariableValue() {
 		return variableValue.get();
 	}
 
@@ -44,7 +44,7 @@ public class TableVariable {
 	 * Sets the variable value as specified String
 	 * @param variableValue
 	 */
-	protected void setVariableValue(Double variableValue) {
+	public void setVariableValue(Double variableValue) {
 		this.variableValue.set(variableValue);
 	}
 	
