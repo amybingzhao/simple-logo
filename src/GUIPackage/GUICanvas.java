@@ -26,7 +26,7 @@ public class GUICanvas implements Observer{
 	private static final int TURTLE_SIZE = 20;
 	private static final int CANVAS_WIDTH = 500;
 	private static final int STARTING_X = CANVAS_WIDTH/2;
-	private static final int CANVAS_HEIGHT = 600;
+	private static final int CANVAS_HEIGHT = 500;
 	private static final int STARTING_Y = CANVAS_HEIGHT/2;
 	private static final String PATH_DELIMITER = "/";
 	private static final String DEFAULT_TURTLE = "turtle_outline.png";

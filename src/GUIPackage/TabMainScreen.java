@@ -17,7 +17,7 @@ import javafx.scene.layout.HBox;
 public class TabMainScreen {
 	private static final String GUI_RESOURCE = "GUI";
 	private static final int PANEL_PADDING = 10;
-	private static final int CANVAS_WIDTH = 900;
+	private static final int CANVAS_WIDTH = 600;
 	private static final int CANVAS_HEIGHT = 600;
 	private Tab myRootTab;
 	private BorderPane myMainScreen;
