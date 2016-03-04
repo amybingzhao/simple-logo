@@ -21,7 +21,7 @@ import javafx.scene.layout.VBox;
  *
  */
 
-public class GUIObjectVBox implements IGUIObject {
+public class GUIObjectImageVBox implements IGUIObject {
 	private static final String IMAGE_FILE_TYPES = "png jpg tif gif";
 	private ResourceBundle myResources;
 	private String nodeType;
@@ -38,7 +38,7 @@ public class GUIObjectVBox implements IGUIObject {
 	private static final double PADDING_BOTTOM = 10;
 	private static final double PADDING_LEFT = 10;
 	
-	public GUIObjectVBox(ResourceBundle myResources, Controller myController, GUICanvas canvas, String nodeType) {
+	public GUIObjectImageVBox(ResourceBundle myResources, Controller myController, GUICanvas canvas, String nodeType) {
 		this.myResources = myResources;
 		this.myController = myController;
 		this.canvas = canvas;

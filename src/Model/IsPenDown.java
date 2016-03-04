@@ -21,7 +21,7 @@ public class IsPenDown extends Node {
 		List<Turtle> turtles = getActiveTurtles();
 		double ret = 0;
 		for (int i = 0; i < turtles.size(); i++) {
-			if (turtles.get(i).penUp()) {
+			if (turtles.get(i).isPenUp()) {
 				ret = 0;
 			} else {
 				ret = 1;

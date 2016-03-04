@@ -2,10 +2,12 @@ package Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import GUIPackage.GUIAlert;
 import GUIPackage.GUICanvas;
 import GUIPackage.GUIOutput;
+import GUIPackage.GUIObjectLabeled;
 import Model.CommandDictionary;
 import Model.IFunctions;
 import Model.Turtle;
@@ -26,22 +28,27 @@ public class Controller {
     public static final String DOES_NOT_EXIST = "DoesNotExist";
     public static final String EXECUTION_ERROR = "ExecutionError";
     public static final String INVALID_SYNTAX = "InvalidSyntax";
+    private static final String GUI_RESOURCE = "GUI";
     private String myLanguageResource;
     private Parser myParser;
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
-    private GUIOutput myOutput;
-    private GUIAlert myAlert;
     private final String WHITESPACE = "\\p{Space}";
     private GUICanvas myCanvas;
-    
+    private int myCanvasWidth;
+    private int myCanvasHeight;
+    private Turtle myTurtle;
+    private GUIObjectLabeled myOutput;
+    private GUIAlert myAlert;
+    private ResourceBundle myGUIResource;
+    private CommandDictionary commandDict;
+    private VariableDictionary varDict;
+
     public Controller(GUICanvas canvas) {
     	myCanvas = canvas;
     	init();
     }
-    private CommandDictionary commandDict;
-    private VariableDictionary varDict;
-
+    
     /**
      * Initializes the controller.
      */
@@ -50,7 +57,8 @@ public class Controller {
         myCommandHistory = new ArrayList<String>();
         myTurtles = new ArrayList<Turtle>();
         addInitialTurtle();
-        myOutput = new GUIOutput();
+        myGUIResource = ResourceBundle.getBundle(GUI_RESOURCE);
+        myOutput = new GUIObjectLabeled(myGUIResource,"Output");
         myAlert = new GUIAlert();
         commandDict = new CommandDictionary();
         varDict = new VariableDictionary();
@@ -143,7 +151,7 @@ public class Controller {
         return myCommandHistory;
     }
     
-    public GUIOutput getGUIOutput(){
+    public GUIObjectLabeled getGUIOutput(){
     	return myOutput;
     }
     
