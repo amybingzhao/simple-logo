@@ -49,7 +49,9 @@ public abstract class TurtleNode extends Node {
     public double applyToTurtlesInList(List<Turtle> list, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
     	double ret = 0;
     	for (int i = 0; i < list.size(); i++) {
+    		list.get(i).setAsCurrentTurtle();
     		ret = applyToIndividualTurtle(list.get(i), commandDict, varDict);
+    		list.get(i).noLongerCurrentTurtle();
     	}
     	return ret;
     }
@@ -68,5 +70,18 @@ public abstract class TurtleNode extends Node {
     		}
     	}
     	return null;
+    }
+    
+    public void activateTurtles(double maxID) {
+    	for (int i = 0; i <= maxID; i++) {
+			Turtle turtle = getTurtleByID(i);
+			if (turtle != null) {
+				turtle.setAsCurrentTurtle();
+				turtle.activate();
+				turtle.noLongerCurrentTurtle();
+			} else {
+				createTurtle(i);
+			}
+		}
     }
 }

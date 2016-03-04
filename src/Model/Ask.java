@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Ask extends TurtleNode {
 
+	private static final String ASK = "ask ";
 	private static final int TURTLE_IDS = 0;
 	private static final int COMMANDS = 1;
 	@Override
@@ -12,25 +13,31 @@ public class Ask extends TurtleNode {
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Turtle> origActiveList = getActiveTurtles();
 		List<Double> turtleIDs = createListFromCommandList((CommandList) getChildren().get(TURTLE_IDS), commandDict, varDict);
-		double maxID = Collections.max(turtleIDs);
-
-		for (int i = 0; i <= maxID; i++) {
-			Turtle turtle = getTurtleByID(i);
+		
+		// only activates the ones listed in turtleIDs
+		for (int i = 0; i < turtleIDs.size(); i++) {
+			Turtle turtle = getTurtleByID(turtleIDs.get(i));
 			if (turtle != null) {
+				turtle.setAsCurrentTurtle();
 				turtle.activate();
+				turtle.noLongerCurrentTurtle();
 			} else {
-				createTurtle(i);
+				createTurtle(turtleIDs.get(i));
 			}
 		}
 		
 		double ret = getChildren().get(COMMANDS).interpret(commandDict, varDict);
 		
-		for (int i = 0; i <= maxID; i++) {
+		for (int i = 0; i < getTurtles().size(); i++) {
 			Turtle turtle = getTurtleByID(i);
-			if (origActiveList.contains(turtle)) {
-				turtle.activate();
-			} else {
-				turtle.inactivate();
+			if (turtle != null) {
+				turtle.setAsCurrentTurtle();
+				if (origActiveList.contains(turtle)) {
+					turtle.activate();
+				} else {
+					turtle.inactivate();
+				}
+				turtle.noLongerCurrentTurtle();
 			}
 		}
 		
@@ -38,16 +45,13 @@ public class Ask extends TurtleNode {
 	}
 
 	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	@Override
+	public String toString() {
+		return ASK + getChildren().get(TURTLE_IDS) + " " + getChildren().get(COMMANDS);
+	}
 }
