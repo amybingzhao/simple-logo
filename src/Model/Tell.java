@@ -14,12 +14,12 @@ public class Tell extends TurtleNode {
 		double maxID = Collections.max(turtleIDs);
 		
 		// creates all up through the max, so tell [ 100 ] creates 100 turtles; tell [ 1 2 5 ] checks 1-5
-		for (int i = 0; i <= maxID; i++) {
-			Turtle turtle = getTurtleByID(turtleIDs.get(i));
+		for (double i = 0; i <= maxID; i++) {
+			Turtle turtle = getTurtleByID(i);
 			if (turtle != null) {
 				turtle.activate();
 			} else {
-				createTurtle(turtleIDs.get(i));
+				createTurtle(i);
 			}
 		}
 		
@@ -29,6 +29,13 @@ public class Tell extends TurtleNode {
 	@Override
 	public String toString() {
 		return TELL + getChildren().get(TURTLE_IDS).toString();
+	}
+
+	@Override
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

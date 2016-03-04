@@ -19,16 +19,10 @@ public class SetTowards extends TurtleNode {
 	 * @param varDict
 	 */
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
-		List<Turtle> turtles = getActiveTurtles();
-		double degree = 0;
-
-		for (int i = 0; i < turtles.size(); i++) {
-			degree = turtles.get(i).turnTowards(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
-		}
-
-		return degree;
+		return turtle.turnTowards(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
 	}
 
 	/**
@@ -38,5 +32,5 @@ public class SetTowards extends TurtleNode {
 	public String toString() {
 		List<Node> children = getChildren();
 		return TOWARDS + children.get(X).toString() + " " + children.get(Y).toString();
-	}
+	}	
 }

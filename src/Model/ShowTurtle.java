@@ -17,11 +17,9 @@ public class ShowTurtle extends TurtleNode {
 	 * @param varDict
 	 */
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Turtle> turtles = getActiveTurtles();
-		for (int i = 0; i < turtles.size(); i++) {
-			turtles.get(i).show();
-		}
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		turtle.show();
 		return 1;
 	}
 
@@ -32,5 +30,4 @@ public class ShowTurtle extends TurtleNode {
 	public String toString() {
 		return SHOWTURTLE;
 	}
-
 }

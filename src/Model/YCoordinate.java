@@ -17,13 +17,9 @@ public class YCoordinate extends TurtleNode {
 	 * @param varDict
 	 */
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Turtle> turtles = getActiveTurtles();
-		double curY = 0;
-		for (int i = 0; i < turtles.size(); i++) {
-			curY = turtles.get(i).getCurY();
-		}
-		return curY;
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		return turtle.getCurY();
 	}
 
 	/**
@@ -33,4 +29,6 @@ public class YCoordinate extends TurtleNode {
 	public String toString() {
 		return YCOR;
 	}
+
+
 }

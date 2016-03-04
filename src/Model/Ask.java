@@ -43,4 +43,11 @@ public class Ask extends TurtleNode {
 		return null;
 	}
 
+	@Override
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

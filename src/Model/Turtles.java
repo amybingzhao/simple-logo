@@ -14,4 +14,11 @@ public class Turtles extends TurtleNode {
 		return TURTLES;
 	}
 
+	@Override
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

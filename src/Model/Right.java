@@ -19,13 +19,10 @@ public class Right extends TurtleNode {
 	 * @param varDict
 	 */
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Node> children = getChildren();
-		double degrees = children.get(DEGREES).interpret(commandDict, varDict);		
-		List<Turtle> turtles = getActiveTurtles();
-		for (int i = 0; i < turtles.size(); i++) {
-			turtles.get(i).setDirection(turtles.get(i).getDirection() + degrees);
-		}
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		double degrees = getChildren().get(DEGREES).interpret(commandDict, varDict);		
+		turtle.setDirection(turtle.getDirection() + degrees);
 		return degrees;
 	}
 
@@ -36,5 +33,5 @@ public class Right extends TurtleNode {
 	public String toString() {
 		List<Node> children = getChildren();
 		return RIGHT + children.get(DEGREES).toString();
-	}
+	}	
 }

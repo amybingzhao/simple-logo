@@ -17,14 +17,9 @@ public class Heading extends TurtleNode {
 	 * @param varDict
 	 */
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Turtle> turtles = getTurtles();
-		double dir = 0;
-		for (int i = 0; i < turtles.size(); i++) {
-			dir = turtles.get(i).getDirection();
-		}
-
-		return dir;
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		return turtle.getDirection();
 	}
 
 	/**
@@ -34,5 +29,7 @@ public class Heading extends TurtleNode {
 	public String toString() {
 		return HEADING;
 	}
+
+
 
 }
