@@ -2,9 +2,10 @@ package Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import GUIPackage.GUIAlert;
-import GUIPackage.GUIOutput;
+import GUIPackage.GUIObjectLabeled;
 import Model.CommandDictionary;
 import Model.IFunctions;
 import Model.Turtle;
@@ -25,6 +26,7 @@ public class Controller {
     public static final String DOES_NOT_EXIST = "DoesNotExist";
     public static final String EXECUTION_ERROR = "ExecutionError";
     public static final String INVALID_SYNTAX = "InvalidSyntax";
+    private static final String GUI_RESOURCE = "GUI";
     private String myLanguageResource;
     private Parser myParser;
     private List<Turtle> myTurtles;
@@ -32,9 +34,10 @@ public class Controller {
     private int myCanvasWidth;
     private int myCanvasHeight;
     private Turtle myTurtle;
-    private GUIOutput myOutput;
+    private GUIObjectLabeled myOutput;
     private GUIAlert myAlert;
     private final String WHITESPACE = "\\p{Space}";
+    private ResourceBundle myGUIResource;
     private CommandDictionary commandDict;
     private VariableDictionary varDict;
 
@@ -48,7 +51,8 @@ public class Controller {
         myCommandHistory = new ArrayList<String>();
         myTurtles = new ArrayList<Turtle>();
         myTurtle = t;
-        myOutput = new GUIOutput();
+        myGUIResource = ResourceBundle.getBundle(GUI_RESOURCE);
+        myOutput = new GUIObjectLabeled(myGUIResource,"Output");
         myAlert = new GUIAlert();
         commandDict = new CommandDictionary();
         varDict = new VariableDictionary();
@@ -124,7 +128,7 @@ public class Controller {
         return myCommandHistory;
     }
     
-    public GUIOutput getGUIOutput(){
+    public GUIObjectLabeled getGUIOutput(){
     	return myOutput;
     }
     
