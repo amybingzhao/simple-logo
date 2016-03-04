@@ -49,6 +49,7 @@ public class Controller {
         myLanguageResource = DEFAULT_LANGUAGE_RESOURCE;
         myCommandHistory = new ArrayList<String>();
         myTurtles = new ArrayList<Turtle>();
+        addInitialTurtle();
         myOutput = new GUIOutput();
         myAlert = new GUIAlert();
         commandDict = new CommandDictionary();
@@ -56,6 +57,13 @@ public class Controller {
         myParser = new Parser(commandDict, varDict);
         myParser.addPatterns(myLanguageResource);
         myParser.addPatterns(SYNTAX_RESOURCE);
+    }
+    
+    public void addInitialTurtle() {
+    	Turtle turtle = new Turtle(0);
+    	turtle.activate();
+    	turtle.addObserver(myCanvas);
+    	myTurtles.add(turtle);
     }
 
     /**
@@ -111,15 +119,20 @@ public class Controller {
     private double executeCommandTree(IFunctions head) throws ClassNotFoundException {
     	double result = 0;
     	System.out.println(head.toString());
-    	addObserverToNewTurtles();
     	result = head.interpret(commandDict, varDict);
+    	addObserverToNewTurtles();
     	return result;
     }
 
     private void addObserverToNewTurtles() {
     	for (int i = 0; i < myTurtles.size(); i++) {
     		myTurtles.get(i).addObserver(myCanvas);
+    		myTurtles.get(i).updateObservers();
     	}
+    }
+    
+    public List<Turtle> getTurtles() {
+    	return myTurtles;
     }
 
     private void addCommandToHistory(String command) {

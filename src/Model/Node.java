@@ -81,20 +81,37 @@ public abstract class Node implements IFunctions {
     }
     
     
-    public Turtle createTurtle(int ID) {
-    	return new Turtle(ID);
+    public void createTurtle(double ID) {
+    	Turtle turtle = new Turtle(ID);
+		turtle.activate();
+    	myTurtles.add(turtle);
     }
     
     public List<Turtle> getTurtles() {
     	if (myTurtles != null) {
     		if (myTurtles.isEmpty()) {
-    			Turtle turtle = createTurtle(0);
-    			turtle.activate();
-    	    	myTurtles.add(turtle);
+    			createTurtle(0);
     		}
     		return myTurtles;
     	}
     	return null;
+    }
+    
+    public Turtle getTurtleByID(double ID) {
+    	for (int i = 0; i < myTurtles.size(); i++) {
+    		if (myTurtles.get(i).getID() == ID) {
+    			return myTurtles.get(i);
+    		}
+    	}
+    	return null;
+    }
+    
+    public List<Double> createListFromCommandList(CommandList commandList, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    	List<Double> list = new ArrayList<Double>();
+    	for (int i = 0; i < commandList.getChildren().size(); i++) {
+    		list.add(commandList.getChildren().get(i).interpret(commandDict, varDict));
+    	}
+    	return list;
     }
 /*
     protected double applyToActiveTurtles(Class nodeClass, String methodName, Node obj) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {

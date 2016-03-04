@@ -164,7 +164,6 @@ public class Parser {
             myNode.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
             if (Arrays.asList(myTurtleCommands.getString(TURTLE_COMMANDS).split(",")).contains(name)) {
                 myNode.setTurtleList(myCurTurtles);
-                myCurTurtles = myNode.getTurtles();
             }
             return myNode;
         } catch (Exception e) {
