@@ -11,9 +11,11 @@ public class Home extends Node {
 	
 	/**
 	 * Moves the turtle back to the origin and returns the distance moved.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		Turtle turtle = getTurtle();
 		return turtle.moveToHome();
 	}

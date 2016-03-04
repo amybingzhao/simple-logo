@@ -1,8 +1,10 @@
 package GUIPackage;
 
 import Model.Turtle;
+
 import java.util.Observable;
 import java.util.Observer;
+
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,14 +12,16 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
+
 import java.io.File;
 
 /**
  * Returns one Node that contains the Turtle Canvas and two ColorPicker objects
  * (for background and pen)
- * @author AnnieTang
  *
+ * @author AnnieTang
  */
+
 public class GUICanvas implements Observer{
 	private static final int TURTLE_SIZE = 20;
 	private static final int CANVAS_WIDTH = 500;
@@ -179,4 +183,5 @@ public class GUICanvas implements Observer{
 	public boolean getPenDownStatus(){
 		return !myTurtle.isPenUp();
 	}
+
 }

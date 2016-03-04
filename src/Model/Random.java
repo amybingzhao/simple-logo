@@ -11,10 +11,12 @@ public class Random extends Node {
 
     /**
      * Returns a random value between 0 and the given max.
+     * @param commandDict
+     * @param varDict
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        return Math.random() * getChildren().get(MAX).interpret();
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+        return Math.random() * getChildren().get(MAX).interpret(commandDict, varDict);
     }
 
     /**

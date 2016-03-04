@@ -4,8 +4,10 @@ import Model.Turtle;
 import java.util.ResourceBundle;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -19,7 +21,8 @@ public class GUI implements IGUI {
 	private static final String GUI_RESOURCE = "GUI";
 	private static final String HELP_TAB_TEXT = "Help";
 	private Scene myScene;
-	private TabPane myRoot;
+	private AnchorPane myRoot;
+	private TabPane myTabs;
 	private ResourceBundle myResources;
 	private Turtle myTurtle;
 	
@@ -37,12 +40,21 @@ public class GUI implements IGUI {
 	 * @return GUI Scene
 	 */
 	public Scene createScene() {
-		myRoot = new TabPane();
+		myRoot = new AnchorPane();
+		myTabs = new TabPane();
+		Button newTab = new Button("Create New Tab");
+		newTab.setOnAction(event -> createNewTab());
 
 		Tab mainScreenTab = new TabMainScreen().getTab();
 		Tab helpTab = createHelpTab();
 		
-		myRoot.getTabs().addAll(mainScreenTab, helpTab);		
+		myTabs.getTabs().addAll(mainScreenTab, helpTab);
+		mainScreenTab.setText("Main Workspace");	
+		
+		AnchorPane.setTopAnchor(myTabs, 5.0);
+		AnchorPane.setTopAnchor(newTab, 50.0);
+		
+		myRoot.getChildren().addAll(myTabs, newTab);
 	
 		myScene = new Scene(myRoot, windowHeight, windowWidth, Color.WHITE);
 		return myScene;
@@ -52,7 +64,7 @@ public class GUI implements IGUI {
 	 * Creates Help Tab for the user.
 	 * @return Tab with all the commands
 	 */
-	private Tab createHelpTab(){
+	private Tab createHelpTab() {
 		Tab helpTab = new Tab();
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
@@ -60,6 +72,13 @@ public class GUI implements IGUI {
 		helpTab.setContent(browser);
 		helpTab.setText(HELP_TAB_TEXT);
 		return helpTab;
+	}
+	
+	private void createNewTab() {
+		Tab tab = new TabMainScreen().getTab();
+        myTabs.getTabs().add(tab);
+		tab.setText("Workspace " + (myTabs.getTabs().size() - 1));
+        myTabs.getSelectionModel().select(tab);
 	}
 	
 	/**

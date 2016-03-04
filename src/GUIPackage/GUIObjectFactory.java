@@ -1,11 +1,13 @@
 package GUIPackage;
+
 import java.util.ResourceBundle;
 
 import Controller.Controller;
+
 /**
  * Instantiate GUIObjects based on String passed in.
- * @author AnnieTang
  *
+ * @author AnnieTang
  */
 public class GUIObjectFactory {
 	private ResourceBundle myResources;
@@ -58,15 +60,6 @@ public class GUIObjectFactory {
 			case("ColorPickerPen"):{
 				return new GUIObjectColorPickerPen(canvas,myResources.getString(nodeTypeKey+"Label"));
 			}
-//			case("TurtleLocation"):{
-//				return new GUIObjectLabeled(myResources, myResources.getString(nodeTypeKey));
-//			}
-//			case("TurtleHeading"):{
-//				return new GUIObjectLabeled(myResources, myResources.getString(nodeTypeKey));
-//			}
-//			case("TurtlePen"):{
-//				return new GUIObjectLabeled(myResources, myResources.getString(nodeTypeKey));
-//			}
 			case("TurtleState"):{
 				return new GUIObjectTurtleState(myResources,
 						new GUIObjectLabeled(myResources, myResources.getString("TurtleLocation")),

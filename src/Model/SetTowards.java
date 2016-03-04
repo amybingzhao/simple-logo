@@ -15,12 +15,14 @@ public class SetTowards extends Node {
 	
 	/**
 	 * Turns the turtle to face the given (x, y) position.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		Turtle turtle = getTurtle();
-		return turtle.turnTowards(children.get(X).interpret(), children.get(Y).interpret());
+		return turtle.turnTowards(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
 	}
 
 	/**

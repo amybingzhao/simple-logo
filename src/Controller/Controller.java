@@ -6,10 +6,10 @@ import java.util.ResourceBundle;
 
 import GUIPackage.GUIAlert;
 import GUIPackage.GUIObjectLabeled;
-import GUIPackage.GUIOutput;
+import Model.CommandDictionary;
 import Model.IFunctions;
-import Model.Node;
 import Model.Turtle;
+import Model.VariableDictionary;
 
 /**
  * This class is the only external-facing back end class. It facilitates the interaction between the front end and back end
@@ -38,6 +38,8 @@ public class Controller {
     private GUIAlert myAlert;
     private final String WHITESPACE = "\\p{Space}";
     private ResourceBundle myGUIResource;
+    private CommandDictionary commandDict;
+    private VariableDictionary varDict;
 
     /**
      * Initializes the controller.
@@ -45,16 +47,18 @@ public class Controller {
     public void init(int canvasHeight, int canvasWidth, Turtle t) {
         myCanvasWidth = canvasWidth;
         myCanvasHeight = canvasHeight;
-        myParser = new Parser();
         myLanguageResource = DEFAULT_LANGUAGE_RESOURCE;
-        myParser.addPatterns(myLanguageResource);
-        myParser.addPatterns(SYNTAX_RESOURCE);
         myCommandHistory = new ArrayList<String>();
         myTurtles = new ArrayList<Turtle>();
         myTurtle = t;
         myGUIResource = ResourceBundle.getBundle(GUI_RESOURCE);
         myOutput = new GUIObjectLabeled(myGUIResource,"Output");
         myAlert = new GUIAlert();
+        commandDict = new CommandDictionary();
+        varDict = new VariableDictionary();
+        myParser = new Parser(commandDict, varDict);
+        myParser.addPatterns(myLanguageResource);
+        myParser.addPatterns(SYNTAX_RESOURCE);
     }
 
     /**
@@ -78,8 +82,6 @@ public class Controller {
     	List<String> commandAsList = getCommandAsList(command);
     	while (!commandAsList.isEmpty()) {
     		try{
-    			//System.out.println("command: " + command);
-    			//List<IFunctions> commands = myParser.createCommandTree(command, myTurtle);
     			IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myTurtle);
     			double result = executeCommandTree(commandToExecute);
     			myOutput.setOutputText(Double.toString(result));
@@ -112,7 +114,7 @@ public class Controller {
     private double executeCommandTree(IFunctions head) throws ClassNotFoundException {
     	double result = 0;
     	System.out.println(head.toString());
-    	result = head.interpret();
+    	result = head.interpret(commandDict, varDict);
     	System.out.println(myTurtle.printPosition());
     	return result;
     }
@@ -132,6 +134,14 @@ public class Controller {
     
     public void displayAlert(String errorResourceKey){
     	myAlert.displayAlert(errorResourceKey);
+    }
+
+    public CommandDictionary getCommandDictionary(){
+        return commandDict;
+    }
+
+    public VariableDictionary getVariableDictionary(){
+        return varDict;
     }
 
 }

@@ -16,8 +16,7 @@ import javafx.scene.layout.HBox;
 
 public class TabMainScreen {
 	private static final String GUI_RESOURCE = "GUI";
-	private static final int LEFT_PANEL_PADDING = 10;
-	private static final String TAB_TEXT = "Main";
+	private static final int PANEL_PADDING = 10;
 	private static final int CANVAS_WIDTH = 500;
 	private static final int CANVAS_HEIGHT = 600;
 	private Tab myRootTab;
@@ -70,7 +69,6 @@ public class TabMainScreen {
 		setTopPane();
 		
 		myRootTab.setContent(myMainScreen);
-		myRootTab.setText(TAB_TEXT);
 		return myRootTab;
 	}
 	
@@ -87,23 +85,25 @@ public class TabMainScreen {
 	}
 
 	private void setLeftPane() {
-		VBox box = new VBox(LEFT_PANEL_PADDING);
+		VBox leftPanel = new VBox(PANEL_PADDING);
 		colorPickerBackground = myFactory.createNewGUIObject("ColorPickerBackground");
 		colorPickerPen = myFactory.createNewGUIObject("ColorPickerPen");
 		userCommands = myFactory.createNewGUIObject("UserCommands");
 		previousCommands = myFactory.createNewGUIObject("PreviousCommands");
 		languageSelector = myFactory.createNewGUIObject("LanguageSelector");
 		imageInput = myFactory.createNewGUIObject("ImageInput");
-		box.getChildren().addAll(colorPickerBackground.createNode(),
+		leftPanel.getChildren().addAll(colorPickerBackground.createNode(),
 				colorPickerPen.createNode(),userCommands.createNode(), 
 				previousCommands.createNode(), languageSelector.createNode(), 
 				imageInput.createNode());
-		myMainScreen.setLeft(box);
+		myMainScreen.setLeft(leftPanel);
 	}
 	
 	private void setRightPane() {
+		HBox rightPanel = new HBox(PANEL_PADDING);
 		variables = myFactory.createNewGUIObject("Variables");
-		myMainScreen.setRight(variables.createNode());
+		rightPanel.getChildren().add(variables.createNode());
+		myMainScreen.setRight(rightPanel);
 	}
 	
 	private void setBottomPane(){

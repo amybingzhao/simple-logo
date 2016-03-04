@@ -14,11 +14,13 @@ public class Power extends Node {
 	
 	/**
      * Raises the given base to the given exponent.
+     * @param commandDict
+     * @param varDict
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
-        return Math.pow(children.get(BASE).interpret(), children.get(EXPONENT).interpret());
+        return Math.pow(children.get(BASE).interpret(commandDict, varDict), children.get(EXPONENT).interpret(commandDict, varDict));
     }
 
     /**

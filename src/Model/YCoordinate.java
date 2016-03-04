@@ -11,9 +11,11 @@ public class YCoordinate extends Node {
 	
 	/**
 	 * Returns the turtle's current y-coordinate.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		Turtle turtle = getTurtle();
 		return turtle.getCurY();
 	}

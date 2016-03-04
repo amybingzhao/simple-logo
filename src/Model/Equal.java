@@ -15,11 +15,13 @@ public class Equal extends Node {
 	
 	/**
 	 * Returns 1 if the two expressions are equal; 0 otherwise.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
-		if (children.get(EXPR1).interpret() == children.get(EXPR2).interpret()) {
+		if (children.get(EXPR1).interpret(commandDict, varDict) == children.get(EXPR2).interpret(commandDict, varDict)) {
 			return 1;
 		} else {
 			return 0;

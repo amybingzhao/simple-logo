@@ -14,11 +14,13 @@ public class Quotient extends Node {
 
 	/**
      * Returns the quotient of expr1 divided by expr2.
+     * @param commandDict
+     * @param varDict
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
-        return children.get(EXPR1).interpret() / children.get(EXPR2).interpret();
+        return children.get(EXPR1).interpret(commandDict, varDict) / children.get(EXPR2).interpret(commandDict, varDict);
     }
 
     /**
