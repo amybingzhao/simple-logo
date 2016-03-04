@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import GUIPackage.GUIAlert;
+import GUIPackage.GUICanvas;
+import GUIPackage.GUIOutput;
 import GUIPackage.GUIObjectLabeled;
 import Model.CommandDictionary;
 import Model.IFunctions;
@@ -31,26 +33,30 @@ public class Controller {
     private Parser myParser;
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
+    private final String WHITESPACE = "\\p{Space}";
+    private GUICanvas myCanvas;
     private int myCanvasWidth;
     private int myCanvasHeight;
     private Turtle myTurtle;
     private GUIObjectLabeled myOutput;
     private GUIAlert myAlert;
-    private final String WHITESPACE = "\\p{Space}";
     private ResourceBundle myGUIResource;
     private CommandDictionary commandDict;
     private VariableDictionary varDict;
 
+    public Controller(GUICanvas canvas) {
+    	myCanvas = canvas;
+    	init();
+    }
+    
     /**
      * Initializes the controller.
      */
-    public void init(int canvasHeight, int canvasWidth, Turtle t) {
-        myCanvasWidth = canvasWidth;
-        myCanvasHeight = canvasHeight;
+    public void init() {
         myLanguageResource = DEFAULT_LANGUAGE_RESOURCE;
         myCommandHistory = new ArrayList<String>();
         myTurtles = new ArrayList<Turtle>();
-        myTurtle = t;
+        addInitialTurtle();
         myGUIResource = ResourceBundle.getBundle(GUI_RESOURCE);
         myOutput = new GUIObjectLabeled(myGUIResource,"Output");
         myAlert = new GUIAlert();
@@ -59,6 +65,13 @@ public class Controller {
         myParser = new Parser(commandDict, varDict);
         myParser.addPatterns(myLanguageResource);
         myParser.addPatterns(SYNTAX_RESOURCE);
+    }
+    
+    public void addInitialTurtle() {
+    	Turtle turtle = new Turtle(0);
+    	turtle.activate();
+    	turtle.addObserver(myCanvas);
+    	myTurtles.add(turtle);
     }
 
     /**
@@ -82,7 +95,7 @@ public class Controller {
     	List<String> commandAsList = getCommandAsList(command);
     	while (!commandAsList.isEmpty()) {
     		try{
-    			IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myTurtle);
+    			IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myTurtles);
     			double result = executeCommandTree(commandToExecute);
     			myOutput.setOutputText(Double.toString(result));
     			addCommandToHistory(command);
@@ -115,10 +128,20 @@ public class Controller {
     	double result = 0;
     	System.out.println(head.toString());
     	result = head.interpret(commandDict, varDict);
-    	System.out.println(myTurtle.printPosition());
+    	addObserverToNewTurtles();
     	return result;
     }
 
+    private void addObserverToNewTurtles() {
+    	for (int i = 0; i < myTurtles.size(); i++) {
+    		myTurtles.get(i).addObserver(myCanvas);
+    		myTurtles.get(i).updateObservers();
+    	}
+    }
+    
+    public List<Turtle> getTurtles() {
+    	return myTurtles;
+    }
 
     private void addCommandToHistory(String command) {
         myCommandHistory.add(command);

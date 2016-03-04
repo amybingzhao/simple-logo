@@ -21,17 +21,15 @@ public class Parser {
     private static final String LIST_START = "ListStart";
     private static final String LIST_END = "ListEnd";
     private static final String TURTLE_COMMANDS = "TurtleCommands";
-    private static final String MAKE = "MakeVariable";
     private static final String COMMAND = "Command";
     private static final String MAKE_USER_INSTRUCTION = "MakeUserInstruction";
     private List<Entry<String, Pattern>> mySymbols;
     private static final String TURTLE_COMMANDS_RESOURCE = "Controller/TurtleCommands";
     private static final String NUM_CHILDREN_PER_COMMAND = "Controller/NumChildrenForFunction";
     private static final String MODEL = "Model.";
-    private final String WHITESPACE = "\\p{Space}";
     private ResourceBundle myNumChildrenPerCommand;
     private ResourceBundle myTurtleCommands;
-    private Turtle myTurtle;
+    private List<Turtle> myCurTurtles;
     private VariableDictionary varDict;
     private CommandDictionary commandDict;
 
@@ -39,11 +37,10 @@ public class Parser {
         mySymbols = new ArrayList<>();
         myNumChildrenPerCommand = ResourceBundle.getBundle(NUM_CHILDREN_PER_COMMAND);
         myTurtleCommands = ResourceBundle.getBundle(TURTLE_COMMANDS_RESOURCE);
-        myTurtle = new Turtle();
         varDict = myVarDict;
         commandDict = myComDict;
     }
-
+    
     /**
      * From regex example
      *
@@ -83,8 +80,8 @@ public class Parser {
         }
     }
 
-    public IFunctions createCommandTree(List commandList, Turtle turtle) throws ClassNotFoundException {
-        myTurtle = turtle;
+    public IFunctions createCommandTree(List<String> commandList, List<Turtle> curTurtles) throws ClassNotFoundException {
+        myCurTurtles = curTurtles;
         return createCommandTreeFromList(commandList);
     }
 
@@ -96,18 +93,17 @@ public class Parser {
         return head;
     }
 
-    public CommandList createList(List<String> inputList, Turtle turtle) throws ClassNotFoundException {
-        myTurtle = turtle;
+    public CommandList createList(List<String> inputList) throws ClassNotFoundException {
         CommandList list = new CommandList();
         // assumes there is a list end; if not we gotta through an error
         while (!(parseText(inputList.get(0))).equals(LIST_END)) {
-            Node head;
-            if (parseText(inputList.get(0)).equals(LIST_START)) {
-                inputList.remove(0);
-                head = createList(inputList, turtle);
-            } else {
-                head = createClass(inputList.get(0), inputList);
-            }
+        	Node head;
+        	if (parseText(inputList.get(0)).equals(LIST_START)) {
+        		inputList.remove(0);
+        		head = createList(inputList);
+        	} else {
+        		head = createClass(inputList.get(0), inputList);
+        	}
             list.addChild(head);
         }
 
@@ -129,8 +125,8 @@ public class Parser {
             case COMMENT:
                 break;
             case LIST_START:
-                node = createList(inputCommandList, myTurtle);
-                break;
+            	node = createList(inputCommandList);
+            	break;
             case COMMAND:
                 node = handleCommand(commandToBuild, inputCommandList);
                 break;
@@ -167,7 +163,7 @@ public class Parser {
             myNode = (Node) className.newInstance();
             myNode.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
             if (Arrays.asList(myTurtleCommands.getString(TURTLE_COMMANDS).split(",")).contains(name)) {
-                myNode.addTurtle(myTurtle);
+                myNode.setTurtleList(myCurTurtles);
             }
             return myNode;
         } catch (Exception e) {

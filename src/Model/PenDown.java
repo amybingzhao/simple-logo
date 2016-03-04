@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * PenDown function.
  * @author amyzhao
@@ -8,7 +10,7 @@ package Model;
 public class PenDown extends Node {
 
 	private static final String PENDOWN = "pendown ";
-	
+
 	/**
 	 * Puts the turtle's pen down so trail will now show.
 	 * @param commandDict
@@ -16,8 +18,10 @@ public class PenDown extends Node {
 	 */
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
-		turtle.putPenDown();
+		List<Turtle> turtles = getActiveTurtles();
+		for (int i = 0; i < turtles.size(); i++) {
+			turtles.get(i).putPenDown();
+		}
 		return 1;
 	}
 

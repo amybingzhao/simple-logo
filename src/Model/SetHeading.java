@@ -20,11 +20,12 @@ public class SetHeading extends Node {
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
-		Turtle turtle = getTurtle();
-		double curDir = turtle.getDirection();
-		
-		turtle.setDirection(children.get(DEGREES).interpret(commandDict, varDict));
-
+		List<Turtle> turtles = getActiveTurtles();
+		double curDir = 0;
+		for (int i = 0; i < turtles.size(); i++) {
+			curDir = turtles.get(i).getDirection();
+			turtles.get(i).setDirection(children.get(DEGREES).interpret(commandDict, varDict));
+		}
 		return children.get(DEGREES).interpret(commandDict, varDict) - curDir;
 	}
 

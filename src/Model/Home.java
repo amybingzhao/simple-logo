@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * Home function.
  * @author amyzhao
@@ -8,7 +10,7 @@ package Model;
 public class Home extends Node {
 
 	private static final String HOME = "home ";
-	
+
 	/**
 	 * Moves the turtle back to the origin and returns the distance moved.
 	 * @param commandDict
@@ -16,8 +18,12 @@ public class Home extends Node {
 	 */
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
-		return turtle.moveToHome();
+		List<Turtle> turtles = getActiveTurtles();
+		double dist = 0;
+		for (int i = 0; i < turtles.size(); i++) {
+			dist = turtles.get(i).moveToHome();
+		}
+		return dist;
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * XCoordinate function.
  * @author amyzhao
@@ -8,7 +10,7 @@ package Model;
 public class XCoordinate extends Node {
 
 	private static final String XCOR = "xcor ";
-	
+
 	/**
 	 * Returns the turtle's current x-coordinate.
 	 * @param commandDict
@@ -16,8 +18,12 @@ public class XCoordinate extends Node {
 	 */
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
-		return turtle.getCurX();
+		List<Turtle> turtles = getActiveTurtles();
+		double curX = 0;
+		for (int i = 0; i < turtles.size(); i++) {
+			curX = turtles.get(i).getCurX();
+		}
+		return curX;
 	}
 
 	/**
