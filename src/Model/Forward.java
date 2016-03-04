@@ -9,34 +9,35 @@ import java.util.List;
  */
 public class Forward extends Node {
 
-    private static final String FORWARD = "forward ";
-    private static final int DISTANCE = 0;
+	private static final String FORWARD = "forward ";
+	private static final int DISTANCE = 0;
 
-    /**
-     * Moves the turtle forward the given distance.
-     *
-     * @param commandDict
-     * @param varDict
-     */
-    @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        Turtle turtle = getTurtle();
-        List<Node> children = getChildren();
+	/**
+	 * Moves the turtle forward the given distance.
+	 *
+	 * @param commandDict
+	 * @param varDict
+	 */
+	@Override
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		List<Turtle> turtles = getActiveTurtles();
+		List<Node> children = getChildren();
+		double dist = children.get(DISTANCE).interpret(commandDict, varDict);
 
-        double dist = children.get(DISTANCE).interpret(commandDict, varDict);
-        if (turtle != null) {
-            turtle.move(dist);
-        }
+		for (int i = 0; i < turtles.size(); i++) {
+			if (turtles.get(i) != null) {
+				turtles.get(i).move(dist);
+			}
+		}
+		return dist;
+	}
 
-        return dist;
-    }
-
-    /**
-     * Returns the required user input for this command.
-     */
-    @Override
-    public String toString() {
-        List<Node> children = getChildren();
-        return FORWARD + children.get(DISTANCE).toString();
-    }
-}
+		/**
+		 * Returns the required user input for this command.
+		 */
+		@Override
+		public String toString() {
+			List<Node> children = getChildren();
+			return FORWARD + children.get(DISTANCE).toString();
+		}
+	}

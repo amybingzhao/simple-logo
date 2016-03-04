@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * IsShowing function.
  * @author amyzhao
@@ -8,7 +10,7 @@ package Model;
 public class IsShowing extends Node {
 
 	private static final String SHOWINGP = "showing? ";
-	
+
 	/**
 	 * Returns 1 if the turtle is showing on the canvas; 0 otherwise.
 	 * @param commandDict
@@ -16,12 +18,16 @@ public class IsShowing extends Node {
 	 */
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
-		if (turtle.showing()) {
-			return 1;
-		} else {
-			return 0;
+		List<Turtle> turtles = getActiveTurtles();
+		double ret = 0;
+		for (int i = 0; i < turtles.size(); i++) {
+			if (turtles.get(i).showing()) {
+				ret = 1;
+			} else {
+				ret = 0;
+			}
 		}
+		return ret;
 	}
 
 	/**

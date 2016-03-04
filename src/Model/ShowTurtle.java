@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * ShowTurtle function.
  * @author amyzhao
@@ -16,8 +18,10 @@ public class ShowTurtle extends Node {
 	 */
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
-		turtle.show();;
+		List<Turtle> turtles = getActiveTurtles();
+		for (int i = 0; i < turtles.size(); i++) {
+			turtles.get(i).show();
+		}
 		return 1;
 	}
 

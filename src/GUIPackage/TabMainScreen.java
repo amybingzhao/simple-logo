@@ -44,11 +44,8 @@ public class TabMainScreen {
 	 */
 	private void initializeTab() {
 		//create Turtle and Observer
-		myTurtle = new Turtle();
 		canvas = new GUICanvas();
-		myTurtle.addObserver(canvas);
-		myController = new Controller();
-		myController.init(CANVAS_HEIGHT, CANVAS_WIDTH, myTurtle);
+		myController = new Controller(canvas);
 	}
 	
 	/**

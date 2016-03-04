@@ -2,7 +2,7 @@ to poly [ :numsides :length ]
 [
   repeat :numsides
   [
-    fd :length 
+    fd :length
     rt quotient 360 :numsides
   ]
 ]

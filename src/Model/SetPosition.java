@@ -21,12 +21,17 @@ public class SetPosition extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<Node> children = getChildren();
-        Turtle turtle = getTurtle();
-        double dist = turtle.calcDistance(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
-        turtle.turnTowards(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
-        turtle.move(dist);
-        return dist;
+    	List<Node> children = getChildren();
+		List<Turtle> turtles = getActiveTurtles();
+		double dist = 0;
+		
+		for (int i = 0; i < turtles.size(); i++) {
+			dist = turtles.get(i).calcDistance(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
+			turtles.get(i).turnTowards(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
+			turtles.get(i).move(dist);
+		}
+		
+		return dist;
     }
 
     /**
