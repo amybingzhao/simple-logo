@@ -15,9 +15,9 @@ import Controller.Controller;
 
 public class GUIObjectComboBoxLanguages extends GUIObjectComboBox {
 
-	public GUIObjectComboBoxLanguages(ResourceBundle myResources, Controller myController,
+	public GUIObjectComboBoxLanguages(GUICanvas canvas, ResourceBundle myResources, Controller myController,
 			String promptText, GUICommandLine cLine) {
-		super(myResources, myController, promptText, cLine);
+		super(canvas, myResources, myController, promptText, cLine);
 	}
 
 	@Override
@@ -28,6 +28,10 @@ public class GUIObjectComboBoxLanguages extends GUIObjectComboBox {
 	@Override
 	protected void setButtonAction(){
 		comboButton.setOnAction(event -> myController.setLanguage(comboBox.getValue()));
+	}
+
+	@Override
+	protected void setCellFactory() {
 	}
 
 }

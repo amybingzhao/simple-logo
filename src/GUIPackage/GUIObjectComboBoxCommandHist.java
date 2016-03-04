@@ -13,9 +13,9 @@ import Controller.Controller;
 
 public class GUIObjectComboBoxCommandHist extends GUIObjectComboBox {
 	
-	public GUIObjectComboBoxCommandHist(ResourceBundle myResources, Controller myController,
+	public GUIObjectComboBoxCommandHist(GUICanvas canvas, ResourceBundle myResources, Controller myController,
 			String promptText, GUICommandLine cLine) {
-		super(myResources, myController, promptText, cLine);
+		super(canvas, myResources, myController, promptText, cLine);
 	}
 
 	@Override
@@ -28,6 +28,10 @@ public class GUIObjectComboBoxCommandHist extends GUIObjectComboBox {
 		comboButton.setOnAction(event -> {
 			myCommandLine.runCommand(comboBox.getValue());
 		});
+	}
+
+	@Override
+	protected void setCellFactory() {		
 	}
 	
 }

@@ -85,7 +85,8 @@ public class TabMainScreen {
 		userCommands = myFactory.createNewGUIObject("UserCommands");
 		previousCommands = myFactory.createNewGUIObject("PreviousCommands");
 		languageSelector = myFactory.createNewGUIObject("LanguageSelector");
-		imageInput = myFactory.createNewGUIObject("ImageInput");
+//		imageInput = myFactory.createNewGUIObject("ImageVBox");
+		imageInput = myFactory.createNewGUIObject("ImageComboBox");
 		leftPanel.getChildren().addAll(colorPickerBackground.createNode(),
 				colorPickerPen.createNode(),userCommands.createNode(), 
 				previousCommands.createNode(), languageSelector.createNode(), 
