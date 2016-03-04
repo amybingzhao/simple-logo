@@ -85,6 +85,7 @@ public class GUIObjectTableView implements IGUIObject {
      */
     @Override
     public void updateNode() {
+        data.clear();
         for (String s : varDict.getKeySet()) {
             data.add(new TableVariable(s, varDict.getNodeFor(s)));
         }
