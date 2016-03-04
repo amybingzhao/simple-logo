@@ -13,17 +13,19 @@ import javafx.scene.image.Image;
 
 public class Turtle extends Observable {
 	private Image myImage;
-	private int myVariableName;
+	private double myID;
 	private double myX;
 	private double myY;
 	private boolean penUp;
 	private boolean isVisible;
 	private double myDirection;
+	private boolean isActive;
 	private boolean reset;
 	private static final double ONE_REVOLUTION = 360;
 	private static final double INCREMENT = 0.1;
 	
-	public Turtle() {
+	public Turtle(double ID) {
+		myID = ID;
 		myX = 0;
 		myY = 0;
 		penUp = true;
@@ -192,6 +194,21 @@ public class Turtle extends Observable {
 		return myY;
 	}
 	
+	public void activate() {
+		isActive = true;
+	}
+	
+	public void inactivate() {
+		isActive = false;
+	}
+	
+	public boolean isActive() {
+		return isActive;
+	}
+	
+	public double getID() {
+		return myID;
+	}
 	/**
 	 * Prints the turtle's current position and direction.
 	 * @return a string representing the turtle's current (x, y) position and direction.

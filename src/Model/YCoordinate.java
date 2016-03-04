@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * YCoordinate function.
  * @author amyzhao
@@ -8,7 +10,7 @@ package Model;
 public class YCoordinate extends Node {
 
 	private static final String YCOR = "ycor ";
-	
+
 	/**
 	 * Returns the turtle's current y-coordinate.
 	 * @param commandDict
@@ -16,8 +18,12 @@ public class YCoordinate extends Node {
 	 */
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
-		return turtle.getCurY();
+		List<Turtle> turtles = getActiveTurtles();
+		double curY = 0;
+		for (int i = 0; i < turtles.size(); i++) {
+			curY = turtles.get(i).getCurY();
+		}
+		return curY;
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * HideTurtle function.
  * @author amyzhao
@@ -8,7 +10,7 @@ package Model;
 public class HideTurtle extends Node {
 
 	private static final String HIDETURTLE = "hideturtle ";
-	
+
 	/**
 	 * Sets the turtle to invisible.
 	 * @param commandDict
@@ -16,8 +18,10 @@ public class HideTurtle extends Node {
 	 */
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
-		turtle.hide();
+		List<Turtle> turtles = getActiveTurtles();
+		for (int i = 0; i < turtles.size(); i++) {
+			turtles.get(i).hide();
+		}
 		return 0;
 	}
 

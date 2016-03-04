@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * PenUp function.
  * @author amyzhao
@@ -8,7 +10,7 @@ package Model;
 public class PenUp extends Node {
 
 	private static final String PENUP = "penup ";
-	
+
 	/**
 	 * Lifts pen up for current turtle so trail will no longer show.
 	 * @param commandDict
@@ -16,8 +18,10 @@ public class PenUp extends Node {
 	 */
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Turtle turtle = getTurtle();
-		turtle.liftPenUp();
+		List<Turtle> turtles = getActiveTurtles();
+		for (int i = 0; i < turtles.size(); i++) {
+			turtles.get(i).liftPenUp();
+		}
 		return 0;
 	}
 
