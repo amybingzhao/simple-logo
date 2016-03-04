@@ -41,11 +41,12 @@ public class GUIObjectFactory {
 						myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
 			}
 			case("VariablesTableView"):{
-				return new GUIObjectTableView(myResources);
+				return new GUIObjectTableView(myResources, myController.getCommandDictionary(), myController.getVariableDictionary());
 			}
 			case("UserCommandsComboBox"):{
-				return new GUIObjectComboBoxUserHist(myResources, myController,
-						myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
+				 return new GUIObjectComboBoxUserHist(myResources, myController,
+	                        myResources.getString(nodeTypeKey + "PromptText"), myCommandLine, myController.getCommandDictionary(), myController.getVariableDictionary());
+
 			}
 			case("PreviousCommandsComboBox"):{
 				return new GUIObjectComboBoxCommandHist(myResources, myController, 
