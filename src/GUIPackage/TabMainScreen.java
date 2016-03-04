@@ -41,8 +41,10 @@ public class TabMainScreen {
 	 */
 	private void initializeTab() {
 		//create Turtle and Observer
+		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		canvas = new GUICanvas();
 		myController = new Controller(canvas);
+		commandLine = new GUICommandLine(myController, myResources, this);
 	}
 	
 	/**
@@ -51,7 +53,6 @@ public class TabMainScreen {
 	 */
 	protected Tab getTab() {
 		initializeTab();
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myRootTab = new Tab();
 		myMainScreen = new BorderPane();
 		myFactory = new GUIObjectFactory(myResources, myController, canvas, commandLine); 
@@ -102,7 +103,6 @@ public class TabMainScreen {
 	}
 	
 	private void setBottomPane(){
-		commandLine = new GUICommandLine(myController, myResources, this);
 		myMainScreen.setBottom(commandLine.createNode());
 	}
 
