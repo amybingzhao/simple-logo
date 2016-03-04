@@ -13,9 +13,11 @@ public class ShowTurtle extends Node {
 	
 	/**
 	 * Sets the turtle to visible and returns 1.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Turtle> turtles = getActiveTurtles();
 		for (int i = 0; i < turtles.size(); i++) {
 			turtles.get(i).show();

@@ -10,18 +10,20 @@ import java.util.List;
 public class Heading extends Node {
 
 	private static final String HEADING = "heading ";
-	
+
 	/**
 	 * Returns the turtle's current direction.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Turtle> turtles = getTurtles();
 		double dir = 0;
 		for (int i = 0; i < turtles.size(); i++) {
 			dir = turtles.get(i).getDirection();
 		}
-		
+
 		return dir;
 	}
 

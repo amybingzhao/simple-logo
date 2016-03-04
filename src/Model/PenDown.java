@@ -10,12 +10,14 @@ import java.util.List;
 public class PenDown extends Node {
 
 	private static final String PENDOWN = "pendown ";
-	
+
 	/**
 	 * Puts the turtle's pen down so trail will now show.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Turtle> turtles = getActiveTurtles();
 		for (int i = 0; i < turtles.size(); i++) {
 			turtles.get(i).putPenDown();

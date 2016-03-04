@@ -69,8 +69,10 @@ public abstract class Node implements IFunctions {
 
     /**
      * Interprets the function.
+     * @param commandDict
+     * @param varDict
      */
-    public abstract double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
+    public abstract double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
 
     /**
      * Gets this node's turtle.

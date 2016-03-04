@@ -14,18 +14,19 @@ public class SetHeading extends Node {
 	
 	/**
 	 * Turns the turtle towards to the given degrees, where 0 is facing north and rotating CW is positive.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		List<Turtle> turtles = getActiveTurtles();
 		double curDir = 0;
-		
 		for (int i = 0; i < turtles.size(); i++) {
 			curDir = turtles.get(i).getDirection();
-			turtles.get(i).setDirection(children.get(DEGREES).interpret());
+			turtles.get(i).setDirection(children.get(DEGREES).interpret(commandDict, varDict));
 		}
-		return children.get(DEGREES).interpret() - curDir;
+		return children.get(DEGREES).interpret(commandDict, varDict) - curDir;
 	}
 
 	/**

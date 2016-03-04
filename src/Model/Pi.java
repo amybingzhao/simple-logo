@@ -10,9 +10,11 @@ public class Pi extends Node {
 
     /**
      * Returns the value of pi.
+     * @param commandDict
+     * @param varDict
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         return Math.PI;
     }
 

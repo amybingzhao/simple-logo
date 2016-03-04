@@ -10,12 +10,14 @@ import java.util.List;
 public class PenUp extends Node {
 
 	private static final String PENUP = "penup ";
-	
+
 	/**
 	 * Lifts pen up for current turtle so trail will no longer show.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Turtle> turtles = getActiveTurtles();
 		for (int i = 0; i < turtles.size(); i++) {
 			turtles.get(i).liftPenUp();

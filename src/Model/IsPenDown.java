@@ -10,12 +10,14 @@ import java.util.List;
 public class IsPenDown extends Node {
 
 	private static final String PENDOWNP = "pendown? ";
-	
+
 	/**
 	 * If the turtle's pen is down, returns 1; else returns 0.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Turtle> turtles = getActiveTurtles();
 		double ret = 0;
 		for (int i = 0; i < turtles.size(); i++) {

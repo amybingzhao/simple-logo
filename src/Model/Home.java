@@ -10,12 +10,14 @@ import java.util.List;
 public class Home extends Node {
 
 	private static final String HOME = "home ";
-	
+
 	/**
 	 * Moves the turtle back to the origin and returns the distance moved.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Turtle> turtles = getActiveTurtles();
 		double dist = 0;
 		for (int i = 0; i < turtles.size(); i++) {

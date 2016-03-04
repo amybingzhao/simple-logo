@@ -14,21 +14,23 @@ public class Backward extends Node {
 	private static final int DISTANCE = 0;
 
 	/**
-	 * Moves the turtle backwards a given distance and returns the distance moved.
-	 */
+	* Moves the turtle backwards a given distance and returns the distance moved.
+	* @param commandDict
+	* @param varDict
+	*/
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Turtle> turtles = getActiveTurtles();
 		List<Node> children = getChildren();
 
-		double dist = children.get(DISTANCE).interpret();
+		double dist = children.get(DISTANCE).interpret(commandDict, varDict);
 
 		for (int i = 0; i < turtles.size(); i++) {
 			if (turtles.get(i) != null) {
 				turtles.get(i).move(-dist);
 			}
 		}
-		return dist;    
+		return dist;  
 	}
 
 	/**

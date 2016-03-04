@@ -6,9 +6,10 @@ import java.util.List;
 import GUIPackage.GUIAlert;
 import GUIPackage.GUICanvas;
 import GUIPackage.GUIOutput;
+import Model.CommandDictionary;
 import Model.IFunctions;
-import Model.Node;
 import Model.Turtle;
+import Model.VariableDictionary;
 
 /**
  * This class is the only external-facing back end class. It facilitates the interaction between the front end and back end
@@ -40,14 +41,14 @@ public class Controller {
     	myCanvas = canvas;
     	init();
     }
+    private CommandDictionary commandDict;
+    private VariableDictionary varDict;
+
     /**
      * Initializes the controller.
      */
     public void init() {
-        myParser = new Parser();
         myLanguageResource = DEFAULT_LANGUAGE_RESOURCE;
-        myParser.addPatterns(myLanguageResource);
-        myParser.addPatterns(SYNTAX_RESOURCE);
         myCommandHistory = new ArrayList<String>();
         myNumTurtles = 0;
         myTurtles = new ArrayList<Turtle>();
@@ -55,6 +56,11 @@ public class Controller {
         myTurtles.add(myCurTurtle);
         myOutput = new GUIOutput();
         myAlert = new GUIAlert();
+        commandDict = new CommandDictionary();
+        varDict = new VariableDictionary();
+        myParser = new Parser(commandDict, varDict);
+        myParser.addPatterns(myLanguageResource);
+        myParser.addPatterns(SYNTAX_RESOURCE);
     }
     
     public Turtle createTurtle(int ID) {
@@ -117,8 +123,7 @@ public class Controller {
     private double executeCommandTree(IFunctions head) throws ClassNotFoundException {
     	double result = 0;
     	System.out.println(head.toString());
-    	result = head.interpret();
-    	System.out.println(myCurTurtle.printPosition());
+    	result = head.interpret(commandDict, varDict);
     	return result;
     }
 
@@ -137,6 +142,14 @@ public class Controller {
     
     public void displayAlert(String errorResourceKey){
     	myAlert.displayAlert(errorResourceKey);
+    }
+
+    public CommandDictionary getCommandDictionary(){
+        return commandDict;
+    }
+
+    public VariableDictionary getVariableDictionary(){
+        return varDict;
     }
 
 }

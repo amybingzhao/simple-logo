@@ -10,12 +10,14 @@ import java.util.List;
 public class XCoordinate extends Node {
 
 	private static final String XCOR = "xcor ";
-	
+
 	/**
 	 * Returns the turtle's current x-coordinate.
+	 * @param commandDict
+	 * @param varDict
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Turtle> turtles = getActiveTurtles();
 		double curX = 0;
 		for (int i = 0; i < turtles.size(); i++) {
