@@ -1,7 +1,5 @@
 package Model;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * Minus function.
  * Created by blakekaplan on 2/27/16.
@@ -13,14 +11,9 @@ public class Minus extends Node {
 
     /**
      * Negates the given expression.
-     * @throws InvocationTargetException 
-     * @throws IllegalArgumentException 
-     * @throws IllegalAccessException 
-     * @throws SecurityException 
-     * @throws NoSuchMethodException 
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         return -1 * getChildren().get(EXPR).interpret();
     }
 

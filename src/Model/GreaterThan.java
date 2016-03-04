@@ -1,6 +1,5 @@
 package Model;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -16,14 +15,9 @@ public class GreaterThan extends Node {
 	
 	/**
 	 * Returns 1 if expr1 is greater than expr2; 0 otherwise.
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws SecurityException 
-	 * @throws NoSuchMethodException 
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		if (children.get(EXPR1).interpret() > children.get(EXPR2).interpret()) {
 			return 1;

@@ -15,14 +15,9 @@ public class Backward extends Node {
 
 	/**
      * Moves the turtle backwards a given distance and returns the distance moved.
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws SecurityException 
-	 * @throws NoSuchMethodException 
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
     	return applyToActiveTurtles(this.getClass(), "moveBackward", this);
     }
 

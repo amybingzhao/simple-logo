@@ -71,13 +71,8 @@ public abstract class Node implements IFunctions {
 
     /**
      * Interprets the function.
-     * @throws InvocationTargetException 
-     * @throws IllegalArgumentException 
-     * @throws IllegalAccessException 
-     * @throws SecurityException 
-     * @throws NoSuchMethodException 
      */
-    public abstract double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
+    public abstract double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
 
     /**
      * Gets this node's turtle.

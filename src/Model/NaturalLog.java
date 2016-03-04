@@ -1,7 +1,5 @@
 package Model;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * NaturalLog function.
  * Created by blakekaplan on 2/27/16.
@@ -13,14 +11,9 @@ public class NaturalLog extends Node {
 
     /**
      * Evaluates the natural logarithm of the given expression.
-     * @throws InvocationTargetException 
-     * @throws IllegalArgumentException 
-     * @throws IllegalAccessException 
-     * @throws SecurityException 
-     * @throws NoSuchMethodException 
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         return Math.log(getChildren().get(EXPR).interpret());
     }
 

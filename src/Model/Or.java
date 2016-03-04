@@ -1,6 +1,5 @@
 package Model;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -16,14 +15,9 @@ public class Or extends Node {
 	
 	/**
 	 * If expr1 or expr2 is true, returns 1; else 0.
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws SecurityException 
-	 * @throws NoSuchMethodException 
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		if (children.get(EXPR1).interpret() > 0 || children.get(EXPR2).interpret() > 0) {
 			return 1;

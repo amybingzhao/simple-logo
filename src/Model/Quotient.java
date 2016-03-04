@@ -1,6 +1,5 @@
 package Model;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -15,14 +14,9 @@ public class Quotient extends Node {
 
 	/**
      * Returns the quotient of expr1 divided by expr2.
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws SecurityException 
-	 * @throws NoSuchMethodException 
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
         return children.get(EXPR1).interpret() / children.get(EXPR2).interpret();
     }

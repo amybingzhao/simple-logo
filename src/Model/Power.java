@@ -1,6 +1,5 @@
 package Model;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -15,14 +14,9 @@ public class Power extends Node {
 	
 	/**
      * Raises the given base to the given exponent.
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws SecurityException 
-	 * @throws NoSuchMethodException 
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
         return Math.pow(children.get(BASE).interpret(), children.get(EXPONENT).interpret());
     }

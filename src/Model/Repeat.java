@@ -1,6 +1,5 @@
 package Model;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -17,14 +16,9 @@ public class Repeat extends Node {
 	
 	/**
 	 * Repeats the given commands a given number of times.
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws SecurityException 
-	 * @throws NoSuchMethodException 
 	 */
 	@Override
-	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
 		double numIter = children.get(EXPR).interpret();
 		double ret = 0;

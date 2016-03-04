@@ -1,7 +1,5 @@
 package Model;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * Sine function.
  * Created by blakekaplan on 2/27/16.
@@ -14,14 +12,9 @@ public class Sine extends Node {
 
     /**
      * Returns the sine of the expression, where the expression is given in degrees.
-     * @throws InvocationTargetException 
-     * @throws IllegalArgumentException 
-     * @throws IllegalAccessException 
-     * @throws SecurityException 
-     * @throws NoSuchMethodException 
      */
     @Override
-    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public double interpret() throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         double degrees = getChildren().get(DEGREES).interpret();
         double radians = degrees * (Math.PI / DEGREES_PER_PI);
         return Math.sin(radians);
