@@ -44,6 +44,7 @@ public class GUICanvas implements Observer{
 	private Image turtleImage;
 	private Color myPenColor;
 	private Color myBackgroundColor;
+	private double myPenSize;
 	
 	/**
 	 * Creates the Canvas Node to be displayed.
@@ -183,8 +184,8 @@ public class GUICanvas implements Observer{
 		return myPenColor;
 	}
 	
-	public Color getBackgroundColor() {
-		return myBackgroundColor;
+	public void setPenSize(double size) {
+		myPenSize = size;
 	}
 	
 	public int getWidth(){

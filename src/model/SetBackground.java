@@ -16,6 +16,4 @@ public class SetBackground extends DisplayNode {
 	public String toString() {
 		return SET_BACKGROUND + getChildren().get(INDEX).toString();
 	}
-	
-	
 }
