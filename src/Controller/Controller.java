@@ -2,6 +2,7 @@ package Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import GUIPackage.GUIAlert;
@@ -34,10 +35,8 @@ public class Controller {
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
     private final String WHITESPACE = "\\p{Space}";
-    private GUICanvas myCanvas;
     private int myCanvasWidth;
     private int myCanvasHeight;
-    private Turtle myTurtle;
     private GUIObjectLabeled myOutput;
     private GUIAlert myAlert;
     private ResourceBundle myGUIResource;
@@ -45,7 +44,6 @@ public class Controller {
     private VariableDictionary varDict;
 
     public Controller(GUICanvas canvas) {
-    	myCanvas = canvas;
     	init();
     }
     
@@ -70,7 +68,6 @@ public class Controller {
     public void addInitialTurtle() {
     	Turtle turtle = new Turtle(0);
     	turtle.activate();
-    	turtle.addObserver(myCanvas);
     	myTurtles.add(turtle);
     }
 
@@ -128,15 +125,15 @@ public class Controller {
     	double result = 0;
     	System.out.println(head.toString());
     	result = head.interpret(commandDict, varDict);
-    	addObserverToNewTurtles();
     	return result;
     }
-
-    private void addObserverToNewTurtles() {
-    	for (int i = 0; i < myTurtles.size(); i++) {
-    		myTurtles.get(i).addObserver(myCanvas);
-    		myTurtles.get(i).updateObservers();
+    
+    public void addObserver(Observer o) {
+    	for (Turtle t: myTurtles) {
+    		t.addObserver(o);
+    		t.updateObservers();
     	}
+    		
     }
     
     public List<Turtle> getTurtles() {
