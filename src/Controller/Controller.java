@@ -131,7 +131,6 @@ public class Controller {
     public void addObserver(Observer o) {
     	for (Turtle t: myTurtles) {
     		t.addObserver(o);
-    		t.updateObservers();
     	}
     		
     }

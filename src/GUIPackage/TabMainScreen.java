@@ -43,6 +43,7 @@ public class TabMainScreen {
 		//create Turtle and Observer
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		myController = new Controller(canvas);
+		myController.init();
 		canvas = new GUICanvas(myController);
 		commandLine = new GUICommandLine(myController, myResources, this);
 	}
