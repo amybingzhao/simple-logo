@@ -10,10 +10,13 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import Model.CommandDictionary;
+import Model.Turtle;
 import Model.VariableDictionary;
 import org.w3c.dom.*;
 
+import java.awt.*;
 import java.io.File;
+import java.util.List;
 
 
 /**
@@ -21,6 +24,8 @@ import java.io.File;
  */
 public class XMLSaver {
 
+    public static final String XML_STYLE = "{http://xml.apache.org/xslt}indent-amount";
+    public static final String ROOT_TEXT = "SLogo Configuration";
     private DocumentBuilderFactory myFactory;
     private DocumentBuilder myBuilder;
     private Document myDocument;
@@ -39,9 +44,17 @@ public class XMLSaver {
         }
     }
 
-    public void generateFile(File file) {
-        myDocument = myBuilder.newDocument();
-        Element myRoot = myDocument.createElement("SLogo Configuration");
+    public void generateFile(String imgName, String backgroundColor, String penColor, String language, List<Turtle> turtles, File file) {
+        System.out.println(imgName);
+        System.out.println(backgroundColor);
+        System.out.println(penColor);
+        System.out.println(language);
+        for (Turtle myTurt : turtles) {
+            System.out.println(myTurt);
+        }
+        System.out.println(file.getName());
+//        myDocument = myBuilder.newDocument();
+//        Element myRoot = myDocument.createElement(ROOT_TEXT);
     }
 
     public void createFile(File file) {
@@ -51,7 +64,7 @@ public class XMLSaver {
             myTransformer = myTransformerFactory.newTransformer();
             myTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
             myTransformer.setOutputProperty(OutputKeys.METHOD, "xml");
-            myTransformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+            myTransformer.setOutputProperty(XML_STYLE, "4");
             DOMSource mySource = new DOMSource(myDocument);
             StreamResult myResult = new StreamResult(file);
             myTransformer.transform(mySource, myResult);
@@ -60,4 +73,7 @@ public class XMLSaver {
         }
     }
 
+//    private Element getConfig(){
+//
+//    }
 }
