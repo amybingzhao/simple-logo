@@ -201,6 +201,10 @@ public class GUICanvas implements Observer{
 	public double getTurtleShapeIndex() {
 	
 	}
+	
+	public void setPaletteIndex(double index, Color colorToAdd) {
+	
+	}
 	*/
 	public int getWidth(){
 		return CANVAS_WIDTH;
