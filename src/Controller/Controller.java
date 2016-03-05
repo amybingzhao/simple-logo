@@ -62,7 +62,7 @@ public class Controller {
         myAlert = new GUIAlert();
         commandDict = new CommandDictionary();
         varDict = new VariableDictionary();
-        myParser = new Parser(commandDict, varDict);
+        myParser = new Parser(commandDict, varDict, myCanvas);
         myParser.addPatterns(myLanguageResource);
         myParser.addPatterns(SYNTAX_RESOURCE);
     }

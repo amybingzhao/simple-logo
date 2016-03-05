@@ -43,6 +43,8 @@ public class GUICanvas implements Observer{
 	private GraphicsContext gc;
 	private Turtle myTurtle;
 	private Image turtleImage;
+	private Color myPenColor;
+	private Color myBackgroundColor;
 	
 	/**
 	 * Creates the Canvas Node to be displayed.
@@ -167,8 +169,23 @@ public class GUICanvas implements Observer{
 	 * Sets Pen color based on User preference.
 	 * @param Color that user chose.
 	 */
-	protected void setPenColor(Color c) {
-		gcDrawing.setFill(c);
+	public void setPenColor(Color c) {
+		myPenColor = c;
+		gcDrawing.setFill(myPenColor);
+	}
+	
+	/*public void setBackgroundColor(double colorVal) {
+		myBackgroundColor = c;
+		gcBackground.setFill(myBackgroundColor);
+		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+	}*/
+	
+	public Color getPenColor() {
+		return myPenColor;
+	}
+	
+	public Color getBackgroundColor() {
+		return myBackgroundColor;
 	}
 	
 	public int getWidth(){

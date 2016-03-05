@@ -5,6 +5,7 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
+import GUIPackage.GUICanvas;
 import Model.*;
 
 /**
@@ -21,24 +22,30 @@ public class Parser {
     private static final String LIST_START = "ListStart";
     private static final String LIST_END = "ListEnd";
     private static final String TURTLE_COMMANDS = "TurtleCommands";
+    private static final String DISPLAY_COMMANDS = "DisplayCommands";
     private static final String COMMAND = "Command";
     private static final String MAKE_USER_INSTRUCTION = "MakeUserInstruction";
     private List<Entry<String, Pattern>> mySymbols;
     private static final String TURTLE_COMMANDS_RESOURCE = "Controller/TurtleCommands";
+    private static final String DISPLAY_COMMANDS_RESOURCE = "Controller/DisplayCommands";
     private static final String NUM_CHILDREN_PER_COMMAND = "Controller/NumChildrenForFunction";
     private static final String MODEL = "Model.";
     private ResourceBundle myNumChildrenPerCommand;
     private ResourceBundle myTurtleCommands;
+    private ResourceBundle myDisplayCommands;
     private List<Turtle> myCurTurtles;
     private VariableDictionary varDict;
     private CommandDictionary commandDict;
+    private GUICanvas myCanvas;
 
-    public Parser(CommandDictionary myComDict, VariableDictionary myVarDict) {
+    public Parser(CommandDictionary myComDict, VariableDictionary myVarDict, GUICanvas canvas) {
         mySymbols = new ArrayList<>();
         myNumChildrenPerCommand = ResourceBundle.getBundle(NUM_CHILDREN_PER_COMMAND);
         myTurtleCommands = ResourceBundle.getBundle(TURTLE_COMMANDS_RESOURCE);
+        myDisplayCommands = ResourceBundle.getBundle(DISPLAY_COMMANDS_RESOURCE);
         varDict = myVarDict;
         commandDict = myComDict;
+        myCanvas = canvas;
     }
     
     /**
@@ -156,12 +163,25 @@ public class Parser {
         return node;
     }
 
+    private boolean isTurtleCommand(String name) {
+    	return Arrays.asList(myTurtleCommands.getString(TURTLE_COMMANDS).split(",")).contains(name);
+    }
+    
+    private boolean isDisplayCommand(String name) {
+    	return Arrays.asList(myDisplayCommands.getString(DISPLAY_COMMANDS).split(",")).contains(name);
+    }
+    
     private Node getFunctionObject(String name) throws ClassNotFoundException {
         Class className = Class.forName(MODEL + name);
         try {
-            if (Arrays.asList(myTurtleCommands.getString(TURTLE_COMMANDS).split(",")).contains(name)) {
+            if (isTurtleCommand(name)) {
             	TurtleNode myNode = (TurtleNode) className.newInstance();
                 myNode.setTurtleList(myCurTurtles);
+                myNode.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
+                return myNode;
+            } else if (isDisplayCommand(name)) {
+            	DisplayNode myNode = (DisplayNode) className.newInstance();
+            	myNode.setCanvas(myCanvas);
                 myNode.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
                 return myNode;
             } else {
