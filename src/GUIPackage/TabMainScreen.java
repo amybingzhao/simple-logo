@@ -4,6 +4,7 @@ import Model.Turtle;
 
 import java.util.ResourceBundle;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
@@ -32,8 +33,8 @@ public class TabMainScreen {
 	private IGUIObject variables;
 	private IGUIObject languageSelector;
 	private IGUIObject imageInput;
-	private IGUIObject colorPickerBackground;
-	private IGUIObject colorPickerPen;
+	private GUIObjectComboBoxColor backgroundColorPalette;
+	private GUIObjectComboBoxColor penColorPalette;
 	private IGUIObject turtleState;
 	
 	/**
@@ -81,15 +82,14 @@ public class TabMainScreen {
 
 	private void setLeftPane() {
 		VBox leftPanel = new VBox(PANEL_PADDING);
-		colorPickerBackground = myFactory.createNewGUIObject("ColorPickerBackground");
-		colorPickerPen = myFactory.createNewGUIObject("ColorPickerPen");
+		backgroundColorPalette = (GUIObjectComboBoxColor) myFactory.createNewGUIObject("BackgroundColorPalette");
+		penColorPalette = (GUIObjectComboBoxColor) myFactory.createNewGUIObject("PenColorPalette");
 		userCommands = myFactory.createNewGUIObject("UserCommands");
 		previousCommands = myFactory.createNewGUIObject("PreviousCommands");
 		languageSelector = myFactory.createNewGUIObject("LanguageSelector");
-//		imageInput = myFactory.createNewGUIObject("ImageVBox");
 		imageInput = myFactory.createNewGUIObject("ImageComboBox");
-		leftPanel.getChildren().addAll(colorPickerBackground.createNode(),
-				colorPickerPen.createNode(),userCommands.createNode(), 
+		leftPanel.getChildren().addAll(backgroundColorPalette.createNode(),
+				penColorPalette.createNode(),userCommands.createNode(), 
 				previousCommands.createNode(), languageSelector.createNode(), 
 				imageInput.createNode());
 		myMainScreen.setLeft(leftPanel);

@@ -15,15 +15,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
-
+/**
+ * ComboBox with palette of images that the user can choose from for the Turtle.
+ * @author AnnieTang
+ *
+ */
 public class GUIObjectComboBoxImages extends GUIObjectComboBox {
 	private Map<String, ImageView> imageMap;
 	private List<String> imageNames;
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	
 	public GUIObjectComboBoxImages(GUICanvas canvas, ResourceBundle myResources, Controller myController, String promptText,
-			GUICommandLine cLine) {
-		super(canvas, myResources, myController, promptText, cLine);
+			GUICommandLine myCommandLine) {
+		super(canvas, myResources, myController, promptText, myCommandLine);
 		imageMap = new HashMap<String, ImageView>();
 		imageNames = new ArrayList<String>();
 		//TEST

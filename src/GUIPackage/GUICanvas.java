@@ -16,8 +16,7 @@ import javafx.scene.transform.Rotate;
 import java.io.File;
 
 /**
- * Returns one Node that contains the Turtle Canvas and two ColorPicker objects
- * (for background and pen)
+ * Returns canvas for Turtle.
  *
  * @author AnnieTang
  */

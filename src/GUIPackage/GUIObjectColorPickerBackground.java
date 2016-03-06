@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 
 /**
  * Color picker for the canvas.
- * @author
+ * @author AnnieTang
  *
  */
 public class GUIObjectColorPickerBackground extends GUIObjectColorPicker {

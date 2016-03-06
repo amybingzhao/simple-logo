@@ -16,8 +16,8 @@ import Controller.Controller;
 public class GUIObjectComboBoxLanguages extends GUIObjectComboBox {
 
 	public GUIObjectComboBoxLanguages(GUICanvas canvas, ResourceBundle myResources, Controller myController,
-			String promptText, GUICommandLine cLine) {
-		super(canvas, myResources, myController, promptText, cLine);
+			String promptText, GUICommandLine myCommandLine) {
+		super(canvas, myResources, myController, promptText, myCommandLine);
 	}
 
 	@Override

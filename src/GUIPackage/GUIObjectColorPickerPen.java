@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 
 /**
  * Sets color for turtle pen.
- * @author
+ * @author AnnieTang
  *
  */
 public class GUIObjectColorPickerPen extends GUIObjectColorPicker {

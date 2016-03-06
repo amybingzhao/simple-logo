@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import Controller.Controller;
 
 /**
- * Instantiate GUIObjects based on String passed in.
+ * Instantiate GUIObjects based on ResourceBundle key passed into createNewGUIObject(String key).
  *
  * @author AnnieTang
  */
@@ -33,9 +33,9 @@ public class GUIObjectFactory {
 		case("CommandLineVBox"):{
 			return null;
 		}
-		case("ImageVBox"):{
-			return new GUIObjectImageVBox(myResources, myController, canvas, nodeType);
-		}
+//		case("ImageVBox"):{
+//			return new GUIObjectImageVBox(myResources, myController, canvas, nodeType);
+//		}
 		case("ImageComboBox"):{
 			return new GUIObjectComboBoxImages(canvas, myResources, myController, 
 					myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
@@ -49,7 +49,7 @@ public class GUIObjectFactory {
 		}
 		case("UserCommandsComboBox"):{
 			return new GUIObjectComboBoxUserHist(canvas, myResources, myController,
-					myResources.getString(nodeTypeKey + "PromptText"), myCommandLine, myController.getCommandDictionary(), myController.getVariableDictionary());
+					myResources.getString(nodeTypeKey + "PromptText"), myCommandLine, myController.getCommandDictionary());
 		}
 		case("PreviousCommandsComboBox"):{
 			return new GUIObjectComboBoxCommandHist(canvas, myResources, myController, 
@@ -58,8 +58,16 @@ public class GUIObjectFactory {
 		case("HelpTabPane"):{
 			return null;
 		}
-		case("ColorPickerBackground"):{
-			return new GUIObjectColorPickerBackground(canvas,myResources.getString(nodeTypeKey+"Label"));
+//		case("ColorPickerBackground"):{
+//			return new GUIObjectColorPickerBackground(canvas,myResources.getString(nodeTypeKey+"Label"));
+//		}
+		case("BackgroundColorPalette"):{
+			return new GUIObjectComboBoxColorB(canvas, myResources, myController,
+					myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
+		}
+		case("PenColorPalette"):{
+			return new GUIObjectComboBoxColorB(canvas, myResources, myController,
+					myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
 		}
 		case("ColorPickerPen"):{
 			return new GUIObjectColorPickerPen(canvas,myResources.getString(nodeTypeKey+"Label"));
