@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * XCoordinate function.
  * @author amyzhao

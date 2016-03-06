@@ -8,7 +8,6 @@ package model;
 public class Variable extends Node {
 
     private String name;
-    private String expression;
 
     /**
      * Sets the name of the variable of interest.

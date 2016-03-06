@@ -3,14 +3,11 @@ package controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import guipackage.GUIAlert;
 import guipackage.GUICanvas;
 import guipackage.GUIObjectLabeled;
-import guipackage.GUIOutput;
-import guipackage.TurtleObserver;
 import model.CommandDictionary;
 import model.IFunctions;
 import model.Turtle;
@@ -37,8 +34,6 @@ public class Controller {
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
     private final String WHITESPACE = "\\p{Space}";
-    private int myCanvasWidth;
-    private int myCanvasHeight;
     private GUIObjectLabeled myOutput;
     private GUIAlert myAlert;
     private GUICanvas myCanvas;

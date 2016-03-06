@@ -8,7 +8,6 @@ import java.util.*;
  */
 public class VariableDictionary {
 
-    private static VariableDictionary instance = null;
     private static double DEFAULT = 0;
     private Map<String, Double> myVariables;
 

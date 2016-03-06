@@ -36,7 +36,7 @@ public class If extends Node {
      */
     @Override
     public String toString() {
-        return "if " + childrenToString();
+        return IF + childrenToString();
     }
 
 }
