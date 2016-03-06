@@ -72,7 +72,7 @@ public class Controller {
     	Turtle turtle = new Turtle(0);
     	turtle.activate();
     	turtle.addObserver(new TurtleObserver(myCanvas));
-    	turtle.setDirection(0);
+    	turtle.updateObservers();
     	myTurtles.add(turtle);
     }
 
@@ -138,7 +138,7 @@ public class Controller {
     	for (Turtle t: myTurtles) {
     		if (t.countObservers() == 0) {
 	    		t.addObserver(new TurtleObserver(myCanvas));
-	    		t.notifyObservers();
+	    		t.updateObservers();
     		}
     	}	
     }
