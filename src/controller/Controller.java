@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,7 +13,11 @@ import model.CommandDictionary;
 import model.IFunctions;
 import model.Turtle;
 import model.VariableDictionary;
+import org.xml.sax.SAXException;
+import xml.XMLParser;
 import xml.XMLSaver;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * This class is the only external-facing back end class. It facilitates the interaction between the front end and back end
@@ -30,6 +35,7 @@ public class Controller {
     public static final String EXECUTION_ERROR = "ExecutionError";
     public static final String INVALID_SYNTAX = "InvalidSyntax";
     private static final String GUI_RESOURCE = "GUI";
+    public static final String PARSING_ERROR = "ParsingError";
     private String myLanguageResource;
     private Parser myParser;
     private List<Turtle> myTurtles;
@@ -109,7 +115,15 @@ public class Controller {
                 myAlert.displayAlert(EXECUTION_ERROR);
             }
         }
-        save();
+    }
+
+    public void loadXML(File myFile) {
+        XMLParser myXMLParser = new XMLParser();
+        try {
+            myXMLParser.parse(myFile);
+        } catch (IOException | ParserConfigurationException | SAXException e) {
+            myAlert.displayAlert(PARSING_ERROR);
+        }
     }
 
     // converts string command to arraylist
@@ -169,9 +183,9 @@ public class Controller {
         return varDict;
     }
 
-    private void save() {
+    private void save(File file) {
         XMLSaver mySaver = new XMLSaver(commandDict, varDict);
-        mySaver.generateFile(myCanvas.getBackgroundColor().toString(), "Blue", myGUIResource.toString(), getTurtles(), new File("test.xml"));
+        mySaver.generateFile(myCanvas.getBackgroundColor().toString(), "Blue", myGUIResource.toString(), getTurtles(), file);
     }
 
 }
