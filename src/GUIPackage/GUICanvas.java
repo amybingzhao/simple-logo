@@ -28,7 +28,7 @@ import java.io.File;
  * @author AnnieTang
  */
 
-public class GUICanvas implements Observer{
+public class GUICanvas{
 	private static final int TURTLE_SIZE = 20;
 	private static final int CANVAS_WIDTH = 500;
 	private static final int CANVAS_HEIGHT = 500;
@@ -46,42 +46,40 @@ public class GUICanvas implements Observer{
 	private GraphicsContext gcBackground;
 	private GraphicsContext gcDrawing;
 	private GraphicsContext gc;
-	private Map<Turtle, List<GraphicsContext>> myTurtles;
+	private Map<TurtleObserver, List<GraphicsContext>> myTurtles;
 	private List<Double[]> oldTurtleCoordinates;
 	private Image turtleImage;
-	private Controller myController;
 	
-	public GUICanvas(Controller c) {
-		myController = c;
+	public GUICanvas() {
 	}
 	
+	
+	public void init() {
+		myTurtles = new HashMap<TurtleObserver, List<GraphicsContext>>();
+		oldTurtleCoordinates = new ArrayList<Double[]>();
+		canvasBackground = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+		gcBackground = canvasBackground.getGraphicsContext2D();
+		gcBackground.setFill(Color.BISQUE);
+		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		addDefaultTurtles();
+		myRoot = new Pane(canvasBackground);
+	}
 	/**
 	 * Creates the Canvas Node to be displayed.
 	 * @return Canvas Node
 	 */
 	public Node createNode() {
-		myTurtles = new HashMap<Turtle, List<GraphicsContext>>();
-		oldTurtleCoordinates = new ArrayList<Double[]>();
-		myController.addObserver(this);
-		canvasBackground = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-		gcBackground = canvasBackground.getGraphicsContext2D();
-		gcBackground.setFill(Color.BISQUE);
-		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-		myRoot = new Pane(canvasBackground);
-		addTurtlesToMap();
-		addDefaultTurtles();
 		return myRoot;
 	}
 	
 	/**
 	 * Updates the Canvas when the Turtle is updated.
 	 */
-	@Override
-	public void update(Observable o, Object arg) {
-		Turtle turtle = (Turtle) o;
+	public void update(TurtleObserver turtle) {
 		if (turtle.shouldReset()) {
 			resetCanvas(turtle);
 		} else {
+			addTurtleToMap(turtle);
 			clearPreviousTurtle(turtle);
 			drawTurtle(turtle);
 		}
@@ -90,7 +88,7 @@ public class GUICanvas implements Observer{
 	/**
 	 * Resets Canvas. Deletes all of the Turtle's trails and changes the Turtle back to default.
 	 */
-	public void resetCanvas(Turtle turtle) {
+	public void resetCanvas(TurtleObserver turtle) {
 		myTurtles.get(turtle).get(0).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		myTurtles.get(turtle).get(1).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		drawTurtle(turtle);
@@ -99,7 +97,7 @@ public class GUICanvas implements Observer{
 	/**
 	 * Keeps track of the old coordinates after updating the Turtle.
 	 */
-	public void setOldCoordinates(Turtle turtle, double x, double y) {
+	public void setOldCoordinates(TurtleObserver turtle, double x, double y) {
 		Double[] coordinates = new Double[2];
 		coordinates[0] = x;
 		coordinates[1] = y;
@@ -112,25 +110,25 @@ public class GUICanvas implements Observer{
 	 * Places default turtle on canvas.
 	 */
 	private void addDefaultTurtles(){
-		for (Turtle t: myTurtles.keySet()) {
-			int myX = STARTING_X;
-			int myY = STARTING_Y;
-			turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
-			GraphicsContext turtleGC = myTurtles.get(t).get(0);
-			turtleGC.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
-			setOldCoordinates(t, myX, myY);
-		}
+//		for (Turtle t: myTurtles.keySet()) {
+		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
+//			GraphicsContext turtleGC = myTurtles.get(t).get(0);
+//			turtleGC.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+//		setOldCoordinates(t, myX, myY);
+//		}
 	}
 	
-	private void addTurtlesToMap(){
-		List<Turtle> turtleList = myController.getTurtles();
-		for (Turtle t: turtleList) {
+	private void addTurtleToMap(TurtleObserver turtle){
+		if (!myTurtles.containsKey(turtle)) {
 			Canvas turtleCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 			Canvas drawingCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 			myRoot.getChildren().addAll(turtleCanvas, drawingCanvas);
-			myTurtles.put(t, new ArrayList<GraphicsContext>(
+			myTurtles.put(turtle, new ArrayList<GraphicsContext>(
 					Arrays.asList(turtleCanvas.getGraphicsContext2D(),
 							drawingCanvas.getGraphicsContext2D())));
+			int myX = STARTING_X;
+			int myY = STARTING_Y;
+			setOldCoordinates(turtle, myX, myY);
 		}
 	}
 	
@@ -158,7 +156,7 @@ public class GUICanvas implements Observer{
 	/**
 	 * Clears the previous instance of the Turtle on the canvas.
 	 */
-	public void clearPreviousTurtle(Turtle turtle) {
+	public void clearPreviousTurtle(TurtleObserver turtle) {
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(myOldDirection, myOldX + TURTLE_SIZE/2, myOldY + TURTLE_SIZE/2);
@@ -171,18 +169,18 @@ public class GUICanvas implements Observer{
 	/**
 	 * Draws the turtle onto canvas based on turtle's X and Y values and its direction.
 	 */
-	public void drawTurtle(Turtle turtle) {
+	public void drawTurtle(TurtleObserver turtle) {
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		GraphicsContext gcDrawing = myTurtles.get(turtle).get(1);
-		double myX = turtle.getCurX() + CANVAS_WIDTH/2 - TURTLE_SIZE/2;
-		double myY = -(turtle.getCurY() - CANVAS_HEIGHT/2 + TURTLE_SIZE/2);
+		double myX = turtle.getX() + CANVAS_WIDTH/2 - TURTLE_SIZE/2;
+		double myY = -(turtle.getY() - CANVAS_HEIGHT/2 + TURTLE_SIZE/2);
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-		if (turtle.showing()) {
+		if (turtle.getShowing()) {
 			gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
 		}
-		if (!turtle.isPenUp()) {
+		if (turtle.getPenDown()) {
 			gcDrawing.fillOval(myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2, 3, 3);
 		}
 		gc.restore();

@@ -144,7 +144,6 @@ public class Turtle extends Observable {
 	 */
 	public void resetTurtle() {
 		reset = true;
-		setChanged();
 		updateObservers();
 	}
 	

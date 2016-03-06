@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import GUIPackage.GUIAlert;
 import GUIPackage.GUICanvas;
 import GUIPackage.GUIOutput;
+import GUIPackage.TurtleObserver;
 import GUIPackage.GUIObjectLabeled;
 import Model.CommandDictionary;
 import Model.IFunctions;
@@ -39,11 +40,13 @@ public class Controller {
     private int myCanvasHeight;
     private GUIObjectLabeled myOutput;
     private GUIAlert myAlert;
+    private GUICanvas myCanvas;
     private ResourceBundle myGUIResource;
     private CommandDictionary commandDict;
     private VariableDictionary varDict;
 
     public Controller(GUICanvas canvas) {
+    	myCanvas = canvas;
     	init();
     }
     
@@ -68,6 +71,8 @@ public class Controller {
     public void addInitialTurtle() {
     	Turtle turtle = new Turtle(0);
     	turtle.activate();
+    	turtle.addObserver(new TurtleObserver(myCanvas));
+    	turtle.setDirection(0);
     	myTurtles.add(turtle);
     }
 
@@ -125,14 +130,17 @@ public class Controller {
     	double result = 0;
     	System.out.println(head.toString());
     	result = head.interpret(commandDict, varDict);
+    	addObserver();
     	return result;
     }
     
-    public void addObserver(Observer o) {
+    public void addObserver() {
     	for (Turtle t: myTurtles) {
-    		t.addObserver(o);
-    	}
-    		
+    		if (t.countObservers() == 0) {
+	    		t.addObserver(new TurtleObserver(myCanvas));
+	    		t.notifyObservers();
+    		}
+    	}	
     }
     
     public List<Turtle> getTurtles() {
