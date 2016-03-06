@@ -143,7 +143,7 @@ public class GUICanvas implements Observer{
 		turtleImage = image;
 		for(Turtle key: myTurtles.keySet()){
 			if (key == null){
-				gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+				gc.drawImage(turtleImage, STARTING_X, STARTING_Y, TURTLE_SIZE, TURTLE_SIZE);
 			}
 			else drawTurtle(key);
 		}
