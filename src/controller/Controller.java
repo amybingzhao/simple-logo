@@ -2,12 +2,14 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import guipackage.GUIAlert;
 import guipackage.GUICanvas;
 import guipackage.GUIObjectLabeled;
 import guipackage.GUIOutput;
+import guipackage.TurtleObserver;
 import model.CommandDictionary;
 import model.IFunctions;
 import model.Turtle;
@@ -34,12 +36,11 @@ public class Controller {
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
     private final String WHITESPACE = "\\p{Space}";
-    private GUICanvas myCanvas;
     private int myCanvasWidth;
     private int myCanvasHeight;
-    private Turtle myTurtle;
     private GUIObjectLabeled myOutput;
     private GUIAlert myAlert;
+    private GUICanvas myCanvas;
     private ResourceBundle myGUIResource;
     private CommandDictionary commandDict;
     private VariableDictionary varDict;
@@ -71,6 +72,7 @@ public class Controller {
     	Turtle turtle = new Turtle(0);
     	turtle.activate();
     	turtle.addObserver(myCanvas);
+    	turtle.updateObservers();
     	myTurtles.add(turtle);
     }
 
@@ -128,15 +130,17 @@ public class Controller {
     	double result = 0;
     	System.out.println(head.toString());
     	result = head.interpret(commandDict, varDict);
-    	addObserverToNewTurtles();
+    	addObserver();
     	return result;
     }
-
-    private void addObserverToNewTurtles() {
-    	for (int i = 0; i < myTurtles.size(); i++) {
-    		myTurtles.get(i).addObserver(myCanvas);
-    		myTurtles.get(i).updateObservers();
-    	}
+    
+    public void addObserver() {
+    	for (Turtle t: myTurtles) {
+    		if (t.countObservers() == 0) {
+	    		t.addObserver(myCanvas);
+	    		t.updateObservers();
+    		}
+    	}	
     }
     
     public List<Turtle> getTurtles() {
