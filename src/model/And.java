@@ -10,8 +10,6 @@ import java.util.List;
 public class And extends Node {
 
     private static final String AND = "and ";
-    private static final int EXPR1 = 0;
-    private static final int EXPR2 = 1;
 
     /**
      * If expr1 and expr2 are both true, returns 1; else return 0.

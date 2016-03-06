@@ -39,7 +39,7 @@ public class Turtle extends Observable {
 	 * Moves the turtle the specified distance in its current direction in increments of (1,1).
 	 * @param dist: distance to move.
 	 */
-	public void move(double dist) {
+	public double move(double dist) {
 		double limit = Math.abs(dist);
 		double inc = INCREMENT;
 		if (dist < 0) {
@@ -51,6 +51,7 @@ public class Turtle extends Observable {
 			myY = myY + inc * Math.cos(Math.toRadians(myDirection));
 			updateObservers();
 		}
+		return dist;
 	}
 	
 	/**

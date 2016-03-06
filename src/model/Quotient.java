@@ -9,8 +9,6 @@ import java.util.List;
 public class Quotient extends Node {
 
     private static final String QUOTIENT = "quotient ";
-    private static final int EXPR1 = 0;
-	private static final int EXPR2 = 1;
 
 	/**
      * Returns the quotient of expr1 divided by expr2.
@@ -19,9 +17,13 @@ public class Quotient extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<Node> children = getChildren();
-        return children.get(EXPR1).interpret(commandDict, varDict) / children.get(EXPR2).interpret(commandDict, varDict);
-    }
+    	List<Node> children = getChildren();
+		double quotient = children.get(0).interpret(commandDict, varDict);
+		for (int i = 1; i < children.size(); i++) {
+			quotient = quotient/children.get(i).interpret(commandDict, varDict);
+		}
+		return quotient;
+	}
 
     /**
 	 * Returns the required user input for this command. 

@@ -10,8 +10,7 @@ import java.util.List;
 public class NotEqual extends Node {
 
     private static final String NOTEQUAL = "notequal? ";
-    private static final int EXPR1 = 0;
-    private static final int EXPR2 = 1;
+    private static final int EXPR = 0;
 
     /**
      * If the expr1 and expr2 are not equal, returns 1; else 0.
@@ -21,12 +20,14 @@ public class NotEqual extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<Node> children = getChildren();
-        if (children.get(EXPR1).interpret(commandDict, varDict) != children.get(EXPR2).interpret(commandDict, varDict)) {
-            return 1;
-        } else {
-            return 0;
-        }
+    	List<Node> children = getChildren();
+		double expr = children.get(EXPR).interpret(commandDict, varDict);
+		for (int i = 1; i < children.size(); i++) {
+			if (children.get(i).interpret(commandDict, varDict) != expr) {
+				return 1;
+			}
+		}
+		return 0;
     }
 
     /**
