@@ -81,6 +81,14 @@ public abstract class Node implements IFunctions {
     	return ret;
     }*/
     
+    protected String childrenToString() {
+    	StringBuilder sb = new StringBuilder(); 
+    	for (int i = 0; i < myChildren.size(); i++) {
+    		sb.append(myChildren.get(i).toString());
+    		sb.append(" ");
+    	}
+    	return sb.toString();
+    }
     /**
 	 * Returns the required user input for this command. 
 	 */
