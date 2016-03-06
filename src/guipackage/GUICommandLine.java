@@ -23,6 +23,7 @@ public class GUICommandLine {
 	private Label commandLabel;
 	private TextArea commandInputLine;
 	private Button runButton;
+	private VBox commandLine;
 	
 	private static final int COMMAND_LINE_SPACING = 5;
 	private static final double PADDING_TOP = 0;
@@ -47,7 +48,7 @@ public class GUICommandLine {
 		runButton = new Button(myResources.getString("Run"));
 		runButton.setOnAction(evt -> runCommand(commandInputLine.getText()));
 		
-		VBox commandLine = new VBox();
+		commandLine = new VBox();
 		commandLine.getChildren().addAll(commandLabel, commandInputLine, runButton);
 		commandLine.setSpacing(COMMAND_LINE_SPACING);
 		commandLine.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));

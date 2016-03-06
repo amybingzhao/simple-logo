@@ -1,6 +1,6 @@
 package guipackage;
-import controller.Controller;
 
+import controller.Controller;
 import java.util.ResourceBundle;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -44,6 +44,7 @@ public class TabMainScreen {
 		//create Turtle and Observer
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		canvas = new GUICanvas();
+		canvas.init();
 		myController = new Controller(canvas);
 		commandLine = new GUICommandLine(myController, myResources, this);
 	}

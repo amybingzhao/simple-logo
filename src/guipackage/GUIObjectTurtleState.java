@@ -34,9 +34,9 @@ public class GUIObjectTurtleState implements IGUIObject {
 
 	@Override
 	public void updateNode() {
-		locationLabel.setOutputText(canvas.getCoordinateString());
-		headingLabel.setOutputText(canvas.getHeadingString());
-		penLabel.setOutputText(Boolean.toString(canvas.getPenDownStatus()));
+//		locationLabel.setOutputText(canvas.getCoordinateString());
+//		headingLabel.setOutputText(canvas.getHeadingString());
+//		penLabel.setOutputText(Boolean.toString(canvas.getPenDownStatus()));
 	}
 
 }
