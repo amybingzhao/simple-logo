@@ -21,7 +21,12 @@ public class Sum extends Node{
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
-		return children.get(EXPR1).interpret(commandDict, varDict) + children.get(EXPR2).interpret(commandDict, varDict);
+		double sum = 0;
+		for (int i = 0; i < children.size(); i++) {
+			sum += children.get(i).interpret(commandDict, varDict);
+		}
+		return sum;
+		//return children.get(EXPR1).interpret(commandDict, varDict) + children.get(EXPR2).interpret(commandDict, varDict);
 	}
 	
 	/**
