@@ -30,12 +30,12 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 	protected Button comboButton;
 	protected GUICanvas canvas;
 	
-	public GUIObjectComboBox(GUICanvas canvas, ResourceBundle myResources, Controller myController, String promptText, GUICommandLine cLine) {
+	public GUIObjectComboBox(GUICanvas canvas, ResourceBundle myResources, Controller myController, String promptText, GUICommandLine myCommandLine) {
 		this.canvas = canvas;
 		this.myResources = myResources;
 		this.myController = myController;
 		this.promptText = promptText;
-		this.myCommandLine = cLine;
+		this.myCommandLine = myCommandLine;
 	}
 	
 	/**
@@ -82,5 +82,12 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 	 * @return
 	 */
 	protected abstract List<String> optionsList();
+	
+	public void changePalette(String RGB, int index) {
+		List<String> currentPalette = comboBox.getItems();
+		currentPalette.set(index, RGB);
+//		defaultPalette = currentPalette;
+		updateNode();
+	}
 
 }

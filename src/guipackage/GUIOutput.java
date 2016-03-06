@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 
 /**
  * Creates the Output label on the GUI.
- * @author Annie
+ * @author AnnieTang
  *
  */
 public class GUIOutput{

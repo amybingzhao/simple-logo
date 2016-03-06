@@ -1,5 +1,6 @@
 package guipackage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,24 +15,34 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
-
+/**
+ * ComboBox with palette of images that the user can choose from for the Turtle.
+ * @author AnnieTang
+ *
+ */
 public class GUIObjectComboBoxImages extends GUIObjectComboBox {
 	private Map<String, ImageView> imageMap;
 	private List<String> imageNames;
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
+	private static final String IMAGE_RESOURCE = "Images";
 	
 	public GUIObjectComboBoxImages(GUICanvas canvas, ResourceBundle myResources, Controller myController, String promptText,
-			GUICommandLine cLine) {
-		super(canvas, myResources, myController, promptText, cLine);
+			GUICommandLine myCommandLine) {
+		super(canvas, myResources, myController, promptText, myCommandLine);
 		imageMap = new HashMap<String, ImageView>();
 		imageNames = new ArrayList<String>();
-		//TEST
-		imageNames.add("turtle.jpg");
-		imageNames.add("turtle_outline.png");
 		fillImageNames();
+		fillImageMap();
 	}
 
 	private void fillImageNames(){
+		File imageDir = new File(IMAGE_RESOURCE);
+		for(File imageFile: imageDir.listFiles()){
+			imageNames.add(imageFile.getName());
+		}
+	}
+	
+	private void fillImageMap(){
 		for(String imageName: imageNames){
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
 			ImageView imageView = new ImageView(image);
@@ -67,6 +78,7 @@ public class GUIObjectComboBoxImages extends GUIObjectComboBox {
 	protected void setButtonAction() {
 		comboButton.setOnAction(event -> {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(comboBox.getValue()));
+		System.out.println(comboBox.getValue());
 		canvas.setTurtleImage(image);
 		});
 	}

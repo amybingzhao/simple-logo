@@ -8,7 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.HBox;
-
+/**
+ * Allows editable text to show up on console in various places. 
+ * @author AnnieTang
+ *
+ */
 public class GUIObjectLabeled implements IGUIObject {
 	private static final int PADDING = 10;
 	private Labeled outputLabel;
