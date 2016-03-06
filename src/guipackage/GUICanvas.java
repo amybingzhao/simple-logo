@@ -1,7 +1,6 @@
 package guipackage;
 
-import Model.Turtle;
-import Controller.Controller;
+import controller.Controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;

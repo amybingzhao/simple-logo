@@ -29,7 +29,7 @@ public class Parser {
     private static final String TURTLE_COMMANDS_RESOURCE = "Controller/TurtleCommands";
     private static final String DISPLAY_COMMANDS_RESOURCE = "Controller/DisplayCommands";
     private static final String NUM_CHILDREN_PER_COMMAND = "Controller/NumChildrenForFunction";
-    private static final String MODEL = "Model.";
+    private static final String MODEL = "model.";
     private ResourceBundle myNumChildrenPerCommand;
     private ResourceBundle myTurtleCommands;
     private ResourceBundle myDisplayCommands;

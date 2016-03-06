@@ -1,9 +1,9 @@
-package GUIPackage;
+package guipackage;
 
 import java.util.Observable;
 import java.util.Observer;
 
-import Model.Turtle;
+import model.Turtle;
 
 public class TurtleObserver implements Observer{
 	private GUICanvas myCanvas;
