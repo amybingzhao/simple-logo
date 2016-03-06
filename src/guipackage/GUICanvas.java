@@ -36,10 +36,6 @@ public class GUICanvas implements Observer{
 	private static final int STARTING_Y = CANVAS_HEIGHT/2 - TURTLE_SIZE/2;
 	private static final String PATH_DELIMITER = "/";
 	private static final String DEFAULT_TURTLE = "turtle_outline.png";
-	private double myX;
-	private double myY;
-	private double myOldX;
-	private double myOldY;
 	private double myOldDirection;
 	private Canvas canvasBackground;
 	private Pane myRoot;
@@ -47,7 +43,7 @@ public class GUICanvas implements Observer{
 	private GraphicsContext gcDrawing;
 	private GraphicsContext gc;
 	private Map<Turtle, List<GraphicsContext>> myTurtles;
-	private List<Double[]> oldTurtleCoordinates;
+	private List<Double[]> turtleParameters;
 	private Image turtleImage;
 	private int myPenColorIndex;
 	private int myBackgroundColorIndex;
@@ -60,7 +56,7 @@ public class GUICanvas implements Observer{
 	
 	public void init() {
 		myTurtles = new HashMap<Turtle, List<GraphicsContext>>();
-		oldTurtleCoordinates = new ArrayList<Double[]>();
+		turtleParameters = new ArrayList<Double[]>();
 		canvasBackground = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		gcBackground = canvasBackground.getGraphicsContext2D();
 		gcBackground.setFill(Color.BISQUE);
@@ -103,13 +99,14 @@ public class GUICanvas implements Observer{
 	/**
 	 * Keeps track of the old coordinates after updating the Turtle.
 	 */
-	public void setOldCoordinates(Turtle turtle, double x, double y) {
-		Double[] coordinates = new Double[2];
+	public void setOldCoordinates(Turtle turtle, double x, double y, double direction) {
+		Double[] coordinates = new Double[3];
 		coordinates[0] = x;
 		coordinates[1] = y;
-		if (oldTurtleCoordinates.size() < turtle.getID() + 1)
-			oldTurtleCoordinates.add((int) turtle.getID(), coordinates);
-		else oldTurtleCoordinates.set((int) turtle.getID(), coordinates);
+		coordinates[2] = direction;
+		if (turtleParameters.size() < turtle.getID() + 1)
+			turtleParameters.add((int) turtle.getID(), coordinates);
+		else turtleParameters.set((int) turtle.getID(), coordinates);
 	}
 	
 	/**
@@ -134,7 +131,7 @@ public class GUICanvas implements Observer{
 							drawingCanvas.getGraphicsContext2D())));
 			int myX = STARTING_X;
 			int myY = STARTING_Y;
-			setOldCoordinates(turtle, myX, myY);
+			setOldCoordinates(turtle, myX, myY, 0);
 		}
 	}
 	
@@ -146,7 +143,7 @@ public class GUICanvas implements Observer{
 		turtleImage = image;
 		for(Turtle key: myTurtles.keySet()){
 			if (key == null){
-				gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+				gc.drawImage(turtleImage, STARTING_X, STARTING_Y, TURTLE_SIZE, TURTLE_SIZE);
 			}
 			else drawTurtle(key);
 		}
@@ -157,11 +154,13 @@ public class GUICanvas implements Observer{
 	 */
 	public void clearPreviousTurtle(Turtle turtle) {
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
+		double myOldX = turtleParameters.get((int) turtle.getID())[0].doubleValue();
+		double myOldY = turtleParameters.get((int) turtle.getID())[1].doubleValue();
+		double myOldDirection = turtleParameters.get((int) turtle.getID())[2].doubleValue();
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(myOldDirection, myOldX + TURTLE_SIZE/2, myOldY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-		gc.clearRect(oldTurtleCoordinates.get((int) turtle.getID())[0].doubleValue(),
-				oldTurtleCoordinates.get((int) turtle.getID())[1].doubleValue(), TURTLE_SIZE, TURTLE_SIZE);
+		gc.clearRect(myOldX, myOldY, TURTLE_SIZE, TURTLE_SIZE);
 		gc.restore();
 	}
 
@@ -183,8 +182,7 @@ public class GUICanvas implements Observer{
 			gcDrawing.fillOval(myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2, 3, 3);
 		}
 		gc.restore();
-		setOldCoordinates(turtle, myX, myY);
-		myOldDirection = turtle.getDirection();
+		setOldCoordinates(turtle, myX, myY, turtle.getDirection());
 	}
 	
 	/**
