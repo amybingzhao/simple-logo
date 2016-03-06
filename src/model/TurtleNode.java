@@ -84,4 +84,11 @@ public abstract class TurtleNode extends Node {
 			}
 		}
     }
+    
+    public void inactivateAllTurtles() {
+    	for (int i = 0; i < myTurtles.size(); i++) {
+			Turtle turtle = getTurtleByID(i);
+			turtle.inactivate();
+		}
+    }
 }

@@ -13,7 +13,8 @@ public class Ask extends TurtleNode {
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Turtle> origActiveList = getActiveTurtles();
 		List<Double> turtleIDs = createListFromCommandList((CommandList) getChildren().get(TURTLE_IDS), commandDict, varDict);
-		
+
+		inactivateAllTurtles();
 		// only activates the ones listed in turtleIDs
 		for (int i = 0; i < turtleIDs.size(); i++) {
 			Turtle turtle = getTurtleByID(turtleIDs.get(i));
@@ -28,15 +29,12 @@ public class Ask extends TurtleNode {
 		
 		double ret = getChildren().get(COMMANDS).interpret(commandDict, varDict);
 		
-		for (int i = 0; i < getTurtles().size(); i++) {
-			Turtle turtle = getTurtleByID(i);
+		inactivateAllTurtles();
+		for (int i = 0; i < origActiveList.size(); i++) {
+			Turtle turtle = getTurtleByID(origActiveList.get(i).getID());
 			if (turtle != null) {
 				turtle.setAsCurrentTurtle();
-				if (origActiveList.contains(turtle)) {
-					turtle.activate();
-				} else {
-					turtle.inactivate();
-				}
+				turtle.activate();
 				turtle.noLongerCurrentTurtle();
 			}
 		}
