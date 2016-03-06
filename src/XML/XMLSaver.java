@@ -11,6 +11,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import model.CommandDictionary;
 import model.Turtle;
+import model.Node;
 import model.VariableDictionary;
 import org.w3c.dom.*;
 
@@ -36,6 +37,7 @@ public class XMLSaver {
     public static final String X = "X";
     public static final String ID = "ID";
     public static final String DIRECTION = "Direction";
+    public static final String VARIABLES = "Variables";
     private DocumentBuilderFactory myFactory;
     private DocumentBuilder myBuilder;
     private Document myDocument;
@@ -60,6 +62,7 @@ public class XMLSaver {
         myDocument.appendChild(myRoot);
         myRoot.appendChild(getConfig(backgroundColor, penColor));
         myRoot.appendChild(getTurtles(turtles));
+        myRoot.appendChild(getVariables());
         createFile(file);
     }
 
@@ -94,6 +97,14 @@ public class XMLSaver {
         return turtleElement;
     }
 
+    private Element getVariables(){
+        Element variablesElement = myDocument.createElement(VARIABLES);
+        for (String key : myVarDict.getKeySet()){
+            variablesElement.appendChild(makeElement(key, "" + myVarDict.getNodeFor(key)));
+        }
+        return variablesElement;
+    }
+
     private Element makeTurtleElement(Turtle myTurtle) {
         Element turtleElement = myDocument.createElement(TURTLE);
         turtleElement.appendChild(makeElement(ID, "" + myTurtle.getID()));
@@ -110,6 +121,10 @@ public class XMLSaver {
         return myElement;
     }
 
+    public void addToVarDict(String key, double value){
+        myVarDict.makeVariable(key, value);
+    }
+
     public static void main(String[] args) {
         XMLSaver mySaver = new XMLSaver(new CommandDictionary(), new VariableDictionary());
         List<Turtle> myTurts = new ArrayList<>();
@@ -117,6 +132,7 @@ public class XMLSaver {
         Turtle otherTurtle = new Turtle(40);
         myTurts.add(myTurtle);
         myTurts.add(otherTurtle);
+        mySaver.addToVarDict(":x", 20.0);
         mySaver.generateFile("Test1", "Test2", "Test3", "Test4", myTurts, new File("test.xml"));
     }
 
