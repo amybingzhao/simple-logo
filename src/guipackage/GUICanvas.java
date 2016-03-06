@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
@@ -19,7 +20,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
 
-import java.io.File;
 
 /**
  * Returns one Node that contains the Turtle Canvas and two ColorPicker objects
@@ -45,6 +45,12 @@ public class GUICanvas implements Observer{
 	private Map<Turtle, List<GraphicsContext>> myTurtles;
 	private List<Double[]> turtleParameters;
 	private Image turtleImage;
+	private GUIObjectComboBoxColor myBackgroundPalette;
+	private GUIObjectComboBoxColor myPenPalette;
+	
+	
+	
+	//
 	private int myPenColorIndex;
 	private int myBackgroundColorIndex;
 	private double myPenSize;

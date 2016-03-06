@@ -20,9 +20,9 @@ import javafx.util.Callback;
 abstract class GUIObjectComboBoxColor extends GUIObjectComboBox{
 	protected List<String> defaultPalette;
 	
-	public GUIObjectComboBoxColor(GUICanvas canvas, ResourceBundle myResources, Controller myController,
-			String promptText, GUICommandLine myCommandLine) {
-		super(canvas, myResources, myController, promptText, myCommandLine);
+	public GUIObjectComboBoxColor(GUICanvas canvas, ResourceBundle myResources,
+			String promptText) {
+		super(canvas, myResources, promptText);
 		fillDefaultPalette();
 	}
 

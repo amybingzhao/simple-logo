@@ -15,10 +15,9 @@ import javafx.scene.paint.Color;
  */
 public class GUIObjectComboBoxColorP extends GUIObjectComboBoxColor {
 
-	public GUIObjectComboBoxColorP(GUICanvas canvas, ResourceBundle myResources, Controller myController,
-			String promptText, GUICommandLine myCommandLine) {
-		super(canvas, myResources, myController, promptText, myCommandLine);
-		// TODO Auto-generated constructor stub
+	public GUIObjectComboBoxColorP(GUICanvas canvas, ResourceBundle myResources,
+			String promptText) {
+		super(canvas, myResources, promptText);
 	}
 
 	@Override
@@ -29,6 +28,7 @@ public class GUIObjectComboBoxColorP extends GUIObjectComboBoxColor {
 
 	@Override
 	protected void setCanvasValues(Color col) {
+		System.out.println(col);
 		canvas.setPenColor(col);
 	}
 	

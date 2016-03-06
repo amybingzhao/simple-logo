@@ -62,12 +62,10 @@ public class GUIObjectFactory {
 //			return new GUIObjectColorPickerBackground(canvas,myResources.getString(nodeTypeKey+"Label"));
 //		}
 		case("BackgroundColorPalette"):{
-			return new GUIObjectComboBoxColorB(canvas, myResources, myController,
-					myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
+			return new GUIObjectComboBoxColorB(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
 		}
 		case("PenColorPalette"):{
-			return new GUIObjectComboBoxColorB(canvas, myResources, myController,
-					myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
+			return new GUIObjectComboBoxColorP(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
 		}
 		case("ColorPickerPen"):{
 			return new GUIObjectColorPickerPen(canvas,myResources.getString(nodeTypeKey+"Label"));
