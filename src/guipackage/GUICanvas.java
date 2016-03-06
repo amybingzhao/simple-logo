@@ -163,6 +163,7 @@ public class GUICanvas implements Observer{
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		double myOldX = turtleParameters.get((int) turtle.getID())[0].doubleValue();
 		double myOldY = turtleParameters.get((int) turtle.getID())[1].doubleValue();
+		double myOldDirection = turtleParameters.get((int) turtle.getID())[2].doubleValue();
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(myOldDirection, myOldX + TURTLE_SIZE/2, myOldY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
