@@ -15,6 +15,7 @@ import model.VariableDictionary;
 import org.w3c.dom.*;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,15 +25,17 @@ import java.util.List;
 public class XMLSaver {
 
     public static final String XML_STYLE = "{http://xml.apache.org/xslt}indent-amount";
-    public static final String ROOT_TEXT = "SLogo Configuration";
+    public static final String ROOT_TEXT = "SLogoConfiguration";
     public static final String CONFIG = "Config";
-    public static final String BACKGROUND_COLOR = "Background Color";
-    public static final String PEN_COLOR = "Pen Color";
+    public static final String BACKGROUND_COLOR = "BackgroundColor";
+    public static final String PEN_COLOR = "PenColor";
     public static final String TURTLES = "Turtles";
     public static final String TURTLE = "Turtle";
     public static final String IMAGE = "Image";
     public static final String Y = "Y";
     public static final String X = "X";
+    public static final String ID = "ID";
+    public static final String DIRECTION = "Direction";
     private DocumentBuilderFactory myFactory;
     private DocumentBuilder myBuilder;
     private Document myDocument;
@@ -52,16 +55,12 @@ public class XMLSaver {
     }
 
     public void generateFile(String imgName, String backgroundColor, String penColor, String language, List<Turtle> turtles, File file) {
-        System.out.println(imgName);
-        System.out.println(backgroundColor);
-        System.out.println(penColor);
-        System.out.println(language);
-        for (Turtle myTurt : turtles) {
-            System.out.println(myTurt);
-        }
-        System.out.println(file.getName());
-//        myDocument = myBuilder.newDocument();
-//        Element myRoot = myDocument.createElement(ROOT_TEXT);
+        myDocument = myBuilder.newDocument();
+        Element myRoot = myDocument.createElement("SLogoState");
+        myDocument.appendChild(myRoot);
+        myRoot.appendChild(getConfig(backgroundColor, penColor));
+        myRoot.appendChild(getTurtles(turtles));
+        createFile(file);
     }
 
     public void createFile(File file) {
@@ -89,15 +88,19 @@ public class XMLSaver {
 
     private Element getTurtles(List<Turtle> myTurtles) {
         Element turtleElement = myDocument.createElement(TURTLES);
-
+        for (Turtle myTurtle : myTurtles) {
+            turtleElement.appendChild(makeTurtleElement(myTurtle));
+        }
         return turtleElement;
     }
 
     private Element makeTurtleElement(Turtle myTurtle) {
         Element turtleElement = myDocument.createElement(TURTLE);
+        turtleElement.appendChild(makeElement(ID, "" + myTurtle.getID()));
         turtleElement.appendChild(makeElement(X, "" + myTurtle.getCurX()));
         turtleElement.appendChild(makeElement(Y, "" + myTurtle.getCurY()));
-        turtleElement.appendChild(makeElement(IMAGE, "" + myTurtle.getImage().toString()));
+        turtleElement.appendChild(makeElement(DIRECTION, "" + myTurtle.getDirection()));
+        turtleElement.appendChild(makeElement(IMAGE, "" + myTurtle.getImage()));
         return turtleElement;
     }
 
@@ -105,6 +108,16 @@ public class XMLSaver {
         Element myElement = myDocument.createElement(nodeName);
         myElement.appendChild(myDocument.createTextNode(data));
         return myElement;
+    }
+
+    public static void main(String[] args) {
+        XMLSaver mySaver = new XMLSaver(new CommandDictionary(), new VariableDictionary());
+        List<Turtle> myTurts = new ArrayList<>();
+        Turtle myTurtle = new Turtle(30);
+        Turtle otherTurtle = new Turtle(40);
+        myTurts.add(myTurtle);
+        myTurts.add(otherTurtle);
+        mySaver.generateFile("Test1", "Test2", "Test3", "Test4", myTurts, new File("test.xml"));
     }
 
 }
