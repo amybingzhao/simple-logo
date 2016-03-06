@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -108,6 +109,7 @@ public class Controller {
                 myAlert.displayAlert(EXECUTION_ERROR);
             }
         }
+        save();
     }
 
     // converts string command to arraylist
@@ -167,9 +169,9 @@ public class Controller {
         return varDict;
     }
 
-    public void save() {
+    private void save() {
         XMLSaver mySaver = new XMLSaver(commandDict, varDict);
-        //mySaver.generateFile();
+        mySaver.generateFile(myCanvas.getBackgroundColor().toString(), "Blue", myGUIResource.toString(), getTurtles(), new File("test.xml"));
     }
 
 }

@@ -9,10 +9,11 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import model.CommandDictionary;
-import model.Turtle;
+import controller.Controller;
+import controller.Parser;
+import guipackage.GUICanvas;
+import model.*;
 import model.Node;
-import model.VariableDictionary;
 import org.w3c.dom.*;
 
 import java.io.File;
@@ -38,6 +39,11 @@ public class XMLSaver {
     public static final String ID = "ID";
     public static final String DIRECTION = "Direction";
     public static final String VARIABLES = "Variables";
+    public static final String COMMANDS = "Commands";
+    public static final String COMMAND = "Command";
+    public static final String NAME = "Name";
+    public static final String PROCEDURE = "Procedure";
+    public static final String NUMBER_OF_ARGUMENTS = "NumberOfArguments";
     private DocumentBuilderFactory myFactory;
     private DocumentBuilder myBuilder;
     private Document myDocument;
@@ -56,13 +62,14 @@ public class XMLSaver {
         }
     }
 
-    public void generateFile(String imgName, String backgroundColor, String penColor, String language, List<Turtle> turtles, File file) {
+    public void generateFile(String backgroundColor, String penColor, String language, List<Turtle> turtles, File file) {
         myDocument = myBuilder.newDocument();
         Element myRoot = myDocument.createElement("SLogoState");
         myDocument.appendChild(myRoot);
         myRoot.appendChild(getConfig(backgroundColor, penColor));
         myRoot.appendChild(getTurtles(turtles));
         myRoot.appendChild(getVariables());
+        myRoot.appendChild(getCommands());
         createFile(file);
     }
 
@@ -97,12 +104,28 @@ public class XMLSaver {
         return turtleElement;
     }
 
-    private Element getVariables(){
+    private Element getVariables() {
         Element variablesElement = myDocument.createElement(VARIABLES);
-        for (String key : myVarDict.getKeySet()){
+        for (String key : myVarDict.getKeySet()) {
             variablesElement.appendChild(makeElement(key, "" + myVarDict.getNodeFor(key)));
         }
         return variablesElement;
+    }
+
+    private Element getCommands() {
+        Element commandElement = myDocument.createElement(COMMANDS);
+        for (String key : myCommandDict.getCommandKeySet()) {
+            commandElement.appendChild(makeCommandElement(key));
+        }
+        return commandElement;
+    }
+
+    private Element makeCommandElement(String key) {
+        Element commandElement = myDocument.createElement(COMMAND);
+        commandElement.appendChild(makeElement(NAME, key));
+        commandElement.appendChild(makeElement(PROCEDURE, myCommandDict.getCommandFor(key).getProcedure().toString()));
+        commandElement.appendChild(makeElement(NUMBER_OF_ARGUMENTS, "" + myCommandDict.getNumArgsForkey(key)));
+        return commandElement;
     }
 
     private Element makeTurtleElement(Turtle myTurtle) {
@@ -120,20 +143,4 @@ public class XMLSaver {
         myElement.appendChild(myDocument.createTextNode(data));
         return myElement;
     }
-
-    public void addToVarDict(String key, double value){
-        myVarDict.makeVariable(key, value);
-    }
-
-    public static void main(String[] args) {
-        XMLSaver mySaver = new XMLSaver(new CommandDictionary(), new VariableDictionary());
-        List<Turtle> myTurts = new ArrayList<>();
-        Turtle myTurtle = new Turtle(30);
-        Turtle otherTurtle = new Turtle(40);
-        myTurts.add(myTurtle);
-        myTurts.add(otherTurtle);
-        mySaver.addToVarDict(":x", 20.0);
-        mySaver.generateFile("Test1", "Test2", "Test3", "Test4", myTurts, new File("test.xml"));
-    }
-
 }
