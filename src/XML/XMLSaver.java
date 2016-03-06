@@ -26,6 +26,14 @@ public class XMLSaver {
 
     public static final String XML_STYLE = "{http://xml.apache.org/xslt}indent-amount";
     public static final String ROOT_TEXT = "SLogo Configuration";
+    public static final String CONFIG = "Config";
+    public static final String BACKGROUND_COLOR = "Background Color";
+    public static final String PEN_COLOR = "Pen Color";
+    public static final String TURTLES = "Turtles";
+    public static final String TURTLE = "Turtle";
+    public static final String IMAGE = "Image";
+    public static final String Y = "Y";
+    public static final String X = "X";
     private DocumentBuilderFactory myFactory;
     private DocumentBuilder myBuilder;
     private Document myDocument;
@@ -73,7 +81,31 @@ public class XMLSaver {
         }
     }
 
-//    private Element getConfig(){
-//
-//    }
+    private Element getConfig(String backgroundColor, String penColor) {
+        Element configElement = myDocument.createElement(CONFIG);
+        configElement.appendChild(makeElement(BACKGROUND_COLOR, backgroundColor));
+        configElement.appendChild(makeElement(PEN_COLOR, penColor));
+        return configElement;
+    }
+
+    private Element getTurtles(List<Turtle> myTurtles) {
+        Element turtleElement = myDocument.createElement(TURTLES);
+
+        return turtleElement;
+    }
+
+    private Element makeTurtleElement(Turtle myTurtle) {
+        Element turtleElement = myDocument.createElement(TURTLE);
+        turtleElement.appendChild(makeElement(X, "" + myTurtle.getCurX()));
+        turtleElement.appendChild(makeElement(Y, "" + myTurtle.getCurY()));
+        turtleElement.appendChild(makeElement(IMAGE, "" + myTurtle.getImage().toString()));
+        return turtleElement;
+    }
+
+    private Element makeElement(String nodeName, String data) {
+        Element myElement = myDocument.createElement(nodeName);
+        myElement.appendChild(myDocument.createTextNode(data));
+        return myElement;
+    }
+
 }
