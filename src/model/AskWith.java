@@ -12,19 +12,7 @@ public class AskWith extends TurtleNode {
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Turtle> origActiveList = getActiveTurtles();
-		List<Turtle> allTurtles = getTurtles();
-		List<Double> activeTurtleIDs = new ArrayList<Double>();
-		IFunctions condition = getChildren().get(CONDITION);
-		
-		inactivateAllTurtles();
-		for (int i = 0; i < allTurtles.size(); i++) {
-			allTurtles.get(i).activate();
-			allTurtles.get(i).setAsCurrentTurtle();
-			if (condition.interpret(commandDict, varDict) == 1) {
-				activeTurtleIDs.add(allTurtles.get(i).getID());
-			}
-			allTurtles.get(i).inactivate();
-		}
+		List<Double> activeTurtleIDs = checkTurtlesForCondition(getTurtles(), commandDict, varDict);		
 		
 		// only activates the ones listed in turtleIDs
 		for (int i = 0; i < activeTurtleIDs.size(); i++) {
@@ -51,6 +39,20 @@ public class AskWith extends TurtleNode {
 		}
 		
 		return ret;
+	}
+
+	private List<Double> checkTurtlesForCondition(List<Turtle> allTurtles, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		List<Double> turtleIDs = new ArrayList<Double>();
+		inactivateAllTurtles();
+		for (int i = 0; i < allTurtles.size(); i++) {
+			allTurtles.get(i).activate();
+			allTurtles.get(i).setAsCurrentTurtle();
+			if (getChildren().get(CONDITION).interpret(commandDict, varDict) == 1) {
+				turtleIDs.add(allTurtles.get(i).getID());
+			}
+			allTurtles.get(i).inactivate();
+		}
+		return turtleIDs;
 	}
 
 	@Override
