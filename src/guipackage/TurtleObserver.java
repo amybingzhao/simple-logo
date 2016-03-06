@@ -36,7 +36,7 @@ public class TurtleObserver implements Observer{
 	}
 	
 	public void updateCanvas() {
-		myCanvas.update(this);
+//		myCanvas.update(this);
 	}
 	
 	protected double getX() {
