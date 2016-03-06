@@ -6,7 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 /**
- * Alert popups for error handling.
+ * Alert pop-ups for error handling.
  *
  * @author AnnieTang
  */

@@ -19,13 +19,11 @@ import model.VariableDictionary;
 public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
     private CommandDictionary myUserDefinedCommands;
     private TextInputDialog dialog;
-    private VariableDictionary varDict;
 
     public GUIObjectComboBoxUserHist(GUICanvas canvas, ResourceBundle myResources, Controller myController,
-                                     String promptText, GUICommandLine cLine, CommandDictionary myComDict, VariableDictionary myVarDict) {
-        super(canvas, myResources, myController, promptText, cLine);
+                                     String promptText, GUICommandLine myCommandLine, CommandDictionary myComDict) {
+        super(canvas, myResources, myController, promptText, myCommandLine);
         myUserDefinedCommands = myComDict;
-        varDict = myVarDict;
     }
 
     @Override
