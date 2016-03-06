@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -98,9 +99,11 @@ public class Controller {
     	while (!commandAsList.isEmpty()) {
     		try{
     			IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myTurtles);
-    			double result = executeCommandTree(commandToExecute);
-    			myOutput.setOutputText(Double.toString(result));
-    			addCommandToHistory(command);
+    			if (commandToExecute != null) {
+    				double result = executeCommandTree(commandToExecute);
+    				myOutput.setOutputText(Double.toString(result));
+    				addCommandToHistory(command);
+    			}
     		}
     		catch(ClassNotFoundException e){
     			myAlert.displayAlert(DOES_NOT_EXIST);
@@ -117,10 +120,14 @@ public class Controller {
     // converts string command to arraylist
     private List<String> getCommandAsList(String command) {
         List<String> inputCommandList = new ArrayList<String>();
-        String[] inputArray = command.split(WHITESPACE);
+        String[] inputArray = command.split("\n");
         for (int i = 0; i < inputArray.length; i++) {
         	if (!inputArray[i].isEmpty()) {
-        		inputCommandList.add(inputArray[i]);
+        		if (!inputArray[i].trim().startsWith("#")) {
+        			inputCommandList.addAll(Arrays.asList(inputArray[i].split(WHITESPACE)));
+        		} else {
+        			inputCommandList.add(inputArray[i]);
+        		}
         	}
         }
         return inputCommandList;
