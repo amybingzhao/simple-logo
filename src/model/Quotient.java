@@ -28,6 +28,6 @@ public class Quotient extends Node {
 	 */
     @Override
     public String toString() {
-        return QUOTIENT + getChildren().get(EXPR1).toString() + " " + getChildren().get(EXPR2).toString();
+        return QUOTIENT + childrenToString();
     }
 }

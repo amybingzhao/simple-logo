@@ -39,8 +39,7 @@ public class Repeat extends Node {
      */
     @Override
     public String toString() {
-        List<Node> children = getChildren();
-        return REPEAT + children.get(EXPR).toString() + " " + children.get(COMMANDS).toString();
+        return REPEAT + childrenToString();
     }
 
 

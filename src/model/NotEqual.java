@@ -33,7 +33,6 @@ public class NotEqual extends Node {
      * Returns the required user input for this command.
      */
     public String toString() {
-        List<Node> children = getChildren();
-        return NOTEQUAL + children.get(EXPR1).toString() + " " + children.get(EXPR2).toString();
+        return NOTEQUAL + childrenToString();
     }
 }

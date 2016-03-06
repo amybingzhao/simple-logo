@@ -41,8 +41,7 @@ public class DoTimes extends Node {
      */
     @Override
     public String toString() {
-        List<Node> children = getChildren();
-        return DOTIMES + children.get(VARIABLE_AND_LIMIT).toString() + " " + children.get(COMMANDS).toString();
+        return DOTIMES + childrenToString();
     }
 
 }

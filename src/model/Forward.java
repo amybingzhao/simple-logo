@@ -37,7 +37,6 @@ public class Forward extends TurtleNode {
 	 */
 	@Override
 	public String toString() {
-		List<Node> children = getChildren();
-		return FORWARD + children.get(DISTANCE).toString();
+		return FORWARD + childrenToString();
 	}
 }

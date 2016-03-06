@@ -28,6 +28,6 @@ public class Power extends Node {
 	 */
     @Override
     public String toString() {
-        return POWER + getChildren().get(BASE).toString() + " " +getChildren().get(EXPONENT).toString();
+        return POWER + childrenToString();
     }
 }

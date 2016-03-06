@@ -35,7 +35,6 @@ public class Backward extends TurtleNode {
 	 */
 	@Override
 	public String toString() {
-		List<Node> children = getChildren();
-		return BACKWARD + children.get(DISTANCE).toString();
+		return BACKWARD + childrenToString();
 	}
 }

@@ -32,7 +32,6 @@ public class Equal extends Node {
 	 * Returns the required user input for this command. 
 	 */
 	public String toString() {
-		List<Node> children = getChildren();
-		return EQUAL + children.get(EXPR1).toString() + " " + children.get(EXPR2).toString();
+		return EQUAL + childrenToString();
 	}
 }

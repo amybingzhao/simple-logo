@@ -25,6 +25,6 @@ public class Tell extends TurtleNode {
 
 	@Override
 	public String toString() {
-		return TELL + getChildren().get(TURTLE_IDS).toString();
+		return TELL + childrenToString();
 	}
 }

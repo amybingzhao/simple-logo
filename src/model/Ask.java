@@ -50,6 +50,6 @@ public class Ask extends TurtleNode {
 	
 	@Override
 	public String toString() {
-		return ASK + getChildren().get(TURTLE_IDS) + " " + getChildren().get(COMMANDS);
+		return ASK + childrenToString();
 	}
 }

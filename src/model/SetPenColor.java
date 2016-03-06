@@ -13,6 +13,6 @@ public class SetPenColor extends DisplayNode {
 
 	@Override
 	public String toString() {
-		return SET_PEN_COLOR + getChildren().get(INDEX).toString();
+		return SET_PEN_COLOR + childrenToString();
 	}
 }

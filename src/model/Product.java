@@ -28,6 +28,6 @@ public class Product extends Node {
 	 */
     @Override
     public String toString() {
-        return PRODUCT + getChildren().get(EXPR1).toString() + " " + getChildren().get(EXPR2).toString();
+        return PRODUCT + childrenToString();
     }
 }

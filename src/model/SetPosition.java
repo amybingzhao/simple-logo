@@ -37,7 +37,6 @@ public class SetPosition extends TurtleNode {
      */
     @Override
     public String toString() {
-        List<Node> children = getChildren();
-        return SETXY + children.get(X).toString() + " " + children.get(Y).toString();
+        return SETXY + childrenToString();
     }
 }

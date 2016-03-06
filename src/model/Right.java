@@ -31,7 +31,6 @@ public class Right extends TurtleNode {
 	 */
 	@Override
 	public String toString() {
-		List<Node> children = getChildren();
-		return RIGHT + children.get(DEGREES).toString();
+		return RIGHT + childrenToString();
 	}	
 }

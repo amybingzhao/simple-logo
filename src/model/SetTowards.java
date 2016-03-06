@@ -30,7 +30,6 @@ public class SetTowards extends TurtleNode {
 	 */
 	@Override
 	public String toString() {
-		List<Node> children = getChildren();
-		return TOWARDS + children.get(X).toString() + " " + children.get(Y).toString();
+		return TOWARDS + childrenToString();
 	}	
 }

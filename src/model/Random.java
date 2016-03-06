@@ -24,6 +24,6 @@ public class Random extends Node {
 	 */
     @Override
     public String toString() {
-        return RANDOM + getChildren().get(MAX).toString();
+        return RANDOM + childrenToString();
     }
 }

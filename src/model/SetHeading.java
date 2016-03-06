@@ -32,7 +32,6 @@ public class SetHeading extends TurtleNode {
 	 */
 	@Override
 	public String toString() {
-		List<Node> children = getChildren();
-		return SETHEADING + children.get(DEGREES).toString();
+		return SETHEADING + childrenToString();
 	}
 }

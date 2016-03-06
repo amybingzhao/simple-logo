@@ -13,6 +13,6 @@ public class SetPenSize extends DisplayNode {
 
 	@Override
 	public String toString() {
-		return SET_PEN_SIZE + getChildren().get(PIXELS).toString();
+		return SET_PEN_SIZE + childrenToString();
 	}
 }

@@ -27,6 +27,6 @@ public class ArcTangent extends Node {
 	 */
     @Override
     public String toString() {
-        return ARC_TANGENT + getChildren().get(DEGREES).toString();
+        return ARC_TANGENT + childrenToString();
     }
 }

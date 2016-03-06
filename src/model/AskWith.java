@@ -63,6 +63,6 @@ public class AskWith extends TurtleNode {
 	
 	@Override
 	public String toString() {
-		return ASKWITH + getChildren().get(CONDITION) + " " + getChildren().get(COMMANDS);
+		return ASKWITH + childrenToString();
 	}
 }

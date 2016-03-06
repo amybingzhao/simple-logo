@@ -29,6 +29,6 @@ public class Difference extends Node {
 	 */
     @Override
     public String toString() {
-        return DIFFERENCE + getChildren().get(EXPR1).toString() + " " + getChildren().get(EXPR2	).toString();
+        return DIFFERENCE + childrenToString();
     }
 }

@@ -28,6 +28,6 @@ public class Sine extends Node {
      */
     @Override
     public String toString() {
-        return SINE + getChildren().get(DEGREES).toString();
+        return SINE + childrenToString();
     }
 }

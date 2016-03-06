@@ -43,7 +43,6 @@ public class For extends Node {
      * Returns the required user input for this command.
      */
     public String toString() {
-        List<Node> children = getChildren();
-        return FOR + children.get(VARIABLE_AND_LIMITS).toString() + " " + children.get(COMMANDS).toString();
+        return FOR + childrenToString();
     }
 }
