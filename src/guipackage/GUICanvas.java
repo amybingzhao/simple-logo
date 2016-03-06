@@ -209,22 +209,20 @@ public class GUICanvas implements Observer{
 		gcDrawing.setFill(c);
 	}
 	
-	/*
-	
-	public void setPenColorIndex(double colorIndex) {
-	
-	}
-	
-	public void setBackgroundColor(double colorVal) {
-		myBackgroundColor = c;
-		gcBackground.setFill(myBackgroundColor);
+	public void setBackgroundColor(Color col) {
+		gcBackground.setFill(col);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
 	
 	public Color getPenColor() {
-		return myPenColor;
+		return (Color) gcDrawing.getFill();
 	}
 	
+	public Color getBackgroundColor(){
+		return (Color) gcBackground.getFill();
+	}
+	
+	/*	
 	public void setPenSize(double size) {
 		myPenSize = size;
 	}
@@ -234,10 +232,6 @@ public class GUICanvas implements Observer{
 	}
 	
 	public double getTurtleShapeIndex() {
-	
-	}
-	
-	public void setPaletteIndex(double index, Color colorToAdd) {
 	
 	}
 	*/
