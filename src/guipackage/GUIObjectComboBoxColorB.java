@@ -26,8 +26,7 @@ public class GUIObjectComboBoxColorB extends GUIObjectComboBoxColor {
 
 	@Override
 	protected void setCanvasValues(Color col) {
-		canvas.getBackgroundGraphicsContext().setFill(col);
-		canvas.getBackgroundGraphicsContext().fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		canvas.setBackgroundColor(col);
 	}
 	
 }

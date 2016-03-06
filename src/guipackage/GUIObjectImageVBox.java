@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 /**
@@ -123,7 +124,8 @@ public class GUIObjectImageVBox implements IGUIObject {
 	@Override
 	public void updateNode() {
 		if(canUpdate){
-			canvas.setTurtleImage(imageFile);
+			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(imageFile.getName()));
+			canvas.setTurtleImage(newImage);
 		}
 	}
 }

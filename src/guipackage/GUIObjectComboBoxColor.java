@@ -73,7 +73,7 @@ abstract class GUIObjectComboBoxColor extends GUIObjectComboBox{
 		return defaultPalette;
 	}
 	
-	public void setPalette(String RGB, int index) {
+	public void changePalette(String RGB, int index) {
 		List<String> currentPalette = comboBox.getItems();
 		if(index<currentPalette.size()){
 			currentPalette.set(index, RGB);

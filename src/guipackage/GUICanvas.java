@@ -140,23 +140,16 @@ public class GUICanvas implements Observer{
 	
 	/**
 	 * Sets user-inputed image as the Canvas turtle.
-	 * @param file that contains image
+	 * @param Image
 	 */
-	public void setTurtleImage(File file){
-		String filePath = file.getPath();
-		String[] splitFilePath = filePath.split(PATH_DELIMITER);
-		String fileName = splitFilePath[splitFilePath.length - 1];
-		turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
-//		if (turtle == null) 
-//			gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
-//		else drawTurtle();
-	}
-	
 	public void setTurtleImage(Image image){
 		turtleImage = image;
-//		if (turtle == null) 
-//			gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
-//		else drawTurtle();
+		for(Turtle key: myTurtles.keySet()){
+			if (key == null){
+				gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+			}
+			else drawTurtle(key);
+		}
 	}
 	
 	/**
@@ -209,22 +202,20 @@ public class GUICanvas implements Observer{
 		gcDrawing.setFill(c);
 	}
 	
-	/*
-	
-	public void setPenColorIndex(double colorIndex) {
-	
-	}
-	
-	public void setBackgroundColor(double colorVal) {
-		myBackgroundColor = c;
-		gcBackground.setFill(myBackgroundColor);
+	public void setBackgroundColor(Color col) {
+		gcBackground.setFill(col);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
 	
 	public Color getPenColor() {
-		return myPenColor;
+		return (Color) gcDrawing.getFill();
 	}
 	
+	public Color getBackgroundColor(){
+		return (Color) gcBackground.getFill();
+	}
+	
+	/*	
 	public void setPenSize(double size) {
 		myPenSize = size;
 	}
@@ -234,10 +225,6 @@ public class GUICanvas implements Observer{
 	}
 	
 	public double getTurtleShapeIndex() {
-	
-	}
-	
-	public void setPaletteIndex(double index, Color colorToAdd) {
 	
 	}
 	*/

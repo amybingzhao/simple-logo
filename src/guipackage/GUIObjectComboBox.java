@@ -83,7 +83,7 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 	 */
 	protected abstract List<String> optionsList();
 	
-	public void setPalette(String RGB, int index) {
+	public void changePalette(String RGB, int index) {
 		List<String> currentPalette = comboBox.getItems();
 		currentPalette.set(index, RGB);
 //		defaultPalette = currentPalette;
