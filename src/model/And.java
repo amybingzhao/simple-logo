@@ -7,26 +7,23 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class And extends Node {
+public class And extends BooleanNode {
 
     private static final String AND = "and ";
 
     /**
-     * If expr1 and expr2 are both true, returns 1; else return 0.
+     * If all expressions are true, returns true.
      *
      * @param commandDict
      * @param varDict
+     * @throws IndexOutOfBoundsException 
+     * @throws NullPointerException 
+     * @throws ClassNotFoundException 
      */
-    @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<Node> children = getChildren();
-        for (int i = 0; i < children.size(); i++) {
-        	if (children.get(i).interpret(commandDict, varDict) == 0) {
-        		return 0;
-        	}
-        }
-        return 1;
-    }
+	@Override
+	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		return countNumTrue(commandDict, varDict) == getChildren().size();
+	}
 
     /**
      * Returns the required user input for this command.
@@ -34,5 +31,6 @@ public class And extends Node {
     public String toString() {
         return AND + childrenToString();
     }
+
 
 }

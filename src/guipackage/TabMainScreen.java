@@ -75,6 +75,8 @@ public class TabMainScreen {
 	 */
 	private void setCenterPane() {
 		Node canvasNode = canvas.createNode();
+		penSettings = myFactory.createNewGUIObject("PenSettings");
+		canvas.addNodeToCanvasRight(penSettings.createNode());
 		myMainScreen.setCenter(canvasNode);
 	}
 
@@ -94,8 +96,7 @@ public class TabMainScreen {
 	private void setRightPane() {
 		VBox rightPanel = new VBox(PANEL_PADDING);
 		variables = myFactory.createNewGUIObject("Variables");
-		penSettings = myFactory.createNewGUIObject("PenSettings");
-		rightPanel.getChildren().addAll(variables.createNode(), penSettings.createNode());
+		rightPanel.getChildren().addAll(variables.createNode());
 		myMainScreen.setRight(rightPanel);
 	}
 	
