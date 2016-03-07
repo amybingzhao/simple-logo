@@ -1,15 +1,14 @@
 package model;
 
+import guipackage.GUICanvas;
+
 public class SetBackground extends DisplayNode {
 
 	private static final String SET_BACKGROUND = "setbackground ";
-	private static final int INDEX = 0;
 	
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		getCanvas().setBackgroundColor((int) getChildren().get(INDEX).interpret(commandDict, varDict));
-		return getChildren().get(INDEX).interpret(commandDict, varDict);
+	protected void performCanvasOperation(GUICanvas canvas, double val) {
+		canvas.setBackgroundColor((int) val);
 	}
 
 	@Override
