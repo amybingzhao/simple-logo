@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 
 public class GUIObjectPenSettings implements IGUIObject{
 	
-	private static final int VBOX_SPACING = 10;
+	private static final int VBOX_SPACING = 5;
 	private ResourceBundle myResources;
 	private GUICanvas myCanvas;
 	
@@ -22,18 +22,23 @@ public class GUIObjectPenSettings implements IGUIObject{
 	}
 	@Override
 	public Node createNode() {
-		VBox myBox = new VBox();
+		VBox myBox = new VBox(VBOX_SPACING);
 		
 		Label upDownLabel = new Label("Select Pen Up or Down");
 		
 		ToggleGroup penUpDownGroup = new ToggleGroup();
 		
-		RadioButton penUp = new RadioButton("Pen Up");
+		RadioButton penUp = new RadioButton(myResources.getString("PenUp"));
 		penUp.setToggleGroup(penUpDownGroup);
 		penUp.setSelected(true);
+		penUp.setUserData(myResources.getString("PenUp"));
 		
-		RadioButton penDown = new RadioButton("Pen Down");
+		RadioButton penDown = new RadioButton(myResources.getString("PenDown"));
 		penDown.setToggleGroup(penUpDownGroup);
+		penDown.setUserData(myResources.getString("PenDown"));
+		
+		penUpDownGroup.selectedToggleProperty().addListener(
+				e -> myCanvas.setPen(penUpDownGroup.getSelectedToggle().getUserData().toString()));
 		
 		Label penTypeLabel = new Label("Select Line Type");
 		
@@ -49,14 +54,15 @@ public class GUIObjectPenSettings implements IGUIObject{
 		RadioButton penDotted = new RadioButton("Dotted Pen");
 		penDotted.setToggleGroup(penTypeGroup);
 		
+		Label penLabel = new Label("Enter Pen Thickness");
 		
-		TextField penThickness = new TextField("Enter Desired Pen Thickness");
+		TextField penThickness = new TextField();
 		Button setThickness = new Button("Set Thickness");
 		setThickness.setOnAction(event -> myCanvas.setPenSize(Double.valueOf(penThickness.getText())));
 		
 
 		myBox.getChildren().addAll(upDownLabel, penUp, penDown, penTypeLabel, penSolid, 
-				penDashed, penDotted, penThickness, setThickness);
+				penDashed, penDotted, penLabel, penThickness, setThickness);
 		
 		return myBox;
 	}

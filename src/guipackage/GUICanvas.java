@@ -327,6 +327,16 @@ public class GUICanvas implements Observer{
 		penSize = size;
 	}
 	
+	public void setPen(String penUp) {
+		for (Turtle t: myTurtles.keySet()) {
+			if (t.isActive() && penUp.equals(myResources.getString("PenUp"))) {
+				t.liftPenUp();
+			} else if (t.isActive() && penUp.equals(myResources.getString("PenDown"))){
+				t.putPenDown();
+			}
+		}
+	}
+	
 //	public String getCoordinateString(){
 //		return Math.round(turtle.getCurX()) + "," + Math.round(turtle.getCurY());
 //	}
