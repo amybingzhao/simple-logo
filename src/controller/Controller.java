@@ -119,18 +119,19 @@ public class Controller {
     			myAlert.displayAlert(EXECUTION_ERROR);
     		}
     	}
+        save(new File("test.xml"));
     }
 
 
 
-    public void loadXML(File myFile) {
-        XMLParser myXMLParser = new XMLParser();
-        try {
-            myXMLParser.parse(myFile);
-        } catch (IOException | ParserConfigurationException | SAXException e) {
-            myAlert.displayAlert(PARSING_ERROR);
-        }
-    }
+//    public void loadXML(File myFile) {
+//        XMLParser myXMLParser = new XMLParser();
+//        try {
+//            myXMLParser.parse(myFile);
+//        } catch (IOException | ParserConfigurationException | SAXException e) {
+//            myAlert.displayAlert(PARSING_ERROR);
+//        }
+//    }
 
     // converts string command to arraylist
     private List<String> getCommandAsList(String command) {
@@ -193,9 +194,14 @@ public class Controller {
         return varDict;
     }
 
-    private void save(File file) {
+    public void save(File file) {
         XMLSaver mySaver = new XMLSaver(commandDict, varDict);
-        mySaver.generateFile(myCanvas.getBackgroundColor().toString(), "Blue", myGUIResource.toString(), getTurtles(), file);
+        mySaver.generateFile("Color", "Blue" , myGUIResource.toString(), getTurtles(), file);
+    }
+
+    private void load(File file) throws ParserConfigurationException, SAXException, IOException {
+        XMLParser myParser = new XMLParser(this);
+        myParser.parse(new File("test.xml"));
     }
 
 }
