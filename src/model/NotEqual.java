@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class NotEqual extends Node {
+public class NotEqual extends BooleanNode {
 
     private static final String NOTEQUAL = "notequal? ";
     private static final int EXPR = 0;
@@ -19,16 +19,10 @@ public class NotEqual extends Node {
      * @param varDict
      */
     @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-    	List<Node> children = getChildren();
-		double expr = children.get(EXPR).interpret(commandDict, varDict);
-		for (int i = 1; i < children.size(); i++) {
-			if (children.get(i).interpret(commandDict, varDict) != expr) {
-				return 1;
-			}
-		}
-		return 0;
-    }
+	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		return countNumEqual(getChildren().get(EXPR).interpret(commandDict, varDict), commandDict, varDict) < getChildren().size();
+	}
 
     /**
      * Returns the required user input for this command.

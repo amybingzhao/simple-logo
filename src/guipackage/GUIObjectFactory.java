@@ -30,12 +30,15 @@ public class GUIObjectFactory {
 	protected IGUIObject createNewGUIObject(String nodeTypeKey){
 		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
-		case("CommandLineVBox"):{
-			return null;
+		case("SaveLoadButtons"):{
+			return new GUIObjectSaveLoad(myResources, myController);
 		}
 //		case("ImageVBox"):{
 //			return new GUIObjectImageVBox(myResources, myController, canvas, nodeType);
 //		}
+		case("PenSettings"):{
+			return new GUIObjectPenSettings(myResources, canvas);
+		}
 		case("ImageComboBox"):{
 			return new GUIObjectComboBoxImages(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
 		}

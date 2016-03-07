@@ -36,6 +36,8 @@ public class TabMainScreen {
 	private GUIObjectComboBoxColor backgroundColorPalette;
 	private GUIObjectComboBoxColor penColorPalette;
 	private IGUIObject turtleState;
+	private IGUIObject penSettings;
+	private IGUIObject saveLoad;
 	
 	/**
 	 * Initializes Tab with all necessary components.
@@ -74,6 +76,8 @@ public class TabMainScreen {
 	 */
 	private void setCenterPane() {
 		Node canvasNode = canvas.createNode();
+		penSettings = myFactory.createNewGUIObject("PenSettings");
+		canvas.addNodeToCanvasRight(penSettings.createNode());
 		myMainScreen.setCenter(canvasNode);
 	}
 
@@ -84,16 +88,17 @@ public class TabMainScreen {
 		previousCommands = myFactory.createNewGUIObject("PreviousCommands");
 		languageSelector = myFactory.createNewGUIObject("LanguageSelector");
 		imageInput = myFactory.createNewGUIObject("ImageComboBox");
+		saveLoad = myFactory.createNewGUIObject("SaveLoad");
 		leftPanel.getChildren().addAll(turtleState.createNode(),userCommands.createNode(), 
 				previousCommands.createNode(), languageSelector.createNode(), 
-				imageInput.createNode());
+				imageInput.createNode(), saveLoad.createNode());
 		myMainScreen.setLeft(leftPanel);
 	}
 	
 	private void setRightPane() {
-		HBox rightPanel = new HBox(PANEL_PADDING);
+		VBox rightPanel = new VBox(PANEL_PADDING);
 		variables = myFactory.createNewGUIObject("Variables");
-		rightPanel.getChildren().add(variables.createNode());
+		rightPanel.getChildren().addAll(variables.createNode());
 		myMainScreen.setRight(rightPanel);
 	}
 	

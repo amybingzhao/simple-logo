@@ -8,7 +8,7 @@ public class SetBackground extends DisplayNode {
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		//getCanvas().setBackgroundColor(getChildren().get(INDEX).interpret(commandDict, varDict));
+		getCanvas().setBackgroundColor((int) getChildren().get(INDEX).interpret(commandDict, varDict));
 		return getChildren().get(INDEX).interpret(commandDict, varDict);
 	}
 

@@ -8,19 +8,18 @@ public class SetPalette extends DisplayNode {
 
 	private static final String SET_PALETTE = "setpalette ";
 	private static final int INDEX = 0;
-	private static final int R = 1;
-	private static final int G = 2;
-	private static final int B = 3;
-	private static final double ALPHA = 1.0;
+	private static final int[] RGB_INDICES = new int[]{1,2,3};
+
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
-		Color color = new Color(children.get(R).interpret(commandDict, varDict),
-				children.get(G).interpret(commandDict, varDict),
-				children.get(B).interpret(commandDict, varDict),
-				ALPHA);
-		//getCanvas().setPaletteIndex(children.get(INDEX).interpret(commandDict, varDict), color);
+		StringBuilder rgb = new StringBuilder();
+		for (int i = 0; i < RGB_INDICES.length; i++) {
+			rgb.append(Integer.toString((int) children.get(RGB_INDICES[i]).interpret(commandDict, varDict)));
+			rgb.append(" ");
+		}
+		getCanvas().setPalette(rgb.toString().trim(), (int) children.get(INDEX).interpret(commandDict, varDict));
 		return children.get(INDEX).interpret(commandDict, varDict);
 	}
 

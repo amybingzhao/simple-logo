@@ -110,6 +110,7 @@ public class Parser {
     
     private Node createGroup (List<String> inputList) throws ClassNotFoundException {
         Node group = getFunctionObject(parseText(inputList.get(0)));
+        inputList.remove(0);
         addChildrenToListOrGroupNode(group, inputList, GROUP_END);
         return group;
     }

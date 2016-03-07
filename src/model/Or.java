@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class Or extends Node {
+public class Or extends BooleanNode {
 
 	private static final String OR = "or ";
 	
@@ -17,14 +17,9 @@ public class Or extends Node {
 	 * @param varDict
 	 */
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Node> children = getChildren();
-		for (int i = 0; i < children.size(); i++) {
-        	if (children.get(i).interpret(commandDict, varDict) == 1) {
-        		return 1;
-        	}
-        }
-        return 0;
+	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		return countNumTrue(commandDict, varDict) > 0;
 	}
 	
 	/**
@@ -33,5 +28,6 @@ public class Or extends Node {
 	public String toString() {
 		return OR + childrenToString();
 	}
+
 	
 }
