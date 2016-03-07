@@ -42,17 +42,21 @@ public class GUICanvas implements Observer{
 	private GraphicsContext gc;
 	private Map<Turtle, List<GraphicsContext>> myTurtles;
 	private List<Double[]> turtleParameters;
-	private Image turtleImage;
-	private String turtleImageName;
 	private GUIObjectComboBoxColor myBackgroundPalette;
 	private GUIObjectComboBoxColor myPenPalette;
 	private GUIObjectComboBoxImages myImagePalette;
 	private ResourceBundle myResources;
 	private int myPenColorIndex;
 	private String myPenRGB;
+	private Color myPenColor;
+	private int myBackgroundColorIndex;
 	private String myBackgroundRGB;
 	private double myPenSize;
+	private Image turtleImage;
+	private String turtleImageName;
 	private int myTurtleShapeIndex;
+	private HBox hboxToReturn;
+	private VBox vboxToRight;
 	
 	public GUICanvas(ResourceBundle myResources) {
 		this.myResources = myResources;
@@ -68,21 +72,24 @@ public class GUICanvas implements Observer{
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		addDefaultTurtles();
 		myRoot = new Pane(canvasBackground);
-		myPenColorIndex = 0;
+		hboxToReturn = new HBox();
+		vboxToRight = new VBox();
 	}
 	/**
 	 * Creates the Canvas Node to be displayed.
 	 * @return Canvas Node
 	 */
 	public Node createNode() {
-		VBox colorPalettes = new VBox();
 		myBackgroundPalette = new GUIObjectComboBoxColorB(this, myResources, myResources.getString("BackgroundColorPalettePromptText"));
 		myPenPalette = new GUIObjectComboBoxColorP(this, myResources, myResources.getString("PenColorPalettePromptText"));
 		myImagePalette = new GUIObjectComboBoxImages(this, myResources, myResources.getString("ImageComboBoxPromptText"));
-		colorPalettes.getChildren().addAll(myBackgroundPalette.createNode(), myPenPalette.createNode(), myImagePalette.createNode());
-		HBox hbox = new HBox();
-		hbox.getChildren().addAll(myRoot, colorPalettes);
-		return hbox;
+		vboxToRight.getChildren().addAll(myBackgroundPalette.createNode(), myPenPalette.createNode(), myImagePalette.createNode());
+		hboxToReturn.getChildren().addAll(myRoot, vboxToRight);
+		return hboxToReturn;
+	}
+	
+	public void addNodeToCanvasRight(Node nodeToAdd){
+		vboxToRight.getChildren().add(nodeToAdd);
 	}
 	
 	/**
@@ -139,10 +146,11 @@ public class GUICanvas implements Observer{
 		if (!myTurtles.containsKey(turtle)) {
 			Canvas turtleCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 			Canvas drawingCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+			GraphicsContext drawingGC = drawingCanvas.getGraphicsContext2D();
+			drawingGC.setFill(myPenColor);
 			myRoot.getChildren().addAll(turtleCanvas, drawingCanvas);
 			myTurtles.put(turtle, new ArrayList<GraphicsContext>(
-					Arrays.asList(turtleCanvas.getGraphicsContext2D(),
-							drawingCanvas.getGraphicsContext2D())));
+					Arrays.asList(turtleCanvas.getGraphicsContext2D(), drawingGC)));
 			int myX = STARTING_X;
 			int myY = STARTING_Y;
 			setOldCoordinates(turtle, myX, myY, 0);
@@ -210,6 +218,7 @@ public class GUICanvas implements Observer{
 	 * @param Color that user chose.
 	 */
 	public void setPenColor(Color c, String penColorName) {
+		myPenColor = c;
 		myPenRGB = penColorName;
 		for(List<GraphicsContext> lst: myTurtles.values()){
 			if (lst != null){
@@ -259,20 +268,12 @@ public class GUICanvas implements Observer{
 	}
 	
 	/**
-	 * Update background color palette at given index to given RGB color.
+	 * Update both pen and background color palette at given index to given RGB color.
 	 * @param Space separated string of RGB values
 	 * @param index of color in palette that user wants to change
 	 */
-	public void setBackgroundPalette(String RGB, int index){
+	public void setPalette(String RGB, int index){
 		myBackgroundPalette.changePalette(RGB, index);
-	}
-	
-	/**
-	 * Update pen color palette at given index to given RGB color.
-	 * @param Space separated string of RGB values
-	 * @param index of color in palette that user wants to change
-	 */
-	public void setPenPalette(String RGB, int index){
 		myPenPalette.changePalette(RGB, index);
 	}
 	

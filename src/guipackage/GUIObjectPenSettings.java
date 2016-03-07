@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -21,7 +22,9 @@ public class GUIObjectPenSettings implements IGUIObject{
 	}
 	@Override
 	public Node createNode() {
-		VBox myBox = new VBox(VBOX_SPACING);
+		VBox myBox = new VBox();
+		
+		Label upDownLabel = new Label("Select Pen Up or Down");
 		
 		ToggleGroup penUpDownGroup = new ToggleGroup();
 		
@@ -32,6 +35,7 @@ public class GUIObjectPenSettings implements IGUIObject{
 		RadioButton penDown = new RadioButton("Pen Down");
 		penDown.setToggleGroup(penUpDownGroup);
 		
+		Label penTypeLabel = new Label("Select Line Type");
 		
 		ToggleGroup penTypeGroup = new ToggleGroup();
 		
@@ -50,7 +54,9 @@ public class GUIObjectPenSettings implements IGUIObject{
 		Button setThickness = new Button("Set Thickness");
 //		setThickness.setOnAction(event -> )
 		
-		
+
+		myBox.getChildren().addAll(upDownLabel, penUp, penDown, penTypeLabel, penSolid, 
+				penDashed, penDotted, penThickness, setThickness);
 		
 		return myBox;
 	}
