@@ -48,10 +48,8 @@ public class GUICanvas implements Observer{
 	private GUIObjectComboBoxColor myPenPalette;
 	private GUIObjectComboBoxImages myImagePalette;
 	private ResourceBundle myResources;
-	
 	private int myPenColorIndex;
 	private String myPenRGB;
-	private int myBackgroundColorIndex;
 	private String myBackgroundRGB;
 	private double myPenSize;
 	private int myTurtleShapeIndex;
@@ -70,6 +68,7 @@ public class GUICanvas implements Observer{
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		addDefaultTurtles();
 		myRoot = new Pane(canvasBackground);
+		myPenColorIndex = 0;
 	}
 	/**
 	 * Creates the Canvas Node to be displayed.
@@ -227,12 +226,15 @@ public class GUICanvas implements Observer{
 		return myPenRGB;
 	}
 	
+	public int getPenColorIndex() {
+		return myPenColorIndex;
+	}
+	
 	/**
 	 * Sets background color based on index within palette.
 	 * @param index of color in palette.
 	 */
 	public void setBackgroundColor(int index) {
-		myBackgroundColorIndex = index;
 		List<String> currentPalette = myBackgroundPalette.getPalette();
 		String[] rgb = currentPalette.get(index).split(" ");
 		Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
@@ -311,7 +313,7 @@ public class GUICanvas implements Observer{
 	/**
 	 * Returns current shape/image of turtle;
 	 */
-	public double getTurtleShapeIndex() {
+	public int getTurtleShapeIndex() {
 		return myTurtleShapeIndex;
 	}
 		
