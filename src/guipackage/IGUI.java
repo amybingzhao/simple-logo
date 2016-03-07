@@ -3,7 +3,7 @@ package guipackage;
 /**
  * This interface is the external API. This contains the information that the frontend
  * will pass to the backend. The backend will call these methods in order to change the
- * Model after receiving the commands that are typed into the console.
+ * model after receiving the commands that are typed into the console.
  *
  * @author David
  */

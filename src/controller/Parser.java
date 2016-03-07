@@ -26,9 +26,9 @@ public class Parser {
     private static final String COMMAND = "Command";
     private static final String MAKE_USER_INSTRUCTION = "MakeUserInstruction";
     private List<Entry<String, Pattern>> mySymbols;
-    private static final String TURTLE_COMMANDS_RESOURCE = "Controller/TurtleCommands";
-    private static final String DISPLAY_COMMANDS_RESOURCE = "Controller/DisplayCommands";
-    private static final String NUM_CHILDREN_PER_COMMAND = "Controller/NumChildrenForFunction";
+    private static final String TURTLE_COMMANDS_RESOURCE = "controller/TurtleCommands";
+    private static final String DISPLAY_COMMANDS_RESOURCE = "controller/DisplayCommands";
+    private static final String NUM_CHILDREN_PER_COMMAND = "controller/NumChildrenForFunction";
     private static final String MODEL = "model.";
     private ResourceBundle myNumChildrenPerCommand;
     private ResourceBundle myTurtleCommands;

@@ -11,7 +11,7 @@ import javafx.scene.control.Alert.AlertType;
  * @author AnnieTang
  */
 public class GUIAlert {
-    private static final String ERROR_RESOURCE = "GUIPackage/Errors";
+    private static final String ERROR_RESOURCE = "guipackage/Errors";
     private ResourceBundle myErrorResources;
 
     public GUIAlert() {

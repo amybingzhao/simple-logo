@@ -1,19 +1,23 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import guipackage.GUIAlert;
 import guipackage.GUICanvas;
 import guipackage.GUIObjectLabeled;
-import guipackage.GUIOutput;
-import guipackage.TurtleObserver;
 import model.CommandDictionary;
 import model.IFunctions;
 import model.Turtle;
 import model.VariableDictionary;
+import org.xml.sax.SAXException;
+import xml.XMLParser;
+import xml.XMLSaver;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * This class is the only external-facing back end class. It facilitates the interaction between the front end and back end
@@ -31,6 +35,7 @@ public class Controller {
     public static final String EXECUTION_ERROR = "ExecutionError";
     public static final String INVALID_SYNTAX = "InvalidSyntax";
     private static final String GUI_RESOURCE = "GUI";
+    public static final String PARSING_ERROR = "ParsingError";
     private String myLanguageResource;
     private Parser myParser;
     private List<Turtle> myTurtles;
@@ -46,10 +51,10 @@ public class Controller {
     private VariableDictionary varDict;
 
     public Controller(GUICanvas canvas) {
-    	myCanvas = canvas;
-    	init();
+        myCanvas = canvas;
+        init();
     }
-    
+
     /**
      * Initializes the controller.
      */
@@ -59,7 +64,7 @@ public class Controller {
         myTurtles = new ArrayList<Turtle>();
         addInitialTurtle();
         myGUIResource = ResourceBundle.getBundle(GUI_RESOURCE);
-        myOutput = new GUIObjectLabeled(myGUIResource,"Output");
+        myOutput = new GUIObjectLabeled(myGUIResource, "Output");
         myAlert = new GUIAlert();
         commandDict = new CommandDictionary();
         varDict = new VariableDictionary();
@@ -67,51 +72,58 @@ public class Controller {
         myParser.addPatterns(myLanguageResource);
         myParser.addPatterns(SYNTAX_RESOURCE);
     }
-    
+
     public void addInitialTurtle() {
-    	Turtle turtle = new Turtle(0);
-    	turtle.activate();
-    	turtle.addObserver(myCanvas);
-    	turtle.updateObservers();
-    	myTurtles.add(turtle);
+        Turtle turtle = new Turtle(0);
+        turtle.activate();
+        turtle.addObserver(myCanvas);
+        turtle.updateObservers();
+        myTurtles.add(turtle);
     }
 
     /**
      * Sets the parser language.
+     *
      * @param lang: user-selected language.
      */
     public void setLanguage(String lang) {
-    	myLanguageResource = LANGUAGE_RESOURCE_LOCATION + lang;
-    	myParser.clearAllPatterns();
-    	myParser.addPatterns(myLanguageResource);
-    	myParser.addPatterns(SYNTAX_RESOURCE);
+        myLanguageResource = LANGUAGE_RESOURCE_LOCATION + lang;
+        myParser.clearAllPatterns();
+        myParser.addPatterns(myLanguageResource);
+        myParser.addPatterns(SYNTAX_RESOURCE);
     }
-    
+
     /**
      * Processes the command.
      *
      * @param command: String inputed by user to the command line.
      * @throws ClassNotFoundException
      */
-    public void processCommand(String command){
-    	List<String> commandAsList = getCommandAsList(command);
-    	while (!commandAsList.isEmpty()) {
-    		try{
-    			IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myTurtles);
-    			double result = executeCommandTree(commandToExecute);
-    			myOutput.setOutputText(Double.toString(result));
-    			addCommandToHistory(command);
-    		}
-    		catch(ClassNotFoundException e){
-    			myAlert.displayAlert(DOES_NOT_EXIST);
-    		}
-    		catch(IndexOutOfBoundsException e){
-    			myAlert.displayAlert(INVALID_SYNTAX);
-    		}
-    		catch(NullPointerException e){
-    			myAlert.displayAlert(EXECUTION_ERROR);
-    		}
-    	}
+    public void processCommand(String command) {
+        List<String> commandAsList = getCommandAsList(command);
+        while (!commandAsList.isEmpty()) {
+            try {
+                IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myTurtles);
+                double result = executeCommandTree(commandToExecute);
+                myOutput.setOutputText(Double.toString(result));
+                addCommandToHistory(command);
+            } catch (ClassNotFoundException e) {
+                myAlert.displayAlert(DOES_NOT_EXIST);
+            } catch (IndexOutOfBoundsException e) {
+                myAlert.displayAlert(INVALID_SYNTAX);
+            } catch (NullPointerException e) {
+                myAlert.displayAlert(EXECUTION_ERROR);
+            }
+        }
+    }
+
+    public void loadXML(File myFile) {
+        XMLParser myXMLParser = new XMLParser();
+        try {
+            myXMLParser.parse(myFile);
+        } catch (IOException | ParserConfigurationException | SAXException e) {
+            myAlert.displayAlert(PARSING_ERROR);
+        }
     }
 
     // converts string command to arraylist
@@ -119,32 +131,32 @@ public class Controller {
         List<String> inputCommandList = new ArrayList<String>();
         String[] inputArray = command.split(WHITESPACE);
         for (int i = 0; i < inputArray.length; i++) {
-        	if (!inputArray[i].isEmpty()) {
-        		inputCommandList.add(inputArray[i]);
-        	}
+            if (!inputArray[i].isEmpty()) {
+                inputCommandList.add(inputArray[i]);
+            }
         }
         return inputCommandList;
     }
 
     private double executeCommandTree(IFunctions head) throws ClassNotFoundException {
-    	double result = 0;
-    	System.out.println(head.toString());
-    	result = head.interpret(commandDict, varDict);
-    	addObserver();
-    	return result;
+        double result = 0;
+        System.out.println(head.toString());
+        result = head.interpret(commandDict, varDict);
+        addObserver();
+        return result;
     }
-    
+
     public void addObserver() {
-    	for (Turtle t: myTurtles) {
-    		if (t.countObservers() == 0) {
-	    		t.addObserver(myCanvas);
-	    		t.updateObservers();
-    		}
-    	}	
+        for (Turtle t : myTurtles) {
+            if (t.countObservers() == 0) {
+                t.addObserver(myCanvas);
+                t.updateObservers();
+            }
+        }
     }
-    
+
     public List<Turtle> getTurtles() {
-    	return myTurtles;
+        return myTurtles;
     }
 
     private void addCommandToHistory(String command) {
@@ -154,21 +166,26 @@ public class Controller {
     public List<String> getCommandHistory() {
         return myCommandHistory;
     }
-    
-    public GUIObjectLabeled getGUIOutput(){
-    	return myOutput;
-    }
-    
-    public void displayAlert(String errorResourceKey){
-    	myAlert.displayAlert(errorResourceKey);
+
+    public GUIObjectLabeled getGUIOutput() {
+        return myOutput;
     }
 
-    public CommandDictionary getCommandDictionary(){
+    public void displayAlert(String errorResourceKey) {
+        myAlert.displayAlert(errorResourceKey);
+    }
+
+    public CommandDictionary getCommandDictionary() {
         return commandDict;
     }
 
-    public VariableDictionary getVariableDictionary(){
+    public VariableDictionary getVariableDictionary() {
         return varDict;
+    }
+
+    private void save(File file) {
+        XMLSaver mySaver = new XMLSaver(commandDict, varDict);
+        mySaver.generateFile(myCanvas.getBackgroundColor().toString(), "Blue", myGUIResource.toString(), getTurtles(), file);
     }
 
 }
