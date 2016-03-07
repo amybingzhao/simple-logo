@@ -1,7 +1,4 @@
 package guipackage;
-
-import controller.Controller;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,17 +6,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
 
-import java.io.File;
 
 /**
  * Returns one Node that contains the Turtle Canvas and two ColorPicker objects
@@ -34,23 +33,27 @@ public class GUICanvas implements Observer{
 	private static final int CANVAS_HEIGHT = 500;
 	private static final int STARTING_X = CANVAS_WIDTH/2 - TURTLE_SIZE/2;
 	private static final int STARTING_Y = CANVAS_HEIGHT/2 - TURTLE_SIZE/2;
-	private static final String PATH_DELIMITER = "/";
 	private static final String DEFAULT_TURTLE = "turtle_outline.png";
 	private double myOldDirection;
 	private Canvas canvasBackground;
 	private Pane myRoot;
 	private GraphicsContext gcBackground;
-	private GraphicsContext gcDrawing;
 	private GraphicsContext gc;
 	private Map<Turtle, List<GraphicsContext>> myTurtles;
 	private List<Double[]> turtleParameters;
 	private Image turtleImage;
+	private GUIObjectComboBoxColor myBackgroundPalette;
+	private GUIObjectComboBoxColor myPenPalette;
+	private GUIObjectComboBoxImages myImagePalette;
+	private ResourceBundle myResources;
+	
 	private int myPenColorIndex;
 	private int myBackgroundColorIndex;
 	private double myPenSize;
 	private int myTurtleShapeIndex;
 	
-	public GUICanvas() {
+	public GUICanvas(ResourceBundle myResources) {
+		this.myResources = myResources;
 	}
 	
 	
@@ -69,7 +72,14 @@ public class GUICanvas implements Observer{
 	 * @return Canvas Node
 	 */
 	public Node createNode() {
-		return myRoot;
+		VBox colorPalettes = new VBox();
+		myBackgroundPalette = new GUIObjectComboBoxColorB(this, myResources, myResources.getString("BackgroundColorPalettePromptText"));
+		myPenPalette = new GUIObjectComboBoxColorP(this, myResources, myResources.getString("PenColorPalettePromptText"));
+		myImagePalette = new GUIObjectComboBoxImages(this, myResources, myResources.getString("ImageComboBoxPromptText"));
+		colorPalettes.getChildren().addAll(myBackgroundPalette.createNode(), myPenPalette.createNode(), myImagePalette.createNode());
+		HBox hbox = new HBox();
+		hbox.getChildren().addAll(myRoot, colorPalettes);
+		return hbox;
 	}
 	
 	/**
@@ -193,46 +203,102 @@ public class GUICanvas implements Observer{
 	}
 	
 	/**
+	 * Sets Pen color based on index within palette.
+	 * @param index of color in palette.
+	 */
+	public void setPenColor(int index){
+		myPenColorIndex = index;
+		List<String> currentPalette = myPenPalette.getPalette();
+		String[] rgb = currentPalette.get(index).split(" ");
+		Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
+		setPenColor(col);
+	}
+	
+	/**
 	 * Sets Pen color based on User preference.
 	 * @param Color that user chose.
 	 */
 	public void setPenColor(Color c) {
-		gcDrawing.setFill(c);
+		for(List<GraphicsContext> lst: myTurtles.values()){
+			if (lst != null){
+				GraphicsContext gcPen = lst.get(1);
+				gcPen.setFill(c);
+			}
+		}
 	}
 	
-	public void setBackgroundColor(Color col) {
+//	public Color getPenColor() {
+//	return (Color) gcDrawing.getFill();
+//}
+	
+	/**
+	 * Sets background color based on index within palette.
+	 * @param index of color in palette.
+	 */
+	public void setBackgroundColor(int index) {
+		myBackgroundColorIndex = index;
+		List<String> currentPalette = myBackgroundPalette.getPalette();
+		String[] rgb = currentPalette.get(index).split(" ");
+		Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
+		setBackgroundColor(col);
+	}
+	
+	/**
+	 * Sets background color based on User preference.
+	 * @param Color that user chose.
+	 */
+	public void setBackgroundColor(Color col){
 		gcBackground.setFill(col);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
 	
-	public Color getPenColor() {
-		return (Color) gcDrawing.getFill();
-	}
-	
+	/**
+	 * Returns current background color of canvas.
+	 */
 	public Color getBackgroundColor(){
 		return (Color) gcBackground.getFill();
 	}
 	
-	/*	
-	public void setPenSize(double size) {
-		myPenSize = size;
+	/**
+	 * Update background color palette at given index to given RGB color.
+	 * @param Space separated string of RGB values
+	 * @param index of color in palette that user wants to change
+	 */
+	public void setBackgroundPalette(String RGB, int index){
+		myBackgroundPalette.changePalette(RGB, index);
 	}
 	
-	public void setTurtleShape(double index) {
-		
+	/**
+	 * Update pen color palette at given index to given RGB color.
+	 * @param Space separated string of RGB values
+	 * @param index of color in palette that user wants to change
+	 */
+	public void setPenPalette(String RGB, int index){
+		myPenPalette.changePalette(RGB, index);
 	}
 	
+	/**
+	 * Sets Turtle shape/image based on index within palette.
+	 * @param index of image in palette.
+	 */
+	public void setTurtleShape(int index) {
+		myTurtleShapeIndex = index;
+		List<String> currentPalette = myImagePalette.getPalette();
+		String imageName = currentPalette.get(index);
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+		setTurtleImage(image);
+	}
+	
+	/**
+	 * Returns current shape/image of turtle;
+	 */
 	public double getTurtleShapeIndex() {
-	
+		return myTurtleShapeIndex;
 	}
-	*/
-	public int getWidth(){
-		return CANVAS_WIDTH;
-	}
-	
-	public int getHeight(){
-		return CANVAS_HEIGHT;
-	}
+		
+//	public void setPenSize(double size) {
+//		myPenSize = size;
+//	}
 	
 //	public String getCoordinateString(){
 //		return Math.round(turtle.getCurX()) + "," + Math.round(turtle.getCurY());
@@ -245,5 +311,13 @@ public class GUICanvas implements Observer{
 //	public boolean getPenDownStatus(){
 //		return !turtle.isPenUp();
 //	}
+	
+	public int getWidth(){
+		return CANVAS_WIDTH;
+	}
+	
+	public int getHeight(){
+		return CANVAS_HEIGHT;
+	}
 
 }
