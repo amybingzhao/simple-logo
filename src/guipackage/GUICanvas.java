@@ -140,10 +140,11 @@ public class GUICanvas implements Observer{
 		if (!myTurtles.containsKey(turtle)) {
 			Canvas turtleCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 			Canvas drawingCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+			GraphicsContext drawingGC = drawingCanvas.getGraphicsContext2D();
+//			drawingGC.setFill(myPenColor);
 			myRoot.getChildren().addAll(turtleCanvas, drawingCanvas);
 			myTurtles.put(turtle, new ArrayList<GraphicsContext>(
-					Arrays.asList(turtleCanvas.getGraphicsContext2D(),
-							drawingCanvas.getGraphicsContext2D())));
+					Arrays.asList(turtleCanvas.getGraphicsContext2D(), drawingGC)));
 			int myX = STARTING_X;
 			int myY = STARTING_Y;
 			setOldCoordinates(turtle, myX, myY, 0);
