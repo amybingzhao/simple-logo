@@ -22,7 +22,7 @@ import java.util.List;
 public class XMLParser {
 
     public static final String CONFIG = "Config";
-    public static final String DELIMITER = ":";
+    public static final String DELIMITER = "-";
     public static final String MAKE = "make ";
     private DocumentBuilderFactory myFactory;
     private DocumentBuilder myBuilder;
@@ -60,6 +60,7 @@ public class XMLParser {
                     parseVariables(entryElement);
                     break;
                 case "Commands":
+                    parseCommands(entryElement);
                     break;
             }
         }
@@ -89,6 +90,10 @@ public class XMLParser {
         }
     }
 
+    private void parseCommands(Element commandElement){
+
+    }
+
     private void makeTurtle(List<String> turtleData) {
         Turtle myTurtle = new Turtle(Double.parseDouble(getTextForEntry(turtleData.get(0))));
         myTurtles.add(myTurtle);
@@ -101,7 +106,7 @@ public class XMLParser {
             Node dataNode = dataList.item(i);
             if (dataNode instanceof Element) {
                 Element dataElement = (Element) dataNode;
-                extractedData.add(dataElement.getNodeName() + ":" + dataElement.getTextContent());
+                extractedData.add(dataElement.getNodeName() + DELIMITER + dataElement.getTextContent());
             }
         }
         return extractedData;

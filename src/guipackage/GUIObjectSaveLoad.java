@@ -1,5 +1,6 @@
 package guipackage;
 
+import java.io.File;
 import java.util.ResourceBundle;
 
 import controller.Controller;
@@ -23,10 +24,10 @@ public class GUIObjectSaveLoad implements IGUIObject {
 		VBox myBox = new VBox(VBOX_PADDING);
 		
 		Button saveButton = new Button(myResources.getString("Save"));
-//		saveButton.setOnAction(e -> );
+		saveButton.setOnAction(e -> myController.save(new File("test.xml")));
 		
 		Button loadButton = new Button(myResources.getString("Load"));
-//		loadButton.setOnAction(e -> );
+		loadButton.setOnAction(e -> myController.loadXML(new File("test.xml")));
 		
 		myBox.getChildren().addAll(saveButton, loadButton);
 		

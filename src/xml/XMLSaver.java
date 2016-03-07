@@ -44,6 +44,7 @@ public class XMLSaver {
     public static final String NAME = "Name";
     public static final String PROCEDURE = "Procedure";
     public static final String NUMBER_OF_ARGUMENTS = "NumberOfArguments";
+    public static final String TURTLE_IMAGE = "TurtleImage";
     private DocumentBuilderFactory myFactory;
     private DocumentBuilder myBuilder;
     private Document myDocument;
@@ -62,11 +63,11 @@ public class XMLSaver {
         }
     }
 
-    public void generateFile(String backgroundColor, String penColor, String language, List<Turtle> turtles, File file) {
+    public void generateFile(String backgroundColor, String penColor, String turtleImage, String language, List<Turtle> turtles, File file) {
         myDocument = myBuilder.newDocument();
         Element myRoot = myDocument.createElement("SLogoState");
         myDocument.appendChild(myRoot);
-        myRoot.appendChild(getConfig(backgroundColor, penColor));
+        myRoot.appendChild(getConfig(backgroundColor, penColor, turtleImage));
         myRoot.appendChild(getTurtles(turtles));
         myRoot.appendChild(getVariables());
         myRoot.appendChild(getCommands());
@@ -89,10 +90,11 @@ public class XMLSaver {
         }
     }
 
-    private Element getConfig(String backgroundColor, String penColor) {
+    private Element getConfig(String backgroundColor, String penColor, String turtleImage) {
         Element configElement = myDocument.createElement(CONFIG);
         configElement.appendChild(makeElement(BACKGROUND_COLOR, backgroundColor));
         configElement.appendChild(makeElement(PEN_COLOR, penColor));
+        configElement.appendChild(makeElement(TURTLE_IMAGE, turtleImage));
         return configElement;
     }
 
@@ -107,7 +109,7 @@ public class XMLSaver {
     private Element getVariables() {
         Element variablesElement = myDocument.createElement(VARIABLES);
         for (String key : myVarDict.getKeySet()) {
-            variablesElement.appendChild(makeElement(key, "" + myVarDict.getNodeFor(key)));
+            variablesElement.appendChild(makeElement(key, "" + (int) myVarDict.getNodeFor(key) ));
         }
         return variablesElement;
     }
@@ -134,7 +136,6 @@ public class XMLSaver {
         turtleElement.appendChild(makeElement(X, "" + myTurtle.getCurX()));
         turtleElement.appendChild(makeElement(Y, "" + myTurtle.getCurY()));
         turtleElement.appendChild(makeElement(DIRECTION, "" + myTurtle.getDirection()));
-        turtleElement.appendChild(makeElement(IMAGE, "" + myTurtle.getImage()));
         return turtleElement;
     }
 
