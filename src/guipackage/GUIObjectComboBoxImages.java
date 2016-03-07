@@ -26,9 +26,8 @@ public class GUIObjectComboBoxImages extends GUIObjectComboBox {
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private static final String IMAGE_RESOURCE = "Images";
 	
-	public GUIObjectComboBoxImages(GUICanvas canvas, ResourceBundle myResources, Controller myController, String promptText,
-			GUICommandLine myCommandLine) {
-		super(canvas, myResources, myController, promptText, myCommandLine);
+	public GUIObjectComboBoxImages(GUICanvas canvas, ResourceBundle myResources, String promptText) {
+		super(canvas, myResources, promptText);
 		imageMap = new HashMap<String, ImageView>();
 		imageNames = new ArrayList<String>();
 		fillImageNames();
@@ -78,18 +77,17 @@ public class GUIObjectComboBoxImages extends GUIObjectComboBox {
 	protected void setButtonAction() {
 		comboButton.setOnAction(event -> {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(comboBox.getValue()));
-		System.out.println(comboBox.getValue());
 		canvas.setTurtleImage(image);
 		});
 	}
 
 	@Override
 	protected List<String> optionsList() {
-		List<String> options = new ArrayList<String>();
-		for(String key:imageMap.keySet()){
-			options.add(key);
-		}
-		return options;
+		return imageNames;
+	}
+	
+	public List<String> getPalette(){
+		return imageNames;
 	}
 
 }
