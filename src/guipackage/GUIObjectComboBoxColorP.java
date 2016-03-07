@@ -23,12 +23,11 @@ public class GUIObjectComboBoxColorP extends GUIObjectComboBoxColor {
 	@Override
 	protected void fillDefaultPalette() {
 		List<String> defaultColors = new ArrayList<String>(Arrays.asList(myResources.getString("DefaultPenColors").split(",")));
-		defaultPalette = defaultColors;
+		palette = defaultColors;
 	}
 
 	@Override
 	protected void setCanvasValues(Color col) {
-		System.out.println(col);
 		canvas.setPenColor(col);
 	}
 	

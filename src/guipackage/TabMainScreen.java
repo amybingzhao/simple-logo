@@ -43,7 +43,7 @@ public class TabMainScreen {
 	private void initializeTab() {
 		//create Turtle and Observer
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		canvas = new GUICanvas();
+		canvas = new GUICanvas(myResources);
 		canvas.init();
 		myController = new Controller(canvas);
 		commandLine = new GUICommandLine(myController, myResources, this);
@@ -73,24 +73,18 @@ public class TabMainScreen {
 	 * Next 5 methods all place GUIObjects on the Pane.
 	 */
 	private void setCenterPane() {
-		HBox hbox = new HBox();
 		Node canvasNode = canvas.createNode();
-		turtleState = myFactory.createNewGUIObject("TurtleState");
-		Node turtleStateVBox = turtleState.createNode();
-		hbox.getChildren().addAll(canvasNode, turtleStateVBox);
-		myMainScreen.setCenter(hbox);
+		myMainScreen.setCenter(canvasNode);
 	}
 
 	private void setLeftPane() {
 		VBox leftPanel = new VBox(PANEL_PADDING);
-		backgroundColorPalette = (GUIObjectComboBoxColor) myFactory.createNewGUIObject("BackgroundColorPalette");
-		penColorPalette = (GUIObjectComboBoxColor) myFactory.createNewGUIObject("PenColorPalette");
+		turtleState = myFactory.createNewGUIObject("TurtleState");
 		userCommands = myFactory.createNewGUIObject("UserCommands");
 		previousCommands = myFactory.createNewGUIObject("PreviousCommands");
 		languageSelector = myFactory.createNewGUIObject("LanguageSelector");
 		imageInput = myFactory.createNewGUIObject("ImageComboBox");
-		leftPanel.getChildren().addAll(backgroundColorPalette.createNode(),
-				penColorPalette.createNode(),userCommands.createNode(), 
+		leftPanel.getChildren().addAll(turtleState.createNode(),userCommands.createNode(), 
 				previousCommands.createNode(), languageSelector.createNode(), 
 				imageInput.createNode());
 		myMainScreen.setLeft(leftPanel);

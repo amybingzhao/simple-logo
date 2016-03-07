@@ -18,7 +18,7 @@ import javafx.util.Callback;
  *
  */
 abstract class GUIObjectComboBoxColor extends GUIObjectComboBox{
-	protected List<String> defaultPalette;
+	protected List<String> palette;
 	
 	public GUIObjectComboBoxColor(GUICanvas canvas, ResourceBundle myResources,
 			String promptText) {
@@ -70,7 +70,7 @@ abstract class GUIObjectComboBoxColor extends GUIObjectComboBox{
 
 	@Override
 	protected List<String> optionsList() {
-		return defaultPalette;
+		return palette;
 	}
 	
 	public void changePalette(String RGB, int index) {
@@ -78,8 +78,12 @@ abstract class GUIObjectComboBoxColor extends GUIObjectComboBox{
 		if(index<currentPalette.size()){
 			currentPalette.set(index, RGB);
 		}
-		defaultPalette = currentPalette;
+		palette = currentPalette;
 		updateNode();
+	}
+	
+	public List<String> getPalette(){
+		return palette;
 	}
 
 }

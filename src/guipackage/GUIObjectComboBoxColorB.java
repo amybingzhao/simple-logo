@@ -22,7 +22,7 @@ public class GUIObjectComboBoxColorB extends GUIObjectComboBoxColor {
 	@Override
 	protected void fillDefaultPalette() {
 		List<String> defaultColors = new ArrayList<String>(Arrays.asList(myResources.getString("DefaultBackgroundColors").split(",")));
-		defaultPalette = defaultColors;
+		palette = defaultColors;
 	}
 
 	@Override

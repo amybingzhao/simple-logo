@@ -37,8 +37,7 @@ public class GUIObjectFactory {
 //			return new GUIObjectImageVBox(myResources, myController, canvas, nodeType);
 //		}
 		case("ImageComboBox"):{
-			return new GUIObjectComboBoxImages(canvas, myResources, myController, 
-					myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
+			return new GUIObjectComboBoxImages(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
 		}
 		case("LanguageComboBox"):{
 			return new GUIObjectComboBoxLanguages(canvas, myResources, myController, 
