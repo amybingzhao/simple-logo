@@ -249,8 +249,8 @@ public class GUICanvas implements Observer{
 	/**
 	 * Returns current background color of canvas.
 	 */
-	public Color getBackgroundColor(){
-		return (Color) gcBackground.getFill();
+	public String getBackgroundColor(){
+		return myBackgroundRGB;
 	}
 	
 	/**
