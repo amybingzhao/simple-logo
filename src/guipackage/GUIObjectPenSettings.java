@@ -81,6 +81,9 @@ public class GUIObjectPenSettings implements IGUIObject{
 		penDotted = new RadioButton(myResources.getString("DottedPen"));
 		penDotted.setToggleGroup(penTypeGroup);
 		penDotted.setUserData(myResources.getString("DottedPen"));
+		
+		penTypeGroup.selectedToggleProperty().addListener(
+				e -> myCanvas.setPenType(penTypeGroup.getSelectedToggle().getUserData().toString()));
 	}
 	
 	private void setThicknessNodes() {
