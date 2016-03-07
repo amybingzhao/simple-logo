@@ -19,7 +19,7 @@ public class SetPalette extends DisplayNode {
 			rgb.append(Integer.toString((int) children.get(RGB_INDICES[i]).interpret(commandDict, varDict)));
 			rgb.append(" ");
 		}
-		getCanvas().setPenPalette(rgb.toString().trim(), (int) children.get(INDEX).interpret(commandDict, varDict));
+		getCanvas().setPalette(rgb.toString().trim(), (int) children.get(INDEX).interpret(commandDict, varDict));
 		return children.get(INDEX).interpret(commandDict, varDict);
 	}
 
