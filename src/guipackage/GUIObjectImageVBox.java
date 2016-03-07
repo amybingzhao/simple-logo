@@ -125,7 +125,7 @@ public class GUIObjectImageVBox implements IGUIObject {
 	public void updateNode() {
 		if(canUpdate){
 			Image newImage = new Image(getClass().getClassLoader().getResourceAsStream(imageFile.getName()));
-			canvas.setTurtleImage(newImage);
+			canvas.setTurtleImage(newImage, imageFile.getName());
 		}
 	}
 }
