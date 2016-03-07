@@ -7,7 +7,7 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public class Equal extends Node {
+public class Equal extends BooleanNode {
 	
 	private static final String EQUAL = "equal? ";
 	private static final int EXPR = 0;
@@ -18,15 +18,9 @@ public class Equal extends Node {
 	 * @param varDict
 	 */
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Node> children = getChildren();
-		double expr = children.get(EXPR).interpret(commandDict, varDict);
-		for (int i = 1; i < children.size(); i++) {
-			if (children.get(i).interpret(commandDict, varDict) != expr) {
-				return 0;
-			}
-		}
-		return 1;
+	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
+			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+		return countNumEqual(getChildren().get(EXPR).interpret(commandDict, varDict), commandDict, varDict) == getChildren().size();
 	}
 	
 	/**
