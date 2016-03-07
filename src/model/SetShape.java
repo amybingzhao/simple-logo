@@ -7,7 +7,7 @@ public class SetShape extends DisplayNode {
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		//getCanvas().setTurtleShape(getChildren().get(INDEX).interpret(commandDict, varDict));
+		getCanvas().setTurtleShape((int) getChildren().get(INDEX).interpret(commandDict, varDict));
 		return getChildren().get(INDEX).interpret(commandDict, varDict);
 	}
 

@@ -46,7 +46,7 @@ public abstract class TurtleNode extends Node {
     	return null;
     }
     
-    public double applyToTurtlesInList(List<Turtle> list, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    protected double applyToTurtlesInList(List<Turtle> list, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
     	double ret = 0;
     	for (int i = 0; i < list.size(); i++) {
     		list.get(i).setAsCurrentTurtle();
