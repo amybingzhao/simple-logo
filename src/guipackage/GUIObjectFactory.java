@@ -36,6 +36,9 @@ public class GUIObjectFactory {
 //		case("ImageVBox"):{
 //			return new GUIObjectImageVBox(myResources, myController, canvas, nodeType);
 //		}
+		case("PenSettings"):{
+			return new GUIObjectPenSettings(myResources, canvas);
+		}
 		case("ImageComboBox"):{
 			return new GUIObjectComboBoxImages(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
 		}
