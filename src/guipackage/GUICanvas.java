@@ -42,13 +42,16 @@ public class GUICanvas implements Observer{
 	private Map<Turtle, List<GraphicsContext>> myTurtles;
 	private List<Double[]> turtleParameters;
 	private Image turtleImage;
+	private String turtleImageName;
 	private GUIObjectComboBoxColor myBackgroundPalette;
 	private GUIObjectComboBoxColor myPenPalette;
 	private GUIObjectComboBoxImages myImagePalette;
 	private ResourceBundle myResources;
 	
 	private int myPenColorIndex;
+	private String myPenRGB;
 	private int myBackgroundColorIndex;
+	private String myBackgroundRGB;
 	private double myPenSize;
 	private int myTurtleShapeIndex;
 	
@@ -146,20 +149,6 @@ public class GUICanvas implements Observer{
 	}
 	
 	/**
-	 * Sets user-inputed image as the Canvas turtle.
-	 * @param Image
-	 */
-	public void setTurtleImage(Image image){
-		turtleImage = image;
-		for(Turtle key: myTurtles.keySet()){
-			if (key == null){
-				gc.drawImage(turtleImage, STARTING_X, STARTING_Y, TURTLE_SIZE, TURTLE_SIZE);
-			}
-			else drawTurtle(key);
-		}
-	}
-	
-	/**
 	 * Clears the previous instance of the Turtle on the canvas.
 	 */
 	public void clearPreviousTurtle(Turtle turtle) {
@@ -211,14 +200,15 @@ public class GUICanvas implements Observer{
 		List<String> currentPalette = myPenPalette.getPalette();
 		String[] rgb = currentPalette.get(index).split(" ");
 		Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
-		setPenColor(col);
+		setPenColor(col, currentPalette.get(index));
 	}
 	
 	/**
 	 * Sets Pen color based on User preference.
 	 * @param Color that user chose.
 	 */
-	public void setPenColor(Color c) {
+	public void setPenColor(Color c, String penColorName) {
+		myPenRGB = penColorName;
 		for(List<GraphicsContext> lst: myTurtles.values()){
 			if (lst != null){
 				GraphicsContext gcPen = lst.get(1);
@@ -226,10 +216,13 @@ public class GUICanvas implements Observer{
 			}
 		}
 	}
-	
-//	public Color getPenColor() {
-//	return (Color) gcDrawing.getFill();
-//}
+	/**
+	 * returns current pen color as space separated RGB
+	 * @return
+	 */
+	public String getPenColor() {
+		return myPenRGB;
+	}
 	
 	/**
 	 * Sets background color based on index within palette.
@@ -240,14 +233,15 @@ public class GUICanvas implements Observer{
 		List<String> currentPalette = myBackgroundPalette.getPalette();
 		String[] rgb = currentPalette.get(index).split(" ");
 		Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
-		setBackgroundColor(col);
+		setBackgroundColor(col, currentPalette.get(index));
 	}
 	
 	/**
 	 * Sets background color based on User preference.
 	 * @param Color that user chose.
 	 */
-	public void setBackgroundColor(Color col){
+	public void setBackgroundColor(Color col, String backgroundColorName){
+		myBackgroundRGB = backgroundColorName;
 		gcBackground.setFill(col);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
@@ -286,7 +280,29 @@ public class GUICanvas implements Observer{
 		List<String> currentPalette = myImagePalette.getPalette();
 		String imageName = currentPalette.get(index);
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
-		setTurtleImage(image);
+		setTurtleImage(image, imageName);
+	}
+	
+	/**
+	 * Sets user-inputed image as the Canvas turtle.
+	 * @param Image
+	 */
+	public void setTurtleImage(Image image, String imageName){
+		turtleImage = image;
+		turtleImageName = imageName;
+		for(Turtle key: myTurtles.keySet()){
+			if (key == null){
+				gc.drawImage(turtleImage, STARTING_X, STARTING_Y, TURTLE_SIZE, TURTLE_SIZE);
+			}
+			else drawTurtle(key);
+		}
+	}
+	/**
+	 * returns current turtle image filename
+	 * @return
+	 */
+	public String getTurtleImageName(){
+		return turtleImageName;
 	}
 	
 	/**

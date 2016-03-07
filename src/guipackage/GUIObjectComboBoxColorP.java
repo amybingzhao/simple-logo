@@ -28,7 +28,7 @@ public class GUIObjectComboBoxColorP extends GUIObjectComboBoxColor {
 
 	@Override
 	protected void setCanvasValues(Color col) {
-		canvas.setPenColor(col);
+		canvas.setPenColor(col, comboBox.getValue());
 	}
 	
 }
