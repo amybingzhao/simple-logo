@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class If extends Node {
+public class If extends ControlNode {
 
     private static final String IF = "if ";
     private static final int EXPR = 0;
@@ -22,13 +22,10 @@ public class If extends Node {
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
-        double ret = 0;
-
-        if (children.get(EXPR).interpret(commandDict, varDict) != 0) {
-            ret = children.get(COMMANDS).interpret(commandDict, varDict);
+        if (expressionIsTrue(children.get(EXPR).interpret(commandDict, varDict))) {
+            return children.get(COMMANDS).interpret(commandDict, varDict);
         }
-
-        return ret;
+        return 0;
     }
 
     /**

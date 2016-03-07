@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class IfElse extends Node {
+public class IfElse extends ControlNode {
 
     private static final String IFELSE = "ifelse ";
     private static final int EXPR = 0;
@@ -23,15 +23,11 @@ public class IfElse extends Node {
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
-        double ret = 0;
-
-        if (children.get(EXPR).interpret(commandDict, varDict) == 1) {
-            ret = children.get(TRUE_COMMANDS).interpret(commandDict, varDict);
+        if (expressionIsTrue(children.get(EXPR).interpret(commandDict, varDict))) {
+            return children.get(TRUE_COMMANDS).interpret(commandDict, varDict);
         } else {
-            ret = children.get(FALSE_COMMANDS).interpret(commandDict, varDict);
+           return children.get(FALSE_COMMANDS).interpret(commandDict, varDict);
         }
-
-        return ret;
     }
 
     /**
