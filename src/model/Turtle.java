@@ -40,18 +40,18 @@ public class Turtle extends Observable {
      *
      * @param dist: distance to move.
      */
-    public void move(double dist) {
-        double limit = Math.abs(dist);
+    public double move(double dist) {
         double inc = INCREMENT;
         if (dist < 0) {
             inc = -inc;
         }
 
-        for (double i = 0; i < limit; i = i + INCREMENT) {
+        for (double i = 0; i < Math.abs(dist); i = i + INCREMENT) {
             myX = myX + inc * Math.sin(Math.toRadians(myDirection));
             myY = myY + inc * Math.cos(Math.toRadians(myDirection));
             updateObservers();
         }
+        return dist;
     }
 
     /**
