@@ -54,6 +54,11 @@ public class Turtle extends Observable {
         return dist;
     }
 
+    public void setXY(double x, double y) {
+    	myX = x;
+    	myY = y;
+    }
+    
     /**
      * Turns the turtle towards a given (x, y)
      *
@@ -76,6 +81,10 @@ public class Turtle extends Observable {
 
     public boolean isCurrentTurtle() {
         return isCurrentTurtle;
+    }
+    
+    public void doneResetting() {
+    	reset = false;
     }
 
     /**

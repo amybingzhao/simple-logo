@@ -104,38 +104,31 @@ public class Parser {
 
     private CommandList createList(List<String> inputList) throws ClassNotFoundException {
         CommandList list = new CommandList();
-        // assumes there is a list end; if not we gotta through an error
-        while (!(parseText(inputList.get(0))).equals(LIST_END)) {
-        	Node head;
-        	if (parseText(inputList.get(0)).equals(LIST_START)) {
-        		inputList.remove(0);
-        		head = createList(inputList);
-        	} else {
-        		head = createClass(inputList.get(0), inputList);
-        	}
-            list.addChild(head);
-        }
-
-        inputList.remove(0);
+        addChildrenToListOrGroupNode(list, inputList, LIST_END);
         return list;
     }
     
     private Node createGroup (List<String> inputList) throws ClassNotFoundException {
-        Node node = getFunctionObject(parseText(inputList.get(0)));
-        inputList.remove(0);
-        // assumes there is a list end; if not we gotta through an error
-        while (!(parseText(inputList.get(0))).equals(GROUP_END)) {
+        Node group = getFunctionObject(parseText(inputList.get(0)));
+        addChildrenToListOrGroupNode(group, inputList, GROUP_END);
+        return group;
+    }
+    
+    private void addChildrenToListOrGroupNode(Node node, List<String> inputList, String endDelimiter) throws ClassNotFoundException {
+    	while (!(parseText(inputList.get(0))).equals(endDelimiter)) {
         	Node childHead;
-        	if (parseText(inputList.get(0)).equals(GROUP_START)) {
+        	if (parseText(inputList.get(0)).equals(LIST_START)) {
         		inputList.remove(0);
         		childHead = createList(inputList);
-        	} else {
+        	} else if (parseText(inputList.get(0)).equals(GROUP_START)) {
+        		inputList.remove(0);
+        		childHead = createGroup(inputList);
+        	}else {
         		childHead = createClass(inputList.get(0), inputList);
         	}
             node.addChild(childHead);
         }
         inputList.remove(0);
-        return node;
     }
 
     private Node createClass(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {

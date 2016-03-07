@@ -24,7 +24,7 @@ public class If extends Node {
         List<Node> children = getChildren();
         double ret = 0;
 
-        if (children.get(EXPR).interpret(commandDict, varDict) == 1) {
+        if (children.get(EXPR).interpret(commandDict, varDict) != 0) {
             ret = children.get(COMMANDS).interpret(commandDict, varDict);
         }
 
