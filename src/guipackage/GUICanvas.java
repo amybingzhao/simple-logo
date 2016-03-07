@@ -29,6 +29,9 @@ import model.Turtle;
  */
 
 public class GUICanvas implements Observer{
+	private static final String DOTTED_LINE = "Dotted Line";
+	private static final String DASHED_LINE = "Dashed Line";
+	private static final String SOLID_LINE = "Solid Line";
 	private static final int DEFAULT_PEN_SIZE = 3;
 	private static final int TURTLE_SIZE = 20;
 	private static final int CANVAS_WIDTH = 500;
@@ -48,6 +51,8 @@ public class GUICanvas implements Observer{
 	private GUIObjectComboBoxImages myImagePalette;
 	private ResourceBundle myResources;
 	private double penSize;
+	private String penType;
+	private int penCounter;
 	
 	private int myPenColorIndex;
 	private String myPenRGB;
@@ -78,6 +83,8 @@ public class GUICanvas implements Observer{
 		myRoot = new Pane(canvasBackground);
 		hboxToReturn = new HBox();
 		vboxToRight = new VBox();
+		penCounter = 0;
+		penType = SOLID_LINE;
 	}
 	/**
 	 * Creates the Canvas Node to be displayed.
@@ -191,13 +198,46 @@ public class GUICanvas implements Observer{
 			gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
 		}
 		if (!turtle.isPenUp()) {
-			gcDrawing.fillOval(myX + TURTLE_SIZE/2 - penSize/2, myY + TURTLE_SIZE/2 - penSize/2,
-					penSize, penSize);
+			drawLine(gcDrawing, myX, myY);
 		}
 		gc.restore();
 		setOldCoordinates(turtle, myX, myY, turtle.getDirection());
 	}
-
+	
+	private void drawLine(GraphicsContext gcDrawing, double myX, double myY) {
+		int scaledPen = (int) penSize * 100;
+		switch (penType){
+			case SOLID_LINE: {
+				drawOval(gcDrawing, myX, myY);
+			}
+			case DASHED_LINE: {
+				if (penCounter < scaledPen / 2) {
+					drawOval(gcDrawing, myX, myY);
+				} else if (penCounter == scaledPen) {
+					penCounter = 0;
+				}
+				penCounter++;
+			}
+			case DOTTED_LINE: {
+				if (penCounter == scaledPen / 2) {
+					drawOval(gcDrawing, myX, myY);
+				} else if (penCounter == scaledPen) {
+					drawOval(gcDrawing, myX, myY);
+					penCounter = 0;
+				}
+				penCounter++;
+			}
+		}
+	}
+	
+	private void drawOval(GraphicsContext gcDrawing, double myX, double myY) {
+		gcDrawing.fillOval(myX + TURTLE_SIZE/2 - penSize/2, myY + TURTLE_SIZE/2 - penSize/2,
+				penSize, penSize);
+	}
+	
+	protected void setPenType(String type) {
+		penType = type;
+	}
 	
 	/**
 	 * @return GraphicsContext for Canvas Background
