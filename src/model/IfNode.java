@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public abstract class ControlNode extends Node {
+public abstract class IfNode extends Node {
 	protected boolean expressionIsTrue(double val) {
 		return val != 0;
 	}
@@ -18,4 +18,9 @@ public abstract class ControlNode extends Node {
         	return 0;
         }
 	}
+	
+	@Override
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+        return ifStatement(getChildren().size(), commandDict, varDict);
+    }
 }

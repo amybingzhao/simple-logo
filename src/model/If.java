@@ -7,21 +7,10 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class If extends ControlNode {
+public class If extends IfNode {
 
     private static final String IF = "if ";
-
-    /**
-     * Executes the given command if the given expression is true.
-     *
-     * @param commandDict
-     * @param varDict
-     */
-    @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        return ifStatement(getChildren().size(), commandDict, varDict);
-    }
-
+    
     /**
      * Returns the required user input for this command.
      */
