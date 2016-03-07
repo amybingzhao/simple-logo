@@ -7,7 +7,7 @@ public class SetPenSize extends DisplayNode {
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		//getCanvas().setPenSize(getChildren().get(INDEX).interpret(commandDict, varDict));
+		getCanvas().setPenSize(getChildren().get(PIXELS).interpret(commandDict, varDict));
 		return getChildren().get(PIXELS).interpret(commandDict, varDict);
 	}
 
