@@ -7,7 +7,7 @@ public class SetPenColor extends DisplayNode {
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		//getCanvas().setPenColor(getChildren().get(INDEX).interpret(commandDict, varDict));
+		getCanvas().setPenColor((int) getChildren().get(INDEX).interpret(commandDict, varDict));
 		return getChildren().get(INDEX).interpret(commandDict, varDict);
 	}
 
