@@ -32,8 +32,7 @@ public class Not extends Node {
      * Returns the required user input for this command.
      */
     public String toString() {
-        List<Node> children = getChildren();
-        return NOT + children.get(EXPR).toString();
+        return NOT + childrenToString();
     }
 
 }

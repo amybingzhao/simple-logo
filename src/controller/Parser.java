@@ -20,6 +20,8 @@ public class Parser {
     private static final String VARIABLE = "Variable";
     private static final String COMMENT = "Comment";
     private static final String LIST_START = "ListStart";
+    private static final String GROUP_START = "GroupStart";
+    private static final String GROUP_END = "GroupEnd";
     private static final String LIST_END = "ListEnd";
     private static final String TURTLE_COMMANDS = "TurtleCommands";
     private static final String DISPLAY_COMMANDS = "DisplayCommands";
@@ -100,7 +102,7 @@ public class Parser {
         return head;
     }
 
-    public CommandList createList(List<String> inputList) throws ClassNotFoundException {
+    private CommandList createList(List<String> inputList) throws ClassNotFoundException {
         CommandList list = new CommandList();
         // assumes there is a list end; if not we gotta through an error
         while (!(parseText(inputList.get(0))).equals(LIST_END)) {
@@ -116,6 +118,24 @@ public class Parser {
 
         inputList.remove(0);
         return list;
+    }
+    
+    private Node createGroup (List<String> inputList) throws ClassNotFoundException {
+        Node node = getFunctionObject(parseText(inputList.get(0)));
+        inputList.remove(0);
+        // assumes there is a list end; if not we gotta through an error
+        while (!(parseText(inputList.get(0))).equals(GROUP_END)) {
+        	Node childHead;
+        	if (parseText(inputList.get(0)).equals(GROUP_START)) {
+        		inputList.remove(0);
+        		childHead = createList(inputList);
+        	} else {
+        		childHead = createClass(inputList.get(0), inputList);
+        	}
+            node.addChild(childHead);
+        }
+        inputList.remove(0);
+        return node;
     }
 
     private Node createClass(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
@@ -133,6 +153,9 @@ public class Parser {
                 break;
             case LIST_START:
             	node = createList(inputCommandList);
+            	break;
+            case GROUP_START:
+            	node = createGroup(inputCommandList);
             	break;
             case COMMAND:
                 node = handleCommand(commandToBuild, inputCommandList);

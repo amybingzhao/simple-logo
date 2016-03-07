@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -41,8 +42,6 @@ public class Controller {
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
     private final String WHITESPACE = "\\p{Space}";
-    private int myCanvasWidth;
-    private int myCanvasHeight;
     private GUIObjectLabeled myOutput;
     private GUIAlert myAlert;
     private GUICanvas myCanvas;
@@ -99,23 +98,30 @@ public class Controller {
      * @param command: String inputed by user to the command line.
      * @throws ClassNotFoundException
      */
-    public void processCommand(String command) {
-        List<String> commandAsList = getCommandAsList(command);
-        while (!commandAsList.isEmpty()) {
-            try {
-                IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myTurtles);
-                double result = executeCommandTree(commandToExecute);
-                myOutput.setOutputText(Double.toString(result));
-                addCommandToHistory(command);
-            } catch (ClassNotFoundException e) {
-                myAlert.displayAlert(DOES_NOT_EXIST);
-            } catch (IndexOutOfBoundsException e) {
-                myAlert.displayAlert(INVALID_SYNTAX);
-            } catch (NullPointerException e) {
-                myAlert.displayAlert(EXECUTION_ERROR);
-            }
-        }
+    public void processCommand(String command){
+    	List<String> commandAsList = getCommandAsList(command);
+    	while (!commandAsList.isEmpty()) {
+    		try{
+    			IFunctions commandToExecute = myParser.createCommandTree(commandAsList, myTurtles);
+    			if (commandToExecute != null) {
+    				double result = executeCommandTree(commandToExecute);
+    				myOutput.setOutputText(Double.toString(result));
+    				addCommandToHistory(command);
+    			}
+    		}
+    		catch(ClassNotFoundException e){
+    			myAlert.displayAlert(DOES_NOT_EXIST);
+    		}
+    		catch(IndexOutOfBoundsException e){
+    			myAlert.displayAlert(INVALID_SYNTAX);
+    		}
+    		catch(NullPointerException e){
+    			myAlert.displayAlert(EXECUTION_ERROR);
+    		}
+    	}
     }
+
+
 
     public void loadXML(File myFile) {
         XMLParser myXMLParser = new XMLParser();
@@ -129,11 +135,15 @@ public class Controller {
     // converts string command to arraylist
     private List<String> getCommandAsList(String command) {
         List<String> inputCommandList = new ArrayList<String>();
-        String[] inputArray = command.split(WHITESPACE);
+        String[] inputArray = command.split("\n");
         for (int i = 0; i < inputArray.length; i++) {
-            if (!inputArray[i].isEmpty()) {
-                inputCommandList.add(inputArray[i]);
-            }
+        	if (!inputArray[i].isEmpty()) {
+        		if (!inputArray[i].trim().startsWith("#")) {
+        			inputCommandList.addAll(Arrays.asList(inputArray[i].split(WHITESPACE)));
+        		} else {
+        			inputCommandList.add(inputArray[i]);
+        		}
+        	}
         }
         return inputCommandList;
     }

@@ -10,7 +10,6 @@ import java.util.List;
 public class Left extends TurtleNode {
 
     private static final String LEFT = "left ";
-    private static final int DEGREES = 0;
 
     /**
      * Rotates the turtle CCW the given number of degrees.
@@ -21,8 +20,12 @@ public class Left extends TurtleNode {
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		double degrees = getChildren().get(DEGREES).interpret(commandDict, varDict);
-		turtle.setDirection(turtle.getDirection() - degrees);
+		List<Node> children = getChildren();
+		double degrees = 0;
+		for (int i = 0; i < children.size(); i++) {
+			degrees = getChildren().get(i).interpret(commandDict, varDict);
+			turtle.setDirection(turtle.getDirection() - degrees);
+		}
 		return degrees;
 	}
 
@@ -31,7 +34,6 @@ public class Left extends TurtleNode {
      */
     @Override
     public String toString() {
-        List<Node> children = getChildren();
-        return LEFT + children.get(DEGREES).toString();
+        return LEFT + childrenToString();
     }
 }

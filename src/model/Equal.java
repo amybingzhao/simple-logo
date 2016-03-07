@@ -10,8 +10,7 @@ import java.util.List;
 public class Equal extends Node {
 	
 	private static final String EQUAL = "equal? ";
-	private static final int EXPR1 = 0;
-	private static final int EXPR2 = 0;
+	private static final int EXPR = 0;
 	
 	/**
 	 * Returns 1 if the two expressions are equal; 0 otherwise.
@@ -21,18 +20,19 @@ public class Equal extends Node {
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
-		if (children.get(EXPR1).interpret(commandDict, varDict) == children.get(EXPR2).interpret(commandDict, varDict)) {
-			return 1;
-		} else {
-			return 0;
+		double expr = children.get(EXPR).interpret(commandDict, varDict);
+		for (int i = 1; i < children.size(); i++) {
+			if (children.get(i).interpret(commandDict, varDict) != expr) {
+				return 0;
+			}
 		}
+		return 1;
 	}
 	
 	/**
 	 * Returns the required user input for this command. 
 	 */
 	public String toString() {
-		List<Node> children = getChildren();
-		return EQUAL + children.get(EXPR1).toString() + " " + children.get(EXPR2).toString();
+		return EQUAL + childrenToString();
 	}
 }

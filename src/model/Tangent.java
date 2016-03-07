@@ -28,6 +28,6 @@ public class Tangent extends Node {
      */
     @Override
     public String toString() {
-        return TANGENT + getChildren().get(DEGREES).toString();
+        return TANGENT + childrenToString();
     }
 }

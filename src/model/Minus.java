@@ -25,6 +25,6 @@ public class Minus extends Node {
      */
     @Override
     public String toString() {
-        return MINUS + getChildren().get(EXPR).toString();
+        return MINUS + childrenToString();
     }
 }

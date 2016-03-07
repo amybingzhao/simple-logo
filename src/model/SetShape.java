@@ -13,6 +13,6 @@ public class SetShape extends DisplayNode {
 
 	@Override
 	public String toString() {
-		return SET_SHAPE + getChildren().get(INDEX).toString();
+		return SET_SHAPE + childrenToString();
 	}
 }

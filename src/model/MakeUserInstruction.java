@@ -54,7 +54,6 @@ public class MakeUserInstruction extends Node {
      */
     @Override
     public String toString() {
-        List<Node> children = getChildren();
-        return TO + myName + " " + children.get(VARIABLES).toString() + " " + children.get(PROCEDURE).toString();
+        return TO + myName + childrenToString();
     }
 }

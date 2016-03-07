@@ -10,7 +10,6 @@ import java.util.List;
 public class Forward extends TurtleNode {
 
 	private static final String FORWARD = "forward ";
-	private static final int DISTANCE = 0;
 
 	/**
 	 * Moves the turtle forward the given distance.
@@ -23,12 +22,10 @@ public class Forward extends TurtleNode {
 			VariableDictionary varDict)
 					throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
-		double dist = children.get(DISTANCE).interpret(commandDict, varDict);
-
-		if (turtle != null) {
-			turtle.move(dist);
+		double dist = 0;
+		for (int i = 0; i < children.size(); i++) {
+			dist = turtle.move(children.get(i).interpret(commandDict, varDict));
 		}
-
 		return dist;
 	}
 
@@ -37,7 +34,6 @@ public class Forward extends TurtleNode {
 	 */
 	@Override
 	public String toString() {
-		List<Node> children = getChildren();
-		return FORWARD + children.get(DISTANCE).toString();
+		return FORWARD + childrenToString();
 	}
 }

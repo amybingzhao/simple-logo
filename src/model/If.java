@@ -36,8 +36,7 @@ public class If extends Node {
      */
     @Override
     public String toString() {
-        List<Node> children = getChildren();
-        return "if " + children.get(EXPR).toString() + " " + children.get(COMMANDS).toString();
+        return IF + childrenToString();
     }
 
 }

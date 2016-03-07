@@ -25,6 +25,6 @@ public class NaturalLog extends Node {
      */
     @Override
     public String toString() {
-        return NATURAL_LOG + getChildren().get(EXPR).toString();
+        return NATURAL_LOG + childrenToString();
     }
 }

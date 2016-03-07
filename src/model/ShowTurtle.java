@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * ShowTurtle function.
  * @author amyzhao

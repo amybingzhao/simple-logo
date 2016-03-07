@@ -1,7 +1,5 @@
 package model;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +79,14 @@ public abstract class Node implements IFunctions {
     	return ret;
     }*/
     
+    protected String childrenToString() {
+    	StringBuilder sb = new StringBuilder(); 
+    	for (int i = 0; i < myChildren.size(); i++) {
+    		sb.append(myChildren.get(i).toString());
+    		sb.append(" ");
+    	}
+    	return sb.toString();
+    }
     /**
 	 * Returns the required user input for this command. 
 	 */

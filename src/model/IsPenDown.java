@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * IsPenDown function.
  * @author amyzhao
@@ -25,7 +23,7 @@ public class IsPenDown extends TurtleNode {
 		} else {
 			ret = 1;
 		}
-		return 0;
+		return ret;
 	}
 
 	/**

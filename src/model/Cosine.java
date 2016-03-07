@@ -27,6 +27,6 @@ public class Cosine extends Node {
      */
     @Override
     public String toString() {
-        return COSINE + getChildren().get(0).toString();
+        return COSINE + childrenToString();
     }
 }

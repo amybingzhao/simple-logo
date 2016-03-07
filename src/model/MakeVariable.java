@@ -33,7 +33,6 @@ public class MakeVariable extends Node {
 
     @Override
     public String toString() {
-        List<Node> children = getChildren();
-        return MAKE + children.get(VARIABLE_NAME).toString() + " " + children.get(EXPRESSION).toString();
+        return MAKE + childrenToString();
     }
 }

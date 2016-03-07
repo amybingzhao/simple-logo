@@ -9,8 +9,7 @@ import java.util.List;
 public class Difference extends Node {
 
     private static final String DIFFERENCE = "difference ";
-    private static final int EXPR1 = 0;
-    private static final int EXPR2 = 1;
+    private static final int START = 0;
 
     /**
      * Returns the difference between the two expressions.
@@ -20,8 +19,11 @@ public class Difference extends Node {
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<Node> children = getChildren();
-
-        return children.get(EXPR1).interpret(commandDict, varDict) - children.get(EXPR2).interpret(commandDict, varDict);
+        double diff = children.get(START).interpret(commandDict, varDict);
+        for (int i = 1; i < children.size(); i++) {
+        	diff = diff - children.get(i).interpret(commandDict, varDict);
+        }
+        return diff;
     }
 
     /**
@@ -29,6 +31,6 @@ public class Difference extends Node {
 	 */
     @Override
     public String toString() {
-        return DIFFERENCE + getChildren().get(EXPR1).toString() + " " + getChildren().get(EXPR2	).toString();
+        return DIFFERENCE + childrenToString();
     }
 }

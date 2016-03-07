@@ -39,8 +39,7 @@ public class IfElse extends Node {
      */
     @Override
     public String toString() {
-        List<Node> children = getChildren();
-        return IFELSE + children.get(EXPR).toString() + " " + children.get(TRUE_COMMANDS).toString() + " " + children.get(FALSE_COMMANDS).toString();
+        return IFELSE + childrenToString();
     }
 
 }

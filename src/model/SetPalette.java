@@ -26,9 +26,7 @@ public class SetPalette extends DisplayNode {
 
 	@Override
 	public String toString() {
-		List<Node> children = getChildren();
-		return SET_PALETTE + children.get(INDEX).toString() + " " + 
-				children.get(R).toString() + " " + children.get(G).toString() + " " + children.get(B).toString();
+		return SET_PALETTE + childrenToString();
 	}
 
 }
