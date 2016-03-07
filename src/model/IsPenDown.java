@@ -1,5 +1,7 @@
 package model;
 
+import java.util.function.Predicate;
+
 /**
  * IsPenDown function.
  * @author amyzhao
@@ -17,13 +19,8 @@ public class IsPenDown extends TurtleNode {
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		double ret = 0;
-		if (turtle.isPenUp()) {
-			ret = 0;
-		} else {
-			ret = 1;
-		}
-		return ret;
+		Predicate<Turtle> pen = t -> !t.isPenUp();
+		return checkTurtleProperty(pen, turtle);
 	}
 
 	/**

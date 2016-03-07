@@ -1,5 +1,7 @@
 package model;
 
+import java.util.function.Predicate;
+
 /**
  * IsShowing function.
  * @author amyzhao
@@ -17,13 +19,8 @@ public class IsShowing extends TurtleNode {
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		double ret = 0;
-		if (turtle.showing()) {
-			ret = 1;
-		} else {
-			ret = 0;
-		}
-		return ret;
+		Predicate<Turtle> show = t -> t.showing();
+		return checkTurtleProperty(show, turtle);
 	}
 	
 	/**
