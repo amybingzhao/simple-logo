@@ -1,18 +1,17 @@
 package model;
 
-public class PenColor extends DisplayNode {
+public class GetShape extends DisplayNode {
 
-	private static final String PEN_COLOR = "pencolor ";
+	private static final String SHAPE = "shape ";
 	
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		//return getCanvas().getPenColorIndex();
-		return 0;
+		return getCanvas().getTurtleShapeIndex();
 	}
 
 	@Override
 	public String toString() {
-		return PEN_COLOR;
+		return SHAPE;
 	}
 }
