@@ -29,6 +29,7 @@ import model.Turtle;
  */
 
 public class GUICanvas implements Observer{
+	private static final int DEFAULT_PEN_SIZE = 3;
 	private static final int TURTLE_SIZE = 20;
 	private static final int CANVAS_WIDTH = 500;
 	private static final int CANVAS_HEIGHT = 500;
@@ -48,6 +49,7 @@ public class GUICanvas implements Observer{
 	private GUIObjectComboBoxColor myPenPalette;
 	private GUIObjectComboBoxImages myImagePalette;
 	private ResourceBundle myResources;
+	private double penSize;
 	
 	private int myPenColorIndex;
 	private String myPenRGB;
@@ -68,6 +70,7 @@ public class GUICanvas implements Observer{
 		gcBackground = canvasBackground.getGraphicsContext2D();
 		gcBackground.setFill(Color.BISQUE);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		penSize = DEFAULT_PEN_SIZE;
 		addDefaultTurtles();
 		myRoot = new Pane(canvasBackground);
 	}
@@ -142,7 +145,7 @@ public class GUICanvas implements Observer{
 			Canvas drawingCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 			GraphicsContext drawingGC = drawingCanvas.getGraphicsContext2D();
 //			drawingGC.setFill(myPenColor);
-			myRoot.getChildren().addAll(turtleCanvas, drawingCanvas);
+			myRoot.getChildren().addAll(drawingCanvas, turtleCanvas);
 			myTurtles.put(turtle, new ArrayList<GraphicsContext>(
 					Arrays.asList(turtleCanvas.getGraphicsContext2D(), drawingGC)));
 			int myX = STARTING_X;
@@ -181,7 +184,8 @@ public class GUICanvas implements Observer{
 			gc.drawImage(turtleImage, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
 		}
 		if (!turtle.isPenUp()) {
-			gcDrawing.fillOval(myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2, 3, 3);
+			gcDrawing.fillOval(myX + TURTLE_SIZE/2 - penSize/2, myY + TURTLE_SIZE/2 - penSize/2,
+					penSize, penSize);
 		}
 		gc.restore();
 		setOldCoordinates(turtle, myX, myY, turtle.getDirection());
@@ -316,9 +320,9 @@ public class GUICanvas implements Observer{
 		return myTurtleShapeIndex;
 	}
 		
-//	public void setPenSize(double size) {
-//		myPenSize = size;
-//	}
+	public void setPenSize(double size) {
+		penSize = size;
+	}
 	
 //	public String getCoordinateString(){
 //		return Math.round(turtle.getCurX()) + "," + Math.round(turtle.getCurY());

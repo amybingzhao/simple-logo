@@ -52,7 +52,7 @@ public class GUIObjectPenSettings implements IGUIObject{
 		
 		TextField penThickness = new TextField("Enter Desired Pen Thickness");
 		Button setThickness = new Button("Set Thickness");
-//		setThickness.setOnAction(event -> )
+		setThickness.setOnAction(event -> myCanvas.setPenSize(Double.valueOf(penThickness.getText())));
 		
 
 		myBox.getChildren().addAll(upDownLabel, penUp, penDown, penTypeLabel, penSolid, 
