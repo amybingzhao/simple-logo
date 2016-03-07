@@ -8,6 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import javafx.animation.AnimationTimer;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -107,6 +108,7 @@ public class GUICanvas implements Observer{
 		myTurtles.get(turtle).get(0).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		myTurtles.get(turtle).get(1).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		drawTurtle(turtle);
+		turtle.doneResetting();
 	}
 	
 	/**
@@ -183,6 +185,7 @@ public class GUICanvas implements Observer{
 		gc.restore();
 		setOldCoordinates(turtle, myX, myY, turtle.getDirection());
 	}
+
 	
 	/**
 	 * @return GraphicsContext for Canvas Background
