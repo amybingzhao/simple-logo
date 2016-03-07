@@ -38,6 +38,12 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 		this.myCommandLine = myCommandLine;
 	}
 	
+	public GUIObjectComboBox(GUICanvas canvas, ResourceBundle myResources, String promptText){
+		this.canvas = canvas;
+		this.myResources = myResources;
+		this.promptText = promptText;
+	}
+	
 	/**
 	 * Creates ComboBox Node.
 	 */
