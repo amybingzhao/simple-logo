@@ -157,7 +157,6 @@ public class Parser {
                 node = new MakeUserInstruction(commandName);
                 node.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
                 inputCommandList.remove(0);
-                commandDict.createPlaceholderCommand(commandName, 4);
                 addChildrenToNode(node, inputCommandList);
                 break;
             default:
