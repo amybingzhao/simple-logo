@@ -1,14 +1,13 @@
 package model;
 
+import guipackage.GUICanvas;
+
 public class SetShape extends DisplayNode {
 	private static final String SET_SHAPE = "setshape ";
-	private static final int INDEX = 0;
-	
+
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		getCanvas().setTurtleShape((int) getChildren().get(INDEX).interpret(commandDict, varDict));
-		return getChildren().get(INDEX).interpret(commandDict, varDict);
+	protected void performCanvasOperation(GUICanvas canvas, double val) {
+		canvas.setTurtleShape((int) val);
 	}
 
 	@Override

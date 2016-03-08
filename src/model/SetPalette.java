@@ -1,8 +1,7 @@
 package model;
 
 import java.util.List;
-
-import javafx.scene.paint.Color;
+import guipackage.GUICanvas;
 
 public class SetPalette extends DisplayNode {
 
@@ -22,7 +21,12 @@ public class SetPalette extends DisplayNode {
 		getCanvas().setPalette(rgb.toString().trim(), (int) children.get(INDEX).interpret(commandDict, varDict));
 		return children.get(INDEX).interpret(commandDict, varDict);
 	}
-
+	
+	@Override
+	protected void performCanvasOperation(GUICanvas canvas, double val) {
+		//not used
+	}
+	
 	@Override
 	public String toString() {
 		return SET_PALETTE + childrenToString();

@@ -124,7 +124,7 @@ public class Parser {
         	} else if (parseText(inputList.get(0)).equals(GROUP_START)) {
         		inputList.remove(0);
         		childHead = createGroup(inputList);
-        	}else {
+        	} else {
         		childHead = createClass(inputList.get(0), inputList);
         	}
             node.addChild(childHead);
