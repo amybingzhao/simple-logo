@@ -11,4 +11,6 @@ public interface IFunctions {
 		double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
 		
 		List<IFunctions> getChildren();
+		
+		String toString();
 }
