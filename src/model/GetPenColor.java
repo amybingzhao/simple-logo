@@ -1,5 +1,7 @@
 package model;
 
+import guipackage.GUICanvas;
+
 public class GetPenColor extends DisplayNode {
 
 	private static final String PEN_COLOR = "pencolor ";
@@ -8,6 +10,11 @@ public class GetPenColor extends DisplayNode {
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		return getCanvas().getPenColorIndex();
+	}
+	
+	@Override
+	protected void performCanvasOperation(GUICanvas canvas, double val) {
+		//not used
 	}
 
 	@Override

@@ -1,8 +1,7 @@
 package model;
 
 import java.util.List;
-
-import javafx.scene.paint.Color;
+import guipackage.GUICanvas;
 
 public class SetPalette extends DisplayNode {
 
@@ -13,7 +12,7 @@ public class SetPalette extends DisplayNode {
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Node> children = getChildren();
+		List<IFunctions> children = getChildren();
 		StringBuilder rgb = new StringBuilder();
 		for (int i = 0; i < RGB_INDICES.length; i++) {
 			rgb.append(Integer.toString((int) children.get(RGB_INDICES[i]).interpret(commandDict, varDict)));
@@ -22,7 +21,12 @@ public class SetPalette extends DisplayNode {
 		getCanvas().setPalette(rgb.toString().trim(), (int) children.get(INDEX).interpret(commandDict, varDict));
 		return children.get(INDEX).interpret(commandDict, varDict);
 	}
-
+	
+	@Override
+	protected void performCanvasOperation(GUICanvas canvas, double val) {
+		//not used
+	}
+	
 	@Override
 	public String toString() {
 		return SET_PALETTE + childrenToString();

@@ -6,10 +6,11 @@ import java.util.ResourceBundle;
 import controller.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
 /**
  * Abstract class to implement different types of ComboBoxes. 
@@ -21,6 +22,8 @@ import javafx.scene.layout.VBox;
 
 public abstract class GUIObjectComboBox implements IGUIObject {
 	private static final int VISIBLE_ROW_COUNT = 5;
+	private static final int PADDING = 10;
+	private static final int HBOX_SPACING = 5;
 	protected String promptText;
 	protected ResourceBundle myResources;
 	protected Controller myController;
@@ -49,7 +52,7 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 	 */
 	@Override
 	public Node createNode(){
-		VBox vbox = new VBox();
+		HBox hbox = new HBox(HBOX_SPACING);
 		options = FXCollections.observableArrayList(
 			        optionsList()
 			    );
@@ -59,8 +62,9 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 		setCellFactory();
 		comboButton = new Button("Go");
 		setButtonAction();
-		vbox.getChildren().addAll(comboBox, comboButton);
-		return vbox;
+		hbox.getChildren().addAll(comboBox, comboButton);
+		hbox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
+		return hbox;
 	}
 	
 	/**

@@ -20,7 +20,7 @@ public class Left extends TurtleNode {
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Node> children = getChildren();
+		List<IFunctions> children = getChildren();
 		double degrees = 0;
 		for (int i = 0; i < children.size(); i++) {
 			degrees = getChildren().get(i).interpret(commandDict, varDict);

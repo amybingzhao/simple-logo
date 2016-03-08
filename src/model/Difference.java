@@ -18,7 +18,7 @@ public class Difference extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<Node> children = getChildren();
+        List<IFunctions> children = getChildren();
         double diff = children.get(START).interpret(commandDict, varDict);
         for (int i = 1; i < children.size(); i++) {
         	diff = diff - children.get(i).interpret(commandDict, varDict);

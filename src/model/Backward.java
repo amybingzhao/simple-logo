@@ -18,7 +18,7 @@ public class Backward extends TurtleNode {
 	 */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Node> children = getChildren();
+		List<IFunctions> children = getChildren();
 		double dist = 0;
 		for (int i = 0; i < children.size(); i++) {
 			dist = turtle.move(-1 * children.get(i).interpret(commandDict, varDict));
