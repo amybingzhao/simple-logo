@@ -21,8 +21,7 @@ public class SetHeading extends TurtleNode {
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Node> children = getChildren();
-		double curDir = 0;
-		curDir = turtle.getDirection();
+		double curDir = turtle.getDirection();
 		turtle.setDirection(children.get(DEGREES).interpret(commandDict, varDict));
 		return children.get(DEGREES).interpret(commandDict, varDict) - curDir;
 	}

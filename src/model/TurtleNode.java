@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public abstract class TurtleNode extends Node {
     private List<Turtle> myTurtles;
@@ -63,7 +64,7 @@ public abstract class TurtleNode extends Node {
     
     protected abstract double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
     
-    public Turtle getTurtleByID(double ID) {
+    protected Turtle getTurtleByID(double ID) {
     	for (int i = 0; i < myTurtles.size(); i++) {
     		if (myTurtles.get(i).getID() == ID) {
     			return myTurtles.get(i);
@@ -72,7 +73,7 @@ public abstract class TurtleNode extends Node {
     	return null;
     }
     
-    public void activateTurtles(double maxID) {
+    protected void activateTurtles(double maxID) {
     	for (int i = 0; i <= maxID; i++) {
 			Turtle turtle = getTurtleByID(i);
 			if (turtle != null) {
@@ -85,10 +86,18 @@ public abstract class TurtleNode extends Node {
 		}
     }
     
-    public void inactivateAllTurtles() {
+    protected void inactivateAllTurtles() {
     	for (int i = 0; i < myTurtles.size(); i++) {
 			Turtle turtle = getTurtleByID(i);
 			turtle.inactivate();
 		}
+    }
+    
+    protected double checkTurtleProperty(Predicate<Turtle> pred, Turtle turtle) {
+    	if (pred.test(turtle)) {
+    		return 1;
+    	} else {
+    		return 0;
+    	}
     }
 }

@@ -28,7 +28,7 @@ public class DoTimes extends Node {
         double ret = 0;
 
         // spec said to go from 1:limit
-        for (double i = 1; i < limit; i++) {
+        for (double i = 1; i <= limit; i++) {
             varDict.makeVariable(var, i);
             ret = children.get(COMMANDS).interpret(commandDict, varDict);
         }

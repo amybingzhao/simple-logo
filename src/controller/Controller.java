@@ -134,18 +134,20 @@ public class Controller {
 
     // converts string command to arraylist
     private List<String> getCommandAsList(String command) {
-        List<String> inputCommandList = new ArrayList<String>();
-        String[] inputArray = command.split("\n");
-        for (int i = 0; i < inputArray.length; i++) {
-        	if (!inputArray[i].isEmpty()) {
-        		if (!inputArray[i].trim().startsWith("#")) {
-        			inputCommandList.addAll(Arrays.asList(inputArray[i].split(WHITESPACE)));
-        		} else {
-        			inputCommandList.add(inputArray[i]);
-        		}
-        	}
-        }
-        return inputCommandList;
+    	List<String> inputCommandList = new ArrayList<String>();
+    	String[] inputArray = command.split("\n");
+    	for (int i = 0; i < inputArray.length; i++) {
+    		if (!inputArray[i].trim().startsWith("#")) {
+    			String[] toAdd = inputArray[i].split(WHITESPACE);
+    			for (int j = 0; j < toAdd.length; j++) { 
+    				if (!toAdd[j].isEmpty()) {
+    					inputCommandList.add(toAdd[j].trim());
+    				}
+    			}
+    		}
+
+    	}
+    	return inputCommandList;
     }
 
     private double executeCommandTree(IFunctions head) throws ClassNotFoundException {
