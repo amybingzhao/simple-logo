@@ -31,6 +31,7 @@ public class XMLParser {
 
     private String backgroundColor;
     private String penColor;
+    private String turtleImage;
     private List<Turtle> myTurtles;
 
     public XMLParser(Controller controller) {
@@ -70,6 +71,7 @@ public class XMLParser {
         List<String> configData = extract(configElement);
         backgroundColor = getTextForEntry(configData.get(0));
         penColor = getTextForEntry(configData.get(1));
+        turtleImage = getTextForEntry(configData.get(2));
     }
 
     private void parseTurtles(Element turtleElements) {
@@ -90,8 +92,16 @@ public class XMLParser {
         }
     }
 
-    private void parseCommands(Element commandElement){
-
+    private void parseCommands(Element commandsElement) {
+        NodeList myList = commandsElement.getChildNodes();
+        for (int i = 0; i < myList.getLength(); i++) {
+            Node myNode = myList.item(i);
+            if (myNode instanceof Element){
+                Element commandElement = (Element) myNode;
+                List<String> data = extract(commandElement);
+                myController.processCommand(getTextForEntry(data.get(1)));
+            }
+        }
     }
 
     private void makeTurtle(List<String> turtleData) {
@@ -128,6 +138,10 @@ public class XMLParser {
 
     public String getPenColor() {
         return penColor;
+    }
+
+    public String getTurtleImage() {
+        return turtleImage;
     }
 
     public List<Turtle> getTurtles() {

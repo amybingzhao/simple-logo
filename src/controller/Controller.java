@@ -119,7 +119,6 @@ public class Controller {
     			myAlert.displayAlert(EXECUTION_ERROR);
     		}
     	}
-        save(new File("test.xml"));
     }
 
 
@@ -130,7 +129,6 @@ public class Controller {
         } catch (IOException | ParserConfigurationException | SAXException e) {
             myAlert.displayAlert(PARSING_ERROR);
         }
-        System.out.println(myXMLParser.getBackgroundColor());
     }
 
     // converts string command to arraylist

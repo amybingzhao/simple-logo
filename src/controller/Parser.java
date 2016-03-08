@@ -155,7 +155,7 @@ public class Parser {
                 node = handleCommand(commandToBuild, inputCommandList);
                 break;
             case MAKE_USER_INSTRUCTION:
-                node = new MakeUserInstruction(inputCommandList.get(0));
+                node = new MakeUserInstruction(new ArrayList(inputCommandList));
                 node.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
                 inputCommandList.remove(0);
                 addChildrenToNode(node, inputCommandList);

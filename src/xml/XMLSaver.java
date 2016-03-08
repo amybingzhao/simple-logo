@@ -68,7 +68,7 @@ public class XMLSaver {
         Element myRoot = myDocument.createElement("SLogoState");
         myDocument.appendChild(myRoot);
         myRoot.appendChild(getConfig(backgroundColor, penColor, turtleImage));
-        myRoot.appendChild(getTurtles(turtles));
+//        myRoot.appendChild(getTurtles(turtles));
         myRoot.appendChild(getVariables());
         myRoot.appendChild(getCommands());
         createFile(file);
@@ -116,7 +116,7 @@ public class XMLSaver {
 
     private Element getCommands() {
         Element commandElement = myDocument.createElement(COMMANDS);
-        for (String key : myCommandDict.getCommandKeySet()) {
+        for (String key : myCommandDict.getCommandTextKeySet()) {
             commandElement.appendChild(makeCommandElement(key));
         }
         return commandElement;
@@ -125,7 +125,7 @@ public class XMLSaver {
     private Element makeCommandElement(String key) {
         Element commandElement = myDocument.createElement(COMMAND);
         commandElement.appendChild(makeElement(NAME, key));
-        commandElement.appendChild(makeElement(PROCEDURE, myCommandDict.getCommandFor(key).getProcedure().toString()));
+        commandElement.appendChild(makeElement(PROCEDURE, myCommandDict.getCommandTextForKey(key)));
         commandElement.appendChild(makeElement(NUMBER_OF_ARGUMENTS, "" + myCommandDict.getNumArgsForkey(key)));
         return commandElement;
     }

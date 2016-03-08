@@ -12,9 +12,11 @@ public class MakeUserInstruction extends Node {
     private static final int VARIABLES = 0;
     private static final int PROCEDURE = 1;
     private String myName;
+    private List<String> myCommandList;
 
-    public MakeUserInstruction(String name) {
-        myName = name;
+    public MakeUserInstruction(List<String> inputCommandList) {
+        myCommandList = inputCommandList;
+        myName = myCommandList.get(0);
     }
 
     /**
@@ -37,8 +39,18 @@ public class MakeUserInstruction extends Node {
         myCommand.setProcedure(expressions.getChildren());
         commandDict.createCommand(myName, myCommand);
         commandDict.setNumArguments(myName, parameters.size());
+        commandDict.storeCommandText(myName, join());
         return 1;
     }
+
+    private String join(){
+        String myCommand = "to ";
+        for (String myString : myCommandList){
+            myCommand = myCommand + myString + " ";
+        }
+        return myCommand.trim();
+    }
+
 
     /**
      * Gets the name of the command.
@@ -54,6 +66,6 @@ public class MakeUserInstruction extends Node {
      */
     @Override
     public String toString() {
-        return TO + myName + childrenToString();
+        return TO + myName + " " + childrenToString();
     }
 }
