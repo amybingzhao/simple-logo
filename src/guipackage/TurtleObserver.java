@@ -32,11 +32,6 @@ public class TurtleObserver implements Observer{
 		isCurrentTurtle = turtle.isCurrentTurtle();
 		reset = turtle.shouldReset();
 		showing = turtle.showing();
-		updateCanvas();
-	}
-	
-	public void updateCanvas() {
-//		myCanvas.update(this);
 	}
 	
 	protected double getX() {

@@ -86,10 +86,8 @@ public class TabMainScreen {
 		userCommands = myFactory.createNewGUIObject("UserCommands");
 		previousCommands = myFactory.createNewGUIObject("PreviousCommands");
 		languageSelector = myFactory.createNewGUIObject("LanguageSelector");
-		imageInput = myFactory.createNewGUIObject("ImageComboBox");
 		leftPanel.getChildren().addAll(turtleState.createNode(),userCommands.createNode(), 
-				previousCommands.createNode(), languageSelector.createNode(), 
-				imageInput.createNode());
+				previousCommands.createNode(), languageSelector.createNode());
 		myMainScreen.setLeft(leftPanel);
 	}
 	
