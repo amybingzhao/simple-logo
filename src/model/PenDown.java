@@ -17,7 +17,7 @@ public class PenDown extends TurtleNode {
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		turtle.putPenDown();
+		turtle.setPenUp(false);
 		return 1;
 	}
 	

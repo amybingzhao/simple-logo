@@ -18,9 +18,9 @@ public class Ask extends TurtleNode {
 		for (int i = 0; i < turtleIDs.size(); i++) {
 			Turtle turtle = getTurtleByID(turtleIDs.get(i));
 			if (turtle != null) {
-				turtle.setAsCurrentTurtle();
-				turtle.activate();
-				turtle.noLongerCurrentTurtle();
+				turtle.changeCurrentTurtleStatus(true);
+				turtle.setActive(true);
+				turtle.changeCurrentTurtleStatus(false);
 			} else {
 				createTurtle(turtleIDs.get(i));
 			}
@@ -32,9 +32,9 @@ public class Ask extends TurtleNode {
 		for (int i = 0; i < origActiveList.size(); i++) {
 			Turtle turtle = getTurtleByID(origActiveList.get(i).getID());
 			if (turtle != null) {
-				turtle.setAsCurrentTurtle();
-				turtle.activate();
-				turtle.noLongerCurrentTurtle();
+				turtle.changeCurrentTurtleStatus(true);
+				turtle.setActive(true);
+				turtle.changeCurrentTurtleStatus(false);
 			}
 		}
 		

@@ -46,19 +46,22 @@ public class Command extends Node {
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 
         if (!commandDict.contains(myName)) {
-            throw new ClassNotFoundException();
-        }
+        	throw new ClassNotFoundException();
+        } else {
+        	parameters = commandDict.getCommandFor(myName).getParams();
+        	myProcedure = commandDict.getCommandFor(myName).getProcedure();
 
-        List<IFunctions> children = getChildren();
-        for (int i = 0; i < parameters.size(); i++) {
-            String myVar = parameters.get(i);
-            double value = children.get(i).interpret(commandDict, varDict);
-            varDict.makeVariable(myVar, value);
+        	List<IFunctions> children = getChildren();
+        	for (int i = 0; i < parameters.size(); i++) {
+        		String myVar = parameters.get(i);
+        		double value = children.get(i).interpret(commandDict, varDict);
+        		varDict.makeVariable(myVar, value);
+        	}
+        	for (IFunctions myNode : myProcedure) {
+        		myNode.interpret(commandDict, varDict);
+        	}
+        	return 0;
         }
-        for (IFunctions myNode : myProcedure) {
-            myNode.interpret(commandDict, varDict);
-        }
-        return 0;
     }
 
     /**

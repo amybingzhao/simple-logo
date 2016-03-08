@@ -395,9 +395,9 @@ public class GUICanvas implements Observer{
 	public void setPen(String penUp) {
 		for (Turtle t: myTurtles.keySet()) {
 			if (t.isActive() && penUp.equals(myResources.getString("PenUp"))) {
-				t.liftPenUp();
+				t.setPenUp(true);
 			} else if (t.isActive() && penUp.equals(myResources.getString("PenDown"))){
-				t.putPenDown();
+				t.setPenUp(false);
 			}
 		}
 	}
