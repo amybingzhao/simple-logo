@@ -25,11 +25,11 @@ public class MakeUserInstruction extends Node {
      */
     //TODO: must return 0 if command not successfully defined
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<Node> children = getChildren();
+        List<IFunctions> children = getChildren();
         Command myCommand = new Command(myName);
         CommandList paramList = (CommandList) children.get(VARIABLES);
-        List<Node> parameters = paramList.getChildren();
-        for (Node myNode : parameters) {
+        List<IFunctions> parameters = paramList.getChildren();
+        for (IFunctions myNode : parameters) {
             Variable myVar = (Variable) myNode;
             myCommand.addParam(myVar.toString());
         }

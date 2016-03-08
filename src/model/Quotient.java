@@ -17,7 +17,7 @@ public class Quotient extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-    	List<Node> children = getChildren();
+    	List<IFunctions> children = getChildren();
 		double quotient = children.get(0).interpret(commandDict, varDict);
 		for (int i = 1; i < children.size(); i++) {
 			quotient = quotient/children.get(i).interpret(commandDict, varDict);

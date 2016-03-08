@@ -9,14 +9,14 @@ import java.util.List;
  *
  */
 public abstract class Node implements IFunctions {
-    private List<Node> myChildren;
+    private List<IFunctions> myChildren;
     private int numChildrenNeeded;
 
     /**
      * Initializes the node's turtle and list of children nodes.
      */
     public Node() {
-        myChildren = new ArrayList<Node>();
+        myChildren = new ArrayList<IFunctions>();
     }
 
     /**
@@ -47,7 +47,7 @@ public abstract class Node implements IFunctions {
      * Gets the list of children nodes.
      * @return list of children nodes.
      */
-    public List<Node> getChildren() {
+    public List<IFunctions> getChildren() {
         return myChildren;
     }
 

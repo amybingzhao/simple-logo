@@ -17,7 +17,7 @@ public class CommandList extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<Node> children = getChildren();
+        List<IFunctions> children = getChildren();
         double ret = 0;
 
         for (int i = 0; i < children.size(); i++) {

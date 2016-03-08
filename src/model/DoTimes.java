@@ -21,8 +21,8 @@ public class DoTimes extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<Node> children = getChildren();
-        Node iterVar = children.get(VARIABLE_AND_LIMIT);
+        List<IFunctions> children = getChildren();
+        IFunctions iterVar = children.get(VARIABLE_AND_LIMIT);
         String var = iterVar.getChildren().get(0).toString(); // first child in command list should be varaible;
         double limit = iterVar.getChildren().get(1).interpret(commandDict, varDict); // second child is limit
         double ret = 0;

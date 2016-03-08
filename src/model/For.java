@@ -20,9 +20,9 @@ public class For extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<Node> children = getChildren();
+        List<IFunctions> children = getChildren();
         CommandList argList = (CommandList) children.get(VARIABLE_AND_LIMITS);
-        List<Node> argsNodes = argList.getChildren();
+        List<IFunctions> argsNodes = argList.getChildren();
         double low = argsNodes.get(1).interpret(commandDict, varDict);
         double high = argsNodes.get(2).interpret(commandDict, varDict);
         double increment = argsNodes.get(3).interpret(commandDict, varDict);
