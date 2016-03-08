@@ -8,7 +8,7 @@ import javafx.stage.Stage;
  * Created by blakekaplan on 2/23/16.
  */
 public class Main extends Application{
-	private static final int SCREEN_WIDTH = 1200;
+	private static final int SCREEN_WIDTH = 1300;
 	private static final int SCREEN_HEIGHT = 800;
 	
 	private Stage s;

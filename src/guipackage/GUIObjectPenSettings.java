@@ -2,6 +2,7 @@ package guipackage;
 
 import java.util.ResourceBundle;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,8 +12,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
 public class GUIObjectPenSettings implements IGUIObject{
-	
-	private static final int VBOX_SPACING = 5;
+	private static final int PADDING = 10;
+	private static final int VBOX_SPACING = 10;
 	private ResourceBundle myResources;
 	private GUICanvas myCanvas;
 	private Label upDownLabel;
@@ -43,6 +44,7 @@ public class GUIObjectPenSettings implements IGUIObject{
 		myBox.getChildren().addAll(upDownLabel, penUp, penDown, penTypeLabel, penSolid, 
 				penDashed, penDotted, penLabel, penThickness, setThickness);
 		
+		myBox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		return myBox;
 	}
 	
