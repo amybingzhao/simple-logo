@@ -68,7 +68,6 @@ public class XMLSaver {
         Element myRoot = myDocument.createElement("SLogoState");
         myDocument.appendChild(myRoot);
         myRoot.appendChild(getConfig(backgroundColor, penColor, turtleImage));
-//        myRoot.appendChild(getTurtles(turtles));
         myRoot.appendChild(getVariables());
         myRoot.appendChild(getCommands());
         createFile(file);
@@ -98,14 +97,6 @@ public class XMLSaver {
         return configElement;
     }
 
-    private Element getTurtles(List<Turtle> myTurtles) {
-        Element turtleElement = myDocument.createElement(TURTLES);
-        for (Turtle myTurtle : myTurtles) {
-            turtleElement.appendChild(makeTurtleElement(myTurtle));
-        }
-        return turtleElement;
-    }
-
     private Element getVariables() {
         Element variablesElement = myDocument.createElement(VARIABLES);
         for (String key : myVarDict.getKeySet()) {
@@ -128,15 +119,6 @@ public class XMLSaver {
         commandElement.appendChild(makeElement(PROCEDURE, myCommandDict.getCommandTextForKey(key)));
         commandElement.appendChild(makeElement(NUMBER_OF_ARGUMENTS, "" + myCommandDict.getNumArgsForkey(key)));
         return commandElement;
-    }
-
-    private Element makeTurtleElement(Turtle myTurtle) {
-        Element turtleElement = myDocument.createElement(TURTLE);
-        turtleElement.appendChild(makeElement(ID, "" + myTurtle.getID()));
-        turtleElement.appendChild(makeElement(X, "" + myTurtle.getCurX()));
-        turtleElement.appendChild(makeElement(Y, "" + myTurtle.getCurY()));
-        turtleElement.appendChild(makeElement(DIRECTION, "" + myTurtle.getDirection()));
-        return turtleElement;
     }
 
     private Element makeElement(String nodeName, String data) {

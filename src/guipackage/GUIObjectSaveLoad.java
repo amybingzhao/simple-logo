@@ -7,6 +7,7 @@ import controller.Controller;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 public class GUIObjectSaveLoad implements IGUIObject {
 	private ResourceBundle myResources;
@@ -33,6 +34,18 @@ public class GUIObjectSaveLoad implements IGUIObject {
 		
 		return myBox;
 	}
+
+    /**
+     * Creates a file picker to get a file name
+     * @return returns the file
+     */
+//    public File promptForFileName(){
+//        FileChooser myFileChooser = new FileChooser();
+//        FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter("XML Files (.xml)", "*.xml");
+//        myFileChooser.getExtensionFilters().add(myFilter);
+//        File fileName = myFileChooser.showSaveDialog(myStage);
+//        return fileName;
+//    }
 
 	@Override
 	public void updateNode() {
