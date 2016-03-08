@@ -11,7 +11,7 @@ public class Command extends Node {
 
     private String myName;
     private List<String> parameters;
-    private List<Node> myProcedure;
+    private List<IFunctions> myProcedure;
 
     /**
      * Initializes the name and the parameters list for the command.
@@ -49,13 +49,13 @@ public class Command extends Node {
             throw new ClassNotFoundException();
         }
 
-        List<Node> children = getChildren();
+        List<IFunctions> children = getChildren();
         for (int i = 0; i < parameters.size(); i++) {
             String myVar = parameters.get(i);
             double value = children.get(i).interpret(commandDict, varDict);
             varDict.makeVariable(myVar, value);
         }
-        for (Node myNode : myProcedure) {
+        for (IFunctions myNode : myProcedure) {
             myNode.interpret(commandDict, varDict);
         }
         return 0;
@@ -66,11 +66,11 @@ public class Command extends Node {
      *
      * @param procedure: child command trees to be executed.
      */
-    public void setProcedure(List<Node> procedure) {
-        myProcedure = procedure;
+    public void setProcedure(List<IFunctions> list) {
+        myProcedure = list;
     }
 
-    public List<Node> getProcedure() {
+    public List<IFunctions> getProcedure() {
         return myProcedure;
     }
 

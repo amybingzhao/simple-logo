@@ -12,7 +12,7 @@ public class SetPalette extends DisplayNode {
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Node> children = getChildren();
+		List<IFunctions> children = getChildren();
 		StringBuilder rgb = new StringBuilder();
 		for (int i = 0; i < RGB_INDICES.length; i++) {
 			rgb.append(Integer.toString((int) children.get(RGB_INDICES[i]).interpret(commandDict, varDict)));

@@ -8,7 +8,7 @@ public abstract class IfNode extends Node {
 	}
 	
 	protected double ifStatement(int numChildren, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Node> children = getChildren();
+		List<IFunctions> children = getChildren();
         if (expressionIsTrue(children.get(0).interpret(commandDict, varDict))) {
             return children.get(1).interpret(commandDict, varDict);
         }
