@@ -95,10 +95,8 @@ public class Parser {
     }
 
     private IFunctions createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
-        IFunctions head = null;
         String commandToBuild = inputCommandList.get(0);
-        head = createClass(commandToBuild, inputCommandList);
-
+        IFunctions head = createClass(commandToBuild, inputCommandList);
         return head;
     }
 
@@ -155,9 +153,11 @@ public class Parser {
                 node = handleCommand(commandToBuild, inputCommandList);
                 break;
             case MAKE_USER_INSTRUCTION:
-                node = new MakeUserInstruction(inputCommandList.get(0));
+            	String commandName = inputCommandList.get(0);
+                node = new MakeUserInstruction(commandName);
                 node.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
                 inputCommandList.remove(0);
+                commandDict.createPlaceholderCommand(commandName, 4);
                 addChildrenToNode(node, inputCommandList);
                 break;
             default:
