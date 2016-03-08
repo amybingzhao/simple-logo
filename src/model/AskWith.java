@@ -18,9 +18,9 @@ public class AskWith extends TurtleNode {
 		for (int i = 0; i < activeTurtleIDs.size(); i++) {
 			Turtle turtle = getTurtleByID(activeTurtleIDs.get(i));
 			if (turtle != null) {
-				turtle.setAsCurrentTurtle();
-				turtle.activate();
-				turtle.noLongerCurrentTurtle();
+				turtle.changeCurrentTurtleStatus(true);
+				turtle.setActive(true);
+				turtle.changeCurrentTurtleStatus(false);
 			} else {
 				createTurtle(activeTurtleIDs.get(i));
 			}
@@ -32,9 +32,9 @@ public class AskWith extends TurtleNode {
 		for (int i = 0; i < origActiveList.size(); i++) {
 			Turtle turtle = getTurtleByID(origActiveList.get(i).getID());
 			if (turtle != null) {
-				turtle.setAsCurrentTurtle();
-				turtle.activate();
-				turtle.noLongerCurrentTurtle();
+				turtle.changeCurrentTurtleStatus(true);
+				turtle.setActive(true);
+				turtle.changeCurrentTurtleStatus(false);
 			}
 		}
 		
@@ -45,12 +45,13 @@ public class AskWith extends TurtleNode {
 		List<Double> turtleIDs = new ArrayList<Double>();
 		inactivateAllTurtles();
 		for (int i = 0; i < allTurtles.size(); i++) {
-			allTurtles.get(i).activate();
-			allTurtles.get(i).setAsCurrentTurtle();
+			allTurtles.get(i).setActive(true);
+			allTurtles.get(i).changeCurrentTurtleStatus(true);
 			if (getChildren().get(CONDITION).interpret(commandDict, varDict) == 1) {
 				turtleIDs.add(allTurtles.get(i).getID());
 			}
-			allTurtles.get(i).inactivate();
+			allTurtles.get(i).setActive(false);
+			allTurtles.get(i).changeCurrentTurtleStatus(false);
 		}
 		return turtleIDs;
 	}

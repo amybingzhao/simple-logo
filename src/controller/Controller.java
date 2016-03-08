@@ -3,7 +3,6 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -37,11 +36,11 @@ public class Controller {
     public static final String INVALID_SYNTAX = "InvalidSyntax";
     private static final String GUI_RESOURCE = "GUI";
     public static final String PARSING_ERROR = "ParsingError";
+    private static final String WHITESPACE = "\\p{Space}";
     private String myLanguageResource;
     private Parser myParser;
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
-    private final String WHITESPACE = "\\p{Space}";
     private GUIObjectLabeled myOutput;
     private GUIAlert myAlert;
     private GUICanvas myCanvas;
@@ -59,8 +58,8 @@ public class Controller {
      */
     public void init() {
         myLanguageResource = DEFAULT_LANGUAGE_RESOURCE;
-        myCommandHistory = new ArrayList<String>();
-        myTurtles = new ArrayList<Turtle>();
+        myCommandHistory = new ArrayList<>();
+        myTurtles = new ArrayList<>();
         addInitialTurtle();
         myGUIResource = ResourceBundle.getBundle(GUI_RESOURCE);
         myOutput = new GUIObjectLabeled(myGUIResource, "Output");
@@ -74,7 +73,7 @@ public class Controller {
 
     public void addInitialTurtle() {
         Turtle turtle = new Turtle(0);
-        turtle.activate();
+        turtle.setActive(true);
         turtle.addObserver(myCanvas);
         turtle.updateObservers();
         myTurtles.add(turtle);
@@ -133,7 +132,7 @@ public class Controller {
 
     // converts string command to arraylist
     private List<String> getCommandAsList(String command) {
-    	List<String> inputCommandList = new ArrayList<String>();
+    	List<String> inputCommandList = new ArrayList<>();
     	String[] inputArray = command.split("\n");
     	for (int i = 0; i < inputArray.length; i++) {
     		if (!inputArray[i].trim().startsWith("#")) {
@@ -150,9 +149,8 @@ public class Controller {
     }
 
     private double executeCommandTree(IFunctions head) throws ClassNotFoundException {
-        double result = 0;
         System.out.println(head.toString());
-        result = head.interpret(commandDict, varDict);
+        double result = head.interpret(commandDict, varDict);
         addObserver();
         return result;
     }

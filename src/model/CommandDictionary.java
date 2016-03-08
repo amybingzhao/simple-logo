@@ -33,6 +33,12 @@ public class CommandDictionary {
             myCommands.put(key, newCommand);
         }
     }
+    
+    public void createPlaceholderCommand(String key, int numParams) {
+    	Command placeHolder = new Command(key);
+    	myNumArguments.put(key, numParams);
+    	myCommands.put(key, placeHolder);
+    }
 
     /**
      * Gets the command associated with a given command name.

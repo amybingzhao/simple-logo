@@ -95,10 +95,8 @@ public class Parser {
     }
 
     private IFunctions createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
-        IFunctions head = null;
         String commandToBuild = inputCommandList.get(0);
-        head = createClass(commandToBuild, inputCommandList);
-
+        IFunctions head = createClass(commandToBuild, inputCommandList);
         return head;
     }
 

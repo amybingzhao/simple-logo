@@ -34,7 +34,7 @@ public class VariableDictionary {
     public double getNodeFor(String key) {
         if (!contains(key)) {
             myVariables.put(key, DEFAULT);
-        } //else throw new NullPointerException();
+        }
         return myVariables.get(key);
     }
 
