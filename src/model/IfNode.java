@@ -13,14 +13,16 @@ public abstract class IfNode extends Node {
 	
 	protected double ifStatement(int numChildren, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<IFunctions> children = getChildren();
-        if (expressionIsTrue(children.get(EXPR).interpret(commandDict, varDict))) {
-            return children.get(TRUE_COMMANDS).interpret(commandDict, varDict);
-        }
-        if (numChildren > 2) {
-        	return children.get(FALSE_COMMANDS).interpret(commandDict, varDict);
-        } else {
-        	return 0;
-        }
+		if (expressionIsTrue(children.get(EXPR).interpret(commandDict, varDict))) {
+			return children.get(TRUE_COMMANDS).interpret(commandDict, varDict);
+		}
+		else {
+			if (numChildren > 2) {
+				return children.get(FALSE_COMMANDS).interpret(commandDict, varDict);
+			} else {
+				return 0;
+			}
+		}
 	}
 	
 	@Override
