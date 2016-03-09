@@ -25,10 +25,10 @@ public class GUIObjectSaveLoad implements IGUIObject {
 		VBox myBox = new VBox(VBOX_PADDING);
 		
 		Button saveButton = new Button(myResources.getString("Save"));
-		saveButton.setOnAction(e -> myController.save(new File("test.xml")));
+		saveButton.setOnAction(e -> myController.save(promptForFileName(true)));
 		
 		Button loadButton = new Button(myResources.getString("Load"));
-		loadButton.setOnAction(e -> myController.loadXML(new File("test.xml")));
+		loadButton.setOnAction(e -> myController.loadXML(promptForFileName(false)));
 		
 		myBox.getChildren().addAll(saveButton, loadButton);
 		
@@ -39,13 +39,19 @@ public class GUIObjectSaveLoad implements IGUIObject {
      * Creates a file picker to get a file name
      * @return returns the file
      */
-//    public File promptForFileName(){
-//        FileChooser myFileChooser = new FileChooser();
-//        FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter("XML Files (.xml)", "*.xml");
-//        myFileChooser.getExtensionFilters().add(myFilter);
-//        File fileName = myFileChooser.showSaveDialog(myStage);
-//        return fileName;
-//    }
+    private File promptForFileName(boolean isSaving){
+        FileChooser myFileChooser = new FileChooser();
+        FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter("XML Files (.xml)", "*.xml");
+        myFileChooser.getExtensionFilters().add(myFilter);
+        File fileName;
+        if (isSaving){
+            fileName = myFileChooser.showSaveDialog(myController.getStage());
+        }
+        else{
+            fileName = myFileChooser.showOpenDialog(myController.getStage());
+        }
+        return fileName;
+    }
 
 	@Override
 	public void updateNode() {
