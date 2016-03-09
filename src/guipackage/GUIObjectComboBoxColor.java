@@ -81,9 +81,4 @@ abstract class GUIObjectComboBoxColor extends GUIObjectComboBox{
 		palette = currentPalette;
 		updateNode();
 	}
-	
-	public List<String> getPalette(){
-		return palette;
-	}
-
 }
