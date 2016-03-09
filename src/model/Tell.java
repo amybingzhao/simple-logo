@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Tell extends TurtleNode {
 
-	private static final String TELL = "tell ";
+	private static final String TELL = "Tell ";
 	private static final int TURTLE_IDS = 0;
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)

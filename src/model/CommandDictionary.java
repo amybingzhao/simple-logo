@@ -11,10 +11,12 @@ public class CommandDictionary {
 
     private Map<String, Command> myCommands;
     private Map<String, Integer> myNumArguments;
+    private Map<String, String> myCommandText;
 
-    public CommandDictionary(){
+    public CommandDictionary() {
         myCommands = new HashMap<>();
         myNumArguments = new HashMap<>();
+        myCommandText = new HashMap<>();
     }
 
     /**
@@ -54,6 +56,11 @@ public class CommandDictionary {
         return ret;
     }
 
+
+    public void storeCommandText(String key, String commandText) {
+        myCommandText.put(key, commandText);
+    }
+
     /**
      * Checks if a command of the given name already exists.
      *
@@ -84,6 +91,8 @@ public class CommandDictionary {
         return myNumArguments.get(key);
     }
 
+    public String getCommandTextForKey(String key) { return myCommandText.get(key); }
+
     /**
      * Gets the set of command names already defined.
      *
@@ -91,5 +100,9 @@ public class CommandDictionary {
      */
     public Set<String> getCommandKeySet() {
         return myCommands.keySet();
+    }
+
+    public Set<String> getCommandTextKeySet() {
+        return myCommandText.keySet();
     }
 }

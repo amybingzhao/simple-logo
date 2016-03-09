@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Sum extends Node{
 	
-	private static final String SUM = "sum ";
+	private static final String SUM = "Sum ";
 	
 	/**
 	 * Returns the sum of expr1 and expr2.

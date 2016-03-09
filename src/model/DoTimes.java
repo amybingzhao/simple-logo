@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class DoTimes extends Node {
 
-    private static final String DOTIMES = "dotimes ";
+    private static final String DOTIMES = "DoTimes ";
     private static final int VARIABLE_AND_LIMIT = 0;
     private static final int COMMANDS = 1;
     private static final int VARIABLE = 0;

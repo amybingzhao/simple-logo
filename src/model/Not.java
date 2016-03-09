@@ -7,7 +7,7 @@ package model;
  */
 public class Not extends BooleanNode {
 
-    private static final String NOT = "not ";
+    private static final String NOT = "Not ";
     private static final int EXPR = 0;
 
     /**

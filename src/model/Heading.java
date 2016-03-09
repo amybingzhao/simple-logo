@@ -7,7 +7,7 @@ package model;
  */
 public class Heading extends TurtleNode {
 
-	private static final String HEADING = "heading ";
+	private static final String HEADING = "Heading ";
 
 	/**
 	 * Returns the turtle's current direction.

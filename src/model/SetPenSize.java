@@ -3,7 +3,7 @@ package model;
 import guipackage.GUICanvas;
 
 public class SetPenSize extends DisplayNode {
-	private static final String SET_PEN_SIZE = "setpensize ";
+	private static final String SET_PEN_SIZE = "SetPenSize ";
 	
 	@Override
 	protected void performCanvasOperation(GUICanvas canvas, double val) {

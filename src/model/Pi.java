@@ -6,7 +6,7 @@ package model;
  */
 public class Pi extends Node {
 
-    private static final String PI = "pi ";
+    private static final String PI = "Pi ";
 
     /**
      * Returns the value of pi.

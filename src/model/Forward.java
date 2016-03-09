@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Forward extends TurtleNode {
 
-	private static final String FORWARD = "forward ";
+	private static final String FORWARD = "Forward ";
 
 	/**
 	 * Moves the turtle forward the given distance.

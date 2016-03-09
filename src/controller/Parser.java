@@ -39,6 +39,7 @@ public class Parser {
     private VariableDictionary varDict;
     private CommandDictionary commandDict;
     private GUICanvas myCanvas;
+    private String currentLanguage;
 
     public Parser(CommandDictionary myComDict, VariableDictionary myVarDict, GUICanvas canvas) {
         mySymbols = new ArrayList<>();
@@ -96,8 +97,7 @@ public class Parser {
 
     private IFunctions createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
         String commandToBuild = inputCommandList.get(0);
-        IFunctions head = createClass(commandToBuild, inputCommandList);
-        return head;
+        return createClass(commandToBuild, inputCommandList);
     }
 
     private CommandList createList(List<String> inputList) throws ClassNotFoundException {
@@ -153,8 +153,7 @@ public class Parser {
                 node = handleCommand(commandToBuild, inputCommandList);
                 break;
             case MAKE_USER_INSTRUCTION:
-            	String commandName = inputCommandList.get(0);
-                node = new MakeUserInstruction(commandName);
+                node = new MakeUserInstruction(inputCommandList.get(0), currentLanguage);
                 node.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
                 inputCommandList.remove(0);
                 addChildrenToNode(node, inputCommandList);
@@ -218,6 +217,10 @@ public class Parser {
                 node.addChild(childNode);
             }
         }
+    }
+
+    public void setCurrentLanguage(String language){
+        currentLanguage = language;
     }
 
     private boolean match(String text, Pattern regex) {

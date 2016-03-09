@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ID extends TurtleNode {
 
-	private static final String ID = "id ";
+	private static final String ID = "ID ";
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {

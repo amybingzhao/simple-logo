@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * MakeUserInstruction function to implement To.
@@ -11,10 +12,13 @@ public class MakeUserInstruction extends Node {
     private static final String TO = "to ";
     private static final int VARIABLES = 0;
     private static final int PROCEDURE = 1;
+    public static final String MAKE_USER_INSTRUCTION = "MakeUserInstruction";
     private String myName;
+    private String myCurrentLanguage;
 
-    public MakeUserInstruction(String name) {
+    public MakeUserInstruction(String name, String language) {
         myName = name;
+        myCurrentLanguage = language;
     }
 
     /**
@@ -23,7 +27,6 @@ public class MakeUserInstruction extends Node {
      * @param commandDict
      * @param varDict
      */
-    //TODO: must return 0 if command not successfully defined
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<IFunctions> children = getChildren();
         Command myCommand = new Command(myName);
@@ -37,6 +40,7 @@ public class MakeUserInstruction extends Node {
         myCommand.setProcedure(expressions.getChildren());
         commandDict.createCommand(myName, myCommand);
         commandDict.setNumArguments(myName, parameters.size());
+        commandDict.storeCommandText(myName, toString());
         return 1;
     }
 
@@ -49,11 +53,32 @@ public class MakeUserInstruction extends Node {
         return myName;
     }
 
+    private String translateToLanguage(String command){
+        String translated = "";
+        String[] splitCommand = command.split(" ");
+        for (String entry : splitCommand){
+            translated = translated + getTranslation(entry) + " ";
+        }
+        return translated;
+    }
+
+    private String getTranslation(String entry){
+        ResourceBundle languageBundle = ResourceBundle.getBundle(myCurrentLanguage);
+        if (languageBundle.containsKey(entry)){
+            String options = languageBundle.getString(entry);
+            String[] splitOptions = options.split("\\|");
+            return splitOptions[0];
+        }
+        else{
+            return entry;
+        }
+    }
+
     /**
      * Returns the required user input for this command.
      */
     @Override
     public String toString() {
-        return TO + myName + childrenToString();
+        return translateToLanguage(MAKE_USER_INSTRUCTION + " " + myName + " " + childrenToString());
     }
 }

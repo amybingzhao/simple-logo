@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Power extends Node {
 
-	private static final String POWER = "pow ";
+	private static final String POWER = "Power ";
 	private static final int BASE = 0;
 	private static final int EXPONENT = 1;
 	

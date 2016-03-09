@@ -7,7 +7,7 @@ package model;
  */
 public class Equal extends BooleanNode {
 	
-	private static final String EQUAL = "equal? ";
+	private static final String EQUAL = "Equal ";
 	private static final int EXPR = 0;
 	
 	/**

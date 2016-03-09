@@ -4,7 +4,7 @@ import guipackage.GUICanvas;
 
 public class GetShape extends DisplayNode {
 
-	private static final String SHAPE = "shape ";
+	private static final String SHAPE = "GetShape ";
 	
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)

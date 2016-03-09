@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class SetPosition extends TurtleNode {
 
-    private static final String SETXY = "setxy ";
+    private static final String SETXY = "SetPosition ";
     private static final int X = 0;
     private static final int Y = 1;
 

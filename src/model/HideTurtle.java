@@ -7,7 +7,7 @@ package model;
  */
 public class HideTurtle extends TurtleNode {
 
-	private static final String HIDETURTLE = "hideturtle ";
+	private static final String HIDETURTLE = "HideTurtle ";
 
 	/**
 	 * Sets the turtle to invisible.

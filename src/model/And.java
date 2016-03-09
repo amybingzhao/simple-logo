@@ -7,7 +7,7 @@ package model;
  */
 public class And extends BooleanNode {
 
-    private static final String AND = "and ";
+    private static final String AND = "And ";
 
     /**
      * If all expressions are true, returns true.

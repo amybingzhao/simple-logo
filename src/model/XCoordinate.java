@@ -7,7 +7,7 @@ package model;
  */
 public class XCoordinate extends TurtleNode {
 
-	private static final String XCOR = "xcor ";
+	private static final String XCOR = "XCoordinate ";
 
 	/**
 	 * Returns the turtle's current x-coordinate.

@@ -7,7 +7,7 @@ package model;
  */
 public class PenDown extends TurtleNode {
 
-	private static final String PENDOWN = "pendown ";
+	private static final String PENDOWN = "PenDown ";
 
 	/**
 	 * Puts the turtle's pen down so trail will now show.

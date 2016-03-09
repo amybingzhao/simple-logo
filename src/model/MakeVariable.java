@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MakeVariable extends Node {
 
-    private static final String MAKE = "make ";
+    private static final String MAKE = "MakeVariable ";
     private static final int VARIABLE_NAME = 0;
     private static final int EXPRESSION = 1;
     private String name;

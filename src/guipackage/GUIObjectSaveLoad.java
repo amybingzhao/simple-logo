@@ -1,11 +1,13 @@
 package guipackage;
 
+import java.io.File;
 import java.util.ResourceBundle;
 
 import controller.Controller;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 public class GUIObjectSaveLoad implements IGUIObject {
 	private ResourceBundle myResources;
@@ -23,15 +25,27 @@ public class GUIObjectSaveLoad implements IGUIObject {
 		VBox myBox = new VBox(VBOX_PADDING);
 		
 		Button saveButton = new Button(myResources.getString("Save"));
-//		saveButton.setOnAction(e -> );
+		saveButton.setOnAction(e -> myController.save(new File("test.xml")));
 		
 		Button loadButton = new Button(myResources.getString("Load"));
-//		loadButton.setOnAction(e -> );
+		loadButton.setOnAction(e -> myController.loadXML(new File("test.xml")));
 		
 		myBox.getChildren().addAll(saveButton, loadButton);
 		
 		return myBox;
 	}
+
+    /**
+     * Creates a file picker to get a file name
+     * @return returns the file
+     */
+//    public File promptForFileName(){
+//        FileChooser myFileChooser = new FileChooser();
+//        FileChooser.ExtensionFilter myFilter = new FileChooser.ExtensionFilter("XML Files (.xml)", "*.xml");
+//        myFileChooser.getExtensionFilters().add(myFilter);
+//        File fileName = myFileChooser.showSaveDialog(myStage);
+//        return fileName;
+//    }
 
 	@Override
 	public void updateNode() {

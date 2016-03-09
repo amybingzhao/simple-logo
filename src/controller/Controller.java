@@ -68,6 +68,7 @@ public class Controller {
         varDict = new VariableDictionary();
         myParser = new Parser(commandDict, varDict, myCanvas);
         myParser.addPatterns(myLanguageResource);
+        myParser.setCurrentLanguage(myLanguageResource);
         myParser.addPatterns(SYNTAX_RESOURCE);
     }
 
@@ -88,6 +89,7 @@ public class Controller {
         myLanguageResource = LANGUAGE_RESOURCE_LOCATION + lang;
         myParser.clearAllPatterns();
         myParser.addPatterns(myLanguageResource);
+        myParser.setCurrentLanguage(myLanguageResource);
         myParser.addPatterns(SYNTAX_RESOURCE);
     }
 
@@ -121,9 +123,8 @@ public class Controller {
     }
 
 
-
     public void loadXML(File myFile) {
-        XMLParser myXMLParser = new XMLParser();
+        XMLParser myXMLParser = new XMLParser(this);
         try {
             myXMLParser.parse(myFile);
         } catch (IOException | ParserConfigurationException | SAXException e) {
@@ -193,9 +194,9 @@ public class Controller {
         return varDict;
     }
 
-    private void save(File file) {
+    public void save(File file) {
         XMLSaver mySaver = new XMLSaver(commandDict, varDict);
-        mySaver.generateFile(myCanvas.getBackgroundColor().toString(), "Blue", myGUIResource.toString(), getTurtles(), file);
+        mySaver.generateFile(myCanvas.getBackgroundColor(), myCanvas.getPenColor(), myCanvas.getTurtleImageName(), myGUIResource.toString(), getTurtles(), file);
     }
 
 }

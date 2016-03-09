@@ -5,7 +5,7 @@ import guipackage.GUICanvas;
 
 public class SetPalette extends DisplayNode {
 
-	private static final String SET_PALETTE = "setpalette ";
+	private static final String SET_PALETTE = "SetPalette ";
 	private static final int INDEX = 0;
 	private static final int[] RGB_INDICES = new int[]{1,2,3};
 

@@ -6,7 +6,7 @@ package model;
  */
 public class Cosine extends Node {
 
-    private static final String COSINE = "cos ";
+    private static final String COSINE = "Cosine ";
     private static final int DEGREES = 0;
 
     /**
