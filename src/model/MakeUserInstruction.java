@@ -14,12 +14,10 @@ public class MakeUserInstruction extends Node {
     private static final int PROCEDURE = 1;
     public static final String MAKE_USER_INSTRUCTION = "MakeUserInstruction";
     private String myName;
-    private List<String> myCommandList;
     private String myCurrentLanguage;
 
-    public MakeUserInstruction(List<String> inputCommandList, String language) {
-        myCommandList = inputCommandList;
-        myName = myCommandList.get(0);
+    public MakeUserInstruction(String name, String language) {
+        myName = name;
         myCurrentLanguage = language;
     }
 
@@ -42,18 +40,9 @@ public class MakeUserInstruction extends Node {
         myCommand.setProcedure(expressions.getChildren());
         commandDict.createCommand(myName, myCommand);
         commandDict.setNumArguments(myName, parameters.size());
-        commandDict.storeCommandText(myName, join());
+        commandDict.storeCommandText(myName, toString());
         return 1;
     }
-
-    private String join(){
-        String myCommand = "to ";
-        for (String myString : myCommandList){
-            myCommand = myCommand + myString + " ";
-        }
-        return myCommand.trim();
-    }
-
 
     /**
      * Gets the name of the command.
@@ -64,12 +53,32 @@ public class MakeUserInstruction extends Node {
         return myName;
     }
 
+    private String translateToLanguage(String command){
+        String translated = "";
+        String[] splitCommand = command.split(" ");
+        for (String entry : splitCommand){
+            translated = translated + getTranslation(entry) + " ";
+        }
+        return translated;
+    }
+
+    private String getTranslation(String entry){
+        ResourceBundle languageBundle = ResourceBundle.getBundle(myCurrentLanguage);
+        if (languageBundle.containsKey(entry)){
+            String options = languageBundle.getString(entry);
+            String[] splitOptions = options.split("\\|");
+            return splitOptions[0];
+        }
+        else{
+            return entry;
+        }
+    }
+
     /**
      * Returns the required user input for this command.
      */
     @Override
     public String toString() {
-        ResourceBundle languageBundle = ResourceBundle.getBundle(myCurrentLanguage);
-        return languageBundle.getString(MAKE_USER_INSTRUCTION) + " " + myName + " " + childrenToString();
+        return translateToLanguage(MAKE_USER_INSTRUCTION + " " + myName + " " + childrenToString());
     }
 }
