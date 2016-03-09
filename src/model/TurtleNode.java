@@ -30,7 +30,6 @@ public abstract class TurtleNode extends Node {
         return activeTurtles;
     }
     
-    
     public void createTurtle(double ID) {
     	Turtle turtle = new Turtle(ID);
 		turtle.setActive(true);
