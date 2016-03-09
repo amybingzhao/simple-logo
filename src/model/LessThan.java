@@ -7,7 +7,7 @@ package model;
  */
 public class LessThan extends BooleanNode {
 
-    private static final String LESS = "less? ";
+    private static final String LESS = "LessThan ";
     private static final int EXPR1 = 0;
     private static final int EXPR2 = 1;
 

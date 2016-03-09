@@ -7,7 +7,7 @@ package model;
  */
 public class IfElse extends IfNode {
 
-    private static final String IFELSE = "ifelse ";
+    private static final String IFELSE = "IfElse ";
 
     /**
      * Returns the required user input for this command.

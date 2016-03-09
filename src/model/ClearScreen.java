@@ -7,7 +7,7 @@ package model;
  */
 public class ClearScreen extends TurtleNode {
 
-	private static final String CLEARSCREEN = "clearscreen ";
+	private static final String CLEARSCREEN = "ClearScreen ";
 
 	/** 
 	 * Moves the turtle back to (0, 0) and erases its trails; returns the distance the turtle moved to get back to (0, 0).

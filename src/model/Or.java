@@ -7,7 +7,7 @@ package model;
  */
 public class Or extends BooleanNode {
 
-	private static final String OR = "or ";
+	private static final String OR = "Or ";
 	
 	/**
 	 * If expr1 or expr2 is true, returns 1; else 0.

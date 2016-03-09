@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Product extends Node {
 
-    private static final String PRODUCT = "product ";
+    private static final String PRODUCT = "Product ";
 
 	/**
      * Returns the product of expr1 and expr2.

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Right extends TurtleNode {
 
-	private static final String RIGHT = "right ";
+	private static final String RIGHT = "Right ";
 
 	/**
 	 * Rotates the turtle CW by the given number of degrees.

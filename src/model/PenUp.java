@@ -7,7 +7,7 @@ package model;
  */
 public class PenUp extends TurtleNode {
 
-	private static final String PENUP = "penup ";
+	private static final String PENUP = "PenUp ";
 
 	/**
 	 * Lifts pen up for current turtle so trail will no longer show.

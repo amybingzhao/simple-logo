@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Quotient extends Node {
 
-    private static final String QUOTIENT = "quotient ";
+    private static final String QUOTIENT = "Quotient ";
 
 	/**
      * Returns the quotient of expr1 divided by expr2.

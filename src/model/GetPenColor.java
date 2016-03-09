@@ -4,7 +4,7 @@ import guipackage.GUICanvas;
 
 public class GetPenColor extends DisplayNode {
 
-	private static final String PEN_COLOR = "pencolor ";
+	private static final String PEN_COLOR = "GetPenColor ";
 	
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)

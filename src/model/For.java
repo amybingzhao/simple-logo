@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class For extends Node {
 
-    private static final String FOR = "for ";
+    private static final String FOR = "For ";
     private static final int VARIABLE_AND_LIMITS = 0;
     private static final int COMMANDS = 1;
     private static final int LOW = 1;

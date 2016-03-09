@@ -7,7 +7,7 @@ package model;
  */
 public class GreaterThan extends BooleanNode {
 
-    private static final String GREATER = "greater? ";
+    private static final String GREATER = "GreaterThan ";
     private static final int EXPR1 = 0;
     private static final int EXPR2 = 1;
 

@@ -7,7 +7,7 @@ package model;
  */
 public class YCoordinate extends TurtleNode {
 
-	private static final String YCOR = "ycor ";
+	private static final String YCOR = "YCoordinate ";
 
 	/**
 	 * Returns the turtle's current y-coordinate.

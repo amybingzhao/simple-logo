@@ -68,6 +68,7 @@ public class Controller {
         varDict = new VariableDictionary();
         myParser = new Parser(commandDict, varDict, myCanvas);
         myParser.addPatterns(myLanguageResource);
+        myParser.setCurrentLanguage(myLanguageResource);
         myParser.addPatterns(SYNTAX_RESOURCE);
     }
 
@@ -88,6 +89,7 @@ public class Controller {
         myLanguageResource = LANGUAGE_RESOURCE_LOCATION + lang;
         myParser.clearAllPatterns();
         myParser.addPatterns(myLanguageResource);
+        myParser.setCurrentLanguage(myLanguageResource);
         myParser.addPatterns(SYNTAX_RESOURCE);
     }
 

@@ -6,7 +6,7 @@ package model;
  */
 public class ArcTangent extends Node {
 
-    private static final String ARC_TANGENT = "atan ";	// is there a reason why this is public?
+    private static final String ARC_TANGENT = "ArcTangent ";	// is there a reason why this is public?
     private static final int DEGREES = 0;
     
     /**

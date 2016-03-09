@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class SetHeading extends TurtleNode {
 	
-	private static final String SETHEADING = "setheading ";
+	private static final String SETHEADING = "SetHeading ";
 	private static final int DEGREES = 0;
 	
 	/**

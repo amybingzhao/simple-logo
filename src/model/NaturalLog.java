@@ -6,7 +6,7 @@ package model;
  */
 public class NaturalLog extends Node {
 
-    private static final String NATURAL_LOG = "log ";
+    private static final String NATURAL_LOG = "NaturalLog ";
     private static final int EXPR = 0;
 
     /**

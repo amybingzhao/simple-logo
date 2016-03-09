@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * MakeUserInstruction function to implement To.
@@ -11,12 +12,15 @@ public class MakeUserInstruction extends Node {
     private static final String TO = "to ";
     private static final int VARIABLES = 0;
     private static final int PROCEDURE = 1;
+    public static final String MAKE_USER_INSTRUCTION = "MakeUserInstruction";
     private String myName;
     private List<String> myCommandList;
+    private String myCurrentLanguage;
 
-    public MakeUserInstruction(List<String> inputCommandList) {
+    public MakeUserInstruction(List<String> inputCommandList, String language) {
         myCommandList = inputCommandList;
         myName = myCommandList.get(0);
+        myCurrentLanguage = language;
     }
 
     /**
@@ -25,7 +29,6 @@ public class MakeUserInstruction extends Node {
      * @param commandDict
      * @param varDict
      */
-    //TODO: must return 0 if command not successfully defined
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
         List<IFunctions> children = getChildren();
         Command myCommand = new Command(myName);
@@ -66,6 +69,7 @@ public class MakeUserInstruction extends Node {
      */
     @Override
     public String toString() {
-        return TO + myName + " " + childrenToString();
+        ResourceBundle languageBundle = ResourceBundle.getBundle(myCurrentLanguage);
+        return languageBundle.getString(MAKE_USER_INSTRUCTION) + " " + myName + " " + childrenToString();
     }
 }

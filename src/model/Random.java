@@ -6,7 +6,7 @@ package model;
  */
 public class Random extends Node {
 
-    private static final String RANDOM = "random ";
+    private static final String RANDOM = "Random ";
     private static final int MAX = 0;
 
     /**

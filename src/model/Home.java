@@ -7,7 +7,7 @@ package model;
  */
 public class Home extends TurtleNode {
 
-	private static final String HOME = "home ";
+	private static final String HOME = "Home ";
 
 	/**
 	 * Moves the turtle back to the origin and returns the distance moved.

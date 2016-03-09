@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Backward extends TurtleNode {
 
-	private static final String BACKWARD = "back ";
+	private static final String BACKWARD = "Backward ";
 
 	/**
 	 * Moves the turtle backwards a given distance and returns the distance moved.

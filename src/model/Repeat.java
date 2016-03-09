@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Repeat extends Node {
 
-    private static final String REPEAT = "repeat ";
+    private static final String REPEAT = "Repeat ";
     private static final int EXPR = 0;
     private static final int COMMANDS = 1;
     private static final String REPCOUNT_VARIABLE = "repCount";

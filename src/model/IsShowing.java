@@ -9,7 +9,7 @@ import java.util.function.Predicate;
  */
 public class IsShowing extends TurtleNode {
 
-	private static final String SHOWINGP = "showing? ";
+	private static final String SHOWINGP = "IsShowing ";
 
 	/**
 	 * Returns 1 if the turtle is showing on the canvas; 0 otherwise.

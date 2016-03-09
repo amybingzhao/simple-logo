@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class SetTowards extends TurtleNode {
 
-	private static final String TOWARDS = "towards ";
+	private static final String TOWARDS = "SetTowards ";
 	private static final int X = 0;
 	private static final int Y = 1;
 	

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AskWith extends TurtleNode {
 
-	private static final String ASKWITH = "askwith ";
+	private static final String ASKWITH = "AskWith ";
 	private static final int CONDITION = 0;
 	private static final int COMMANDS = 1;
 	@Override
