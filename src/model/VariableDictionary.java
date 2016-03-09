@@ -15,10 +15,6 @@ public class VariableDictionary {
         myVariables = new HashMap<>();
     }
 
-    public VariableDictionary(VariableDictionary existing){
-
-    }
-
     /**
      * Makes a variable key/value pair.
      *
