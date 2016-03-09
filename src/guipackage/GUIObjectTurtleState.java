@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
+import model.Turtle;
 
 public class GUIObjectTurtleState implements IGUIObject {
 	private GUIObjectLabeled locationLabel;
@@ -36,9 +37,12 @@ public class GUIObjectTurtleState implements IGUIObject {
 
 	@Override
 	public void updateNode() {
-//		locationLabel.setOutputText(canvas.getCoordinateString());
-//		headingLabel.setOutputText(canvas.getHeadingString());
-//		penLabel.setOutputText(Boolean.toString(canvas.getPenDownStatus()));
+	}
+	
+	public void updateTurtleState(Turtle turtle){
+		locationLabel.setOutputText(Math.round(turtle.getCurX()) + "," + Math.round(turtle.getCurY()));
+		headingLabel.setOutputText(""+Math.round(turtle.getDirection()));
+		penLabel.setOutputText(Boolean.toString(turtle.isPenUp()));
 	}
 
 }

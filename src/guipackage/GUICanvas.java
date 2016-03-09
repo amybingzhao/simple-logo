@@ -40,7 +40,6 @@ public class GUICanvas implements Observer{
 	private static final int STARTING_X = CANVAS_WIDTH/2 - TURTLE_SIZE/2;
 	private static final int STARTING_Y = CANVAS_HEIGHT/2 - TURTLE_SIZE/2;	
 	private static final String DEFAULT_TURTLE = "turtle_outline.png";
-	private double myOldDirection;
 	private Canvas canvasBackground;
 	private Pane myCanvasRoot;
 	private GraphicsContext gcBackground;
@@ -176,7 +175,7 @@ public class GUICanvas implements Observer{
 	}
 	
 	/**
-	 * Places default turtle on canvas.
+	 * Places single default turtle on canvas.
 	 */
 	private void addDefaultTurtles(){
 		turtleShape = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
@@ -407,19 +406,7 @@ public class GUICanvas implements Observer{
 			}
 		}
 	}
-	
-//	public String getCoordinateString(){
-//		return Math.round(turtle.getCurX()) + "," + Math.round(turtle.getCurY());
-//	}
-	
-	public String getHeadingString(){
-		return "" + myOldDirection%360;
-	}
-	
-//	public boolean getPenDownStatus(){
-//		return !turtle.isPenUp();
-//	}
-	
+
 	public int getWidth(){
 		return CANVAS_WIDTH;
 	}
