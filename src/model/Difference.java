@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * Difference function.
  * Created by blakekaplan on 2/27/16.
@@ -18,12 +16,12 @@ public class Difference extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<IFunctions> children = getChildren();
-        double diff = children.get(START).interpret(commandDict, varDict);
-        for (int i = 1; i < children.size(); i++) {
-        	diff = diff - children.get(i).interpret(commandDict, varDict);
-        }
-        return diff;
+        return applyChildren(getChildren().get(START).interpret(commandDict, varDict) * 2, commandDict, varDict);
+    }
+    
+    @Override
+    protected double addChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    	return val - child.interpret(commandDict, varDict);
     }
 
     /**
