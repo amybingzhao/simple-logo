@@ -7,7 +7,7 @@ package model;
  */
 public class If extends IfNode {
 
-    private static final String IF = "if ";
+    private static final String IF = "If ";
     
     /**
      * Returns the required user input for this command.

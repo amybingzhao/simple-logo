@@ -25,7 +25,7 @@ public abstract class BooleanNode extends Node {
 	}
 	
 	private int countNumMatchingCondition(Predicate<Double> condition, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Node> children = getChildren();
+		List<IFunctions> children = getChildren();
 		int numMatching = 0;
         for (int i = 0; i < children.size(); i++) {
         	if (condition.test(children.get(i).interpret(commandDict, varDict))) {

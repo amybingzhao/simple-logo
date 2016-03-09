@@ -24,6 +24,7 @@ public class Turtle extends Observable {
     private boolean reset;
     private static final double ONE_REVOLUTION = 360;
     private static final double INCREMENT = 0.1;
+    private static final int SQUARE = 2;
 
     public Turtle(double ID) {
         myID = ID;
@@ -71,12 +72,8 @@ public class Turtle extends Observable {
         return angle;
     }
 
-    public void setAsCurrentTurtle() {
-        isCurrentTurtle = true;
-    }
-
-    public void noLongerCurrentTurtle() {
-        isCurrentTurtle = false;
+    public void changeCurrentTurtleStatus(boolean currentTurtleStatus) {
+        isCurrentTurtle = currentTurtleStatus;
     }
 
     public boolean isCurrentTurtle() {
@@ -95,7 +92,7 @@ public class Turtle extends Observable {
      * @return distance between current position and (x, y)
      */
     public double calcDistance(double x, double y) {
-        return Math.sqrt(Math.pow(myX - x, 2) + Math.pow(myY - y, 2));
+        return Math.sqrt(Math.pow(myX - x, SQUARE) + Math.pow(myY - y, SQUARE));
     }
 
     /**
@@ -125,22 +122,15 @@ public class Turtle extends Observable {
     /**
      * Lifts the turtle's pen up so no trail is drawn when it moves.
      */
-    public void liftPenUp() {
-        penUp = true;
-    }
-
-    /**
-     * Puts the turtle's pen down so a trail is drawn when it moves.
-     */
-    public void putPenDown() {
-        penUp = false;
+    public void setPenUp(boolean penUpStatus) {
+        penUp = penUpStatus;
     }
 
     /**
      * Makes the turtle invisible.
      */
-    public void hide() {
-        isVisible = false;
+    public void setVisible(boolean visible) {
+        isVisible = visible;
         updateObservers();
     }
 
@@ -184,14 +174,6 @@ public class Turtle extends Observable {
     }
 
     /**
-     * Makes the turtle visible.
-     */
-    public void show() {
-        isVisible = true;
-        updateObservers();
-    }
-
-    /**
      * Checks if the turtle is visible.
      *
      * @return true if the turtle's isVisible field is true; false otherwise.
@@ -227,12 +209,8 @@ public class Turtle extends Observable {
         return myY;
     }
 
-    public void activate() {
-        isActive = true;
-    }
-
-    public void inactivate() {
-        isActive = false;
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public boolean isActive() {
@@ -241,15 +219,6 @@ public class Turtle extends Observable {
 
     public double getID() {
         return myID;
-    }
-
-    /**
-     * Prints the turtle's current position and direction.
-     *
-     * @return a string representing the turtle's current (x, y) position and direction.
-     */
-    public String printPosition() {
-        return ("(" + Double.toString(myX) + ", " + Double.toString(myY) + "), Direction: " + Double.toString(myDirection));
     }
 
     public Image getImage() {

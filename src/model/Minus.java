@@ -6,7 +6,7 @@ package model;
  */
 public class Minus extends Node {
 
-    private static final String MINUS = "minus ";
+    private static final String MINUS = "Minus ";
     private static final int EXPR = 0;
 
     /**

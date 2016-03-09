@@ -4,7 +4,7 @@ import guipackage.GUICanvas;
 
 public class SetBackground extends DisplayNode {
 
-	private static final String SET_BACKGROUND = "setbackground ";
+	private static final String SET_BACKGROUND = "SetBackground ";
 	
 	@Override
 	protected void performCanvasOperation(GUICanvas canvas, double val) {

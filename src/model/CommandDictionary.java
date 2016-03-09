@@ -11,10 +11,12 @@ public class CommandDictionary {
 
     private Map<String, Command> myCommands;
     private Map<String, Integer> myNumArguments;
+    private Map<String, String> myCommandText;
 
-    public CommandDictionary(){
+    public CommandDictionary() {
         myCommands = new HashMap<>();
         myNumArguments = new HashMap<>();
+        myCommandText = new HashMap<>();
     }
 
     /**
@@ -31,6 +33,12 @@ public class CommandDictionary {
             myCommands.put(key, newCommand);
         }
     }
+    
+    public void createPlaceholderCommand(String key, int numParams) {
+    	Command placeHolder = new Command(key);
+    	myNumArguments.put(key, numParams);
+    	myCommands.put(key, placeHolder);
+    }
 
     /**
      * Gets the command associated with a given command name.
@@ -46,6 +54,11 @@ public class CommandDictionary {
         }
         ret.setProcedure(commandToGet.getProcedure());
         return ret;
+    }
+
+
+    public void storeCommandText(String key, String commandText) {
+        myCommandText.put(key, commandText);
     }
 
     /**
@@ -78,6 +91,8 @@ public class CommandDictionary {
         return myNumArguments.get(key);
     }
 
+    public String getCommandTextForKey(String key) { return myCommandText.get(key); }
+
     /**
      * Gets the set of command names already defined.
      *
@@ -85,5 +100,9 @@ public class CommandDictionary {
      */
     public Set<String> getCommandKeySet() {
         return myCommands.keySet();
+    }
+
+    public Set<String> getCommandTextKeySet() {
+        return myCommandText.keySet();
     }
 }

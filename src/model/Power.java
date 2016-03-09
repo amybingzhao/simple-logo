@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Power extends Node {
 
-	private static final String POWER = "pow ";
+	private static final String POWER = "Power ";
 	private static final int BASE = 0;
 	private static final int EXPONENT = 1;
 	
@@ -19,7 +19,7 @@ public class Power extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<Node> children = getChildren();
+        List<IFunctions> children = getChildren();
         return Math.pow(children.get(BASE).interpret(commandDict, varDict), children.get(EXPONENT).interpret(commandDict, varDict));
     }
 

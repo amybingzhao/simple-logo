@@ -7,7 +7,7 @@ package model;
  */
 public class PenDown extends TurtleNode {
 
-	private static final String PENDOWN = "pendown ";
+	private static final String PENDOWN = "PenDown ";
 
 	/**
 	 * Puts the turtle's pen down so trail will now show.
@@ -17,7 +17,7 @@ public class PenDown extends TurtleNode {
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		turtle.putPenDown();
+		turtle.setPenUp(false);
 		return 1;
 	}
 	

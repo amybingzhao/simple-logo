@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * Backward function.
  * @author amyzhao
@@ -9,7 +7,7 @@ import java.util.List;
  */
 public class Backward extends TurtleNode {
 
-	private static final String BACKWARD = "back ";
+	private static final String BACKWARD = "Backward ";
 
 	/**
 	 * Moves the turtle backwards a given distance and returns the distance moved.
@@ -18,12 +16,8 @@ public class Backward extends TurtleNode {
 	 */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<Node> children = getChildren();
-		double dist = 0;
-		for (int i = 0; i < children.size(); i++) {
-			dist = turtle.move(-1 * children.get(i).interpret(commandDict, varDict));
-		}
-		return dist;
+		double dist = applyChildren(0, commandDict, varDict);
+		return turtle.move(-dist);
 	}
 	
 	/**

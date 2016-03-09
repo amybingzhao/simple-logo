@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import model.Turtle;
 
 /**
@@ -24,14 +25,16 @@ public class GUI implements IGUI {
 	private TabPane myTabs;
 	private ResourceBundle myResources;
 	private Turtle myTurtle;
+    private Stage myStage;
 	
 	private int windowHeight;
 	private int windowWidth;
 
-	public GUI(int windowWidth, int windowHeight) {
+	public GUI(int windowWidth, int windowHeight, Stage stage) {
 		this.windowWidth = windowWidth;
 		this.windowHeight = windowHeight;
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
+        myStage = stage;
 	}
 	
 	/**
@@ -44,7 +47,7 @@ public class GUI implements IGUI {
 		Button newTab = new Button("Create New Tab");
 		newTab.setOnAction(event -> createNewTab());
 
-		Tab mainScreenTab = new TabMainScreen().getTab();
+		Tab mainScreenTab = new TabMainScreen().getTab(myStage);
 		Tab helpTab = createHelpTab();
 		
 		myTabs.getTabs().addAll(mainScreenTab, helpTab);
@@ -74,7 +77,7 @@ public class GUI implements IGUI {
 	}
 	
 	private void createNewTab() {
-		Tab tab = new TabMainScreen().getTab();
+		Tab tab = new TabMainScreen().getTab(myStage);
         myTabs.getTabs().add(tab);
 		tab.setText("Workspace " + (myTabs.getTabs().size() - 1));
         myTabs.getSelectionModel().select(tab);

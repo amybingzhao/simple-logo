@@ -6,7 +6,7 @@ package model;
  */
 public class Tangent extends Node {
 
-    private static final String TANGENT = "tan ";
+    private static final String TANGENT = "Tangent ";
     private static final int DEGREES = 0;
 
     /**

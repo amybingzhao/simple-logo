@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Repeat extends Node {
 
-    private static final String REPEAT = "repeat ";
+    private static final String REPEAT = "Repeat ";
     private static final int EXPR = 0;
     private static final int COMMANDS = 1;
     private static final String REPCOUNT_VARIABLE = "repCount";
@@ -22,7 +22,7 @@ public class Repeat extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<Node> children = getChildren();
+        List<IFunctions> children = getChildren();
         double numIter = children.get(EXPR).interpret(commandDict, varDict);
         double ret = 0;
 

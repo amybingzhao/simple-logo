@@ -1,14 +1,12 @@
 package model;
 
-import java.util.List;
-
 /**
  * Quotient function.
  * Created by blakekaplan on 2/27/16.
  */
 public class Quotient extends Node {
 
-    private static final String QUOTIENT = "quotient ";
+    private static final String QUOTIENT = "Quotient ";
 
 	/**
      * Returns the quotient of expr1 divided by expr2.
@@ -17,14 +15,14 @@ public class Quotient extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-    	List<Node> children = getChildren();
-		double quotient = children.get(0).interpret(commandDict, varDict);
-		for (int i = 1; i < children.size(); i++) {
-			quotient = quotient/children.get(i).interpret(commandDict, varDict);
-		}
-		return quotient;
+        return applyChildren(Math.pow(getChildren().get(0).interpret(commandDict, varDict), 2), commandDict, varDict);
 	}
 
+    @Override
+    protected double addChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    	return val / child.interpret(commandDict, varDict);
+    }
+    
     /**
 	 * Returns the required user input for this command. 
 	 */

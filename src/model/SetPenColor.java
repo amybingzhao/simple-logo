@@ -3,7 +3,7 @@ package model;
 import guipackage.GUICanvas;
 
 public class SetPenColor extends DisplayNode {
-	private static final String SET_PEN_COLOR = "setpencolor ";
+	private static final String SET_PEN_COLOR = "SetPenColor ";
 
 	@Override
 	protected void performCanvasOperation(GUICanvas canvas, double val) {

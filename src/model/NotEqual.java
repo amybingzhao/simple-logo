@@ -7,7 +7,7 @@ package model;
  */
 public class NotEqual extends BooleanNode {
 
-    private static final String NOTEQUAL = "notequal? ";
+    private static final String NOTEQUAL = "NotEqual ";
     private static final int EXPR = 0;
 
     /**

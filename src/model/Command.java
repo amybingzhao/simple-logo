@@ -11,7 +11,7 @@ public class Command extends Node {
 
     private String myName;
     private List<String> parameters;
-    private List<Node> myProcedure;
+    private List<IFunctions> myProcedure;
 
     /**
      * Initializes the name and the parameters list for the command.
@@ -46,19 +46,22 @@ public class Command extends Node {
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 
         if (!commandDict.contains(myName)) {
-            throw new ClassNotFoundException();
-        }
+        	throw new ClassNotFoundException();
+        } else {
+        	parameters = commandDict.getCommandFor(myName).getParams();
+        	myProcedure = commandDict.getCommandFor(myName).getProcedure();
 
-        List<Node> children = getChildren();
-        for (int i = 0; i < parameters.size(); i++) {
-            String myVar = parameters.get(i);
-            double value = children.get(i).interpret(commandDict, varDict);
-            varDict.makeVariable(myVar, value);
+        	List<IFunctions> children = getChildren();
+        	for (int i = 0; i < parameters.size(); i++) {
+        		String myVar = parameters.get(i);
+        		double value = children.get(i).interpret(commandDict, varDict);
+        		varDict.makeVariable(myVar, value);
+        	}
+        	for (IFunctions myNode : myProcedure) {
+        		myNode.interpret(commandDict, varDict);
+        	}
+        	return 0;
         }
-        for (Node myNode : myProcedure) {
-            myNode.interpret(commandDict, varDict);
-        }
-        return 0;
     }
 
     /**
@@ -66,11 +69,11 @@ public class Command extends Node {
      *
      * @param procedure: child command trees to be executed.
      */
-    public void setProcedure(List<Node> procedure) {
-        myProcedure = procedure;
+    public void setProcedure(List<IFunctions> list) {
+        myProcedure = list;
     }
 
-    public List<Node> getProcedure() {
+    public List<IFunctions> getProcedure() {
         return myProcedure;
     }
 

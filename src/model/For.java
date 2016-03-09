@@ -8,9 +8,13 @@ import java.util.List;
  */
 public class For extends Node {
 
-    private static final String FOR = "for ";
+    private static final String FOR = "For ";
     private static final int VARIABLE_AND_LIMITS = 0;
     private static final int COMMANDS = 1;
+    private static final int LOW = 1;
+    private static final int HIGH = 2;
+    private static final int INCR = 3;
+    private static final int VAR = 0;
 
     /**
      * Repeats the given commands for the given start and end limits and the given increment.
@@ -20,13 +24,13 @@ public class For extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-        List<Node> children = getChildren();
+        List<IFunctions> children = getChildren();
         CommandList argList = (CommandList) children.get(VARIABLE_AND_LIMITS);
-        List<Node> argsNodes = argList.getChildren();
-        double low = argsNodes.get(1).interpret(commandDict, varDict);
-        double high = argsNodes.get(2).interpret(commandDict, varDict);
-        double increment = argsNodes.get(3).interpret(commandDict, varDict);
-        Variable myVar = (Variable) argsNodes.get(0);
+        List<IFunctions> argsNodes = argList.getChildren();
+        double low = argsNodes.get(LOW).interpret(commandDict, varDict);
+        double high = argsNodes.get(HIGH).interpret(commandDict, varDict);
+        double increment = argsNodes.get(INCR).interpret(commandDict, varDict);
+        Variable myVar = (Variable) argsNodes.get(VAR);
         String varString = myVar.toString();
 
         double ret = 0;

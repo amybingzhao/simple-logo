@@ -7,7 +7,7 @@ package model;
  */
 public class ShowTurtle extends TurtleNode {
 
-	private static final String SHOWTURTLE = "showturtle ";
+	private static final String SHOWTURTLE = "ShowTurtle ";
 	
 	/**
 	 * Sets the turtle to visible and returns 1.
@@ -17,7 +17,7 @@ public class ShowTurtle extends TurtleNode {
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		turtle.show();
+		turtle.setVisible(true);
 		return 1;
 	}
 
