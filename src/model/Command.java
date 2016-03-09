@@ -59,7 +59,7 @@ public class Command extends Node {
         		scopedDictionary.makeVariable(myVar, value);
         	}
         	for (IFunctions myNode : myProcedure) {
-        		myNode.interpret(commandDict.getClone(), scopedDictionary);
+        		myNode.interpret(commandDict, scopedDictionary);
         	}
         	return 0;
         }
@@ -68,7 +68,7 @@ public class Command extends Node {
     /**
      * Sets the command procedure.
      *
-     * @param procedure: child command trees to be executed.
+     * @param list: child command trees to be executed.
      */
     public void setProcedure(List<IFunctions> list) {
         myProcedure = list;
