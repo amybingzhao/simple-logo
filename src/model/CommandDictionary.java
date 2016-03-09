@@ -105,4 +105,16 @@ public class CommandDictionary {
     public Set<String> getCommandTextKeySet() {
         return myCommandText.keySet();
     }
+
+    public void setMaps(Map<String, Command> commandMap, Map<String, Integer> numArgsMap, Map<String, String> commandTextMap){
+        myCommands = commandMap;
+        myNumArguments = numArgsMap;
+        myCommandText = commandTextMap;
+    }
+
+    public CommandDictionary getClone(){
+        CommandDictionary newComDict = new CommandDictionary();
+        newComDict.setMaps(new HashMap<>(myCommands), new HashMap<>(myNumArguments), new HashMap<>(myCommandText));
+        return newComDict;
+    }
 }
