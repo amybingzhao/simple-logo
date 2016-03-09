@@ -1,6 +1,7 @@
 package model;
 
 import guipackage.GUICanvas;
+import guipackage.GUICanvasPen;
 
 public abstract class DisplayNode extends Node {
 	
@@ -12,6 +13,10 @@ public abstract class DisplayNode extends Node {
 	
 	protected GUICanvas getCanvas() {
 		return myCanvas;
+	}
+	
+	protected GUICanvasPen getPen() {
+		return myCanvas.getPen();
 	}
 	
 	protected abstract void performCanvasOperation(GUICanvas canvas, double val);
