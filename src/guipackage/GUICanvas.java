@@ -249,7 +249,7 @@ public class GUICanvas implements Observer{
 	}
 	
 	private void drawOval(GraphicsContext gcDrawing, double myX, double myY) {
-		double penSize = myPen.getMyPenSize();
+		long penSize = Math.round(myPen.getMyPenSize());
 		gcDrawing.fillOval(myX + TURTLE_SIZE/2 - penSize/2, myY + TURTLE_SIZE/2 - penSize/2,
 				penSize, penSize);
 	}
