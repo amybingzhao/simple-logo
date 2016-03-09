@@ -72,6 +72,34 @@ public abstract class TurtleNode extends Node {
     	return null;
     }
     
+    protected void activateTurtlesInList(List<Double> turtleIDs) {
+    	inactivateAllTurtles();
+		for (int i = 0; i < turtleIDs.size(); i++) {
+			Turtle turtle = getTurtleByID(turtleIDs.get(i));
+			if (turtle != null) {
+				turtle.changeCurrentTurtleStatus(true);
+				turtle.setActive(true);
+				turtle.changeCurrentTurtleStatus(false);
+			} else {
+				createTurtle(turtleIDs.get(i));
+			}
+		}
+    }
+    
+    protected double applyToTurtlesInList(List<Double> turtleIDs, List<Turtle> origActiveTurtles, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    	activateTurtlesInList(turtleIDs);
+		double ret = getChildren().get(1).interpret(commandDict, varDict);
+		activateTurtlesInList(getTurtleIDs(origActiveTurtles));
+		return ret;
+    }
+    
+    protected List<Double> getTurtleIDs(List<Turtle> turtles) {
+    	List<Double> IDs = new ArrayList<>();
+    	for (int i = 0; i < turtles.size(); i++) {
+    		IDs.add(turtles.get(i).getID());
+    	}
+    	return IDs;
+    }
     protected void activateTurtles(double maxID) {
     	for (int i = 0; i <= maxID; i++) {
 			Turtle turtle = getTurtleByID(i);
