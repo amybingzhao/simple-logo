@@ -8,7 +8,7 @@ import java.util.List;
  *
  */
 public interface IFunctions {
-		double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
+		double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException;
 		
 		List<IFunctions> getChildren();
 		

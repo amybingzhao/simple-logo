@@ -26,7 +26,7 @@ public abstract class IfNode extends Node {
 	}
 	
 	@Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         return ifStatement(getChildren().size(), commandDict, varDict);
     }
 }

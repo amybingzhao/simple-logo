@@ -38,15 +38,13 @@ public class Command extends Node {
 
     /**
      * Executes the command using the given parameters.
-     *
-     * @param commandDict
-     * @param varDict
-     */
+     *  @param commandDict
+     * @param varDict*/
     @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
 
         if (!commandDict.contains(myName)) {
-        	throw new ClassNotFoundException();
+            throw new ClassNotFoundException();
         } else {
             VariableDictionary scopedDictionary = varDict.createClone();
         	parameters = commandDict.getCommandFor(myName).getParams();

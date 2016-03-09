@@ -17,12 +17,10 @@ public class DoTimes extends Node {
 
     /**
      * Executes the given command the given number of times.
-     *
-     * @param commandDict
-     * @param varDict
-     */
+     *  @param commandDict
+     * @param varDict*/
     @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         List<IFunctions> children = getChildren();
         IFunctions iterVar = children.get(VARIABLE_AND_LIMIT);
         String var = iterVar.getChildren().get(VARIABLE).toString();

@@ -15,7 +15,7 @@ public class Random extends Node {
      * @param varDict
      */
     @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         return Math.random() * getChildren().get(MAX).interpret(commandDict, varDict);
     }
 

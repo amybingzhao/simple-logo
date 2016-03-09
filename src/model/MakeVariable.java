@@ -15,7 +15,7 @@ public class MakeVariable extends Node {
     private String name;
 
     @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         List<IFunctions> children = getChildren();
         String key = children.get(VARIABLE_NAME).toString();
         double value = children.get(EXPRESSION).interpret(commandDict, varDict);
