@@ -79,6 +79,17 @@ public abstract class Node implements IFunctions {
     	return ret;
     }*/
     
+    protected double applyChildren(double val, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+		for (int i = 0; i < myChildren.size(); i++) {
+			val = addChildValue(val, myChildren.get(i), commandDict, varDict);
+		}
+		return val;
+    }
+    
+    protected double addChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    	return val + child.interpret(commandDict, varDict);
+    }
+    
     protected String childrenToString() {
     	StringBuilder sb = new StringBuilder(); 
     	for (int i = 0; i < myChildren.size(); i++) {

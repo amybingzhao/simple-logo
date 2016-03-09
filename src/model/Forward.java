@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * Forward function.
  *
@@ -21,12 +19,8 @@ public class Forward extends TurtleNode {
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict,
 			VariableDictionary varDict)
 					throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<IFunctions> children = getChildren();
-		double dist = 0;
-		for (int i = 0; i < children.size(); i++) {
-			dist = turtle.move(children.get(i).interpret(commandDict, varDict));
-		}
-		return dist;
+		double dist = applyChildren(0, commandDict, varDict);
+		return turtle.move(dist);
 	}
 
 	/**

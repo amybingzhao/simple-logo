@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * Sum function.
  * @author amyzhao
@@ -18,12 +16,7 @@ public class Sum extends Node{
 	 */
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<IFunctions> children = getChildren();
-		double sum = 0;
-		for (int i = 0; i < children.size(); i++) {
-			sum += children.get(i).interpret(commandDict, varDict);
-		}
-		return sum;
+		return applyChildren(0, commandDict, varDict);
 	}
 	
 	/**

@@ -9,7 +9,7 @@ import java.util.function.Predicate;
  */
 public class IsPenDown extends TurtleNode {
 
-	private static final String PENDOWNP = "PenDown ";
+	private static final String PENDOWNP = "IsPenDown ";
 
 	/**
 	 * If the turtle's pen is down, returns 1; else returns 0.
