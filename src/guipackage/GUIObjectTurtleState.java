@@ -25,10 +25,12 @@ public class GUIObjectTurtleState implements IGUIObject {
 	@Override
 	public Node createNode() {
 		VBox vbox = new VBox();
+		GUIObjectLabeled instructionLabel = new GUIObjectLabeled(myResources, myResources.getString("TurtleStateInstructions"));
 		locationLabel.setOutputText(myResources.getString("StartingTurtleLocation"));
 		headingLabel.setOutputText(myResources.getString("StartingTurtleHeading"));
 		penLabel.setOutputText(myResources.getString("StartingPenDownStatus"));
-		vbox.getChildren().addAll(locationLabel.createNode(), headingLabel.createNode(), penLabel.createNode());
+		vbox.getChildren().addAll(instructionLabel.createNode(), locationLabel.createNode(), 
+				headingLabel.createNode(), penLabel.createNode());
 		return vbox;
 	}
 
