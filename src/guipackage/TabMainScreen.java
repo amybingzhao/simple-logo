@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import model.Turtle;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -38,16 +39,19 @@ public class TabMainScreen {
 	private IGUIObject turtleState;
 	private IGUIObject penSettings;
 	private IGUIObject saveLoad;
+
+    private Stage myStage;
 	
 	/**
 	 * Initializes Tab with all necessary components.
 	 */
-	private void initializeTab() {
+	private void initializeTab(Stage stage) {
 		//create Turtle and Observer
+        myStage = stage;
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		canvas = new GUICanvas(myResources);
 		canvas.init();
-		myController = new Controller(canvas);
+		myController = new Controller(canvas, myStage);
 		commandLine = new GUICommandLine(myController, myResources, this);
 	}
 	
@@ -55,8 +59,8 @@ public class TabMainScreen {
 	 * Sets up all elements on Tab and returns the Tab
 	 * @return
 	 */
-	protected Tab getTab() {
-		initializeTab();
+	protected Tab getTab(Stage stage) {
+		initializeTab(stage);
 		myRootTab = new Tab();
 		myMainScreen = new BorderPane();
 		myFactory = new GUIObjectFactory(myResources, myController, canvas, commandLine); 

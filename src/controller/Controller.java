@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import guipackage.GUIAlert;
 import guipackage.GUICanvas;
 import guipackage.GUIObjectLabeled;
+import javafx.stage.Stage;
 import model.CommandDictionary;
 import model.IFunctions;
 import model.Turtle;
@@ -47,9 +48,11 @@ public class Controller {
     private ResourceBundle myGUIResource;
     private CommandDictionary commandDict;
     private VariableDictionary varDict;
+    private Stage myStage;
 
-    public Controller(GUICanvas canvas) {
+    public Controller(GUICanvas canvas, Stage stage) {
         myCanvas = canvas;
+        myStage = stage;
         init();
     }
 
@@ -199,4 +202,7 @@ public class Controller {
         mySaver.generateFile(myCanvas.getBackgroundColor(), myCanvas.getPenColor(), myCanvas.getTurtleImageName(), myGUIResource.toString(), getTurtles(), file);
     }
 
+    public Stage getStage() {
+        return myStage;
+    }
 }
