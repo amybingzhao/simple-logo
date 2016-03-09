@@ -31,8 +31,6 @@ public class GUICanvas implements Observer{
 	private static final String DOTTED_LINE = "Dotted Line";
 	private static final String DASHED_LINE = "Dashed Line";
 	private static final String SOLID_LINE = "Solid Line";
-	private static final int DEFAULT_PEN_SIZE = 3;
-	private static final Color DEFAULT_PEN_COLOR = Color.BLACK;
 	private static final Color DEFAULT_BACKGROUND_COLOR = Color.BISQUE;
 	private static final int TURTLE_SIZE = 20;
 	private static final int CANVAS_WIDTH = 500;
@@ -51,14 +49,9 @@ public class GUICanvas implements Observer{
 	private GUIObjectComboBoxColor myPenPalette;
 	private GUIObjectComboBoxImages myImagePalette;
 	private ResourceBundle myResources;
+	private GUICanvasPen myPen;
 	
-	private double myPenSize;
-	private String penType;
 	private int penCounter;
-	private int myPenColorIndex;
-	private String myPenRGB;
-	private Color myPenColor;
-	
 	private String myBackgroundRGB;
 	
 	private Image turtleShape;
@@ -81,6 +74,9 @@ public class GUICanvas implements Observer{
 		gcBackground.setFill(DEFAULT_BACKGROUND_COLOR);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		addDefaultTurtles();
+		myPen = new GUICanvasPen();
+		myPen.init();
+		penCounter = 0;
 		myCanvasRoot = new Pane(canvasBackground);
 		hboxToReturn = new HBox();
 		vboxToRight = new VBox();
@@ -103,13 +99,6 @@ public class GUICanvas implements Observer{
 	 * Sets default palette properties, such as pen settings, background color, and turtle image.
 	 */
 	public void setPaletteProperties(){
-		myPenSize = DEFAULT_PEN_SIZE;
-		penCounter = 0;
-		penType = SOLID_LINE;
-		myPenColorIndex = 0;
-		myPenRGB = DEFAULT_PEN_COLOR.getRed() + " " + DEFAULT_PEN_COLOR.getGreen() + " " + DEFAULT_PEN_COLOR.getBlue();
-		myPenColor = DEFAULT_PEN_COLOR;
-		myBackgroundRGB = DEFAULT_BACKGROUND_COLOR.getRed() + " " + DEFAULT_BACKGROUND_COLOR.getGreen() + " " + DEFAULT_BACKGROUND_COLOR.getBlue();
 		turtleShapeName = DEFAULT_TURTLE;
 		myTurtleShapeIndex = getPaletteIndex(turtleShapeName, myImagePalette);
 	}
@@ -187,7 +176,7 @@ public class GUICanvas implements Observer{
 			Canvas turtleCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 			Canvas drawingCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 			GraphicsContext drawingGC = drawingCanvas.getGraphicsContext2D();
-			drawingGC.setFill(myPenColor);
+			drawingGC.setFill(myPen.getMyPenColor());
 			myCanvasRoot.getChildren().addAll(turtleCanvas, drawingCanvas);
 			myTurtles.put(turtle, new ArrayList<GraphicsContext>(
 					Arrays.asList(turtleCanvas.getGraphicsContext2D(), drawingGC)));
@@ -234,8 +223,8 @@ public class GUICanvas implements Observer{
 	}
 	
 	private void drawLine(GraphicsContext gcDrawing, double myX, double myY) {
-		int scaledPen = (int) myPenSize * 100;
-		switch (penType){
+		int scaledPen = (int) myPen.getMyPenSize() * 100;
+		switch (myPen.getMyPenType()){
 			case SOLID_LINE: {
 				drawOval(gcDrawing, myX, myY);
 			}
@@ -260,12 +249,9 @@ public class GUICanvas implements Observer{
 	}
 	
 	private void drawOval(GraphicsContext gcDrawing, double myX, double myY) {
-		gcDrawing.fillOval(myX + TURTLE_SIZE/2 - myPenSize/2, myY + TURTLE_SIZE/2 - myPenSize/2,
-				myPenSize, myPenSize);
-	}
-	
-	protected void setPenType(String type) {
-		penType = type;
+		double penSize = myPen.getMyPenSize();
+		gcDrawing.fillOval(myX + TURTLE_SIZE/2 - penSize/2, myY + TURTLE_SIZE/2 - penSize/2,
+				penSize, penSize);
 	}
 	
 	/**
@@ -280,7 +266,7 @@ public class GUICanvas implements Observer{
 	 * @param index of color in palette.
 	 */
 	public void setPenColor(int index){
-		myPenColorIndex = index;
+		myPen.setMyPenColorIndex(index);
 		List<String> currentPalette = myPenPalette.getOptionsList();
 		String[] rgb = currentPalette.get(index).split(" ");
 		Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
@@ -292,9 +278,9 @@ public class GUICanvas implements Observer{
 	 * @param Color that user chose.
 	 */
 	public void setPenColor(Color c, String penColorName) {
-		myPenColor = c;
-		myPenRGB = penColorName;
-		myPenColorIndex = getPaletteIndex(penColorName, myPenPalette); 
+		myPen.setMyPenColor(c);
+		myPen.setMyPenRGB(penColorName);
+		myPen.setMyPenColorIndex(getPaletteIndex(penColorName, myPenPalette)); 
 		for(List<GraphicsContext> lst: myTurtles.values()){
 			if (lst != null){
 				GraphicsContext gcPen = lst.get(1);
@@ -306,12 +292,8 @@ public class GUICanvas implements Observer{
 	 * returns current pen color as space separated RGB
 	 * @return
 	 */
-	public String getPenColor() {
-		return myPenRGB;
-	}
-	
-	public int getPenColorIndex() {
-		return myPenColorIndex;
+	public GUICanvasPen getPen() {
+		return myPen;
 	}
 	
 	/**
@@ -393,12 +375,8 @@ public class GUICanvas implements Observer{
 	public int getTurtleShapeIndex() {
 		return myTurtleShapeIndex;
 	}
-		
-	public void setPenSize(double size) {
-		myPenSize = size;
-	}
 	
-	public void setPen(String penUp) {
+	public void setPenStatus(String penUp) {
 		for (Turtle t: myTurtles.keySet()) {
 			if (t.isActive() && penUp.equals(myResources.getString("PenUp"))) {
 				t.setPenUp(true);
@@ -415,10 +393,6 @@ public class GUICanvas implements Observer{
 	public String getHeadingString(){
 		return "" + myOldDirection%360;
 	}
-	
-//	public boolean getPenDownStatus(){
-//		return !turtle.isPenUp();
-//	}
 	
 	public int getWidth(){
 		return CANVAS_WIDTH;
