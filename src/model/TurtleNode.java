@@ -46,7 +46,7 @@ public abstract class TurtleNode extends Node {
     	return null;
     }
     
-    protected double applyToTurtlesInList(List<Turtle> list, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    protected double applyToActiveTurtles(List<Turtle> list, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
     	double ret = 0;
     	for (int i = 0; i < list.size(); i++) {
     		list.get(i).changeCurrentTurtleStatus(true);
@@ -58,7 +58,7 @@ public abstract class TurtleNode extends Node {
     
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		return applyToTurtlesInList(getActiveTurtles(), commandDict, varDict); 
+		return applyToActiveTurtles(getActiveTurtles(), commandDict, varDict); 
     }
     
     protected abstract double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
@@ -100,22 +100,18 @@ public abstract class TurtleNode extends Node {
     	}
     	return IDs;
     }
+    
     protected void activateTurtles(double maxID) {
-    	for (int i = 0; i <= maxID; i++) {
-			Turtle turtle = getTurtleByID(i);
-			if (turtle != null) {
-				turtle.changeCurrentTurtleStatus(true);
-				turtle.setActive(true);
-				turtle.changeCurrentTurtleStatus(false);
-			} else {
-				createTurtle(i);
-			}
-		}
+    	List<Double> IDs = new ArrayList<>();
+    	for (double i = 0; i <= maxID; i = i+1) {
+    		IDs.add(i);
+    	}
+    	activateTurtlesInList(IDs);
     }
     
     protected void inactivateAllTurtles() {
     	for (int i = 0; i < myTurtles.size(); i++) {
-			Turtle turtle = getTurtleByID(i);
+			Turtle turtle = myTurtles.get(i);
 			turtle.setActive(false);
 		}
     }

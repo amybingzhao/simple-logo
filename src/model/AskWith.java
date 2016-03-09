@@ -11,7 +11,6 @@ public class AskWith extends TurtleNode {
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
 		List<Double> activeTurtleIDs = checkTurtlesForCondition(getTurtles(), commandDict, varDict);		
-		activateTurtlesInList(activeTurtleIDs);
 		return applyToTurtlesInList(activeTurtleIDs, getActiveTurtles(), commandDict, varDict);
 
 	}
