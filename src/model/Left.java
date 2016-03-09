@@ -18,9 +18,8 @@ public class Left extends TurtleNode {
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
 			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		double leftDegrees = applyChildren(0, commandDict, varDict);
-		turtle.setDirection(turtle.getDirection() - leftDegrees);
-		return leftDegrees;
+		turtle.setDirection(turtle.getDirection() - applyChildren(0, commandDict, varDict));
+		return applyChildren(0, commandDict, varDict);
 	}
 
     /**
