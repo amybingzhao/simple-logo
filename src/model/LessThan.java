@@ -13,13 +13,12 @@ public class LessThan extends BooleanNode {
 
     /**
      * If expr1 is less than expr2, returns 1; else returns 0.
-     *
-     * @param commandDict
+     *  @param commandDict
      * @param varDict
      */
     @Override
-   	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
-   			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
    		return getChildren().get(EXPR1).interpret(commandDict, varDict) < getChildren().get(EXPR2).interpret(commandDict, varDict);
    	}
 

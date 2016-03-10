@@ -10,13 +10,13 @@ public class Right extends TurtleNode {
 	private static final String RIGHT = "Right ";
 
 	/**
-	 * Rotates the turtle CW by the given number of degrees.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * Rotates the turtle CW by the given number of degrees.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		turtle.setDirection(turtle.getDirection() + applyChildren(0, commandDict, varDict));
 		return applyChildren(0, commandDict, varDict);
 	}

@@ -10,13 +10,13 @@ public class Home extends TurtleNode {
 	private static final String HOME = "Home ";
 
 	/**
-	 * Moves the turtle back to the origin and returns the distance moved.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * Moves the turtle back to the origin and returns the distance moved.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		return turtle.moveToHome();
 	}
 

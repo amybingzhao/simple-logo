@@ -14,13 +14,13 @@ public class SetTowards extends TurtleNode {
 	private static final int Y = 1;
 	
 	/**
-	 * Turns the turtle to face the given (x, y) position.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * Turns the turtle to face the given (x, y) position.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		List<IFunctions> children = getChildren();
 		return turtle.turnTowards(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
 	}

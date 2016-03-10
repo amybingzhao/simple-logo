@@ -10,12 +10,12 @@ public class Backward extends TurtleNode {
 	private static final String BACKWARD = "Backward ";
 
 	/**
-	 * Moves the turtle backwards a given distance and returns the distance moved.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * Moves the turtle backwards a given distance and returns the distance moved.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
-	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
 		double dist = applyChildren(0, commandDict, varDict);
 		return turtle.move(-dist);
 	}

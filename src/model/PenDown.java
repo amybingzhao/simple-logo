@@ -10,13 +10,13 @@ public class PenDown extends TurtleNode {
 	private static final String PENDOWN = "PenDown ";
 
 	/**
-	 * Puts the turtle's pen down so trail will now show.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * Puts the turtle's pen down so trail will now show.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		turtle.setPenUp(false);
 		return 1;
 	}

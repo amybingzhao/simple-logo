@@ -10,13 +10,13 @@ public class Or extends BooleanNode {
 	private static final String OR = "Or ";
 	
 	/**
-	 * If expr1 or expr2 is true, returns 1; else 0.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * If expr1 or expr2 is true, returns 1; else 0.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		return countNumTrue(commandDict, varDict) > 0;
 	}
 	

@@ -19,8 +19,8 @@ public class Quotient extends Node {
     }
 
     @Override
-    protected double addChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-    	return val / child.interpret(commandDict, varDict);
+    protected double addChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+        return val / child.interpret(commandDict, varDict);
     }
     
     /**

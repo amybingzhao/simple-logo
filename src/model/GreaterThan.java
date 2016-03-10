@@ -13,13 +13,12 @@ public class GreaterThan extends BooleanNode {
 
     /**
      * Returns 1 if expr1 is greater than expr2; 0 otherwise.
-     *
-     * @param commandDict
+     *  @param commandDict
      * @param varDict
      */
     @Override
-	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
 		return getChildren().get(EXPR1).interpret(commandDict, varDict) > getChildren().get(EXPR2).interpret(commandDict, varDict);
 	}
 
