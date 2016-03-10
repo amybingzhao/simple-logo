@@ -3,7 +3,6 @@ package guipackage;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import controller.Controller;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;

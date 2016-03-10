@@ -41,7 +41,7 @@ public class GUIFactory {
 					myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
 		}
 		case("VariablesTableView"):{
-			return new GUITableView(myResources, myController.getCommandDictionary(), myController.getVariableDictionary());
+			return new GUITableView(myResources, myController.getVariableDictionary());
 		}
 		case("UserCommandsComboBox"):{
 			return new GUIComboBoxUserHist(canvas, myResources, myController,
