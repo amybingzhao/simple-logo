@@ -7,7 +7,7 @@ public class SetPenSize extends DisplayNode {
 	
 	@Override
 	protected void performCanvasOperation(GUICanvas canvas, double val) {
-		canvas.setPenSize(val);
+		canvas.getPen().setMyPenSize(val);
 	}
 
 	@Override

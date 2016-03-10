@@ -16,6 +16,7 @@ public class GUIObjectPenSettings implements IGUIObject{
 	private static final int VBOX_SPACING = 10;
 	private ResourceBundle myResources;
 	private GUICanvas myCanvas;
+	private GUICanvasPen myPen;
 	private Label upDownLabel;
 	private ToggleGroup penUpDownGroup;
 	private RadioButton penUp;
@@ -32,6 +33,7 @@ public class GUIObjectPenSettings implements IGUIObject{
 	public GUIObjectPenSettings(ResourceBundle r, GUICanvas c) {
 		myResources = r;
 		myCanvas = c;
+		myPen = myCanvas.getPen();
 	}
 	@Override
 	public Node createNode() {
@@ -63,7 +65,7 @@ public class GUIObjectPenSettings implements IGUIObject{
 		penDown.setUserData(myResources.getString("PenDown"));
 		
 		penUpDownGroup.selectedToggleProperty().addListener(
-				e -> myCanvas.setPen(penUpDownGroup.getSelectedToggle().getUserData().toString()));
+				e -> myCanvas.setPenStatus(penUpDownGroup.getSelectedToggle().getUserData().toString()));
 	}
 	
 	private void setPenTypeNodes() {
@@ -85,7 +87,7 @@ public class GUIObjectPenSettings implements IGUIObject{
 		penDotted.setUserData(myResources.getString("DottedPen"));
 		
 		penTypeGroup.selectedToggleProperty().addListener(
-				e -> myCanvas.setPenType(penTypeGroup.getSelectedToggle().getUserData().toString()));
+				e -> myPen.setMyPenType(penTypeGroup.getSelectedToggle().getUserData().toString()));
 	}
 	
 	private void setThicknessNodes() {
@@ -93,7 +95,7 @@ public class GUIObjectPenSettings implements IGUIObject{
 		
 		penThickness = new TextField();
 		setThickness = new Button(myResources.getString("SetThickness"));
-		setThickness.setOnAction(event -> myCanvas.setPenSize(Double.valueOf(penThickness.getText())));
+		setThickness.setOnAction(event -> myPen.setMyPenSize(Double.valueOf(penThickness.getText())));
 	}
 
 	@Override
