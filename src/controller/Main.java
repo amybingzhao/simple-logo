@@ -18,6 +18,7 @@ public class Main extends Application{
     	s = new Stage();
     	myGui = new GUI(SCREEN_HEIGHT, SCREEN_WIDTH, s);
     	s.setScene(myGui.createScene());
+    	
     	s.show();
     }
 

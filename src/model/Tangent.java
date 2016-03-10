@@ -11,12 +11,10 @@ public class Tangent extends Node {
 
     /**
      * Returns the tangent of the expression, where the expression is given in degrees.
-     *
-     * @param commandDict
-     * @param varDict
-     */
+     *  @param commandDict
+     * @param varDict*/
     @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         return Math.tan(Math.toRadians(getChildren().get(DEGREES).interpret(commandDict, varDict)));
     }
 

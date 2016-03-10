@@ -7,9 +7,9 @@ public class GetPenColor extends DisplayNode {
 	private static final String PEN_COLOR = "GetPenColor ";
 	
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		return getCanvas().getPenColorIndex();
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
+		return getPen().getMyPenColorIndex();
 	}
 	
 	@Override

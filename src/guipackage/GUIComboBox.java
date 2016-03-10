@@ -10,7 +10,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import javafx.util.Callback;
 
 /**
  * Abstract class to implement different types of ComboBoxes. 
@@ -20,7 +24,8 @@ import javafx.scene.layout.HBox;
  * @author AnnieTang
  */
 
-public abstract class GUIObjectComboBox implements IGUIObject {
+public abstract class GUIComboBox implements IGUIObject {
+	private static final int COMBOBOX_WIDTH = 190;
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int PADDING = 10;
 	private static final int HBOX_SPACING = 5;
@@ -32,8 +37,9 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 	protected GUICommandLine myCommandLine;
 	protected Button comboButton;
 	protected GUICanvas canvas;
+	protected String paletteSource;
 	
-	public GUIObjectComboBox(GUICanvas canvas, ResourceBundle myResources, Controller myController, String promptText, GUICommandLine myCommandLine) {
+	public GUIComboBox(GUICanvas canvas, ResourceBundle myResources, Controller myController, String promptText, GUICommandLine myCommandLine) {
 		this.canvas = canvas;
 		this.myResources = myResources;
 		this.myController = myController;
@@ -41,10 +47,17 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 		this.myCommandLine = myCommandLine;
 	}
 	
-	public GUIObjectComboBox(GUICanvas canvas, ResourceBundle myResources, String promptText){
+	public GUIComboBox(GUICanvas canvas, ResourceBundle myResources, String promptText){
 		this.canvas = canvas;
 		this.myResources = myResources;
 		this.promptText = promptText;
+	}
+	
+	public GUIComboBox(GUICanvas canvas, ResourceBundle myResources, String promptText, String paletteSource){
+		this.canvas = canvas;
+		this.myResources = myResources;
+		this.promptText = promptText;
+		this.paletteSource = paletteSource;
 	}
 	
 	/**
@@ -56,8 +69,9 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 		options = FXCollections.observableArrayList(
 			        optionsList()
 			    );
-		comboBox = new ComboBox<String>(options);
+		comboBox = new ComboBox<>(options);
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
+		comboBox.setPrefWidth(COMBOBOX_WIDTH);
 		comboBox.setPromptText(promptText);
 		setCellFactory();
 		comboButton = new Button("Go");
@@ -75,7 +89,33 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 	/**
 	 * Sets cell factory of ComboBox.
 	 */
-	protected abstract void setCellFactory();
+	protected void setCellFactory(){
+		comboBox.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+		     @Override public ListCell<String> call(ListView<String> p) {
+		         return new ListCell<String>() {		             
+		             @Override protected void updateItem(String item, boolean empty) {
+		                 super.updateItem(item, empty);
+		                 if (item == null || empty) {
+		                     setGraphic(null);
+		                 } else {
+		                	 HBox hbox = new HBox();
+		                	 Label lbl = new Label(item);
+		                     hbox.getChildren().addAll(getNodeForBox(item), lbl);
+		                     setGraphic(hbox);
+		                 }
+		            }
+		       };
+		   }
+		});
+	}
+	
+	/**
+	 * Sets icon for ComboBox
+	 * @param item
+	 * @return
+	 */
+	protected abstract Node getNodeForBox(String item);
+	
 	/**
 	 * Updates Node whenever new information or data is available.
 	 */

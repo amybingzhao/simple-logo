@@ -19,7 +19,10 @@ import model.Turtle;
  */
 public class GUI implements IGUI {
 	private static final String GUI_RESOURCE = "GUI";
-	private static final String HELP_TAB_TEXT = "Help";
+	private static final String HELP_TAB_TEXT1 = "Basic Help";
+	private static final String HELP_TAB_TEXT2 = "Extended Help";
+	private static final double TABS_OFFSET = 5.0;
+	private static final double NEWTAB_OFFSET = 50.0;
 	private Scene myScene;
 	private AnchorPane myRoot;
 	private TabPane myTabs;
@@ -47,14 +50,14 @@ public class GUI implements IGUI {
 		Button newTab = new Button("Create New Tab");
 		newTab.setOnAction(event -> createNewTab());
 
-		Tab mainScreenTab = new TabMainScreen().getTab(myStage);
-		Tab helpTab = createHelpTab();
+		TabMainScreen mainScreen = new TabMainScreen(myResources.getString("Workspace") + (myTabs.getTabs().size()));
+		GUITab help1 = new GUITab(myResources.getString("BasicCommands"), HELP_TAB_TEXT1);
+		GUITab help2 = new GUITab(myResources.getString("ExtendedCommands"), HELP_TAB_TEXT2);
 		
-		myTabs.getTabs().addAll(mainScreenTab, helpTab);
-		mainScreenTab.setText("Main Workspace");	
+		myTabs.getTabs().addAll(mainScreen.getTab(myStage), help1.getTab(), help2.getTab());	
 		
-		AnchorPane.setTopAnchor(myTabs, 5.0);
-		AnchorPane.setTopAnchor(newTab, 50.0);
+		AnchorPane.setTopAnchor(myTabs, TABS_OFFSET);
+		AnchorPane.setTopAnchor(newTab, NEWTAB_OFFSET);
 		
 		myRoot.getChildren().addAll(myTabs, newTab);
 	
@@ -62,24 +65,9 @@ public class GUI implements IGUI {
 		return myScene;
 	}
 	
-	/**
-	 * Creates Help Tab for the user.
-	 * @return Tab with all the commands
-	 */
-	private Tab createHelpTab() {
-		Tab helpTab = new Tab();
-		WebView browser = new WebView();
-		WebEngine webEngine = browser.getEngine();
-		webEngine.load(myResources.getString("HelpTabURL"));
-		helpTab.setContent(browser);
-		helpTab.setText(HELP_TAB_TEXT);
-		return helpTab;
-	}
-	
 	private void createNewTab() {
-		Tab tab = new TabMainScreen().getTab(myStage);
+		Tab tab = new TabMainScreen(myResources.getString("Workspace") + (myTabs.getTabs().size()-1)).getTab(myStage);
         myTabs.getTabs().add(tab);
-		tab.setText("Workspace " + (myTabs.getTabs().size() - 1));
         myTabs.getSelectionModel().select(tab);
 	}
 	

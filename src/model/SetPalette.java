@@ -10,8 +10,8 @@ public class SetPalette extends DisplayNode {
 	private static final int[] RGB_INDICES = new int[]{1,2,3};
 
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
 		List<IFunctions> children = getChildren();
 		StringBuilder rgb = new StringBuilder();
 		for (int i = 0; i < RGB_INDICES.length; i++) {

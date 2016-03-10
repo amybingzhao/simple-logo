@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 import guipackage.GUIAlert;
 import guipackage.GUICanvas;
-import guipackage.GUIObjectLabeled;
+import guipackage.GUILabeled;
 import javafx.stage.Stage;
 import model.CommandDictionary;
 import model.IFunctions;
@@ -40,9 +40,10 @@ public class Controller {
     private static final String WHITESPACE = "\\p{Space}";
     private String myLanguageResource;
     private Parser myParser;
+    private XMLParser myXMLParser;
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
-    private GUIObjectLabeled myOutput;
+    private GUILabeled myOutput;
     private GUIAlert myAlert;
     private GUICanvas myCanvas;
     private ResourceBundle myGUIResource;
@@ -65,7 +66,7 @@ public class Controller {
         myTurtles = new ArrayList<>();
         addInitialTurtle();
         myGUIResource = ResourceBundle.getBundle(GUI_RESOURCE);
-        myOutput = new GUIObjectLabeled(myGUIResource, "Output");
+        myOutput = new GUILabeled(myGUIResource, "Output");
         myAlert = new GUIAlert();
         commandDict = new CommandDictionary();
         varDict = new VariableDictionary();
@@ -127,7 +128,7 @@ public class Controller {
 
 
     public void loadXML(File myFile) {
-        XMLParser myXMLParser = new XMLParser(this);
+        myXMLParser = new XMLParser(this);
         try {
             myXMLParser.parse(myFile);
         } catch (IOException | ParserConfigurationException | SAXException e) {
@@ -181,7 +182,7 @@ public class Controller {
         return myCommandHistory;
     }
 
-    public GUIObjectLabeled getGUIOutput() {
+    public GUILabeled getGUIOutput() {
         return myOutput;
     }
 
@@ -196,10 +197,14 @@ public class Controller {
     public VariableDictionary getVariableDictionary() {
         return varDict;
     }
+    
+    public XMLParser getXMLParser() {
+    	return myXMLParser;
+    }
 
     public void save(File file) {
         XMLSaver mySaver = new XMLSaver(commandDict, varDict);
-        mySaver.generateFile(myCanvas.getBackgroundColor(), myCanvas.getPenColor(), myCanvas.getTurtleImageName(), myGUIResource.toString(), getTurtles(), file);
+        mySaver.generateFile(myCanvas.getBackgroundColor(), myCanvas.getPen().getMyPenRGB(), myCanvas.getTurtleImageName(), myGUIResource.toString(), getTurtles(), file);
     }
 
     public Stage getStage() {

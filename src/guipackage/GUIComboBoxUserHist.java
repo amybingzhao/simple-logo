@@ -3,12 +3,11 @@ package guipackage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import controller.Controller;
+import javafx.scene.Node;
 import javafx.scene.control.TextInputDialog;
 import model.Command;
 import model.CommandDictionary;
-import model.VariableDictionary;
 
 /**
  * Create ComboBox to hold history of user defined commands.
@@ -16,11 +15,11 @@ import model.VariableDictionary;
  * @author AnnieTang
  */
 
-public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
+public class GUIComboBoxUserHist extends GUIComboBox {
     private CommandDictionary myUserDefinedCommands;
     private TextInputDialog dialog;
 
-    public GUIObjectComboBoxUserHist(GUICanvas canvas, ResourceBundle myResources, Controller myController,
+    public GUIComboBoxUserHist(GUICanvas canvas, ResourceBundle myResources, Controller myController,
                                      String promptText, GUICommandLine myCommandLine, CommandDictionary myComDict) {
         super(canvas, myResources, myController, promptText, myCommandLine);
         myUserDefinedCommands = myComDict;
@@ -64,5 +63,10 @@ public class GUIObjectComboBoxUserHist extends GUIObjectComboBox {
 
 	@Override
 	protected void setCellFactory() {
+	}
+
+	@Override
+	protected Node getNodeForBox(String item) {
+		return null;
 	}
 }

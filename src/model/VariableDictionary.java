@@ -56,4 +56,14 @@ public class VariableDictionary {
     public Set<String> getKeySet() {
         return myVariables.keySet();
     }
+
+    public void setVariableMap(Map<String, Double> newData){
+        myVariables = newData;
+    }
+
+    public VariableDictionary createClone(){
+        VariableDictionary newVarDict = new VariableDictionary();
+        newVarDict.setVariableMap(new HashMap<>(myVariables));
+        return newVarDict;
+    }
 }

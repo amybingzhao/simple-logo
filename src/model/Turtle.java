@@ -3,6 +3,7 @@ package model;
 import java.util.Observable;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * This class is the main component of the model. It records the current state of a Turtle and updates the view via the
@@ -22,6 +23,7 @@ public class Turtle extends Observable {
     private boolean isActive;
     private boolean isCurrentTurtle;
     private boolean reset;
+    private ImageView turtleImageView;
     private static final double ONE_REVOLUTION = 360;
     private static final double INCREMENT = 0.1;
     private static final int SQUARE = 2;
@@ -223,5 +225,13 @@ public class Turtle extends Observable {
 
     public Image getImage() {
         return myImage;
+    }
+    
+    public void setImageView(ImageView iv){
+    	turtleImageView = iv;
+    }
+    
+    public ImageView getImageView(){
+    	return turtleImageView;
     }
 }

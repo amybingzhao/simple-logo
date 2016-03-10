@@ -6,27 +6,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-
-import controller.Controller;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.util.Callback;
 /**
  * ComboBox with palette of images that the user can choose from for the Turtle.
  * @author AnnieTang
  *
  */
-public class GUIObjectComboBoxImages extends GUIObjectComboBox {
+public class GUIComboBoxImages extends GUIComboBox {
 	private Map<String, ImageView> imageMap;
 	private List<String> imageNames;
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private static final String IMAGE_RESOURCE = "Images";
 	
-	public GUIObjectComboBoxImages(GUICanvas canvas, ResourceBundle myResources, String promptText) {
+	public GUIComboBoxImages(GUICanvas canvas, ResourceBundle myResources, String promptText) {
 		super(canvas, myResources, promptText);
 		imageMap = new HashMap<String, ImageView>();
 		imageNames = new ArrayList<String>();
@@ -52,25 +46,9 @@ public class GUIObjectComboBoxImages extends GUIObjectComboBox {
 	}
 	
 	@Override
-	protected void setCellFactory(){
-		 comboBox.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-		     @Override public ListCell<String> call(ListView<String> p) {
-		         return new ListCell<String>() {		             
-		             @Override protected void updateItem(String imageName, boolean empty) {
-		                 super.updateItem(imageName, empty);
-		                 if (imageName == null || empty) {
-		                     setGraphic(null);
-		                 } else {
-		                	 HBox hbox = new HBox();
-		                	 Label imageText = new Label(imageName);
-		                     ImageView imageView = imageMap.get(imageName);
-		                     hbox.getChildren().addAll(imageView, imageText);
-		                     setGraphic(hbox);
-		                 }
-		            }
-		       };
-		   }
-		});
+	protected Node getNodeForBox(String item){
+        ImageView imageView = imageMap.get(item);
+        return imageView;
 	}
 	
 	@Override

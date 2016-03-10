@@ -11,12 +11,10 @@ public class CommandList extends Node {
 
     /**
      * Interprets a list of commands, executing each command within the list.
-     *
-     * @param commandDict
-     * @param varDict
-     */
+     *  @param commandDict
+     * @param varDict*/
     @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         List<IFunctions> children = getChildren();
         double ret = 0;
 
