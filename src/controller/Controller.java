@@ -51,6 +51,11 @@ public class Controller {
     private VariableDictionary varDict;
     private Stage myStage;
 
+    /**
+     * Creates a controller with a reference to the workspace's canvas and the workspace's stage.
+     * @param canvas: workspace's canvas.
+     * @param stage: workspace's stage.
+     */
     public Controller(GUICanvas canvas, Stage stage) {
         myCanvas = canvas;
         myStage = stage;
@@ -76,6 +81,9 @@ public class Controller {
         myParser.addPatterns(SYNTAX_RESOURCE);
     }
 
+    /**
+     * Add initial turtle with ID 1.
+     */
     public void addInitialTurtle() {
         Turtle turtle = new Turtle(1);
         turtle.setActive(true);
@@ -127,6 +135,10 @@ public class Controller {
     }
 
 
+    /**
+     * Loads an XML file containing user's workspace preferences.
+     * @param myFile: XML file to load.
+     */
     public void loadXML(File myFile) {
         myXMLParser = new XMLParser(this);
         try {
@@ -136,7 +148,11 @@ public class Controller {
         }
     }
 
-    // converts string command to arraylist
+    /**
+     * Parses string input into a list by splitting based on white space. Ignores lines that're comments.
+     * @param command: string of commands to convert to a list.
+     * @return
+     */
     private List<String> getCommandAsList(String command) {
     	List<String> inputCommandList = new ArrayList<>();
     	String[] inputArray = command.split("\n");
@@ -154,13 +170,21 @@ public class Controller {
     	return inputCommandList;
     }
 
+    /**
+     * Interprets a command tree.
+     * @param head: head node of the command tree.
+     * @return the final output value of the executed command.
+     * @throws ClassNotFoundException
+     */
     private double executeCommandTree(IFunctions head) throws ClassNotFoundException {
-        System.out.println(head.toString());
         double result = head.interpret(commandDict, varDict);
         addObserver();
         return result;
     }
 
+    /**
+     * Adds the canvas as the observer to all new turtles.
+     */
     public void addObserver() {
         for (Turtle t : myTurtles) {
             if (t.countObservers() == 0) {
@@ -170,43 +194,83 @@ public class Controller {
         }
     }
 
+    /**
+     * Gets the list of existing turtles.
+     * @return list of existing turtles.
+     */
     public List<Turtle> getTurtles() {
         return myTurtles;
     }
 
+    /**
+     * Adds a command to the user's command history.
+     * @param command: command to add.
+     */
     private void addCommandToHistory(String command) {
         myCommandHistory.add(command);
     }
 
+    /**
+     * Gets the user's command history.
+     * @return list of user's recently executed commands.
+     */
     public List<String> getCommandHistory() {
         return myCommandHistory;
     }
 
+    /**
+     * Gets the output element for the GUI.
+     * @return output element for GUI.
+     */
     public GUILabeled getGUIOutput() {
         return myOutput;
     }
 
+    /**
+     * Displays an alert indicating an error.
+     * @param errorResourceKey: key for error message in the Errors.properties file.
+     */
     public void displayAlert(String errorResourceKey) {
         myAlert.displayAlert(errorResourceKey);
     }
 
+    /**
+     * Gets the current workspace's command dictionary.
+     * @return current workspace's command dictionary.
+     */
     public CommandDictionary getCommandDictionary() {
         return commandDict;
     }
 
+    /**
+     * Gets the current workspace's variable dictionary.
+     * @return current workspace's variable dictionary.
+     */
     public VariableDictionary getVariableDictionary() {
         return varDict;
     }
     
+    /**
+     * Gets the XML Parser.
+     * @return XML Parser.
+     */
     public XMLParser getXMLParser() {
     	return myXMLParser;
     }
 
+    /**
+     * Saves the current workspace preferences.
+     * @param file: file to write to.
+     */
     public void save(File file) {
         XMLSaver mySaver = new XMLSaver(commandDict, varDict);
         mySaver.generateFile(myCanvas.getBackgroundColor(), myCanvas.getPen().getMyPenRGB(), myCanvas.getTurtleImageName(), myGUIResource.toString(), getTurtles(), file);
     }
 
+    /**
+     * Gets the current workspace's stage.
+     * @return current workspace's stage.
+     */
     public Stage getStage() {
         return myStage;
     }
