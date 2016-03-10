@@ -27,7 +27,9 @@ public class XMLParser {
     private static final String MAKE = "make ";
     private static final String COMMANDS = "Commands";
     private static final String VARIABLES = "Variables";
-    private static final String TURTLES = "Turtles";
+    private static final int IMAGE_INDEX = 2;
+    private static final int PEN_COLOR_INDEX = 1;
+    private static final int BACKGROUND_COLOR_INDEX = 0;
     private DocumentBuilderFactory myFactory;
     private DocumentBuilder myBuilder;
 
@@ -36,7 +38,6 @@ public class XMLParser {
     private String backgroundColor;
     private String penColor;
     private String turtleImage;
-    private List<Turtle> myTurtles;
     private List<String> extractedData;
 
     public XMLParser(Controller controller) {
@@ -49,7 +50,9 @@ public class XMLParser {
         Document myDocument = myBuilder.parse(myFile);
         myDocument.getDocumentElement().normalize();
         NodeList categories = myDocument.getDocumentElement().getChildNodes();
-        for (int i = 0; i < categories.getLength(); i++) handleDocumentNode(categories.item(i));
+        for (int i = 0; i < categories.getLength(); i++){
+            handleDocumentNode(categories.item(i));
+        }
     }
 
     private void handleDocumentNode(Node entry) {
@@ -71,9 +74,9 @@ public class XMLParser {
 
     private void parseConfig(Element configElement) {
         List<String> configData = extract(configElement);
-        backgroundColor = getTextForEntry(configData.get(0));
-        penColor = getTextForEntry(configData.get(1));
-        turtleImage = getTextForEntry(configData.get(2));
+        backgroundColor = getTextForEntry(configData.get(BACKGROUND_COLOR_INDEX));
+        penColor = getTextForEntry(configData.get(PEN_COLOR_INDEX));
+        turtleImage = getTextForEntry(configData.get(IMAGE_INDEX));
     }
 
     private void parseVariables(Element variableElement) {
@@ -83,10 +86,6 @@ public class XMLParser {
         }
     }
 
-    private void makeTurtle(List<String> turtleData) {
-        Turtle myTurtle = new Turtle(Double.parseDouble(getTextForEntry(turtleData.get(0))));
-        myTurtles.add(myTurtle);
-    }
 
     private void loopThroughNodelist(Element myElement, Consumer<Element> myFunc){
         NodeList dataList = myElement.getChildNodes();
@@ -138,10 +137,6 @@ public class XMLParser {
 
     public String getTurtleImage() {
         return turtleImage;
-    }
-
-    public List<Turtle> getTurtles() {
-        return myTurtles;
     }
 
 }
