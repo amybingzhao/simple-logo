@@ -14,18 +14,18 @@ public abstract class BooleanNode extends Node {
 		}
 	}
 	
-	protected int countNumTrue(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Predicate<Double> trueCondition = val -> val != 0;
+	protected int countNumTrue(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+        Predicate<Double> trueCondition = val -> val != 0;
         return countNumMatchingCondition(trueCondition, commandDict, varDict);
 	}
 	
-	protected int countNumEqual(double valToMatch, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		Predicate<Double> equalCondition = val -> val == valToMatch;
+	protected int countNumEqual(double valToMatch, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+        Predicate<Double> equalCondition = val -> val == valToMatch;
         return countNumMatchingCondition(equalCondition, commandDict, varDict);
 	}
 	
-	private int countNumMatchingCondition(Predicate<Double> condition, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		List<IFunctions> children = getChildren();
+	private int countNumMatchingCondition(Predicate<Double> condition, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+        List<IFunctions> children = getChildren();
 		int numMatching = 0;
         for (int i = 0; i < children.size(); i++) {
         	if (condition.test(children.get(i).interpret(commandDict, varDict))) {
@@ -35,5 +35,5 @@ public abstract class BooleanNode extends Node {
 		return numMatching;
 	}
 	 
-	 protected abstract boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
+	 protected abstract boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException;
 }

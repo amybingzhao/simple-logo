@@ -31,8 +31,8 @@ public class AskWith extends TurtleNode {
 	}
 
 	@Override
-	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
 		return 0;
 	}
 	

@@ -9,14 +9,14 @@ public class ClearScreen extends TurtleNode {
 
 	private static final String CLEARSCREEN = "ClearScreen ";
 
-	/** 
-	 * Moves the turtle back to (0, 0) and erases its trails; returns the distance the turtle moved to get back to (0, 0).
-	 * @param commandDict
-	 * @param varDict
-	 */
+	/**
+     * Moves the turtle back to (0, 0) and erases its trails; returns the distance the turtle moved to get back to (0, 0).
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		double dist = turtle.moveToHome();
 		turtle.resetTurtle();
 

@@ -12,13 +12,13 @@ public class IsPenDown extends TurtleNode {
 	private static final String PENDOWNP = "IsPenDown ";
 
 	/**
-	 * If the turtle's pen is down, returns 1; else returns 0.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * If the turtle's pen is down, returns 1; else returns 0.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		Predicate<Turtle> pen = t -> !t.isPenUp();
 		return checkTurtleProperty(pen, turtle);
 	}

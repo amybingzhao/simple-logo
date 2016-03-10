@@ -15,13 +15,12 @@ public class SetPosition extends TurtleNode {
 
     /**
      * Moves the turtle to the given position and returns the distance moved.
-     *
-     * @param commandDict
+     *  @param commandDict
      * @param varDict
      */
-	@Override
+    @Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		List<IFunctions> children = getChildren();
 		double dist = turtle.calcDistance(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));
 		turtle.turnTowards(children.get(X).interpret(commandDict, varDict), children.get(Y).interpret(commandDict, varDict));

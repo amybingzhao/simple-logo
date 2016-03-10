@@ -46,8 +46,8 @@ public abstract class TurtleNode extends Node {
     	return null;
     }
     
-    protected double applyToActiveTurtles(List<Turtle> list, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-    	double ret = 0;
+    protected double applyToActiveTurtles(List<Turtle> list, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+        double ret = 0;
     	for (int i = 0; i < list.size(); i++) {
     		list.get(i).changeCurrentTurtleStatus(true);
     		ret = applyToIndividualTurtle(list.get(i), commandDict, varDict);
@@ -61,7 +61,7 @@ public abstract class TurtleNode extends Node {
         return applyToActiveTurtles(getActiveTurtles(), commandDict, varDict);
     }
     
-    protected abstract double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
+    protected abstract double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException;
     
     protected Turtle getTurtleByID(double ID) {
     	for (int i = 0; i < myTurtles.size(); i++) {
@@ -86,8 +86,8 @@ public abstract class TurtleNode extends Node {
 		}
     }
     
-    protected double applyToTurtlesInList(List<Double> turtleIDs, List<Turtle> origActiveTurtles, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-    	activateTurtlesInList(turtleIDs);
+    protected double applyToTurtlesInList(List<Double> turtleIDs, List<Turtle> origActiveTurtles, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+        activateTurtlesInList(turtleIDs);
 		double ret = getChildren().get(1).interpret(commandDict, varDict);
 		activateTurtlesInList(getTurtleIDs(origActiveTurtles));
 		return ret;
