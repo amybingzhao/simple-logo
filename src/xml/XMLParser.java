@@ -15,15 +15,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Created by blakekaplan on 3/4/16.
  */
 public class XMLParser {
 
-    public static final String CONFIG = "Config";
-    public static final String DELIMITER = "-";
-    public static final String MAKE = "make ";
+    private static final String CONFIG = "Config";
+    private static final String DELIMITER = "-";
+    private static final String MAKE = "make ";
+    private static final String COMMANDS = "Commands";
+    private static final String VARIABLES = "Variables";
+    private static final String TURTLES = "Turtles";
     private DocumentBuilderFactory myFactory;
     private DocumentBuilder myBuilder;
 
@@ -33,6 +37,7 @@ public class XMLParser {
     private String penColor;
     private String turtleImage;
     private List<Turtle> myTurtles;
+    private List<String> extractedData;
 
     public XMLParser(Controller controller) {
         myController = controller;
@@ -54,13 +59,10 @@ public class XMLParser {
                 case CONFIG:
                     parseConfig(entryElement);
                     break;
-                case "Turtles":
-                    parseTurtles(entryElement);
-                    break;
-                case "Variables":
+                case VARIABLES:
                     parseVariables(entryElement);
                     break;
-                case "Commands":
+                case COMMANDS:
                     parseCommands(entryElement);
                     break;
             }
@@ -74,33 +76,10 @@ public class XMLParser {
         turtleImage = getTextForEntry(configData.get(2));
     }
 
-    private void parseTurtles(Element turtleElements) {
-        myTurtles = new ArrayList<>();
-        NodeList myTurtleNodes = turtleElements.getChildNodes();
-        for (int i = 0; i < myTurtleNodes.getLength(); i++) {
-            if (myTurtleNodes.item(i) instanceof Element) {
-                Element turtleElement = (Element) myTurtleNodes.item(i);
-                makeTurtle(extract(turtleElement));
-            }
-        }
-    }
-
     private void parseVariables(Element variableElement) {
         List<String> variableData = extract(variableElement);
         for (String var : variableData) {
             myController.processCommand(MAKE + getNameForEntry(var) + " " + getTextForEntry(var));
-        }
-    }
-
-    private void parseCommands(Element commandsElement) {
-        NodeList myList = commandsElement.getChildNodes();
-        for (int i = 0; i < myList.getLength(); i++) {
-            Node myNode = myList.item(i);
-            if (myNode instanceof Element){
-                Element commandElement = (Element) myNode;
-                List<String> data = extract(commandElement);
-                myController.processCommand(getTextForEntry(data.get(1)));
-            }
         }
     }
 
@@ -109,17 +88,34 @@ public class XMLParser {
         myTurtles.add(myTurtle);
     }
 
-    private List<String> extract(Element data) {
-        ArrayList<String> extractedData = new ArrayList<>();
-        NodeList dataList = data.getChildNodes();
+    private void loopThroughNodelist(Element myElement, Consumer<Element> myFunc){
+        NodeList dataList = myElement.getChildNodes();
         for (int i = 0; i < dataList.getLength(); i++) {
             Node dataNode = dataList.item(i);
             if (dataNode instanceof Element) {
                 Element dataElement = (Element) dataNode;
-                extractedData.add(dataElement.getNodeName() + DELIMITER + dataElement.getTextContent());
+                myFunc.accept(dataElement);
             }
         }
+    }
+
+    private List<String> extract(Element data) {
+        extractedData = new ArrayList<>();
+        loopThroughNodelist(data, element -> addToExtractedData(element));
         return extractedData;
+    }
+
+    private void addToExtractedData(Element myElement){
+        extractedData.add(myElement.getNodeName() + DELIMITER + myElement.getTextContent());
+    }
+
+    private void parseCommands(Element commandsElement) {
+        loopThroughNodelist(commandsElement, element -> parseMethodFromElement(element));
+    }
+
+    private void parseMethodFromElement(Element myElement){
+        List<String> data = extract(myElement);
+        myController.processCommand(getTextForEntry(data.get(1)));
     }
 
     private String getTextForEntry(String entry) {

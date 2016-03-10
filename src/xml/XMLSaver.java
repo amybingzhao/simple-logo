@@ -85,6 +85,7 @@ public class XMLSaver {
             StreamResult myResult = new StreamResult(file);
             myTransformer.transform(mySource, myResult);
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("File Creation Error");
         }
     }
