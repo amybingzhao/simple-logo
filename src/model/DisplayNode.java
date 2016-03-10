@@ -26,6 +26,9 @@ public abstract class DisplayNode extends Node {
             throws ClassNotFoundException {
 		GUICanvas myCanvas = getCanvas();
 		performCanvasOperation(myCanvas, getChildren().get(0).interpret(commandDict, varDict));
+		if (getChildren().isEmpty()) {
+			
+		}
 		return getChildren().get(0).interpret(commandDict, varDict);
 	}
 
