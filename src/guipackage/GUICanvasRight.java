@@ -5,34 +5,36 @@ import java.util.ResourceBundle;
 
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
+import model.Turtle;
 
 public class GUICanvasRight implements IGUIObject {
 	GUIComboBoxColor myBackgroundPalette;
 	GUIComboBoxColor myPenPalette;
 	GUIComboBoxImages myImagePalette;
 	GUIPenSettings myPenSettings;
+	GUITurtleState myTurtleState;
 	ResourceBundle myResources;
 	
-	public GUICanvasRight(ResourceBundle myResources, GUIComboBoxColor background, GUIComboBoxColor pen, GUIComboBoxImages images, GUIPenSettings penSettings) {
+	public GUICanvasRight(ResourceBundle myResources, GUIComboBoxColor background, GUIComboBoxColor pen, 
+			GUIComboBoxImages images, GUIPenSettings penSettings, GUITurtleState turtleState) {
 		this.myResources = myResources;
 		this.myBackgroundPalette = background;
 		this.myPenPalette = pen;
 		this.myImagePalette = images;
 		this.myPenSettings = penSettings;
+		this.myTurtleState = turtleState;
 	}
 
 	@Override
 	public Node createNode() {
 		VBox vbox = new VBox();
 		vbox.getChildren().addAll(myBackgroundPalette.createNode(), myPenPalette.createNode(), myImagePalette.createNode(),
-				myPenSettings.createNode());
+				myPenSettings.createNode(), myTurtleState.createNode());
 		return vbox;
 	}
 
 	@Override
 	public void updateNode() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	public List<String> getPenPalette(){
@@ -50,6 +52,10 @@ public class GUICanvasRight implements IGUIObject {
 	public void changePalettes(String RGB, int index){
 		myBackgroundPalette.changePalette(RGB, index);
 		myPenPalette.changePalette(RGB, index);
+	}
+	
+	public void showTurtleState(Turtle turtle){
+		myTurtleState.showTurtleState(turtle);
 	}
 
 }

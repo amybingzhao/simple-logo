@@ -54,17 +54,20 @@ public class GUIFactory {
 		case("HelpTabPane"):{
 			return null;
 		}
-		case("TurtleState"):{
-			return new GUITurtleState(myResources,
-					new GUILabeled(myResources, myResources.getString("TurtleLocation")),
-					new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
-					new GUILabeled(myResources, myResources.getString("TurtlePen")),
-					canvas);
-		}
+//		case("TurtleState"):{
+//			return new GUITurtleState(myResources,
+//					new GUILabeled(myResources, myResources.getString("TurtleLocation")),
+//					new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
+//					new GUILabeled(myResources, myResources.getString("TurtlePen")));
+//		}
 		case("CanvasRight"):{
 			return new GUICanvasRight(myResources, new GUIComboBoxColorB(canvas, myResources, myResources.getString("BackgroundColorPalettePromptText")),
 			new GUIComboBoxColorP(canvas, myResources, myResources.getString("PenColorPalettePromptText")),new GUIComboBoxImages(canvas, myResources, myResources.getString("ImageComboBoxPromptText")),
-			new GUIPenSettings(myResources, canvas));
+			new GUIPenSettings(myResources, canvas),
+			new GUITurtleState(myResources,
+					new GUILabeled(myResources, myResources.getString("TurtleLocation")),
+					new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
+					new GUILabeled(myResources, myResources.getString("TurtlePen"))));
 		}
 		}
 		return null;

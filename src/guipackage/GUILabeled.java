@@ -14,7 +14,7 @@ import javafx.scene.layout.HBox;
  *
  */
 public class GUILabeled implements IGUIObject {
-	private static final int PADDING = 10;
+	private static final int PADDING = 5;
 	private Labeled outputLabel;
 	private Labeled outputText;
 	

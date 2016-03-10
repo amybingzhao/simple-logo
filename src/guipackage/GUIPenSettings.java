@@ -46,6 +46,10 @@ public class GUIPenSettings implements IGUIObject{
 		myBox.getChildren().addAll(upDownLabel, penUp, penDown, penTypeLabel, penSolid, 
 				penDashed, penDotted, penLabel, penThickness, setThickness);
 		
+		for(Node child: myBox.getChildren()){
+			child.setStyle(myResources.getString("FontStyle"));
+		}
+		
 		myBox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		return myBox;
 	}

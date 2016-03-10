@@ -3,13 +3,10 @@ package guipackage;
 import controller.Controller;
 import java.util.ResourceBundle;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.Turtle;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 /**
  * Create tab for main screen (canvas, command line, options, etc.) 
  * @author AnnieTang
@@ -33,7 +30,6 @@ public class TabMainScreen {
 	private IGUIObject previousCommands;
 	private IGUIObject variables;
 	private IGUIObject languageSelector;
-	private IGUIObject turtleState;
 	private IGUIObject saveLoad;
 
     private Stage myStage;
@@ -83,12 +79,11 @@ public class TabMainScreen {
 
 	private void setLeftPane() {
 		VBox leftPanel = new VBox(PANEL_PADDING);
-		turtleState = myFactory.createNewGUIObject("TurtleState");
 		userCommands = myFactory.createNewGUIObject("UserCommands");
 		previousCommands = myFactory.createNewGUIObject("PreviousCommands");
 		languageSelector = myFactory.createNewGUIObject("LanguageSelector");
 		saveLoad = myFactory.createNewGUIObject("SaveLoad");
-		leftPanel.getChildren().addAll(turtleState.createNode(),userCommands.createNode(), 
+		leftPanel.getChildren().addAll(userCommands.createNode(), 
 				previousCommands.createNode(), languageSelector.createNode(), 
 				saveLoad.createNode());
 		myMainScreen.setLeft(leftPanel);
@@ -117,6 +112,5 @@ public class TabMainScreen {
 		userCommands.updateNode();
 		previousCommands.updateNode();
 		variables.updateNode();
-		turtleState.updateNode();
 	}
 }

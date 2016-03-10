@@ -151,9 +151,7 @@ public class GUICanvas implements Observer{
 	}
 	
 	private void addTurtleToMap(Turtle turtle){
-		System.out.println("1");
 		if (!myTurtles.containsKey(turtle)) {
-			System.out.println("2");
 			Canvas turtleCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 			Canvas drawingCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 			GraphicsContext drawingGC = drawingCanvas.getGraphicsContext2D();
@@ -173,7 +171,6 @@ public class GUICanvas implements Observer{
 	 * Clears the previous instance of the Turtle on the canvas.
 	 */
 	public void clearPreviousTurtle(Turtle turtle) {
-		System.out.println("3");
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		double myOldX = turtleParameters.get((int) turtle.getID())[0].doubleValue();
 		double myOldY = turtleParameters.get((int) turtle.getID())[1].doubleValue();
@@ -189,7 +186,6 @@ public class GUICanvas implements Observer{
 	 * Draws the turtle onto canvas based on turtle's X and Y values and its direction.
 	 */
 	public void drawTurtle(Turtle turtle) {
-		System.out.println("4");
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		GraphicsContext gcDrawing = myTurtles.get(turtle).get(1);
 		double myX = turtle.getCurX() + CANVAS_WIDTH/2 - TURTLE_SIZE/2;
@@ -198,7 +194,6 @@ public class GUICanvas implements Observer{
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 		if (turtle.showing()) {			
-			System.out.println("5");
 			ImageView currentImageView = turtle.getImageView();
 			root.getChildren().remove(currentImageView);
 			currentImageView.setX(myX);
@@ -220,7 +215,7 @@ public class GUICanvas implements Observer{
 		turtleImage.setX(x);
 		turtleImage.setY(y);
 		turtleImage.setOnMouseEntered(event -> {
-				 System.out.println("yay");
+				 canvasRight.showTurtleState(turtle);
 		});
 		turtleImage.setOnMouseClicked(event -> {
 			turtle.setActive(!turtle.isActive());

@@ -10,17 +10,18 @@ public class GUITurtleState implements IGUIObject {
 	private GUILabeled locationLabel;
 	private GUILabeled headingLabel;
 	private GUILabeled penLabel;
-	private GUICanvas canvas;
+	private Node locationNode;
+	private Node headingNode;
+	private Node penNode;
 	private ResourceBundle myResources;
 	
 	
 	public GUITurtleState(ResourceBundle myResources, GUILabeled locationLabel, GUILabeled headingLabel, 
-			GUILabeled penLabel, GUICanvas canvas) {
+			GUILabeled penLabel) {
 		this.myResources = myResources; 
 		this.locationLabel = locationLabel;
 		this.headingLabel = headingLabel;
 		this.penLabel = penLabel;
-		this.canvas = canvas;
 	}
 
 	@Override
@@ -30,19 +31,29 @@ public class GUITurtleState implements IGUIObject {
 		locationLabel.setOutputText(myResources.getString("StartingTurtleLocation"));
 		headingLabel.setOutputText(myResources.getString("StartingTurtleHeading"));
 		penLabel.setOutputText(myResources.getString("StartingPenDownStatus"));
-		vbox.getChildren().addAll(instructionLabel.createNode(), locationLabel.createNode(), 
-				headingLabel.createNode(), penLabel.createNode());
+		setFontStyle();
+		vbox.getChildren().addAll(instructionLabel.createNode(), 
+		locationNode, headingNode, penNode);
 		return vbox;
+	}
+	
+	private void setFontStyle(){
+		locationNode = locationLabel.createNode();
+		headingNode = headingLabel.createNode();
+		penNode = penLabel.createNode();
+		locationNode.setStyle(myResources.getString("FontStyle"));
+		headingNode.setStyle(myResources.getString("FontStyle"));
+		penNode.setStyle(myResources.getString("FontStyle"));
 	}
 
 	@Override
 	public void updateNode() {
 	}
 	
-	public void updateTurtleState(Turtle turtle){
+	public void showTurtleState(Turtle turtle){
 		locationLabel.setOutputText(Math.round(turtle.getCurX()) + "," + Math.round(turtle.getCurY()));
 		headingLabel.setOutputText(""+Math.round(turtle.getDirection()));
-		penLabel.setOutputText(Boolean.toString(turtle.isPenUp()));
+		penLabel.setOutputText(Boolean.toString(!turtle.isPenUp()));
 	}
 
 }
