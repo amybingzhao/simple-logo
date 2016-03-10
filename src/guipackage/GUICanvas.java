@@ -8,6 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import javafx.animation.Animation;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
@@ -42,6 +43,7 @@ public class GUICanvas implements Observer{
 	private static final int PEN_SCALE = 100;
 	private static final int DEFAULT = 0;
 	private Canvas canvasBackground;
+	private Canvas canvasStamps;
 	private Pane myCanvasRoot;
 	private GraphicsContext gcBackground;
 	private GraphicsContext gcStamps;
@@ -60,6 +62,8 @@ public class GUICanvas implements Observer{
 	private List<String> myBackgroundPalette;
 	private List<String> myImagePalette;
 	
+	private GUICanvasAnimation myAnimation;
+	
 	private HBox hbox;
 	private GUICanvasRight canvasRight;
 	private Group root;
@@ -70,15 +74,18 @@ public class GUICanvas implements Observer{
 		myTurtles = new HashMap<>();
 		turtleParameters = new ArrayList<>();
 		canvasBackground = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+		canvasStamps = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		gcBackground = canvasBackground.getGraphicsContext2D();
 		gcBackground.setFill(DEFAULT_BACKGROUND_COLOR);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		gcStamps = canvasStamps.getGraphicsContext2D();
 		turtleShape = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
 		myPen = new GUICanvasPen();
 		penCounter = 0;
-		myCanvasRoot = new Pane(canvasBackground);
+		myCanvasRoot = new Pane(canvasBackground, canvasStamps);
 		hbox = new HBox();
 		root = new Group(myCanvasRoot);
+		myAnimation = new GUICanvasAnimation();
 	}
 
 	
@@ -193,18 +200,20 @@ public class GUICanvas implements Observer{
 	public void drawTurtle(Turtle turtle) {
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		GraphicsContext gcDrawing = myTurtles.get(turtle).get(1);
-		double myX = turtle.getCurX() + CANVAS_WIDTH/2 - TURTLE_SIZE/2;
-		double myY = -(turtle.getCurY() - CANVAS_HEIGHT/2 + TURTLE_SIZE/2);
+		double myX = checkBounds(turtle.getCurX() + CANVAS_WIDTH/2 - TURTLE_SIZE/2);
+		double myY = checkBounds(-(turtle.getCurY() - CANVAS_HEIGHT/2 + TURTLE_SIZE/2));
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-		if (turtle.showing()) {			
+		if (turtle.showing()) {
+			Double[] parameters = turtleParameters.get((int) turtle.getID());
 			ImageView currentImageView = turtle.getImageView();
 			root.getChildren().remove(currentImageView);
+//			myAnimation.makeAnimation(currentImageView, parameters[0], parameters[1], myX, myY, turtle.getDirection() - parameters[2]);
 			currentImageView.setX(myX);
 			currentImageView.setY(myY);
 			root.getChildren().add(currentImageView);
-			gc.drawImage(turtleShape, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+//			myAnimation.play();
 		}
 		if (!turtle.isPenUp()) {
 			drawLine(gcDrawing, myX, myY);
@@ -217,8 +226,8 @@ public class GUICanvas implements Observer{
 		ImageView turtleImage = new ImageView(turtleShape);
 		turtleImage.setFitHeight(TURTLE_SIZE);
 		turtleImage.setPreserveRatio(true);
-		turtleImage.setX(x);
-		turtleImage.setY(y);
+		turtleImage.setX(checkBounds(x));
+		turtleImage.setY(checkBounds(y));
 		turtleImage.setOnMouseEntered(event -> {
 				 canvasRight.showTurtleState(turtle);
 		});
@@ -226,6 +235,13 @@ public class GUICanvas implements Observer{
 			turtle.setActive(!turtle.isActive());
 		});
 		return turtleImage;
+	}
+	
+	private double checkBounds(double coordinate) {
+		if (coordinate > 500 || coordinate < 0) {
+			coordinate = coordinate - 500 * Math.floor(coordinate / 500);
+		}
+		return coordinate;
 	}
 	
 	private void drawLine(GraphicsContext gcDrawing, double myX, double myY) {
@@ -261,16 +277,18 @@ public class GUICanvas implements Observer{
 				penSize, penSize);
 	}
 	
-	public void drawStamps() {
+	public double drawStamps() {
 		for (Turtle turtle: myTurtles.keySet()) {
 			if (turtle.isActive()) {
-				gcStamps.drawImage(turtleShape, turtle.getCurX(), turtle.getCurY());
+				gcStamps.drawImage(turtleShape, checkBounds(turtle.getCurX() + STARTING_X),
+						checkBounds(-turtle.getCurY() + STARTING_Y), TURTLE_SIZE, TURTLE_SIZE);
 			}
 		}
+		return myTurtleShapeIndex;
 	}
 	
 	public void clearStamps() {
-		clearGraphicsContext(gc);
+		clearGraphicsContext(gcStamps);
 	}
 	
 	public void clearGraphicsContext(GraphicsContext gc) {

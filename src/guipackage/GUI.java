@@ -18,11 +18,12 @@ import model.Turtle;
  *
  */
 public class GUI implements IGUI {
+	private static final String MAIN_WORKSPACE = "Main Workspace";
 	private static final String GUI_RESOURCE = "GUI";
 	private static final String HELP_TAB_TEXT1 = "Basic Help";
 	private static final String HELP_TAB_TEXT2 = "Extended Help";
 	private static final double TABS_OFFSET = 5.0;
-	private static final double NEWTAB_OFFSET = 50.0;
+	private static final double NEWTAB_OFFSET = 40.0;
 	private Scene myScene;
 	private AnchorPane myRoot;
 	private TabPane myTabs;
@@ -54,7 +55,7 @@ public class GUI implements IGUI {
 		GUITab help1 = new GUITab(myResources.getString("BasicCommands"), HELP_TAB_TEXT1);
 		GUITab help2 = new GUITab(myResources.getString("ExtendedCommands"), HELP_TAB_TEXT2);
 		
-		myTabs.getTabs().addAll(mainScreen.getTab(myStage), help1.getTab(), help2.getTab());	
+		myTabs.getTabs().addAll(mainScreen.getTab(myStage), help1.getTab(), help2.getTab());
 		
 		AnchorPane.setTopAnchor(myTabs, TABS_OFFSET);
 		AnchorPane.setTopAnchor(newTab, NEWTAB_OFFSET);
