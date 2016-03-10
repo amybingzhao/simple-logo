@@ -16,7 +16,7 @@ public abstract class Node implements IFunctions {
      * Initializes the node's turtle and list of children nodes.
      */
     public Node() {
-        myChildren = new ArrayList<IFunctions>();
+        myChildren = new ArrayList<>();
     }
 
     /**
@@ -61,7 +61,7 @@ public abstract class Node implements IFunctions {
     
     
     public List<Double> createListFromCommandList(CommandList commandList, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
-        List<Double> list = new ArrayList<Double>();
+        List<Double> list = new ArrayList<>();
     	for (int i = 0; i < commandList.getChildren().size(); i++) {
     		list.add(commandList.getChildren().get(i).interpret(commandDict, varDict));
     	}
