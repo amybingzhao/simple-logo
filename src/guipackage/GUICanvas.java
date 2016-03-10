@@ -8,6 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import javafx.animation.Animation;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
@@ -42,6 +43,7 @@ public class GUICanvas implements Observer{
 	private static final int PEN_SCALE = 100;
 	private static final int DEFAULT = 0;
 	private Canvas canvasBackground;
+	private Canvas canvasStamps;
 	private Pane myCanvasRoot;
 	private GraphicsContext gcBackground;
 	private GraphicsContext gcStamps;
@@ -60,6 +62,8 @@ public class GUICanvas implements Observer{
 	private List<String> myBackgroundPalette;
 	private List<String> myImagePalette;
 	
+	private GUICanvasAnimation myAnimation;
+	
 	private HBox hbox;
 	private GUICanvasRight canvasRight;
 	private Group root;
@@ -70,15 +74,18 @@ public class GUICanvas implements Observer{
 		myTurtles = new HashMap<>();
 		turtleParameters = new ArrayList<>();
 		canvasBackground = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+		canvasStamps = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		gcBackground = canvasBackground.getGraphicsContext2D();
 		gcBackground.setFill(DEFAULT_BACKGROUND_COLOR);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		gcStamps = canvasStamps.getGraphicsContext2D();
 		turtleShape = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
 		myPen = new GUICanvasPen();
 		penCounter = 0;
-		myCanvasRoot = new Pane(canvasBackground);
+		myCanvasRoot = new Pane(canvasBackground, canvasStamps);
 		hbox = new HBox();
 		root = new Group(myCanvasRoot);
+		myAnimation = new GUICanvasAnimation();
 	}
 
 	
@@ -195,12 +202,15 @@ public class GUICanvas implements Observer{
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-		if (turtle.showing()) {			
+		if (turtle.showing()) {
+			Double[] parameters = turtleParameters.get((int) turtle.getID());
 			ImageView currentImageView = turtle.getImageView();
-			root.getChildren().remove(currentImageView);
-			currentImageView.setX(myX);
-			currentImageView.setY(myY);
-			root.getChildren().add(currentImageView);
+//			root.getChildren().remove(currentImageView);
+			myAnimation.makeAnimation(currentImageView, parameters[0], parameters[1], myX, myY, turtle.getDirection() - parameters[2]);
+//			currentImageView.setX(myX);
+//			currentImageView.setY(myY);
+//			root.getChildren().add(currentImageView);
+//			myAnimation.play();
 		}
 		if (!turtle.isPenUp()) {
 			drawLine(gcDrawing, myX, myY);
