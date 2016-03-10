@@ -40,6 +40,7 @@ public class Controller {
     private static final String WHITESPACE = "\\p{Space}";
     private String myLanguageResource;
     private Parser myParser;
+    private XMLParser myXMLParser;
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
     private GUIObjectLabeled myOutput;
@@ -127,7 +128,7 @@ public class Controller {
 
 
     public void loadXML(File myFile) {
-        XMLParser myXMLParser = new XMLParser(this);
+        myXMLParser = new XMLParser(this);
         try {
             myXMLParser.parse(myFile);
         } catch (IOException | ParserConfigurationException | SAXException e) {
@@ -195,6 +196,10 @@ public class Controller {
 
     public VariableDictionary getVariableDictionary() {
         return varDict;
+    }
+    
+    public XMLParser getXMLParser() {
+    	return myXMLParser;
     }
 
     public void save(File file) {

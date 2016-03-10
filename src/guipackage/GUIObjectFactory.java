@@ -31,7 +31,7 @@ public class GUIObjectFactory {
 		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
 		case("SaveLoadButtons"):{
-			return new GUIObjectSaveLoad(myResources, myController);
+			return new GUIObjectSaveLoad(myResources, myController, canvas);
 		}
 //		case("ImageVBox"):{
 //			return new GUIObjectImageVBox(myResources, myController, canvas, nodeType);
