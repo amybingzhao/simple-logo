@@ -65,7 +65,7 @@ public class MakeUserInstruction extends Node {
         if (languageBundle.containsKey(entry)){
             String options = languageBundle.getString(entry);
             String[] splitOptions = options.split("\\|");
-            return splitOptions[0];
+            return splitOptions[0].replace("\\", "");
         }
         else{
             return entry;
