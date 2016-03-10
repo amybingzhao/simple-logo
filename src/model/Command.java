@@ -38,16 +38,15 @@ public class Command extends Node {
 
     /**
      * Executes the command using the given parameters.
-     *
-     * @param commandDict
-     * @param varDict
-     */
+     *  @param commandDict
+     * @param varDict*/
     @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
 
         if (!commandDict.contains(myName)) {
-        	throw new ClassNotFoundException();
+            throw new ClassNotFoundException();
         } else {
+            VariableDictionary scopedDictionary = varDict.createClone();
         	parameters = commandDict.getCommandFor(myName).getParams();
         	myProcedure = commandDict.getCommandFor(myName).getProcedure();
 
@@ -55,10 +54,10 @@ public class Command extends Node {
         	for (int i = 0; i < parameters.size(); i++) {
         		String myVar = parameters.get(i);
         		double value = children.get(i).interpret(commandDict, varDict);
-        		varDict.makeVariable(myVar, value);
+        		scopedDictionary.makeVariable(myVar, value);
         	}
         	for (IFunctions myNode : myProcedure) {
-        		myNode.interpret(commandDict, varDict);
+        		myNode.interpret(commandDict, scopedDictionary);
         	}
         	return 0;
         }
@@ -67,7 +66,7 @@ public class Command extends Node {
     /**
      * Sets the command procedure.
      *
-     * @param procedure: child command trees to be executed.
+     * @param list: child command trees to be executed.
      */
     public void setProcedure(List<IFunctions> list) {
         myProcedure = list;

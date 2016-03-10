@@ -22,8 +22,8 @@ public abstract class DisplayNode extends Node {
 	protected abstract void performCanvasOperation(GUICanvas canvas, double val);
 	
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
 		GUICanvas myCanvas = getCanvas();
 		performCanvasOperation(myCanvas, getChildren().get(0).interpret(commandDict, varDict));
 		return getChildren().get(0).interpret(commandDict, varDict);

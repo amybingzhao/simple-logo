@@ -4,8 +4,8 @@ public class Turtles extends TurtleNode {
 
 	private static final String TURTLES = "turtles ";
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
 		return getTurtles().size();
 	}
 

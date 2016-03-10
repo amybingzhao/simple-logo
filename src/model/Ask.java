@@ -7,8 +7,8 @@ public class Ask extends TurtleNode {
 	private static final String ASK = "Ask ";
 	private static final int TURTLE_IDS = 0;
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
 		List<Double> turtleIDs = createListFromCommandList((CommandList) getChildren().get(TURTLE_IDS), commandDict, varDict);
 		return applyToTurtlesInList(turtleIDs, getActiveTurtles(), commandDict, varDict);
 	}

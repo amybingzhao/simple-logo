@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 public abstract class BooleanNode extends Node {
 
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
 		if (checkCondition(commandDict, varDict)) {
 			return 1;
 		} else {

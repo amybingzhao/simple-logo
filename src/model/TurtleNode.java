@@ -57,8 +57,8 @@ public abstract class TurtleNode extends Node {
     }
     
     @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-		return applyToActiveTurtles(getActiveTurtles(), commandDict, varDict); 
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+        return applyToActiveTurtles(getActiveTurtles(), commandDict, varDict);
     }
     
     protected abstract double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;

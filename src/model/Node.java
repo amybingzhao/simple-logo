@@ -56,7 +56,7 @@ public abstract class Node implements IFunctions {
      * @param commandDict
      * @param varDict
      */
-    public abstract double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException;
+    public abstract double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException;
 
     
     
