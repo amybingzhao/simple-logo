@@ -208,11 +208,11 @@ public class GUICanvas implements Observer{
 		if (turtle.showing()) {
 			Double[] parameters = turtleParameters.get((int) turtle.getID());
 			ImageView currentImageView = turtle.getImageView();
-//			root.getChildren().remove(currentImageView);
-			myAnimation.makeAnimation(currentImageView, parameters[0], parameters[1], myX, myY, turtle.getDirection() - parameters[2]);
-//			currentImageView.setX(myX);
-//			currentImageView.setY(myY);
-//			root.getChildren().add(currentImageView);
+			root.getChildren().remove(currentImageView);
+//			myAnimation.makeAnimation(currentImageView, parameters[0], parameters[1], myX, myY, turtle.getDirection() - parameters[2]);
+			currentImageView.setX(myX);
+			currentImageView.setY(myY);
+			root.getChildren().add(currentImageView);
 //			myAnimation.play();
 		}
 		if (!turtle.isPenUp()) {
@@ -277,12 +277,13 @@ public class GUICanvas implements Observer{
 				penSize, penSize);
 	}
 	
-	public void drawStamps() {
+	public double drawStamps() {
 		for (Turtle turtle: myTurtles.keySet()) {
 			if (turtle.isActive()) {
-				gcStamps.drawImage(turtleShape, turtle.getCurX(), turtle.getCurY());
+				gcStamps.drawImage(turtleShape, turtle.getCurX() + STARTING_X, -turtle.getCurY() + STARTING_Y, TURTLE_SIZE, TURTLE_SIZE);
 			}
 		}
+		return myTurtleShapeIndex;
 	}
 	
 	public void clearStamps() {
