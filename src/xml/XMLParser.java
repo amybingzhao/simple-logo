@@ -59,9 +59,6 @@ public class XMLParser {
                 case CONFIG:
                     parseConfig(entryElement);
                     break;
-                case TURTLES:
-                    parseTurtles(entryElement);
-                    break;
                 case VARIABLES:
                     parseVariables(entryElement);
                     break;
@@ -77,17 +74,6 @@ public class XMLParser {
         backgroundColor = getTextForEntry(configData.get(0));
         penColor = getTextForEntry(configData.get(1));
         turtleImage = getTextForEntry(configData.get(2));
-    }
-
-    private void parseTurtles(Element turtleElements) {
-        myTurtles = new ArrayList<>();
-        NodeList myTurtleNodes = turtleElements.getChildNodes();
-        for (int i = 0; i < myTurtleNodes.getLength(); i++) {
-            if (myTurtleNodes.item(i) instanceof Element) {
-                Element turtleElement = (Element) myTurtleNodes.item(i);
-                makeTurtle(extract(turtleElement));
-            }
-        }
     }
 
     private void parseVariables(Element variableElement) {
