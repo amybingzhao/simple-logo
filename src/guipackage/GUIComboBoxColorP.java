@@ -7,27 +7,28 @@ import java.util.ResourceBundle;
 
 import controller.Controller;
 import javafx.scene.paint.Color;
+
 /**
- * Editable color palette for background color.
+ * Editable color palette for pen color.
  * @author AnnieTang
  *
  */
-public class GUIObjectComboBoxColorB extends GUIObjectComboBoxColor {	
-	
-	public GUIObjectComboBoxColorB(GUICanvas canvas, ResourceBundle myResources,
+public class GUIComboBoxColorP extends GUIComboBoxColor {
+
+	public GUIComboBoxColorP(GUICanvas canvas, ResourceBundle myResources,
 			String promptText) {
 		super(canvas, myResources, promptText);
 	}
 
 	@Override
 	protected void fillDefaultPalette() {
-		List<String> defaultColors = new ArrayList<String>(Arrays.asList(myResources.getString("DefaultBackgroundColors").split(",")));
+		List<String> defaultColors = new ArrayList<String>(Arrays.asList(myResources.getString("DefaultPenColors").split(",")));
 		palette = defaultColors;
 	}
 
 	@Override
 	protected void setCanvasValues(Color col) {
-		canvas.setBackgroundColor(col, comboBox.getValue());
+		canvas.setPenColor(col, comboBox.getValue());
 	}
 	
 }

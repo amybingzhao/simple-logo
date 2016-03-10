@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -44,9 +45,9 @@ public class GUICanvas implements Observer{
 	private GraphicsContext gc;
 	private Map<Turtle, List<GraphicsContext>> myTurtles;
 	private List<Double[]> turtleParameters;
-	private GUIObjectComboBoxColor myBackgroundPalette;
-	private GUIObjectComboBoxColor myPenPalette;
-	private GUIObjectComboBoxImages myImagePalette;
+	private GUIComboBoxColor myBackgroundPalette;
+	private GUIComboBoxColor myPenPalette;
+	private GUIComboBoxImages myImagePalette;
 	private ResourceBundle myResources;
 	private GUICanvasPen myPen;
 	
@@ -72,6 +73,7 @@ public class GUICanvas implements Observer{
 		gcBackground = canvasBackground.getGraphicsContext2D();
 		gcBackground.setFill(DEFAULT_BACKGROUND_COLOR);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+//		myTurtleState = new GUIObjectTurtleState();
 		addDefaultTurtles();
 		myPen = new GUICanvasPen();
 		myPen.init();
@@ -86,9 +88,9 @@ public class GUICanvas implements Observer{
 	 * @return Canvas Node
 	 */
 	public Node createNode() {
-		myBackgroundPalette = new GUIObjectComboBoxColorB(this, myResources, myResources.getString("BackgroundColorPalettePromptText"));
-		myPenPalette = new GUIObjectComboBoxColorP(this, myResources, myResources.getString("PenColorPalettePromptText"));
-		myImagePalette = new GUIObjectComboBoxImages(this, myResources, myResources.getString("ImageComboBoxPromptText"));
+		myBackgroundPalette = new GUIComboBoxColorB(this, myResources, myResources.getString("BackgroundColorPalettePromptText"));
+		myPenPalette = new GUIComboBoxColorP(this, myResources, myResources.getString("PenColorPalettePromptText"));
+		myImagePalette = new GUIComboBoxImages(this, myResources, myResources.getString("ImageComboBoxPromptText"));
 		vboxToRight.getChildren().addAll(myBackgroundPalette.createNode(), myPenPalette.createNode(), myImagePalette.createNode());
 		hboxToReturn.getChildren().addAll(myCanvasRoot, vboxToRight);
 		setPaletteProperties();
@@ -105,9 +107,9 @@ public class GUICanvas implements Observer{
 	/**
 	 * returns index in given palette of given turtle image name.
 	 * @param String imageName
-	 * @param GUIObjectComboBox palette
+	 * @param GUIComboBox palette
 	 */
-	public int getPaletteIndex(String imageName, GUIObjectComboBox whichPalette){
+	public int getPaletteIndex(String imageName, GUIComboBox whichPalette){
 		List<String> palette = whichPalette.getOptionsList();
 		for(String turtleName:palette){
 			if(turtleName.equals(imageName)){
@@ -212,7 +214,11 @@ public class GUICanvas implements Observer{
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 		if (turtle.showing()) {
-			gc.drawImage(turtleShape, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
+			ImageView turtleImage = new ImageView(turtleShape);
+			turtleImage.setOnMouseEntered(event -> {
+					 System.out.println(turtle.getID());
+			});
+			gc.drawImage(turtleImage.getImage(), myX, myY, TURTLE_SIZE, TURTLE_SIZE);
 		}
 		if (!turtle.isPenUp()) {
 			drawLine(gcDrawing, myX, myY);

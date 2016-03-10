@@ -22,11 +22,11 @@ public class TabMainScreen {
 	private Tab myRootTab;
 	private BorderPane myMainScreen;
 	private ResourceBundle myResources;
-	private GUIObjectFactory myFactory;
+	private GUIFactory myFactory;
 	private GUICanvas canvas;
 	private GUICommandLine commandLine;
 	private Controller myController;
-	private GUIObjectLabeled myOutput;
+	private GUILabeled myOutput;
 	
 	//GUIObject instance variables
 	private IGUIObject userCommands;
@@ -34,8 +34,8 @@ public class TabMainScreen {
 	private IGUIObject variables;
 	private IGUIObject languageSelector;
 	private IGUIObject imageInput;
-	private GUIObjectComboBoxColor backgroundColorPalette;
-	private GUIObjectComboBoxColor penColorPalette;
+	private GUIComboBoxColor backgroundColorPalette;
+	private GUIComboBoxColor penColorPalette;
 	private IGUIObject turtleState;
 	private IGUIObject penSettings;
 	private IGUIObject saveLoad;
@@ -63,7 +63,7 @@ public class TabMainScreen {
 		initializeTab(stage);
 		myRootTab = new Tab();
 		myMainScreen = new BorderPane();
-		myFactory = new GUIObjectFactory(myResources, myController, canvas, commandLine); 
+		myFactory = new GUIFactory(myResources, myController, canvas, commandLine); 
 		
 		setCenterPane();
 		setBottomPane();

@@ -9,13 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
-public class GUIObjectSaveLoad implements IGUIObject {
+public class GUISaveLoad implements IGUIObject {
 	private ResourceBundle myResources;
 	private Controller myController;
 	
 	private static final int VBOX_PADDING = 10;
 	
-	public GUIObjectSaveLoad(ResourceBundle r, Controller c) {
+	public GUISaveLoad(ResourceBundle r, Controller c) {
 		myResources = r;
 		myController = c;
 	}

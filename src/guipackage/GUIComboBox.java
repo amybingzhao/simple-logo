@@ -20,7 +20,7 @@ import javafx.scene.layout.HBox;
  * @author AnnieTang
  */
 
-public abstract class GUIObjectComboBox implements IGUIObject {
+public abstract class GUIComboBox implements IGUIObject {
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int PADDING = 10;
 	private static final int HBOX_SPACING = 5;
@@ -33,7 +33,7 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 	protected Button comboButton;
 	protected GUICanvas canvas;
 	
-	public GUIObjectComboBox(GUICanvas canvas, ResourceBundle myResources, Controller myController, String promptText, GUICommandLine myCommandLine) {
+	public GUIComboBox(GUICanvas canvas, ResourceBundle myResources, Controller myController, String promptText, GUICommandLine myCommandLine) {
 		this.canvas = canvas;
 		this.myResources = myResources;
 		this.myController = myController;
@@ -41,7 +41,7 @@ public abstract class GUIObjectComboBox implements IGUIObject {
 		this.myCommandLine = myCommandLine;
 	}
 	
-	public GUIObjectComboBox(GUICanvas canvas, ResourceBundle myResources, String promptText){
+	public GUIComboBox(GUICanvas canvas, ResourceBundle myResources, String promptText){
 		this.canvas = canvas;
 		this.myResources = myResources;
 		this.promptText = promptText;

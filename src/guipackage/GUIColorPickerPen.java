@@ -8,9 +8,9 @@ import javafx.scene.paint.Color;
  * @author AnnieTang
  *
  */
-public class GUIObjectColorPickerPen extends GUIObjectColorPicker {
+public class GUIColorPickerPen extends GUIColorPicker {
 
-	public GUIObjectColorPickerPen(GUICanvas canvas, String pickerLabel) {
+	public GUIColorPickerPen(GUICanvas canvas, String pickerLabel) {
 		super(canvas, pickerLabel);
 	}
 	

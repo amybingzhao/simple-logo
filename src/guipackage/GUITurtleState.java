@@ -6,16 +6,16 @@ import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import model.Turtle;
 
-public class GUIObjectTurtleState implements IGUIObject {
-	private GUIObjectLabeled locationLabel;
-	private GUIObjectLabeled headingLabel;
-	private GUIObjectLabeled penLabel;
+public class GUITurtleState implements IGUIObject {
+	private GUILabeled locationLabel;
+	private GUILabeled headingLabel;
+	private GUILabeled penLabel;
 	private GUICanvas canvas;
 	private ResourceBundle myResources;
 	
 	
-	public GUIObjectTurtleState(ResourceBundle myResources, GUIObjectLabeled locationLabel, GUIObjectLabeled headingLabel, 
-			GUIObjectLabeled penLabel, GUICanvas canvas) {
+	public GUITurtleState(ResourceBundle myResources, GUILabeled locationLabel, GUILabeled headingLabel, 
+			GUILabeled penLabel, GUICanvas canvas) {
 		this.myResources = myResources; 
 		this.locationLabel = locationLabel;
 		this.headingLabel = headingLabel;
@@ -26,7 +26,7 @@ public class GUIObjectTurtleState implements IGUIObject {
 	@Override
 	public Node createNode() {
 		VBox vbox = new VBox();
-		GUIObjectLabeled instructionLabel = new GUIObjectLabeled(myResources, myResources.getString("TurtleStateInstructions"));
+		GUILabeled instructionLabel = new GUILabeled(myResources, myResources.getString("TurtleStateInstructions"));
 		locationLabel.setOutputText(myResources.getString("StartingTurtleLocation"));
 		headingLabel.setOutputText(myResources.getString("StartingTurtleHeading"));
 		penLabel.setOutputText(myResources.getString("StartingPenDownStatus"));

@@ -22,7 +22,7 @@ import model.VariableDictionary;
  *
  * @author David
  */
-public class GUIObjectTableView implements IGUIObject {
+public class GUITableView implements IGUIObject {
 
     private static final int TABLE_COLUMN_WIDTH = 130;
     private ResourceBundle myResources;
@@ -38,7 +38,7 @@ public class GUIObjectTableView implements IGUIObject {
 
     private ObservableList<TableVariable> data = FXCollections.observableArrayList();
 
-    public GUIObjectTableView(ResourceBundle r, CommandDictionary myComDict, VariableDictionary myVarDict) {
+    public GUITableView(ResourceBundle r, CommandDictionary myComDict, VariableDictionary myVarDict) {
         myResources = r;
         commandDict = myComDict;
         varDict = myVarDict;

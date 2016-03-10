@@ -9,13 +9,13 @@ import controller.Controller;
  *
  * @author AnnieTang
  */
-public class GUIObjectFactory {
+public class GUIFactory {
 	private ResourceBundle myResources;
 	private GUICanvas canvas;
 	private Controller myController;
 	private GUICommandLine myCommandLine;
 
-	public GUIObjectFactory(ResourceBundle myResources, Controller myController, GUICanvas canvas, GUICommandLine cLine){
+	public GUIFactory(ResourceBundle myResources, Controller myController, GUICanvas canvas, GUICommandLine cLine){
 		this.myResources = myResources;
 		this.canvas = canvas; 
 		this.myController = myController;
@@ -31,30 +31,30 @@ public class GUIObjectFactory {
 		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
 		case("SaveLoadButtons"):{
-			return new GUIObjectSaveLoad(myResources, myController);
+			return new GUISaveLoad(myResources, myController);
 		}
 //		case("ImageVBox"):{
 //			return new GUIObjectImageVBox(myResources, myController, canvas, nodeType);
 //		}
 		case("PenSettings"):{
-			return new GUIObjectPenSettings(myResources, canvas);
+			return new GUIPenSettings(myResources, canvas);
 		}
 		case("ImageComboBox"):{
-			return new GUIObjectComboBoxImages(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
+			return new GUIComboBoxImages(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
 		}
 		case("LanguageComboBox"):{
-			return new GUIObjectComboBoxLanguages(canvas, myResources, myController, 
+			return new GUIComboBoxLanguages(canvas, myResources, myController, 
 					myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
 		}
 		case("VariablesTableView"):{
-			return new GUIObjectTableView(myResources, myController.getCommandDictionary(), myController.getVariableDictionary());
+			return new GUITableView(myResources, myController.getCommandDictionary(), myController.getVariableDictionary());
 		}
 		case("UserCommandsComboBox"):{
-			return new GUIObjectComboBoxUserHist(canvas, myResources, myController,
+			return new GUIComboBoxUserHist(canvas, myResources, myController,
 					myResources.getString(nodeTypeKey + "PromptText"), myCommandLine, myController.getCommandDictionary());
 		}
 		case("PreviousCommandsComboBox"):{
-			return new GUIObjectComboBoxCommandHist(canvas, myResources, myController, 
+			return new GUIComboBoxCommandHist(canvas, myResources, myController, 
 					myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
 		}
 		case("HelpTabPane"):{
@@ -64,19 +64,19 @@ public class GUIObjectFactory {
 //			return new GUIObjectColorPickerBackground(canvas,myResources.getString(nodeTypeKey+"Label"));
 //		}
 		case("BackgroundColorPalette"):{
-			return new GUIObjectComboBoxColorB(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
+			return new GUIComboBoxColorB(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
 		}
 		case("PenColorPalette"):{
-			return new GUIObjectComboBoxColorP(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
+			return new GUIComboBoxColorP(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
 		}
 		case("ColorPickerPen"):{
-			return new GUIObjectColorPickerPen(canvas,myResources.getString(nodeTypeKey+"Label"));
+			return new GUIColorPickerPen(canvas,myResources.getString(nodeTypeKey+"Label"));
 		}
 		case("TurtleState"):{
-			return new GUIObjectTurtleState(myResources,
-					new GUIObjectLabeled(myResources, myResources.getString("TurtleLocation")),
-					new GUIObjectLabeled(myResources, myResources.getString("TurtleHeading")), 
-					new GUIObjectLabeled(myResources, myResources.getString("TurtlePen")),
+			return new GUITurtleState(myResources,
+					new GUILabeled(myResources, myResources.getString("TurtleLocation")),
+					new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
+					new GUILabeled(myResources, myResources.getString("TurtlePen")),
 					canvas);
 		}
 		}

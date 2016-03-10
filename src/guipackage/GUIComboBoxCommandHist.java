@@ -11,9 +11,9 @@ import controller.Controller;
  *
  */
 
-public class GUIObjectComboBoxCommandHist extends GUIObjectComboBox {
+public class GUIComboBoxCommandHist extends GUIComboBox {
 	
-	public GUIObjectComboBoxCommandHist(GUICanvas canvas, ResourceBundle myResources, Controller myController,
+	public GUIComboBoxCommandHist(GUICanvas canvas, ResourceBundle myResources, Controller myController,
 			String promptText, GUICommandLine myCommandLine) {
 		super(canvas, myResources, myController, promptText, myCommandLine);
 	}
