@@ -33,16 +33,19 @@ public class TabMainScreen {
 	private IGUIObject saveLoad;
 
     private Stage myStage;
+    private String tabText;
+    
+    public TabMainScreen(String tabText){
+    	this.tabText = tabText;
+    }
 	
 	/**
 	 * Initializes Tab with all necessary components.
 	 */
 	private void initializeTab(Stage stage) {
-		//create Turtle and Observer
         myStage = stage;
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		canvas = new GUICanvas(myResources);
-//		canvas.init();
 		myController = new Controller(canvas, myStage);
 		commandLine = new GUICommandLine(myController, myResources, this);
 	}
@@ -64,6 +67,7 @@ public class TabMainScreen {
 		setTopPane();
 		
 		myRootTab.setContent(myMainScreen);
+		myRootTab.setText(tabText);
 		return myRootTab;
 	}
 	

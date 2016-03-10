@@ -132,11 +132,14 @@ public class GUICanvas implements Observer{
 	 * Resets Canvas. Deletes all of the Turtle's trails and changes the Turtle back to default.
 	 */
 	public void resetCanvas(Turtle turtle) {
-		myTurtles.get(turtle).get(0).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-		myTurtles.get(turtle).get(1).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-		drawTurtle(turtle);
-		root.getChildren().remove(turtle.getImageView());
-		turtle.doneResetting();
+		for(Turtle key: myTurtles.keySet()){
+			List<GraphicsContext> lst = myTurtles.get(key);
+			lst.get(0).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+			lst.get(1).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+			drawTurtle(key);
+			root.getChildren().remove(key.getImageView());
+			key.doneResetting();
+		}
 	}
 	
 	/**
