@@ -103,7 +103,7 @@ public abstract class TurtleNode extends Node {
     
     protected void activateTurtles(double maxID) {
     	List<Double> IDs = new ArrayList<>();
-    	for (double i = 0; i <= maxID; i = i+1) {
+    	for (double i = 1; i <= maxID; i = i+1) {
     		IDs.add(i);
     	}
     	activateTurtlesInList(IDs);

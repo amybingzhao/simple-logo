@@ -77,7 +77,7 @@ public class Controller {
     }
 
     public void addInitialTurtle() {
-        Turtle turtle = new Turtle(0);
+        Turtle turtle = new Turtle(1);
         turtle.setActive(true);
         turtle.addObserver(myCanvas);
         turtle.updateObservers();

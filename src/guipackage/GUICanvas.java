@@ -157,9 +157,9 @@ public class GUICanvas implements Observer{
 		coordinates[0] = x;
 		coordinates[1] = y;
 		coordinates[2] = direction;
-		if (turtleParameters.size() < turtle.getID() + 1)
-			turtleParameters.add((int) turtle.getID(), coordinates);
-		else turtleParameters.set((int) turtle.getID(), coordinates);
+		if (turtleParameters.size() <= turtle.getID())
+			turtleParameters.add((int) turtle.getID() - 1, coordinates);
+		else turtleParameters.set((int) turtle.getID() - 1, coordinates);
 	}
 	
 	private void addTurtleToMap(Turtle turtle){
@@ -184,9 +184,9 @@ public class GUICanvas implements Observer{
 	 */
 	public void clearPreviousTurtle(Turtle turtle) {
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
-		double myOldX = turtleParameters.get((int) turtle.getID())[0].doubleValue();
-		double myOldY = turtleParameters.get((int) turtle.getID())[1].doubleValue();
-		double myOldDirection = turtleParameters.get((int) turtle.getID())[2].doubleValue();
+		double myOldX = turtleParameters.get((int) turtle.getID() - 1)[0].doubleValue();
+		double myOldY = turtleParameters.get((int) turtle.getID() - 1)[1].doubleValue();
+		double myOldDirection = turtleParameters.get((int) turtle.getID() - 1)[2].doubleValue();
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(myOldDirection, myOldX + TURTLE_SIZE/2, myOldY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
@@ -206,7 +206,7 @@ public class GUICanvas implements Observer{
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 		if (turtle.showing()) {
-			Double[] parameters = turtleParameters.get((int) turtle.getID());
+			Double[] parameters = turtleParameters.get((int) turtle.getID() - 1);
 			ImageView currentImageView = turtle.getImageView();
 			root.getChildren().remove(currentImageView);
 //			myAnimation.makeAnimation(currentImageView, parameters[0], parameters[1], myX, myY, turtle.getDirection() - parameters[2]);
