@@ -7,8 +7,8 @@ public class GetShape extends DisplayNode {
 	private static final String SHAPE = "GetShape ";
 	
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
 		return getCanvas().getTurtleShapeIndex();
 	}
 	

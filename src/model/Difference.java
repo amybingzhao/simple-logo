@@ -15,7 +15,7 @@ public class Difference extends Node {
      * @param varDict
      */
     @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         return applyChildren(getChildren().get(START).interpret(commandDict, varDict) * 2, commandDict, varDict);
     }
     
