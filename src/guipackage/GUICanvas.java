@@ -190,8 +190,8 @@ public class GUICanvas implements Observer{
 	public void drawTurtle(Turtle turtle) {
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		GraphicsContext gcDrawing = myTurtles.get(turtle).get(1);
-		double myX = turtle.getCurX() + CANVAS_WIDTH/2 - TURTLE_SIZE/2;
-		double myY = -(turtle.getCurY() - CANVAS_HEIGHT/2 + TURTLE_SIZE/2);
+		double myX = checkBounds(turtle.getCurX() + CANVAS_WIDTH/2 - TURTLE_SIZE/2);
+		double myY = checkBounds(-(turtle.getCurY() - CANVAS_HEIGHT/2 + TURTLE_SIZE/2));
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
@@ -201,7 +201,6 @@ public class GUICanvas implements Observer{
 			currentImageView.setX(myX);
 			currentImageView.setY(myY);
 			root.getChildren().add(currentImageView);
-			gc.drawImage(turtleShape, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
 		}
 		if (!turtle.isPenUp()) {
 			drawLine(gcDrawing, myX, myY);
@@ -214,8 +213,8 @@ public class GUICanvas implements Observer{
 		ImageView turtleImage = new ImageView(turtleShape);
 		turtleImage.setFitHeight(TURTLE_SIZE);
 		turtleImage.setPreserveRatio(true);
-		turtleImage.setX(x);
-		turtleImage.setY(y);
+		turtleImage.setX(checkBounds(x));
+		turtleImage.setY(checkBounds(y));
 		turtleImage.setOnMouseEntered(event -> {
 				 canvasRight.showTurtleState(turtle);
 		});
@@ -223,6 +222,13 @@ public class GUICanvas implements Observer{
 			turtle.setActive(!turtle.isActive());
 		});
 		return turtleImage;
+	}
+	
+	private double checkBounds(double coordinate) {
+		if (coordinate > 500 || coordinate < 0) {
+			coordinate = coordinate - 500 * Math.floor(coordinate / 500);
+		}
+		return coordinate;
 	}
 	
 	private void drawLine(GraphicsContext gcDrawing, double myX, double myY) {
