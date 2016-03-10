@@ -3,7 +3,11 @@ package guipackage;
 import javafx.scene.control.Tab;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-
+/**
+ * Returns help tab for given URL. 
+ * @author AnnieTang
+ *
+ */
 public class GUITab {
 	private String webURL;
 	private String tabText;

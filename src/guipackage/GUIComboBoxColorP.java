@@ -14,14 +14,8 @@ import javafx.scene.paint.Color;
 public class GUIComboBoxColorP extends GUIComboBoxColor {
 
 	public GUIComboBoxColorP(GUICanvas canvas, ResourceBundle myResources,
-			String promptText) {
-		super(canvas, myResources, promptText);
-	}
-
-	@Override
-	protected void fillDefaultPalette() {
-		List<String> defaultColors = new ArrayList<String>(Arrays.asList(myResources.getString("DefaultPenColors").split(",")));
-		palette = defaultColors;
+			String promptText, String paletteSource) {
+		super(canvas, myResources, promptText, paletteSource);
 	}
 
 	@Override

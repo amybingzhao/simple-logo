@@ -6,7 +6,11 @@ import java.util.ResourceBundle;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import model.Turtle;
-
+/**
+ * Returns vbox of GUI objects to be placed to the right of the canvas.
+ * @author AnnieTang
+ *
+ */
 public class GUICanvasRight implements IGUIObject {
 	GUIComboBoxColor myBackgroundPalette;
 	GUIComboBoxColor myPenPalette;

@@ -10,7 +10,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import javafx.util.Callback;
 
 /**
  * Abstract class to implement different types of ComboBoxes. 
@@ -33,6 +37,7 @@ public abstract class GUIComboBox implements IGUIObject {
 	protected GUICommandLine myCommandLine;
 	protected Button comboButton;
 	protected GUICanvas canvas;
+	protected String paletteSource;
 	
 	public GUIComboBox(GUICanvas canvas, ResourceBundle myResources, Controller myController, String promptText, GUICommandLine myCommandLine) {
 		this.canvas = canvas;
@@ -46,6 +51,13 @@ public abstract class GUIComboBox implements IGUIObject {
 		this.canvas = canvas;
 		this.myResources = myResources;
 		this.promptText = promptText;
+	}
+	
+	public GUIComboBox(GUICanvas canvas, ResourceBundle myResources, String promptText, String paletteSource){
+		this.canvas = canvas;
+		this.myResources = myResources;
+		this.promptText = promptText;
+		this.paletteSource = paletteSource;
 	}
 	
 	/**
@@ -77,7 +89,33 @@ public abstract class GUIComboBox implements IGUIObject {
 	/**
 	 * Sets cell factory of ComboBox.
 	 */
-	protected abstract void setCellFactory();
+	protected void setCellFactory(){
+		comboBox.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+		     @Override public ListCell<String> call(ListView<String> p) {
+		         return new ListCell<String>() {		             
+		             @Override protected void updateItem(String item, boolean empty) {
+		                 super.updateItem(item, empty);
+		                 if (item == null || empty) {
+		                     setGraphic(null);
+		                 } else {
+		                	 HBox hbox = new HBox();
+		                	 Label lbl = new Label(item);
+		                     hbox.getChildren().addAll(getNodeForBox(item), lbl);
+		                     setGraphic(hbox);
+		                 }
+		            }
+		       };
+		   }
+		});
+	}
+	
+	/**
+	 * Sets icon for ComboBox
+	 * @param item
+	 * @return
+	 */
+	protected abstract Node getNodeForBox(String item);
+	
 	/**
 	 * Updates Node whenever new information or data is available.
 	 */

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import controller.Controller;
+import javafx.scene.Node;
 
 /**
  * Create ComboBox to hold interpretable languages. 
@@ -32,6 +33,11 @@ public class GUIComboBoxLanguages extends GUIComboBox {
 
 	@Override
 	protected void setCellFactory() {
+	}
+
+	@Override
+	protected Node getNodeForBox(String item) {
+		return null;
 	}
 
 }

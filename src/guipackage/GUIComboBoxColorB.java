@@ -1,8 +1,5 @@
 package guipackage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.scene.paint.Color;
@@ -14,14 +11,8 @@ import javafx.scene.paint.Color;
 public class GUIComboBoxColorB extends GUIComboBoxColor {	
 	
 	public GUIComboBoxColorB(GUICanvas canvas, ResourceBundle myResources,
-			String promptText) {
-		super(canvas, myResources, promptText);
-	}
-
-	@Override
-	protected void fillDefaultPalette() {
-		List<String> defaultColors = new ArrayList<String>(Arrays.asList(myResources.getString("DefaultBackgroundColors").split(",")));
-		palette = defaultColors;
+			String promptText, String paletteSource) {
+		super(canvas, myResources, promptText, paletteSource);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import controller.Controller;
+import javafx.scene.Node;
 import javafx.scene.control.TextInputDialog;
 import model.Command;
 import model.CommandDictionary;
@@ -62,5 +63,10 @@ public class GUIComboBoxUserHist extends GUIComboBox {
 
 	@Override
 	protected void setCellFactory() {
+	}
+
+	@Override
+	protected Node getNodeForBox(String item) {
+		return null;
 	}
 }

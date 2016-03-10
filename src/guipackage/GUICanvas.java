@@ -25,7 +25,7 @@ import model.Turtle;
  * Returns one Node that contains the Turtle Canvas and two ColorPicker objects
  * (for background and pen)
  *
- * @author AnnieTang
+ * @author AnnieTang, David Yang
  */
 
 public class GUICanvas implements Observer{
