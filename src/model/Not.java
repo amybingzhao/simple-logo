@@ -12,13 +12,12 @@ public class Not extends BooleanNode {
 
     /**
      * If the given expression is false, return 1; else return 0.
-     *
-     * @param commandDict
+     *  @param commandDict
      * @param varDict
      */
     @Override
-   	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
-   			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
    		return getChildren().get(EXPR).interpret(commandDict, varDict) == 0;
    	}
 

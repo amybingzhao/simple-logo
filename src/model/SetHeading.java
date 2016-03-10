@@ -13,13 +13,13 @@ public class SetHeading extends TurtleNode {
 	private static final int DEGREES = 0;
 	
 	/**
-	 * Turns the turtle towards to the given degrees, where 0 is facing north and rotating CW is positive.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * Turns the turtle towards to the given degrees, where 0 is facing north and rotating CW is positive.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		List<IFunctions> children = getChildren();
 		double curDir = turtle.getDirection();
 		turtle.setDirection(children.get(DEGREES).interpret(commandDict, varDict));

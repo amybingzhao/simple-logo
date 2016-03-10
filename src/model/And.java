@@ -14,12 +14,12 @@ public class And extends BooleanNode {
      *
      * @param commandDict
      * @param varDict
-     * @throws IndexOutOfBoundsException 
+     * @throws IndexOutOfBoundsException
      * @throws NullPointerException 
      * @throws ClassNotFoundException 
      */
-	@Override
-	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    @Override
+	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
 		return countNumTrue(commandDict, varDict) == getChildren().size();
 	}
 

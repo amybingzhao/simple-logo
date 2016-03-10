@@ -60,24 +60,13 @@ public abstract class Node implements IFunctions {
 
     
     
-    public List<Double> createListFromCommandList(CommandList commandList, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-    	List<Double> list = new ArrayList<Double>();
+    public List<Double> createListFromCommandList(CommandList commandList, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+        List<Double> list = new ArrayList<Double>();
     	for (int i = 0; i < commandList.getChildren().size(); i++) {
     		list.add(commandList.getChildren().get(i).interpret(commandDict, varDict));
     	}
     	return list;
     }
-/*
-    protected double applyToActiveTurtles(Class nodeClass, String methodName, Node obj) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-    	double ret = 0;
-    	Class noparams[] = {};
-		Method method = nodeClass.getDeclaredMethod(methodName, noparams);
-    	for (int i = 0; i < myActiveTurtles.size(); i++) {
-    		myActiveTurtle = myActiveTurtles.get(i);
-    		method.invoke(obj, null);
-    	}
-    	return ret;
-    }*/
     
     protected double applyChildren(double val, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
 		for (int i = 0; i < myChildren.size(); i++) {
@@ -86,8 +75,8 @@ public abstract class Node implements IFunctions {
 		return val;
     }
     
-    protected double addChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
-    	return val + child.interpret(commandDict, varDict);
+    protected double addChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+        return val + child.interpret(commandDict, varDict);
     }
     
     protected String childrenToString() {

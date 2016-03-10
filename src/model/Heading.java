@@ -10,13 +10,13 @@ public class Heading extends TurtleNode {
 	private static final String HEADING = "Heading ";
 
 	/**
-	 * Returns the turtle's current direction.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * Returns the turtle's current direction.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		return turtle.getDirection();
 	}
 
