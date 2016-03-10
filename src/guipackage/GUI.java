@@ -21,6 +21,8 @@ public class GUI implements IGUI {
 	private static final String GUI_RESOURCE = "GUI";
 	private static final String HELP_TAB_TEXT1 = "Basic Help";
 	private static final String HELP_TAB_TEXT2 = "Extended Help";
+	private static final double TABS_OFFSET = 5.0;
+	private static final double NEWTAB_OFFSET = 50.0;
 	private Scene myScene;
 	private AnchorPane myRoot;
 	private TabPane myTabs;
@@ -55,8 +57,8 @@ public class GUI implements IGUI {
 		myTabs.getTabs().addAll(mainScreenTab, helpTab1, helpTab2);
 		mainScreenTab.setText("Main Workspace");	
 		
-		AnchorPane.setTopAnchor(myTabs, 5.0);
-		AnchorPane.setTopAnchor(newTab, 50.0);
+		AnchorPane.setTopAnchor(myTabs, TABS_OFFSET);
+		AnchorPane.setTopAnchor(newTab, NEWTAB_OFFSET);
 		
 		myRoot.getChildren().addAll(myTabs, newTab);
 	
