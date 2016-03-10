@@ -51,12 +51,11 @@ public class GUI implements IGUI {
 		Button newTab = new Button("Create New Tab");
 		newTab.setOnAction(event -> createNewTab());
 
-		Tab mainScreenTab = new TabMainScreen().getTab(myStage);
-		Tab helpTab1 = createHelpTab(myResources.getString("BasicCommands"),HELP_TAB_TEXT1);
-		Tab helpTab2 = createHelpTab(myResources.getString("ExtendedCommands"),HELP_TAB_TEXT2);
+		TabMainScreen mainScreen = new TabMainScreen(myResources.getString("Workspace") + (myTabs.getTabs().size()));
+		GUITab help1 = new GUITab(myResources.getString("BasicCommands"), HELP_TAB_TEXT1);
+		GUITab help2 = new GUITab(myResources.getString("ExtendedCommands"), HELP_TAB_TEXT2);
 		
-		myTabs.getTabs().addAll(mainScreenTab, helpTab1, helpTab2);
-		mainScreenTab.setText(MAIN_WORKSPACE);
+		myTabs.getTabs().addAll(mainScreen.getTab(myStage), help1.getTab(), help2.getTab());
 		
 		AnchorPane.setTopAnchor(myTabs, TABS_OFFSET);
 		AnchorPane.setTopAnchor(newTab, NEWTAB_OFFSET);
@@ -67,24 +66,9 @@ public class GUI implements IGUI {
 		return myScene;
 	}
 	
-	/**
-	 * Creates Help Tab for the user.
-	 * @return Tab with all the commands
-	 */
-	private Tab createHelpTab(String webURL, String tabText) {
-		Tab helpTab = new Tab();
-		WebView browser = new WebView();
-		WebEngine webEngine = browser.getEngine();
-		webEngine.load(webURL);
-		helpTab.setContent(browser);
-		helpTab.setText(tabText);
-		return helpTab;
-	}
-	
 	private void createNewTab() {
-		Tab tab = new TabMainScreen().getTab(myStage);
+		Tab tab = new TabMainScreen(myResources.getString("Workspace") + (myTabs.getTabs().size()-1)).getTab(myStage);
         myTabs.getTabs().add(tab);
-		tab.setText("Workspace " + (myTabs.getTabs().size() - 1));
         myTabs.getSelectionModel().select(tab);
 	}
 	
