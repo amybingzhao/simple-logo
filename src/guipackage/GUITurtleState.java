@@ -5,7 +5,11 @@ import java.util.ResourceBundle;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import model.Turtle;
-
+/**
+ * Shows current state of Turtle that is being hovered over. 
+ * @author AnnieTang
+ *
+ */
 public class GUITurtleState implements IGUIObject {
 	private GUILabeled locationLabel;
 	private GUILabeled headingLabel;
