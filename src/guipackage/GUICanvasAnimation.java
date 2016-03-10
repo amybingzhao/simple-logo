@@ -11,21 +11,34 @@ import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 public class GUICanvasAnimation {
-	private Animation myAnimation;
+	private SequentialTransition myAnimation;
 	
-	protected void makeAnimation (Node agent, double oldX, double oldY, double x, double y, double direction) {
+	public GUICanvasAnimation() {
+		myAnimation = new SequentialTransition();
+	}
+	
+	protected void addAnimation(Node agent, double oldX, double oldY,
+			double x, double y, double direction) {
+		System.out.println(oldY);
 		Path path = new Path();
 		path.getElements().addAll(new MoveTo(oldX, oldY), new LineTo(x, y));
+		if (oldX != x || oldY != y) {
+			PathTransition pt = new PathTransition(Duration.millis(1000), path, agent);
+			myAnimation.getChildren().add(pt);
+		}
 		
-		PathTransition pt = new PathTransition(Duration.millis(4000), path, agent);
-		
-		RotateTransition rt = new RotateTransition(Duration.seconds(3));
-		rt.setByAngle((int) direction);
-		
-		myAnimation = new SequentialTransition(agent, pt, rt);
+		if (direction != 0) {
+			RotateTransition rt = new RotateTransition(Duration.seconds(3), agent);
+			rt.setByAngle((int) direction);
+			myAnimation.getChildren().add(rt);
+		}
 	}
 	
 	protected void play() {
 		myAnimation.play();
+	}
+	
+	protected void pause() {
+		myAnimation.pause();
 	}
 }

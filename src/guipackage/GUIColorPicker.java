@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 
 abstract class GUIColorPicker implements IGUIObject {
 	private static final int VBOX_PADDING = 5;
-	protected String pickerLabel;
+	private String pickerLabel;
 	protected GUICanvas canvas;
 	
 	public GUIColorPicker(GUICanvas canvas, String pickerLabel) {

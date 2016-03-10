@@ -153,10 +153,7 @@ public class GUICanvas implements Observer{
 	 * Keeps track of the old coordinates after updating the Turtle.
 	 */
 	public void setOldCoordinates(Turtle turtle, double x, double y, double direction) {
-		Double[] coordinates = new Double[3];
-		coordinates[0] = x;
-		coordinates[1] = y;
-		coordinates[2] = direction;
+		Double[] coordinates = {x, y, direction};
 		if (turtleParameters.size() < turtle.getID() + 1)
 			turtleParameters.add((int) turtle.getID(), coordinates);
 		else turtleParameters.set((int) turtle.getID(), coordinates);
@@ -208,12 +205,15 @@ public class GUICanvas implements Observer{
 		if (turtle.showing()) {
 			Double[] parameters = turtleParameters.get((int) turtle.getID());
 			ImageView currentImageView = turtle.getImageView();
-			root.getChildren().remove(currentImageView);
-//			myAnimation.makeAnimation(currentImageView, parameters[0], parameters[1], myX, myY, turtle.getDirection() - parameters[2]);
-			currentImageView.setX(myX);
-			currentImageView.setY(myY);
-			root.getChildren().add(currentImageView);
-//			myAnimation.play();
+			myAnimation.pause();
+//			root.getChildren().remove(currentImageView);
+			myAnimation.addAnimation(currentImageView, normalizeCoordinates(parameters[0]), 
+					normalizeCoordinates(parameters[1]), normalizeCoordinates(myX),
+					normalizeCoordinates(myY), turtle.getDirection() - parameters[2]);
+//			currentImageView.setX(myX);
+//			currentImageView.setY(myY);
+//			root.getChildren().add(currentImageView);
+			myAnimation.play();
 		}
 		if (!turtle.isPenUp()) {
 			drawLine(gcDrawing, myX, myY);
@@ -367,6 +367,10 @@ public class GUICanvas implements Observer{
 		Color col = Color.rgb((int) Double.parseDouble(rgb[0]),
 				(int) Double.parseDouble(rgb[1]), (int) Double.parseDouble(rgb[2]));
 		return col;
+	}
+	
+	private double normalizeCoordinates(double coordinate) {
+		return coordinate + TURTLE_SIZE/2;
 	}
 	
 	/**
