@@ -288,7 +288,7 @@ public class GUICanvas implements Observer{
 	}
 	
 	public void clearStamps() {
-		clearGraphicsContext(gc);
+		clearGraphicsContext(gcStamps);
 	}
 	
 	public void clearGraphicsContext(GraphicsContext gc) {
