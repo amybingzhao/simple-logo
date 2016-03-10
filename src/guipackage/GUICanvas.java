@@ -280,7 +280,8 @@ public class GUICanvas implements Observer{
 	public double drawStamps() {
 		for (Turtle turtle: myTurtles.keySet()) {
 			if (turtle.isActive()) {
-				gcStamps.drawImage(turtleShape, turtle.getCurX() + STARTING_X, -turtle.getCurY() + STARTING_Y, TURTLE_SIZE, TURTLE_SIZE);
+				gcStamps.drawImage(turtleShape, checkBounds(turtle.getCurX() + STARTING_X),
+						checkBounds(-turtle.getCurY() + STARTING_Y), TURTLE_SIZE, TURTLE_SIZE);
 			}
 		}
 		return myTurtleShapeIndex;
