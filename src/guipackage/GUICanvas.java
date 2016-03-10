@@ -39,6 +39,8 @@ public class GUICanvas implements Observer{
 	private static final int STARTING_X = CANVAS_WIDTH/2 - TURTLE_SIZE/2;
 	private static final int STARTING_Y = CANVAS_HEIGHT/2 - TURTLE_SIZE/2;	
 	private static final String DEFAULT_TURTLE = "turtle_outline.png";
+	private static final int PEN_SCALE = 100;
+	private static final int DEFAULT = 0;
 	private Canvas canvasBackground;
 	private Pane myCanvasRoot;
 	private GraphicsContext gcBackground;
@@ -65,8 +67,8 @@ public class GUICanvas implements Observer{
 	public GUICanvas(ResourceBundle myResources) {
 		this.myResources = myResources;
 		this.canvasRight = (GUICanvasRight) canvasRight;
-		myTurtles = new HashMap<Turtle, List<GraphicsContext>>();
-		turtleParameters = new ArrayList<Double[]>();
+		myTurtles = new HashMap<>();
+		turtleParameters = new ArrayList<>();
 		canvasBackground = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		gcBackground = canvasBackground.getGraphicsContext2D();
 		gcBackground.setFill(DEFAULT_BACKGROUND_COLOR);
@@ -78,6 +80,7 @@ public class GUICanvas implements Observer{
 		hbox = new HBox();
 		root = new Group(myCanvasRoot);
 	}
+
 	
 	/**
 	 * Creates the Canvas Node to be displayed.
@@ -106,6 +109,7 @@ public class GUICanvas implements Observer{
 	public void setDefaultShapeProperties(){
 		turtleShapeName = DEFAULT_TURTLE;
 		myTurtleShapeIndex = getPaletteIndex(turtleShapeName, myImagePalette);
+		myBackgroundRGB = DEFAULT_BACKGROUND_COLOR.getRed() + " " + DEFAULT_BACKGROUND_COLOR.getGreen() + " " + DEFAULT_BACKGROUND_COLOR.getBlue();
 	}
 	
 	/**
@@ -159,7 +163,7 @@ public class GUICanvas implements Observer{
 					Arrays.asList(turtleCanvas.getGraphicsContext2D(), drawingGC)));
 			int myX = STARTING_X;
 			int myY = STARTING_Y;
-			setOldCoordinates(turtle, myX, myY, 0);
+			setOldCoordinates(turtle, myX, myY, DEFAULT);
 			turtle.setImageView(createTurtleImageView(turtle, myX, myY));
 			root.getChildren().add(turtle.getImageView());
 		}
@@ -222,7 +226,7 @@ public class GUICanvas implements Observer{
 	}
 	
 	private void drawLine(GraphicsContext gcDrawing, double myX, double myY) {
-		int scaledPen = (int) myPen.getMyPenSize() * 100;
+		int scaledPen = (int) myPen.getMyPenSize() * PEN_SCALE;
 		switch (myPen.getMyPenType()){
 			case SOLID_LINE: {
 				drawOval(gcDrawing, myX, myY);
@@ -231,7 +235,7 @@ public class GUICanvas implements Observer{
 				if (penCounter < scaledPen / 2) {
 					drawOval(gcDrawing, myX, myY);
 				} else if (penCounter == scaledPen) {
-					penCounter = 0;
+					penCounter = DEFAULT;
 				}
 				penCounter++;
 			}
@@ -240,7 +244,7 @@ public class GUICanvas implements Observer{
 					drawOval(gcDrawing, myX, myY);
 				} else if (penCounter == scaledPen) {
 					drawOval(gcDrawing, myX, myY);
-					penCounter = 0;
+					penCounter = DEFAULT;
 				}
 				penCounter++;
 			}
@@ -267,7 +271,7 @@ public class GUICanvas implements Observer{
 	}
 	
 	public void clearGraphicsContext(GraphicsContext gc) {
-		gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		gc.clearRect(DEFAULT, DEFAULT, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
 
 	/**
@@ -323,8 +327,8 @@ public class GUICanvas implements Observer{
 	 */
 	public void setBackgroundColor(int index) {
 		String[] rgb = myBackgroundPalette.get(index).split(" ");
-		Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
-		setBackgroundColor(col, myBackgroundPalette.get(index));
+		setBackgroundColor(Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2])), 
+				myBackgroundPalette.get(index));
 	}
 	
 	/**
@@ -334,7 +338,7 @@ public class GUICanvas implements Observer{
 	public void setBackgroundColor(Color col, String backgroundColorName){
 		myBackgroundRGB = backgroundColorName;
 		gcBackground.setFill(col);
-		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		gcBackground.fillRect(DEFAULT, DEFAULT, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
 	
 	public Color stringToColor(String colorString) {

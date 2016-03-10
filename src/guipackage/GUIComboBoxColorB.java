@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import controller.Controller;
 import javafx.scene.paint.Color;
 /**
  * Editable color palette for background color.

@@ -3,12 +3,10 @@ package guipackage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import controller.Controller;
 import javafx.scene.control.TextInputDialog;
 import model.Command;
 import model.CommandDictionary;
-import model.VariableDictionary;
 
 /**
  * Create ComboBox to hold history of user defined commands.

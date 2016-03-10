@@ -29,7 +29,6 @@ public class GUITableView implements IGUIObject {
     private TableView<TableVariable> myTableView;
     private TableColumn<TableVariable, String> myVariableColumn;
     private TableColumn<TableVariable, Double> myValueColumn;
-    private CommandDictionary commandDict;
     private VariableDictionary varDict;
 	private static final double PADDING_TOP = 0;
 	private static final double PADDING_RIGHT = 0;
@@ -38,9 +37,8 @@ public class GUITableView implements IGUIObject {
 
     private ObservableList<TableVariable> data = FXCollections.observableArrayList();
 
-    public GUITableView(ResourceBundle r, CommandDictionary myComDict, VariableDictionary myVarDict) {
+    public GUITableView(ResourceBundle r, VariableDictionary myVarDict) {
         myResources = r;
-        commandDict = myComDict;
         varDict = myVarDict;
     }
 
@@ -49,7 +47,7 @@ public class GUITableView implements IGUIObject {
      */
     @Override
     public Node createNode() {
-        myTableView = new TableView<TableVariable>();
+        myTableView = new TableView<>();
         myTableView.setEditable(true);
         
         createVariableColumn();

@@ -57,7 +57,7 @@ public abstract class GUIComboBox implements IGUIObject {
 		options = FXCollections.observableArrayList(
 			        optionsList()
 			    );
-		comboBox = new ComboBox<String>(options);
+		comboBox = new ComboBox<>(options);
 		comboBox.setVisibleRowCount(VISIBLE_ROW_COUNT);
 		comboBox.setPrefWidth(COMBOBOX_WIDTH);
 		comboBox.setPromptText(promptText);
