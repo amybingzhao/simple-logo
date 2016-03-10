@@ -13,7 +13,7 @@ public class Define extends Node {
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         List<IFunctions> children = getChildren();
         Command myCommand = (Command) children.get(0);
-        commandDict.setNumArguments(myCommand.toString(), (int) children.get(1).interpret(commandDict, varDict));
+        commandDict.createPlaceholderCommand(myCommand.toString(), (int) children.get(1).interpret(commandDict, varDict));
         return 1;
     }
 
