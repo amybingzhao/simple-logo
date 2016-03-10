@@ -156,26 +156,13 @@ public class GUICanvas implements Observer{
 			Canvas drawingCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 			GraphicsContext drawingGC = drawingCanvas.getGraphicsContext2D();
 			drawingGC.setFill(myPen.getMyPenColor());
-			int myX = STARTING_X;
-			int myY = STARTING_Y;
-			turtle.setImageView(getTurtleImageView(myX,myY));
-			setOldCoordinates(turtle, myX, myY, 0);
 			myCanvasRoot.getChildren().addAll(turtleCanvas, drawingCanvas);
 			myTurtles.put(turtle, new ArrayList<GraphicsContext>(
 					Arrays.asList(turtleCanvas.getGraphicsContext2D(), drawingGC)));
+			int myX = STARTING_X;
+			int myY = STARTING_Y;
+			setOldCoordinates(turtle, myX, myY, 0);
 		}
-	}
-	
-	private ImageView getTurtleImageView(int x, int y){
-		ImageView turtleImage = new ImageView(turtleShape);
-		turtleImage.setFitHeight(TURTLE_SIZE);
-		turtleImage.setPreserveRatio(true);
-		turtleImage.setX(x);
-		turtleImage.setY(y);
-		turtleImage.setOnMouseEntered(event -> {
-			 System.out.println("turtle yay");
-		});
-		return turtleImage;
 	}
 	
 	/**
@@ -205,12 +192,18 @@ public class GUICanvas implements Observer{
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 		if (turtle.showing()) {
-			ImageView turtleImage = turtle.getImageView();
-			if(!root.getChildren().contains(turtleImage)){
-				root.getChildren().add(turtleImage);
-			}
+			ImageView turtleImage = new ImageView(turtleShape);
+			turtleImage.setFitHeight(TURTLE_SIZE);
+			turtleImage.setPreserveRatio(true);
 			turtleImage.setX(myX);
 			turtleImage.setY(myY);
+			turtle.setImageView(turtleImage);
+			root.getChildren().add(turtleImage);
+			
+			turtleImage.setOnMouseEntered(event -> {
+					 System.out.println(turtle.getID());
+			});
+			
 			gc.drawImage(turtleShape, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
 		}
 		if (!turtle.isPenUp()) {
