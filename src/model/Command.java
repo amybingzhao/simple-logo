@@ -45,6 +45,8 @@ public class Command extends Node {
 
         if (!commandDict.contains(myName)) {
             throw new ClassNotFoundException();
+        } else if (myProcedure == null){
+            myProcedure = commandDict.getCommandFor(myName).getProcedure();
         } else {
             VariableDictionary scopedDictionary = varDict.createClone();
         	parameters = commandDict.getCommandFor(myName).getParams();
@@ -59,8 +61,8 @@ public class Command extends Node {
         	for (IFunctions myNode : myProcedure) {
         		myNode.interpret(commandDict, scopedDictionary);
         	}
-        	return 0;
         }
+        return 0;
     }
 
     /**
