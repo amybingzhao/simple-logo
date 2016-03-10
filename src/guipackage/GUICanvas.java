@@ -75,18 +75,12 @@ public class GUICanvas implements Observer{
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		turtleShape = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
 		myPen = new GUICanvasPen();
-		setPaletteProperties();
+		penCounter = 0;
 		myCanvasRoot = new Pane(canvasBackground);
 		hbox = new HBox();
 		root = new Group(myCanvasRoot);
 	}
-	
-	public void setPaletteProperties(){
-		 penCounter = 0;
-		 myBackgroundRGB = DEFAULT_BACKGROUND_COLOR.getRed() + " " + DEFAULT_BACKGROUND_COLOR.getGreen() + " " + DEFAULT_BACKGROUND_COLOR.getBlue();
-		 turtleShapeName = DEFAULT_TURTLE;
-		 myTurtleShapeIndex = getPaletteIndex(turtleShapeName, myImagePalette);
-	}
+
 	
 	/**
 	 * Creates the Canvas Node to be displayed.
@@ -115,6 +109,7 @@ public class GUICanvas implements Observer{
 	public void setDefaultShapeProperties(){
 		turtleShapeName = DEFAULT_TURTLE;
 		myTurtleShapeIndex = getPaletteIndex(turtleShapeName, myImagePalette);
+		myBackgroundRGB = DEFAULT_BACKGROUND_COLOR.getRed() + " " + DEFAULT_BACKGROUND_COLOR.getGreen() + " " + DEFAULT_BACKGROUND_COLOR.getBlue();
 	}
 	
 	/**
