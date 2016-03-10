@@ -11,13 +11,13 @@ public class Equal extends BooleanNode {
 	private static final int EXPR = 0;
 	
 	/**
-	 * Returns 1 if the two expressions are equal; 0 otherwise.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * Returns 1 if the two expressions are equal; 0 otherwise.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		return countNumEqual(getChildren().get(EXPR).interpret(commandDict, varDict), commandDict, varDict) == getChildren().size();
 	}
 	

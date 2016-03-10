@@ -10,13 +10,13 @@ public class YCoordinate extends TurtleNode {
 	private static final String YCOR = "YCoordinate ";
 
 	/**
-	 * Returns the turtle's current y-coordinate.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * Returns the turtle's current y-coordinate.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		return turtle.getCurY();
 	}
 

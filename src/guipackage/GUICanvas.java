@@ -42,6 +42,7 @@ public class GUICanvas implements Observer{
 	private Canvas canvasBackground;
 	private Pane myCanvasRoot;
 	private GraphicsContext gcBackground;
+	private GraphicsContext gcStamps;
 	private GraphicsContext gc;
 	private Map<Turtle, List<GraphicsContext>> myTurtles;
 	private List<Double[]> turtleParameters;	
@@ -70,19 +71,12 @@ public class GUICanvas implements Observer{
 		gcBackground = canvasBackground.getGraphicsContext2D();
 		gcBackground.setFill(DEFAULT_BACKGROUND_COLOR);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-		placeDefaultTurtle();
+		turtleShape = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
 		myPen = new GUICanvasPen();
 		penCounter = 0;
 		myCanvasRoot = new Pane(canvasBackground);
 		hbox = new HBox();
 		root = new Group(myCanvasRoot);
-	}
-	
-	/**
-	 * Places single default turtle on canvas.
-	 */
-	private void placeDefaultTurtle(){
-		turtleShape = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
 	}
 	
 	/**
@@ -93,7 +87,10 @@ public class GUICanvas implements Observer{
 		hbox.getChildren().add(root);
 		return hbox;
 	}
-	
+	/**
+	 * Adds object to position right of the canvas.
+	 * @param rightOfCanvas
+	 */
 	public void addObjectToRight(GUICanvasRight rightOfCanvas){
 		canvasRight = rightOfCanvas;
 		myPenPalette = canvasRight.getPenPalette();
@@ -126,6 +123,7 @@ public class GUICanvas implements Observer{
 		}
 	}
 	
+
 	/**
 	 * Resets Canvas. Deletes all of the Turtle's trails and changes the Turtle back to default.
 	 */
@@ -248,13 +246,30 @@ public class GUICanvas implements Observer{
 			}
 		}
 	}
-	
+
+
 	private void drawOval(GraphicsContext gcDrawing, double myX, double myY) {
 		long penSize = Math.round(myPen.getMyPenSize());
 		gcDrawing.fillOval(myX + TURTLE_SIZE/2 - penSize/2, myY + TURTLE_SIZE/2 - penSize/2,
 				penSize, penSize);
 	}
 	
+	public void drawStamps() {
+		for (Turtle turtle: myTurtles.keySet()) {
+			if (turtle.isActive()) {
+				gcStamps.drawImage(turtleShape, turtle.getCurX(), turtle.getCurY());
+			}
+		}
+	}
+	
+	public void clearStamps() {
+		clearGraphicsContext(gc);
+	}
+	
+	public void clearGraphicsContext(GraphicsContext gc) {
+		gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+	}
+
 	/**
 	 * @return GraphicsContext for Canvas Background
 	 */
@@ -303,14 +318,6 @@ public class GUICanvas implements Observer{
 		}
 	}
 	/**
-	 * returns current pen color as space separated RGB
-	 * @return
-	 */
-	public GUICanvasPen getPen() {
-		return myPen;
-	}
-	
-	/**
 	 * Sets background color based on index within palette.
 	 * @param index of color in palette.
 	 */
@@ -328,6 +335,13 @@ public class GUICanvas implements Observer{
 		myBackgroundRGB = backgroundColorName;
 		gcBackground.setFill(col);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+	}
+	
+	public Color stringToColor(String colorString) {
+		String[] rgb = colorString.split(" ");
+		Color col = Color.rgb((int) Double.parseDouble(rgb[0]),
+				(int) Double.parseDouble(rgb[1]), (int) Double.parseDouble(rgb[2]));
+		return col;
 	}
 	
 	/**
@@ -372,6 +386,12 @@ public class GUICanvas implements Observer{
 			else drawTurtle(key);
 		}
 	}
+	
+	public Image stringToImage(String imageString) {
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageString));
+		return image;
+	}
+	
 	/**
 	 * returns current turtle image filename
 	 * @return
@@ -387,6 +407,14 @@ public class GUICanvas implements Observer{
 		return myTurtleShapeIndex;
 	}
 	
+	/**
+	 * returns current pen color as space separated RGB
+	 * @return
+	 */
+	public GUICanvasPen getPen() {
+		return myPen;
+	}
+
 	public void setPenStatus(String penUp) {
 		for (Turtle t: myTurtles.keySet()) {
 			if (t.isActive() && penUp.equals(myResources.getString("PenUp"))) {

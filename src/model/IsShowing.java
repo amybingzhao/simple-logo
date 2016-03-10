@@ -12,13 +12,13 @@ public class IsShowing extends TurtleNode {
 	private static final String SHOWINGP = "IsShowing ";
 
 	/**
-	 * Returns 1 if the turtle is showing on the canvas; 0 otherwise.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * Returns 1 if the turtle is showing on the canvas; 0 otherwise.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		Predicate<Turtle> show = t -> t.showing();
 		return checkTurtleProperty(show, turtle);
 	}

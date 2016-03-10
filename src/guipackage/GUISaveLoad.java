@@ -8,17 +8,20 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 public class GUISaveLoad implements IGUIObject {
 	private ResourceBundle myResources;
 	private Controller myController;
+	private GUICanvas myCanvas;
 	
 	private static final int PADDING = 10;
-	
-	public GUISaveLoad(ResourceBundle r, Controller c) {
+
+	public GUISaveLoad(ResourceBundle r, Controller c, GUICanvas canvas) {
 		myResources = r;
 		myController = c;
+		myCanvas = canvas;
 	}
 	
 	@Override
@@ -30,7 +33,7 @@ public class GUISaveLoad implements IGUIObject {
 		saveButton.setOnAction(e -> myController.save(promptForFileName(true)));
 		
 		Button loadButton = new Button(myResources.getString("Load"));
-		loadButton.setOnAction(e -> myController.loadXML(promptForFileName(false)));
+		loadButton.setOnAction(e -> loadCanvasProperties());
 		
 		myBox.getChildren().addAll(saveButton, loadButton);
 		
@@ -53,6 +56,16 @@ public class GUISaveLoad implements IGUIObject {
             fileName = myFileChooser.showOpenDialog(myController.getStage());
         }
         return fileName;
+    }
+    
+    private void loadCanvasProperties() {
+    	myController.loadXML(promptForFileName(false));
+    	myCanvas.setBackgroundColor(myCanvas.stringToColor(myController.getXMLParser().getBackgroundColor()),
+    			myController.getXMLParser().getBackgroundColor());
+    	myCanvas.setPenColor(myCanvas.stringToColor(myController.getXMLParser().getPenColor()),
+    			myController.getXMLParser().getPenColor());
+    	myCanvas.setTurtleShape(myCanvas.stringToImage(myController.getXMLParser().getTurtleImage()),
+    			myController.getXMLParser().getTurtleImage());
     }
 
 	@Override

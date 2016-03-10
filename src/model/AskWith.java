@@ -8,8 +8,8 @@ public class AskWith extends TurtleNode {
 	private static final String ASKWITH = "AskWith ";
 	private static final int CONDITION = 0;
 	@Override
-	public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
 		List<Double> activeTurtleIDs = checkTurtlesForCondition(getTurtles(), commandDict, varDict);		
 		return applyToTurtlesInList(activeTurtleIDs, getActiveTurtles(), commandDict, varDict);
 
@@ -31,8 +31,8 @@ public class AskWith extends TurtleNode {
 	}
 
 	@Override
-	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
 		return 0;
 	}
 	

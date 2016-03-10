@@ -10,13 +10,13 @@ public class ShowTurtle extends TurtleNode {
 	private static final String SHOWTURTLE = "ShowTurtle ";
 	
 	/**
-	 * Sets the turtle to visible and returns 1.
-	 * @param commandDict
-	 * @param varDict
-	 */
+     * Sets the turtle to visible and returns 1.
+     * @param commandDict
+     * @param varDict
+     */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		turtle.setVisible(true);
 		return 1;
 	}

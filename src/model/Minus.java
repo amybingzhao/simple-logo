@@ -11,12 +11,10 @@ public class Minus extends Node {
 
     /**
      * Negates the given expression.
-     *
-     * @param commandDict
-     * @param varDict
-     */
+     *  @param commandDict
+     * @param varDict*/
     @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         return -1 * getChildren().get(EXPR).interpret(commandDict, varDict);
     }
 

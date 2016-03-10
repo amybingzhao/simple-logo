@@ -18,7 +18,7 @@ public class Power extends Node {
      * @param varDict
      */
     @Override
-    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         List<IFunctions> children = getChildren();
         return Math.pow(children.get(BASE).interpret(commandDict, varDict), children.get(EXPONENT).interpret(commandDict, varDict));
     }

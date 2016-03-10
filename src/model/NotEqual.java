@@ -12,13 +12,12 @@ public class NotEqual extends BooleanNode {
 
     /**
      * If the expr1 and expr2 are not equal, returns 1; else 0.
-     *
-     * @param commandDict
+     *  @param commandDict
      * @param varDict
      */
     @Override
-	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+    protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
+            throws ClassNotFoundException {
 		return countNumEqual(getChildren().get(EXPR).interpret(commandDict, varDict), commandDict, varDict) < getChildren().size();
 	}
 

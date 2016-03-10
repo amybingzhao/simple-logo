@@ -11,13 +11,12 @@ public class Left extends TurtleNode {
 
     /**
      * Rotates the turtle CCW the given number of degrees.
-     *
-     * @param commandDict
+     *  @param commandDict
      * @param varDict
      */
-	@Override
+    @Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
-			throws ClassNotFoundException, NullPointerException, IndexOutOfBoundsException {
+            throws ClassNotFoundException {
 		turtle.setDirection(turtle.getDirection() - applyChildren(0, commandDict, varDict));
 		return applyChildren(0, commandDict, varDict);
 	}
