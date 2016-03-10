@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
-public class GUIObjectPenSettings implements IGUIObject{
+public class GUIPenSettings implements IGUIObject{
 	private static final int PADDING = 10;
 	private static final int VBOX_SPACING = 10;
 	private ResourceBundle myResources;
@@ -30,7 +30,7 @@ public class GUIObjectPenSettings implements IGUIObject{
 	private TextField penThickness;
 	private Button setThickness;
 	
-	public GUIObjectPenSettings(ResourceBundle r, GUICanvas c) {
+	public GUIPenSettings(ResourceBundle r, GUICanvas c) {
 		myResources = r;
 		myCanvas = c;
 		myPen = myCanvas.getPen();
@@ -45,6 +45,10 @@ public class GUIObjectPenSettings implements IGUIObject{
 
 		myBox.getChildren().addAll(upDownLabel, penUp, penDown, penTypeLabel, penSolid, 
 				penDashed, penDotted, penLabel, penThickness, setThickness);
+		
+		for(Node child: myBox.getChildren()){
+			child.setStyle(myResources.getString("FontStyle"));
+		}
 		
 		myBox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		return myBox;

@@ -19,7 +19,8 @@ import model.Turtle;
  */
 public class GUI implements IGUI {
 	private static final String GUI_RESOURCE = "GUI";
-	private static final String HELP_TAB_TEXT = "Help";
+	private static final String HELP_TAB_TEXT1 = "Basic Help";
+	private static final String HELP_TAB_TEXT2 = "Extended Help";
 	private Scene myScene;
 	private AnchorPane myRoot;
 	private TabPane myTabs;
@@ -48,9 +49,10 @@ public class GUI implements IGUI {
 		newTab.setOnAction(event -> createNewTab());
 
 		Tab mainScreenTab = new TabMainScreen().getTab(myStage);
-		Tab helpTab = createHelpTab();
+		Tab helpTab1 = createHelpTab(myResources.getString("BasicCommands"),HELP_TAB_TEXT1);
+		Tab helpTab2 = createHelpTab(myResources.getString("ExtendedCommands"),HELP_TAB_TEXT2);
 		
-		myTabs.getTabs().addAll(mainScreenTab, helpTab);
+		myTabs.getTabs().addAll(mainScreenTab, helpTab1, helpTab2);
 		mainScreenTab.setText("Main Workspace");	
 		
 		AnchorPane.setTopAnchor(myTabs, 5.0);
@@ -66,13 +68,13 @@ public class GUI implements IGUI {
 	 * Creates Help Tab for the user.
 	 * @return Tab with all the commands
 	 */
-	private Tab createHelpTab() {
+	private Tab createHelpTab(String webURL, String tabText) {
 		Tab helpTab = new Tab();
 		WebView browser = new WebView();
 		WebEngine webEngine = browser.getEngine();
-		webEngine.load(myResources.getString("HelpTabURL"));
+		webEngine.load(webURL);
 		helpTab.setContent(browser);
-		helpTab.setText(HELP_TAB_TEXT);
+		helpTab.setText(tabText);
 		return helpTab;
 	}
 	

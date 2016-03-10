@@ -8,13 +8,14 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
@@ -38,36 +39,32 @@ public class GUICanvas implements Observer{
 	private static final int STARTING_X = CANVAS_WIDTH/2 - TURTLE_SIZE/2;
 	private static final int STARTING_Y = CANVAS_HEIGHT/2 - TURTLE_SIZE/2;	
 	private static final String DEFAULT_TURTLE = "turtle_outline.png";
-	private double myOldDirection;
 	private Canvas canvasBackground;
 	private Pane myCanvasRoot;
 	private GraphicsContext gcBackground;
 	private GraphicsContext gcStamps;
 	private GraphicsContext gc;
 	private Map<Turtle, List<GraphicsContext>> myTurtles;
-	private List<Double[]> turtleParameters;
-	private GUIObjectComboBoxColor myBackgroundPalette;
-	private GUIObjectComboBoxColor myPenPalette;
-	private GUIObjectComboBoxImages myImagePalette;
+	private List<Double[]> turtleParameters;	
+	
 	private ResourceBundle myResources;
 	private GUICanvasPen myPen;
-	
 	private int penCounter;
 	private String myBackgroundRGB;
-	
 	private Image turtleShape;
 	private String turtleShapeName;
 	private int myTurtleShapeIndex;
+	private List<String> myPenPalette;
+	private List<String> myBackgroundPalette;
+	private List<String> myImagePalette;
 	
-	private HBox hboxToReturn;
-	private VBox vboxToRight;
+	private HBox hbox;
+	private GUICanvasRight canvasRight;
+	private Group root;
 	
 	public GUICanvas(ResourceBundle myResources) {
 		this.myResources = myResources;
-	}
-	
-	
-	public void init() {
+		this.canvasRight = (GUICanvasRight) canvasRight;
 		myTurtles = new HashMap<Turtle, List<GraphicsContext>>();
 		turtleParameters = new ArrayList<Double[]>();
 		canvasBackground = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -76,11 +73,10 @@ public class GUICanvas implements Observer{
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		turtleShape = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
 		myPen = new GUICanvasPen();
-		myPen.init();
 		penCounter = 0;
 		myCanvasRoot = new Pane(canvasBackground);
-		hboxToReturn = new HBox();
-		vboxToRight = new VBox();
+		hbox = new HBox();
+		root = new Group(myCanvasRoot);
 	}
 	
 	/**
@@ -88,43 +84,28 @@ public class GUICanvas implements Observer{
 	 * @return Canvas Node
 	 */
 	public Node createNode() {
-		myBackgroundPalette = new GUIObjectComboBoxColorB(this, myResources, myResources.getString("BackgroundColorPalettePromptText"));
-		myPenPalette = new GUIObjectComboBoxColorP(this, myResources, myResources.getString("PenColorPalettePromptText"));
-		myImagePalette = new GUIObjectComboBoxImages(this, myResources, myResources.getString("ImageComboBoxPromptText"));
-		vboxToRight.getChildren().addAll(myBackgroundPalette.createNode(), myPenPalette.createNode(), myImagePalette.createNode());
-		hboxToReturn.getChildren().addAll(myCanvasRoot, vboxToRight);
-		setPaletteProperties();
-		return hboxToReturn;
+		hbox.getChildren().add(root);
+		return hbox;
 	}
+	/**
+	 * Adds object to position right of the canvas.
+	 * @param rightOfCanvas
+	 */
+	public void addObjectToRight(GUICanvasRight rightOfCanvas){
+		canvasRight = rightOfCanvas;
+		myPenPalette = canvasRight.getPenPalette();
+		myBackgroundPalette = canvasRight.getBackgroundPalette();
+		myImagePalette = canvasRight.getImagePalette();
+		setDefaultShapeProperties();
+		hbox.getChildren().add(canvasRight.createNode());
+	}
+	
 	/**
 	 * Sets default palette properties, such as pen settings, background color, and turtle image.
 	 */
-	public void setPaletteProperties(){
+	public void setDefaultShapeProperties(){
 		turtleShapeName = DEFAULT_TURTLE;
 		myTurtleShapeIndex = getPaletteIndex(turtleShapeName, myImagePalette);
-	}
-	
-	/**
-	 * returns index in given palette of given turtle image name.
-	 * @param String imageName
-	 * @param GUIObjectComboBox palette
-	 */
-	public int getPaletteIndex(String imageName, GUIObjectComboBox whichPalette){
-		List<String> palette = whichPalette.getOptionsList();
-		for(String turtleName: palette){
-			if(turtleName.equals(imageName)){
-				return palette.indexOf(turtleName);
-			}
-		}
-		return -1;
-	}
-	
-	/**
-	 * Add given node to the right side of the canvas.
-	 * @param nodeToAdd
-	 */
-	public void addNodeToCanvasRight(Node nodeToAdd){
-		vboxToRight.getChildren().add(nodeToAdd);
 	}
 	
 	/**
@@ -136,10 +117,35 @@ public class GUICanvas implements Observer{
 		if (turtle.shouldReset()) {
 			resetCanvas(turtle);
 		} else {
-			addTurtleToMap(turtle);
+			addTurtleToMap(turtle); 
 			clearPreviousTurtle(turtle);
 			drawTurtle(turtle);
 		}
+	}
+	
+
+	/**
+	 * Resets Canvas. Deletes all of the Turtle's trails and changes the Turtle back to default.
+	 */
+	public void resetCanvas(Turtle turtle) {
+		myTurtles.get(turtle).get(0).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		myTurtles.get(turtle).get(1).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		drawTurtle(turtle);
+		root.getChildren().remove(turtle.getImageView());
+		turtle.doneResetting();
+	}
+	
+	/**
+	 * Keeps track of the old coordinates after updating the Turtle.
+	 */
+	public void setOldCoordinates(Turtle turtle, double x, double y, double direction) {
+		Double[] coordinates = new Double[3];
+		coordinates[0] = x;
+		coordinates[1] = y;
+		coordinates[2] = direction;
+		if (turtleParameters.size() < turtle.getID() + 1)
+			turtleParameters.add((int) turtle.getID(), coordinates);
+		else turtleParameters.set((int) turtle.getID(), coordinates);
 	}
 	
 	private void addTurtleToMap(Turtle turtle){
@@ -154,6 +160,8 @@ public class GUICanvas implements Observer{
 			int myX = STARTING_X;
 			int myY = STARTING_Y;
 			setOldCoordinates(turtle, myX, myY, 0);
+			turtle.setImageView(createTurtleImageView(turtle, myX, myY));
+			root.getChildren().add(turtle.getImageView());
 		}
 	}
 	
@@ -183,7 +191,12 @@ public class GUICanvas implements Observer{
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-		if (turtle.showing()) {
+		if (turtle.showing()) {			
+			ImageView currentImageView = turtle.getImageView();
+			root.getChildren().remove(currentImageView);
+			currentImageView.setX(myX);
+			currentImageView.setY(myY);
+			root.getChildren().add(currentImageView);
 			gc.drawImage(turtleShape, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
 		}
 		if (!turtle.isPenUp()) {
@@ -191,6 +204,21 @@ public class GUICanvas implements Observer{
 		}
 		gc.restore();
 		setOldCoordinates(turtle, myX, myY, turtle.getDirection());
+	}
+	
+	private ImageView createTurtleImageView(Turtle turtle, double x, double y){
+		ImageView turtleImage = new ImageView(turtleShape);
+		turtleImage.setFitHeight(TURTLE_SIZE);
+		turtleImage.setPreserveRatio(true);
+		turtleImage.setX(x);
+		turtleImage.setY(y);
+		turtleImage.setOnMouseEntered(event -> {
+				 canvasRight.showTurtleState(turtle);
+		});
+		turtleImage.setOnMouseClicked(event -> {
+			turtle.setActive(!turtle.isActive());
+		});
+		return turtleImage;
 	}
 	
 	private void drawLine(GraphicsContext gcDrawing, double myX, double myY) {
@@ -225,28 +253,6 @@ public class GUICanvas implements Observer{
 		gcDrawing.fillOval(myX + TURTLE_SIZE/2 - penSize/2, myY + TURTLE_SIZE/2 - penSize/2,
 				penSize, penSize);
 	}
-
-
-	/**
-	 * Keeps track of the old coordinates after updating the Turtle.
-	 */
-	public void setOldCoordinates(Turtle turtle, double x, double y, double direction) {
-		Double[] coordinates = {x, y, direction};
-		if (turtleParameters.size() < turtle.getID() + 1)
-			turtleParameters.add((int) turtle.getID(), coordinates);
-		else turtleParameters.set((int) turtle.getID(), coordinates);
-	}
-
-
-	/**
-	 * Resets Canvas. Deletes all of the Turtle's trails and changes the Turtle back to default.
-	 */
-	public void resetCanvas(Turtle turtle) {
-		clearGraphicsContext(myTurtles.get(turtle).get(0));
-		clearGraphicsContext(myTurtles.get(turtle).get(1));
-		drawTurtle(turtle);
-		turtle.doneResetting();
-	}
 	
 	public void drawStamps() {
 		for (Turtle turtle: myTurtles.keySet()) {
@@ -269,7 +275,21 @@ public class GUICanvas implements Observer{
 	 */
 	public GraphicsContext getBackgroundGraphicsContext(){
 		return gcBackground;
-	}
+	}	
+	
+	/**
+	 * returns index in given palette of given turtle image name.
+	 * @param String imageName
+	 * @param GUIComboBox palette
+	 */
+	public int getPaletteIndex(String imageName, List<String> whichPalette){
+		for(String turtleName:whichPalette){
+			if(turtleName.equals(imageName)){
+				return whichPalette.indexOf(turtleName);
+			}
+		}
+		return -1;
+	}	
 	
 	/**
 	 * Sets Pen color based on index within palette.
@@ -277,9 +297,9 @@ public class GUICanvas implements Observer{
 	 */
 	public void setPenColor(int index){
 		myPen.setMyPenColorIndex(index);
-		List<String> currentPalette = myPenPalette.getOptionsList();
-		Color col = stringToColor(currentPalette.get(index));
-		setPenColor(col, currentPalette.get(index));
+		String[] rgb = myPenPalette.get(index).split(" ");
+		Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
+		setPenColor(col, myPenPalette.get(index));
 	}
 	
 	/**
@@ -302,9 +322,9 @@ public class GUICanvas implements Observer{
 	 * @param index of color in palette.
 	 */
 	public void setBackgroundColor(int index) {
-		List<String> currentPalette = myBackgroundPalette.getOptionsList();
-		Color col = stringToColor(currentPalette.get(index));
-		setBackgroundColor(col, currentPalette.get(index));
+		String[] rgb = myBackgroundPalette.get(index).split(" ");
+		Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
+		setBackgroundColor(col, myBackgroundPalette.get(index));
 	}
 	
 	/**
@@ -337,8 +357,7 @@ public class GUICanvas implements Observer{
 	 * @param index of color in palette that user wants to change
 	 */
 	public void setPalette(String RGB, int index){
-		myBackgroundPalette.changePalette(RGB, index);
-		myPenPalette.changePalette(RGB, index);
+		canvasRight.changePalettes(RGB, index);
 	}
 	
 	/**
@@ -347,9 +366,9 @@ public class GUICanvas implements Observer{
 	 */
 	public void setTurtleShape(int index) {
 		myTurtleShapeIndex = index;
-		List<String> currentPalette = myImagePalette.getPalette();
-		Image image = stringToImage(currentPalette.get(index));
-		setTurtleShape(image, currentPalette.get(index));
+		String imageName = myImagePalette.get(index);
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
+		setTurtleShape(image, imageName);
 	}
 	
 	/**
@@ -404,10 +423,6 @@ public class GUICanvas implements Observer{
 				t.setPenUp(false);
 			}
 		}
-	}
-	
-	public String getHeadingString(){
-		return "" + myOldDirection%360;
 	}
 	
 	public int getWidth(){

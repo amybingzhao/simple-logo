@@ -20,13 +20,13 @@ import javafx.util.Callback;
  * @author AnnieTang
  *
  */
-public class GUIObjectComboBoxImages extends GUIObjectComboBox {
+public class GUIComboBoxImages extends GUIComboBox {
 	private Map<String, ImageView> imageMap;
 	private List<String> imageNames;
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private static final String IMAGE_RESOURCE = "Images";
 	
-	public GUIObjectComboBoxImages(GUICanvas canvas, ResourceBundle myResources, String promptText) {
+	public GUIComboBoxImages(GUICanvas canvas, ResourceBundle myResources, String promptText) {
 		super(canvas, myResources, promptText);
 		imageMap = new HashMap<String, ImageView>();
 		imageNames = new ArrayList<String>();

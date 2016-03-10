@@ -8,9 +8,9 @@ import javafx.scene.paint.Color;
  * @author AnnieTang
  *
  */
-public class GUIObjectColorPickerBackground extends GUIObjectColorPicker {
+public class GUIColorPickerBackground extends GUIColorPicker {
 
-	public GUIObjectColorPickerBackground(GUICanvas canvas, String pickerLabel) {
+	public GUIColorPickerBackground(GUICanvas canvas, String pickerLabel) {
 		super(canvas, pickerLabel);
 	}
 

@@ -4,20 +4,21 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import controller.Controller;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
-public class GUIObjectSaveLoad implements IGUIObject {
+public class GUISaveLoad implements IGUIObject {
 	private ResourceBundle myResources;
 	private Controller myController;
 	private GUICanvas myCanvas;
 	
-	private static final int VBOX_PADDING = 10;
-	
-	public GUIObjectSaveLoad(ResourceBundle r, Controller c, GUICanvas canvas) {
+	private static final int PADDING = 10;
+
+	public GUISaveLoad(ResourceBundle r, Controller c, GUICanvas canvas) {
 		myResources = r;
 		myController = c;
 		myCanvas = canvas;
@@ -25,7 +26,8 @@ public class GUIObjectSaveLoad implements IGUIObject {
 	
 	@Override
 	public Node createNode() {
-		VBox myBox = new VBox(VBOX_PADDING);
+		VBox myBox = new VBox(PADDING);
+		myBox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		
 		Button saveButton = new Button(myResources.getString("Save"));
 		saveButton.setOnAction(e -> myController.save(promptForFileName(true)));

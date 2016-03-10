@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 import guipackage.GUIAlert;
 import guipackage.GUICanvas;
-import guipackage.GUIObjectLabeled;
+import guipackage.GUILabeled;
 import javafx.stage.Stage;
 import model.CommandDictionary;
 import model.IFunctions;
@@ -43,7 +43,7 @@ public class Controller {
     private XMLParser myXMLParser;
     private List<Turtle> myTurtles;
     private List<String> myCommandHistory;
-    private GUIObjectLabeled myOutput;
+    private GUILabeled myOutput;
     private GUIAlert myAlert;
     private GUICanvas myCanvas;
     private ResourceBundle myGUIResource;
@@ -66,7 +66,7 @@ public class Controller {
         myTurtles = new ArrayList<>();
         addInitialTurtle();
         myGUIResource = ResourceBundle.getBundle(GUI_RESOURCE);
-        myOutput = new GUIObjectLabeled(myGUIResource, "Output");
+        myOutput = new GUILabeled(myGUIResource, "Output");
         myAlert = new GUIAlert();
         commandDict = new CommandDictionary();
         varDict = new VariableDictionary();
@@ -182,7 +182,7 @@ public class Controller {
         return myCommandHistory;
     }
 
-    public GUIObjectLabeled getGUIOutput() {
+    public GUILabeled getGUIOutput() {
         return myOutput;
     }
 

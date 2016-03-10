@@ -13,7 +13,7 @@ public class GUICanvasPen {
 	private String myPenRGB;
 	private Color myPenColor;
 	
-	protected void init() {
+	public GUICanvasPen(){
 		myPenSize = DEFAULT_PEN_SIZE;
 		myPenType = SOLID_LINE;
 		myPenColorIndex = 0;

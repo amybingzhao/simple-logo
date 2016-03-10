@@ -13,12 +13,12 @@ import javafx.scene.layout.HBox;
  * @author AnnieTang
  *
  */
-public class GUIObjectLabeled implements IGUIObject {
-	private static final int PADDING = 10;
+public class GUILabeled implements IGUIObject {
+	private static final int PADDING = 5;
 	private Labeled outputLabel;
 	private Labeled outputText;
 	
-	public GUIObjectLabeled(ResourceBundle myResources, String labelText) {
+	public GUILabeled(ResourceBundle myResources, String labelText) {
 		outputLabel = new Label(labelText);
 		outputText = new Label();
 		
