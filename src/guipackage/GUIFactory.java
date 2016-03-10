@@ -33,12 +33,6 @@ public class GUIFactory {
 		case("SaveLoadButtons"):{
 			return new GUISaveLoad(myResources, myController);
 		}
-//		case("ImageVBox"):{
-//			return new GUIObjectImageVBox(myResources, myController, canvas, nodeType);
-//		}
-		case("PenSettings"):{
-			return new GUIPenSettings(myResources, canvas);
-		}
 		case("ImageComboBox"):{
 			return new GUIComboBoxImages(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
 		}
@@ -60,24 +54,17 @@ public class GUIFactory {
 		case("HelpTabPane"):{
 			return null;
 		}
-//		case("ColorPickerBackground"):{
-//			return new GUIObjectColorPickerBackground(canvas,myResources.getString(nodeTypeKey+"Label"));
-//		}
-		case("BackgroundColorPalette"):{
-			return new GUIComboBoxColorB(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
-		}
-		case("PenColorPalette"):{
-			return new GUIComboBoxColorP(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
-		}
-		case("ColorPickerPen"):{
-			return new GUIColorPickerPen(canvas,myResources.getString(nodeTypeKey+"Label"));
-		}
 		case("TurtleState"):{
 			return new GUITurtleState(myResources,
 					new GUILabeled(myResources, myResources.getString("TurtleLocation")),
 					new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
 					new GUILabeled(myResources, myResources.getString("TurtlePen")),
 					canvas);
+		}
+		case("CanvasRight"):{
+			return new GUICanvasRight(myResources, new GUIComboBoxColorB(canvas, myResources, myResources.getString("BackgroundColorPalettePromptText")),
+			new GUIComboBoxColorP(canvas, myResources, myResources.getString("PenColorPalettePromptText")),new GUIComboBoxImages(canvas, myResources, myResources.getString("ImageComboBoxPromptText")),
+			new GUIPenSettings(myResources, canvas));
 		}
 		}
 		return null;

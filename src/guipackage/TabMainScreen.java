@@ -27,17 +27,13 @@ public class TabMainScreen {
 	private GUICommandLine commandLine;
 	private Controller myController;
 	private GUILabeled myOutput;
+	private GUICanvasRight rightOfCanvas;
 	
-	//GUIObject instance variables
 	private IGUIObject userCommands;
 	private IGUIObject previousCommands;
 	private IGUIObject variables;
 	private IGUIObject languageSelector;
-	private IGUIObject imageInput;
-	private GUIComboBoxColor backgroundColorPalette;
-	private GUIComboBoxColor penColorPalette;
 	private IGUIObject turtleState;
-	private IGUIObject penSettings;
 	private IGUIObject saveLoad;
 
     private Stage myStage;
@@ -50,7 +46,7 @@ public class TabMainScreen {
         myStage = stage;
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
 		canvas = new GUICanvas(myResources);
-		canvas.init();
+//		canvas.init();
 		myController = new Controller(canvas, myStage);
 		commandLine = new GUICommandLine(myController, myResources, this);
 	}
@@ -80,8 +76,8 @@ public class TabMainScreen {
 	 */
 	private void setCenterPane() {
 		Node canvasNode = canvas.createNode();
-		penSettings = myFactory.createNewGUIObject("PenSettings");
-		canvas.addNodeToCanvasRight(penSettings.createNode());
+		rightOfCanvas = (GUICanvasRight) myFactory.createNewGUIObject("CanvasRight");
+		canvas.addObjectToRight(rightOfCanvas);
 		myMainScreen.setCenter(canvasNode);
 	}
 
