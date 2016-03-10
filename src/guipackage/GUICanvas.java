@@ -8,6 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,7 +16,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
@@ -59,7 +59,7 @@ public class GUICanvas implements Observer{
 	
 	private HBox hbox;
 	private GUICanvasRight canvasRight;
-	private StackPane root;
+	private Group root;
 	
 	public GUICanvas(ResourceBundle myResources) {
 		this.myResources = myResources;
@@ -70,12 +70,19 @@ public class GUICanvas implements Observer{
 		gcBackground = canvasBackground.getGraphicsContext2D();
 		gcBackground.setFill(DEFAULT_BACKGROUND_COLOR);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-		addDefaultTurtles();
+		placeDefaultTurtle();
 		myPen = new GUICanvasPen();
 		penCounter = 0;
 		myCanvasRoot = new Pane(canvasBackground);
 		hbox = new HBox();
-		root = new StackPane();
+		root = new Group(myCanvasRoot);
+	}
+	
+	/**
+	 * Places single default turtle on canvas.
+	 */
+	private void placeDefaultTurtle(){
+		turtleShape = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
 	}
 	
 	/**
@@ -83,7 +90,6 @@ public class GUICanvas implements Observer{
 	 * @return Canvas Node
 	 */
 	public Node createNode() {
-		root.getChildren().add(myCanvasRoot);
 		hbox.getChildren().add(root);
 		return hbox;
 	}
@@ -114,7 +120,7 @@ public class GUICanvas implements Observer{
 		if (turtle.shouldReset()) {
 			resetCanvas(turtle);
 		} else {
-			addTurtleToMap(turtle);
+			addTurtleToMap(turtle); 
 			clearPreviousTurtle(turtle);
 			drawTurtle(turtle);
 		}
@@ -127,6 +133,7 @@ public class GUICanvas implements Observer{
 		myTurtles.get(turtle).get(0).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		myTurtles.get(turtle).get(1).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		drawTurtle(turtle);
+		root.getChildren().remove(turtle.getImageView());
 		turtle.doneResetting();
 	}
 	
@@ -143,15 +150,10 @@ public class GUICanvas implements Observer{
 		else turtleParameters.set((int) turtle.getID(), coordinates);
 	}
 	
-	/**
-	 * Places single default turtle on canvas.
-	 */
-	private void addDefaultTurtles(){
-		turtleShape = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
-	}
-	
 	private void addTurtleToMap(Turtle turtle){
+		System.out.println("1");
 		if (!myTurtles.containsKey(turtle)) {
+			System.out.println("2");
 			Canvas turtleCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 			Canvas drawingCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 			GraphicsContext drawingGC = drawingCanvas.getGraphicsContext2D();
@@ -162,6 +164,8 @@ public class GUICanvas implements Observer{
 			int myX = STARTING_X;
 			int myY = STARTING_Y;
 			setOldCoordinates(turtle, myX, myY, 0);
+			turtle.setImageView(createTurtleImageView(turtle, myX, myY));
+			root.getChildren().add(turtle.getImageView());
 		}
 	}
 	
@@ -169,6 +173,7 @@ public class GUICanvas implements Observer{
 	 * Clears the previous instance of the Turtle on the canvas.
 	 */
 	public void clearPreviousTurtle(Turtle turtle) {
+		System.out.println("3");
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		double myOldX = turtleParameters.get((int) turtle.getID())[0].doubleValue();
 		double myOldY = turtleParameters.get((int) turtle.getID())[1].doubleValue();
@@ -184,6 +189,7 @@ public class GUICanvas implements Observer{
 	 * Draws the turtle onto canvas based on turtle's X and Y values and its direction.
 	 */
 	public void drawTurtle(Turtle turtle) {
+		System.out.println("4");
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		GraphicsContext gcDrawing = myTurtles.get(turtle).get(1);
 		double myX = turtle.getCurX() + CANVAS_WIDTH/2 - TURTLE_SIZE/2;
@@ -191,19 +197,13 @@ public class GUICanvas implements Observer{
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-		if (turtle.showing()) {
-			ImageView turtleImage = new ImageView(turtleShape);
-			turtleImage.setFitHeight(TURTLE_SIZE);
-			turtleImage.setPreserveRatio(true);
-			turtleImage.setX(myX);
-			turtleImage.setY(myY);
-			turtle.setImageView(turtleImage);
-			root.getChildren().add(turtleImage);
-			
-			turtleImage.setOnMouseEntered(event -> {
-					 System.out.println(turtle.getID());
-			});
-			
+		if (turtle.showing()) {			
+			System.out.println("5");
+			ImageView currentImageView = turtle.getImageView();
+			root.getChildren().remove(currentImageView);
+			currentImageView.setX(myX);
+			currentImageView.setY(myY);
+			root.getChildren().add(currentImageView);
 			gc.drawImage(turtleShape, myX, myY, TURTLE_SIZE, TURTLE_SIZE);
 		}
 		if (!turtle.isPenUp()) {
@@ -211,6 +211,21 @@ public class GUICanvas implements Observer{
 		}
 		gc.restore();
 		setOldCoordinates(turtle, myX, myY, turtle.getDirection());
+	}
+	
+	private ImageView createTurtleImageView(Turtle turtle, double x, double y){
+		ImageView turtleImage = new ImageView(turtleShape);
+		turtleImage.setFitHeight(TURTLE_SIZE);
+		turtleImage.setPreserveRatio(true);
+		turtleImage.setX(x);
+		turtleImage.setY(y);
+		turtleImage.setOnMouseEntered(event -> {
+				 System.out.println("yay");
+		});
+		turtleImage.setOnMouseClicked(event -> {
+			turtle.setActive(!turtle.isActive());
+		});
+		return turtleImage;
 	}
 	
 	private void drawLine(GraphicsContext gcDrawing, double myX, double myY) {
@@ -250,9 +265,7 @@ public class GUICanvas implements Observer{
 	 */
 	public GraphicsContext getBackgroundGraphicsContext(){
 		return gcBackground;
-	}
-	
-//-------------------------------------------------------------------------------------------------------------------------	
+	}	
 	
 	/**
 	 * returns index in given palette of given turtle image name.
