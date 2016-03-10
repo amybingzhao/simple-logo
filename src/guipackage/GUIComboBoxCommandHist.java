@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import controller.Controller;
+import javafx.scene.Node;
 
 /**
  * Create a ComboBox to hold command history. 
@@ -32,6 +33,11 @@ public class GUIComboBoxCommandHist extends GUIComboBox {
 
 	@Override
 	protected void setCellFactory() {		
+	}
+
+	@Override
+	protected Node getNodeForBox(String item) {
+		return null;
 	}
 	
 }
