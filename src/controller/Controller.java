@@ -263,7 +263,7 @@ public class Controller {
      * @param file: file to write to.
      */
     public void save(File file) {
-        XMLSaver mySaver = new XMLSaver(commandDict, varDict);
+        XMLSaver mySaver = new XMLSaver(commandDict, varDict, this);
         mySaver.generateFile(myCanvas.getBackgroundColor(), myCanvas.getPen().getMyPenRGB(), myCanvas.getTurtleImageName(), file);
     }
 
