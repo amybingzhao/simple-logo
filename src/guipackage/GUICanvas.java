@@ -15,7 +15,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
@@ -53,7 +52,6 @@ public class GUICanvas implements Observer{
 	
 	private ResourceBundle myResources;
 	private GUICanvasPen myPen;
-	private int penCounter;
 	private String myBackgroundRGB;
 	private Image turtleShape;
 	private String turtleShapeName;
@@ -64,7 +62,6 @@ public class GUICanvas implements Observer{
 	
 	private GUICanvasAnimation myAnimation;
 	
-	private HBox hbox;
 	private GUICanvasRight canvasRight;
 	private Group root;
 	private GUICanvasTurtle myTurtleImageView;
@@ -75,16 +72,13 @@ public class GUICanvas implements Observer{
 		myTurtles = new HashMap<>();
 		turtleParameters = new ArrayList<>();
 		initBackground();
-		
 		canvasStamps = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 		gcStamps = canvasStamps.getGraphicsContext2D();
 		turtleShape = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
 		myPen = new GUICanvasPen();
-		penCounter = 0;
 		myCanvasRoot = new Pane(canvasBackground, canvasStamps);
-		hbox = new HBox();
 		root = new Group(myCanvasRoot);
-		myTurtleImageView = new GUICanvasTurtle(turtleShape, root);
+		myTurtleImageView = new GUICanvasTurtle(root);
 		myAnimation = new GUICanvasAnimation();
 	}
 	
@@ -94,33 +88,23 @@ public class GUICanvas implements Observer{
 		gcBackground.setFill(DEFAULT_BACKGROUND_COLOR);
 		gcBackground.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
-
 	
 	/**
 	 * Creates the Canvas Node to be displayed.
 	 * @return Canvas Node
 	 */
 	public Node createNode() {
-		hbox.getChildren().add(root);
-		return hbox;
+		return root;
 	}
 	/**
 	 * Adds object to position right of the canvas.
 	 * @param rightOfCanvas
 	 */
-	public void addObjectToRight(GUICanvasRight rightOfCanvas){
+	public void setRightCanvas(GUICanvasRight rightOfCanvas){
 		canvasRight = rightOfCanvas;
 		myPenPalette = canvasRight.getPenPalette();
 		myBackgroundPalette = canvasRight.getBackgroundPalette();
 		myImagePalette = canvasRight.getImagePalette();
-		setDefaultShapeProperties();
-		hbox.getChildren().add(canvasRight.createNode());
-	}
-	
-	/**
-	 * Sets default palette properties, such as pen settings, background color, and turtle image.
-	 */
-	public void setDefaultShapeProperties(){
 		turtleShapeName = DEFAULT_TURTLE;
 		myTurtleShapeIndex = getPaletteIndex(turtleShapeName, myImagePalette);
 		myBackgroundRGB = DEFAULT_BACKGROUND_COLOR.getRed() + " " + DEFAULT_BACKGROUND_COLOR.getGreen() + " " + DEFAULT_BACKGROUND_COLOR.getBlue();
@@ -145,7 +129,7 @@ public class GUICanvas implements Observer{
 	/**
 	 * Resets Canvas. Deletes all of the Turtle's trails and changes the Turtle back to default.
 	 */
-	public void resetCanvas(Turtle turtle) {
+	private void resetCanvas(Turtle turtle) {
 		for(Turtle key: myTurtles.keySet()){
 			List<GraphicsContext> lst = myTurtles.get(key);
 			lst.get(0).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -159,7 +143,7 @@ public class GUICanvas implements Observer{
 	/**
 	 * Keeps track of the old coordinates after updating the Turtle.
 	 */
-	public void setOldCoordinates(Turtle turtle, double x, double y, double direction) {
+	private void setOldCoordinates(Turtle turtle, double x, double y, double direction) {
 		Double[] coordinates = new Double[3];
 		coordinates[0] = x;
 		coordinates[1] = y;
@@ -181,14 +165,14 @@ public class GUICanvas implements Observer{
 			int myX = STARTING_X;
 			int myY = STARTING_Y;
 			setOldCoordinates(turtle, myX, myY, DEFAULT);
-			myTurtleImageView.createImageViewForTurtle(turtle, toroidalBounds(myX), toroidalBounds(myY), canvasRight);
+			myTurtleImageView.createImageViewForTurtle(turtle, toroidalBounds(myX), toroidalBounds(myY), canvasRight, turtleShape);
 		}
 	}
 	
 	/**
 	 * Clears the previous instance of the Turtle on the canvas.
 	 */
-	public void clearPreviousTurtle(Turtle turtle) {
+	private void clearPreviousTurtle(Turtle turtle) {
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		double myOldX = turtleParameters.get((int) turtle.getID() - 1)[0].doubleValue();
 		double myOldY = turtleParameters.get((int) turtle.getID() - 1)[1].doubleValue();
@@ -203,7 +187,7 @@ public class GUICanvas implements Observer{
 	/**
 	 * Draws the turtle onto canvas based on turtle's X and Y values and its direction.
 	 */
-	public void drawTurtle(Turtle turtle) {
+	private void drawTurtle(Turtle turtle) {
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		GraphicsContext gcDrawing = myTurtles.get(turtle).get(1);
 		double myX = toroidalBounds(turtle.getCurX() + CANVAS_WIDTH/2 - TURTLE_SIZE/2);
@@ -215,7 +199,7 @@ public class GUICanvas implements Observer{
 //			Double[] parameters = turtleParameters.get((int) turtle.getID() - 1);
 			ImageView currentImageView = turtle.getImageView();
 //			myAnimation.makeAnimation(currentImageView, parameters[0], parameters[1], myX, myY, turtle.getDirection() - parameters[2]);
-			myTurtleImageView.updateImageView(currentImageView, myX, myY, turtle.getDirection());
+			myTurtleImageView.updateImageView(currentImageView, myX, myY, turtle.getDirection(), turtleShape);
 //			myAnimation.play();
 		}
 		if (!turtle.isPenUp()) {
@@ -239,21 +223,21 @@ public class GUICanvas implements Observer{
 				drawOval(gcDrawing, myX, myY);
 			}
 			case DASHED_LINE: {
-				if (penCounter < scaledPen / 2) {
+				if (myPen.getMyPenCounter() < scaledPen / 2) {
 					drawOval(gcDrawing, myX, myY);
-				} else if (penCounter == scaledPen) {
-					penCounter = DEFAULT;
+				} else if (myPen.getMyPenCounter() == scaledPen) {
+					myPen.resetPenCounter();;
 				}
-				penCounter++;
+				myPen.incrementMyPenCounter();;
 			}
 			case DOTTED_LINE: {
-				if (penCounter == scaledPen / 2) {
+				if (myPen.getMyPenCounter() == scaledPen / 2) {
 					drawOval(gcDrawing, myX, myY);
-				} else if (penCounter == scaledPen) {
+				} else if (myPen.getMyPenCounter()== scaledPen) {
 					drawOval(gcDrawing, myX, myY);
-					penCounter = DEFAULT;
+					myPen.resetPenCounter();
 				}
-				penCounter++;
+				myPen.incrementMyPenCounter();;
 			}
 		}
 	}
@@ -278,16 +262,9 @@ public class GUICanvas implements Observer{
 		clearGraphicsContext(gcStamps);
 	}
 	
-	public void clearGraphicsContext(GraphicsContext gc) {
+	private void clearGraphicsContext(GraphicsContext gc) {
 		gc.clearRect(DEFAULT, DEFAULT, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
-
-	/**
-	 * @return GraphicsContext for Canvas Background
-	 */
-	public GraphicsContext getBackgroundGraphicsContext(){
-		return gcBackground;
-	}	
 	
 	//------------------------------------------------------------------------------------------------------------------------
 	
@@ -351,13 +328,6 @@ public class GUICanvas implements Observer{
 		gcBackground.fillRect(DEFAULT, DEFAULT, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
 	
-	public Color stringToColor(String colorString) {
-		String[] rgb = colorString.split(" ");
-		Color col = Color.rgb((int) Double.parseDouble(rgb[0]),
-				(int) Double.parseDouble(rgb[1]), (int) Double.parseDouble(rgb[2]));
-		return col;
-	}
-	
 	/**
 	 * Returns current background color of canvas.
 	 */
@@ -399,11 +369,6 @@ public class GUICanvas implements Observer{
 			}
 			else drawTurtle(key);
 		}
-	}
-	
-	public Image stringToImage(String imageString) {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageString));
-		return image;
 	}
 	
 	/**

@@ -6,12 +6,14 @@ public class GUICanvasPen {
 	private static final String SOLID_LINE = "Solid Line";
 	private static final int DEFAULT_PEN_SIZE = 3;
 	private static final Color DEFAULT_PEN_COLOR = Color.BLACK;
+	private static final int DEFAULT_PEN_COUNTER = 0;
 	
 	private double myPenSize;
 	private String myPenType;
 	private int myPenColorIndex;
 	private String myPenRGB;
 	private Color myPenColor;
+	private int myPenCounter;
 	
 	public GUICanvasPen(){
 		myPenSize = DEFAULT_PEN_SIZE;
@@ -61,5 +63,15 @@ public class GUICanvasPen {
 		this.myPenColor = myPenColor;
 	}
 	
+	protected void incrementMyPenCounter(){
+		this.myPenCounter++;
+	}
 	
+	protected int getMyPenCounter(){
+		return myPenCounter;
+	}
+	
+	protected void resetPenCounter(){
+		this.myPenCounter = DEFAULT_PEN_COUNTER;
+	}
 }
