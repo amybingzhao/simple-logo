@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -40,11 +42,13 @@ abstract class GUIComboBoxColor extends GUIComboBox{
 
 	@Override
 	protected Node getNodeForBox(String item){
+		HBox hbox = new HBox();
 		String[] rgb = item.split(" ");
-	   	 Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
-	   	 Rectangle rectangle = new Rectangle(20, 20);
-	   	 rectangle.setFill(col);
-	   	 return rectangle;
+	   	Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
+	   	Rectangle rectangle = new Rectangle(20, 20);
+	   	rectangle.setFill(col);
+	   	hbox.getChildren().addAll(new Label(options.indexOf(item) + " "), rectangle); 
+	   	return hbox;
 	}
 
 	@Override

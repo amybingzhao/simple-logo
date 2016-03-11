@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import controller.Controller;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 
 /**
  * Create ComboBox to hold interpretable languages. 
@@ -33,7 +34,7 @@ public class GUIComboBoxLanguages extends GUIComboBox {
 
 	@Override
 	protected Node getNodeForBox(String item) {
-		return null;
+		return new Label(NO_NODE_FOR_BOX);
 	}
 
 }

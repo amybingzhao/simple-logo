@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 /**
  * ComboBox with palette of images that the user can choose from for the Turtle.
  * @author AnnieTang
@@ -47,7 +49,9 @@ public class GUIComboBoxImages extends GUIComboBox {
 	
 	@Override
 	protected Node getNodeForBox(String item){
-        return imageMap.get(item);
+        HBox hbox = new HBox();
+        hbox.getChildren().addAll(new Label(options.indexOf(item) + " "), imageMap.get(item));
+        return hbox;
 	}
 	
 	@Override
