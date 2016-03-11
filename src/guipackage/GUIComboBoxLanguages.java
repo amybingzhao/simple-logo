@@ -32,10 +32,6 @@ public class GUIComboBoxLanguages extends GUIComboBox {
 	}
 
 	@Override
-	protected void setCellFactory() {
-	}
-
-	@Override
 	protected Node getNodeForBox(String item) {
 		return null;
 	}
