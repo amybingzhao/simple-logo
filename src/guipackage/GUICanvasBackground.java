@@ -5,7 +5,11 @@ import java.util.List;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
+/**
+ * Background canvas of the main GUICanvas
+ * @author AnnieTang
+ *
+ */
 public class GUICanvasBackground {
 	private static final Color DEFAULT_BACKGROUND_COLOR = Color.BISQUE;
 	private static final int DEFAULT_INT = 0;

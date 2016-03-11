@@ -44,7 +44,8 @@ public class GUITableView implements IGUIObject {
     /**
      * Creates TableVariable node and populates it with cells that are editable.
      */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public Node createNode() {
         myTableView = new TableView<>();
         myTableView.setEditable(true);
