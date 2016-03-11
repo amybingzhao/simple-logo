@@ -9,6 +9,9 @@ public class Turtles extends TurtleNode {
 		return getTurtles().size();
 	}
 
+	/**
+	 * Returns the class name and its children.
+	 */
 	@Override
 	public String toString() {
 		return TURTLES;
