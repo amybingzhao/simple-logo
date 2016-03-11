@@ -27,6 +27,7 @@ public abstract class GUIComboBox implements IGUIObject {
 	private static final int VISIBLE_ROW_COUNT = 5;
 	private static final int PADDING = 10;
 	private static final int HBOX_SPACING = 5;
+	protected static final String NO_NODE_FOR_BOX = "";
 	protected String promptText;
 	protected ResourceBundle myResources;
 	protected Controller myController;
@@ -95,10 +96,9 @@ public abstract class GUIComboBox implements IGUIObject {
         if (item == null || empty) {
             setGraphic(null);
         } else {
-       	 HBox hbox = new HBox();
-       	 int index = options.indexOf(item);
-       	 Label lbl = new Label(item + " | " + index);
-            hbox.getChildren().addAll(getNodeForBox(item), lbl);
+       	 	HBox hbox = new HBox();
+       	 	Label lbl = new Label(item);
+       	 	hbox.getChildren().addAll(getNodeForBox(item), lbl);
             setGraphic(hbox);
         }
        }

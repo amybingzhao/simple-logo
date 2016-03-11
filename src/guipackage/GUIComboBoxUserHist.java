@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import controller.Controller;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import model.Command;
 import model.CommandDictionary;
@@ -61,8 +62,8 @@ public class GUIComboBoxUserHist extends GUIComboBox {
         return commandToRun;
     }
 
-	@Override
+    @Override
 	protected Node getNodeForBox(String item) {
-		return null;
+		return new Label(NO_NODE_FOR_BOX);
 	}
 }

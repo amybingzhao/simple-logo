@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import controller.Controller;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 
 /**
  * Create a ComboBox to hold command history. 
@@ -13,7 +14,6 @@ import javafx.scene.Node;
  */
 
 public class GUIComboBoxCommandHist extends GUIComboBox {
-	
 	public GUIComboBoxCommandHist(GUICanvas canvas, ResourceBundle myResources, Controller myController,
 			String promptText, GUICommandLine myCommandLine) {
 		super(canvas, myResources, myController, promptText, myCommandLine);
@@ -33,7 +33,7 @@ public class GUIComboBoxCommandHist extends GUIComboBox {
 
 	@Override
 	protected Node getNodeForBox(String item) {
-		return null;
+		return new Label(NO_NODE_FOR_BOX);
 	}
 	
 }
