@@ -13,8 +13,8 @@ public class IsShowing extends TurtleNode {
 
 	/**
      * Returns 1 if the turtle is showing on the canvas; 0 otherwise.
-     * @param commandDict
-     * @param varDict
+     * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
      */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
@@ -24,7 +24,7 @@ public class IsShowing extends TurtleNode {
 	}
 	
 	/**
-	 * Returns the required user input for this command. 
+	 * Returns the class name.
 	 */
 	@Override
 	public String toString() {
