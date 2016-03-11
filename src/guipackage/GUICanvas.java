@@ -47,7 +47,7 @@ public class GUICanvas implements Observer{
 	private GUICanvasPen myPen;
 	private GUICanvasRight canvasRight;
 	private Group root;
-	private GUICanvasTurtle myTurtleImageView;
+	private GUICanvasTurtleImageView myTurtleImageView;
 	private GUICanvasBackground myBackgroundCanvas;
 	private HBox toReturn;
 	
@@ -61,7 +61,7 @@ public class GUICanvas implements Observer{
 		myBackgroundCanvas = new GUICanvasBackground(CANVAS_WIDTH, CANVAS_HEIGHT);
 		myCanvasRoot = new Pane(myBackgroundCanvas.getCanvas(), canvasStamps);
 		root = new Group(myCanvasRoot);
-		myTurtleImageView = new GUICanvasTurtle(root);
+		myTurtleImageView = new GUICanvasTurtleImageView(root, myTurtles);
 		setRightCanvas();
 	}
 	
@@ -280,7 +280,7 @@ public class GUICanvas implements Observer{
 		return myBackgroundCanvas;
 	}
 	
-	public GUICanvasTurtle getTurtleImageView(){
+	public GUICanvasTurtleImageView getTurtleImageView(){
 		return myTurtleImageView;
 	}
 

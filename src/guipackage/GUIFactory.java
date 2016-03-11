@@ -65,6 +65,9 @@ public class GUIFactory {
 													new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
 													new GUILabeled(myResources, myResources.getString("TurtlePen"))));
 		}
+		case("ShowHide"):{
+			return new GUITurtleStateToggle(myResources, canvas);
+		}
 		}
 		return null;
 	}
