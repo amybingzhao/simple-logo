@@ -61,11 +61,11 @@ public class GUISaveLoad implements IGUIObject {
     
     private void loadCanvasProperties() {
     	myController.loadXML(promptForFileName(false));
-    	myCanvas.setBackgroundColor(stringToColor(myController.getXMLParser().getBackgroundColor()),
+    	myCanvas.getBackgroundCanvas().setBackgroundColor(stringToColor(myController.getXMLParser().getBackgroundColor()),
     			myController.getXMLParser().getBackgroundColor());
     	myCanvas.getPen().setMyPenColor(stringToColor(myController.getXMLParser().getPenColor()),
     			myController.getXMLParser().getPenColor());
-    	myCanvas.setTurtleShape(stringToImage(myController.getXMLParser().getTurtleImage()),
+    	myCanvas.getTurtleImageView().setTurtleShape(stringToImage(myController.getXMLParser().getTurtleImage()),
     			myController.getXMLParser().getTurtleImage());
     }
     

@@ -264,7 +264,8 @@ public class Controller {
      */
     public void save(File file) {
         XMLSaver mySaver = new XMLSaver(commandDict, varDict, this);
-        mySaver.generateFile(myCanvas.getBackgroundColor(), myCanvas.getPen().getMyPenRGB(), myCanvas.getTurtleImageName(), file);
+        mySaver.generateFile(myCanvas.getBackgroundCanvas().getBackgroundColor(), myCanvas.getPen().getMyPenRGB(), 
+        		myCanvas.getTurtleImageView().getTurtleImageName(), file);
     }
 
     /**
