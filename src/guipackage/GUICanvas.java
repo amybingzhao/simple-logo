@@ -36,8 +36,8 @@ public class GUICanvas implements Observer{
 	private static final int STARTING_Y = CANVAS_HEIGHT/2 - TURTLE_SIZE/2;	
 	private static final int PEN_SCALE = 100;
 	private static final int DEFAULT = 0;
-	private static final int MAX_COORDINATE = 250;
-	private static final int MIN_COORDINATE = -250;
+	private static final int MAX_COORDINATE = 500;
+	private static final int MIN_COORDINATE = 0;
 	private Canvas canvasStamps;
 	private Pane myCanvasRoot;
 	private GraphicsContext gcStamps;
@@ -207,10 +207,11 @@ public class GUICanvas implements Observer{
 	private double toroidalBounds(double coordinate) {
 		if (coordinate > MAX_COORDINATE) {
 			coordinate = coordinate%MAX_COORDINATE;
-			System.out.print(coordinate);
 		}
 		else if(coordinate < MIN_COORDINATE){
-			
+			double temp_pos = Math.abs(coordinate);
+			double temp_mod = temp_pos%MAX_COORDINATE;
+			coordinate = MAX_COORDINATE - temp_mod;
 		}
 		return coordinate;
 	}
