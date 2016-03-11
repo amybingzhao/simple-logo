@@ -21,7 +21,7 @@ public abstract class TurtleNode extends Node {
      */
     protected List<Turtle> getActiveTurtles() {
     	List<Turtle> curTurtles = getTurtles();
-        List<Turtle> activeTurtles = new ArrayList<Turtle>();
+        List<Turtle> activeTurtles = new ArrayList<>();
         for (int i = 0; i < curTurtles.size(); i++) {
         	if (curTurtles.get(i).isActive()) {
         		activeTurtles.add(curTurtles.get(i));

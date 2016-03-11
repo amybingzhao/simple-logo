@@ -9,15 +9,10 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import controller.Controller;
-import controller.Parser;
-import guipackage.GUICanvas;
 import model.*;
-import model.Node;
 import org.w3c.dom.*;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,25 +21,17 @@ import java.util.List;
  */
 public class XMLSaver {
 
-    public static final String XML_STYLE = "{http://xml.apache.org/xslt}indent-amount";
-    public static final String ROOT_TEXT = "SLogoConfiguration";
-    public static final String CONFIG = "Config";
-    public static final String BACKGROUND_COLOR = "BackgroundColor";
-    public static final String PEN_COLOR = "PenColor";
-    public static final String TURTLES = "Turtles";
-    public static final String TURTLE = "Turtle";
-    public static final String IMAGE = "Image";
-    public static final String Y = "Y";
-    public static final String X = "X";
-    public static final String ID = "ID";
-    public static final String DIRECTION = "Direction";
-    public static final String VARIABLES = "Variables";
-    public static final String COMMANDS = "Commands";
-    public static final String COMMAND = "Command";
-    public static final String NAME = "Name";
-    public static final String PROCEDURE = "Procedure";
-    public static final String NUMBER_OF_ARGUMENTS = "NumberOfArguments";
-    public static final String TURTLE_IMAGE = "TurtleImage";
+    private static final String XML_STYLE = "{http://xml.apache.org/xslt}indent-amount";
+    private static final String CONFIG = "Config";
+    private static final String BACKGROUND_COLOR = "BackgroundColor";
+    private static final String PEN_COLOR = "PenColor";
+    private static final String VARIABLES = "Variables";
+    private static final String COMMANDS = "Commands";
+    private static final String COMMAND = "Command";
+    private static final String NAME = "Name";
+    private static final String PROCEDURE = "Procedure";
+    private static final String NUMBER_OF_ARGUMENTS = "NumberOfArguments";
+    private static final String TURTLE_IMAGE = "TurtleImage";
     private DocumentBuilderFactory myFactory;
     private DocumentBuilder myBuilder;
     private Document myDocument;
@@ -63,7 +50,7 @@ public class XMLSaver {
         }
     }
 
-    public void generateFile(String backgroundColor, String penColor, String turtleImage, String language, List<Turtle> turtles, File file) {
+    public void generateFile(String backgroundColor, String penColor, String turtleImage, File file) {
         myDocument = myBuilder.newDocument();
         Element myRoot = myDocument.createElement("SLogoState");
         myDocument.appendChild(myRoot);
