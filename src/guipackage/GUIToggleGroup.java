@@ -9,7 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
-
+/**
+ * returns VBox containing toggle group and its RadioButtons
+ * @author AnnieTang
+ *
+ */
 public class GUIToggleGroup {
 	private static final int PADDING = 10;
 	private static final int BOX_SPACING = 10;
