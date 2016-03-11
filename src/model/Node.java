@@ -82,7 +82,7 @@ public abstract class Node implements IFunctions {
      * @return resultant value of combining child nodes' values.
      * @throws ClassNotFoundException
      */
-    protected double applyChildren(double val, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+    protected double combineChildren(double val, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
 		for (int i = 0; i < myChildren.size(); i++) {
 			val = addChildValue(val, myChildren.get(i), commandDict, varDict);
 		}

@@ -15,7 +15,7 @@ public class Quotient extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
-        return applyChildren(Math.pow(getChildren().get(0).interpret(commandDict, varDict), 2), commandDict, varDict);
+        return combineChildren(Math.pow(getChildren().get(0).interpret(commandDict, varDict), 2), commandDict, varDict);
     }
 
     /**

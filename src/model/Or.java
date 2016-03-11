@@ -11,8 +11,8 @@ public class Or extends BooleanNode {
 	
 	/**
      * If any of the child expressions are true, returns 1; else 0.
-     * @param commandDict
-     * @param varDict
+     * @param commandDict: command dictionary of current workspace.
+     * @param varDict: variable dictionary of current workspace.
      */
 	@Override
 	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)

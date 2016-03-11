@@ -15,7 +15,7 @@ public class Product extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
-        return applyChildren(1, commandDict, varDict);
+        return combineChildren(1, commandDict, varDict);
 
     }
     

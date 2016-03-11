@@ -12,7 +12,7 @@ public class NotEqual extends BooleanNode {
 
     /**
      * If the any of the child expressions are not equal to the rest, returns 1; else 0.
-     *  @param commandDict: command dictionary of current workspace.
+     * @param commandDict: command dictionary of current workspace.
      * @param varDict: variable dictionary of current workspace.
      */
     @Override
