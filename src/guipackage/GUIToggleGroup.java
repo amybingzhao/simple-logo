@@ -50,7 +50,6 @@ public class GUIToggleGroup {
 			newBT.setToggleGroup(myGroup);
 			if(i==myTrueButtonIndex) {
 				newBT.setSelected(true);
-				System.out.println(newBT);
 			}
 			myButtons.add(newBT);
 		}
