@@ -75,6 +75,10 @@ public class Command extends Node {
 		myProcedure = list;
 	}
 
+	/**
+	 * Gets the procedure for the given command.
+	 * @return list of nodes specifying the user-defined procedure.
+	 */
 	public List<IFunctions> getProcedure() {
 		return myProcedure;
 	}

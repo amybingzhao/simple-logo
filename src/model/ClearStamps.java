@@ -6,6 +6,9 @@ public class ClearStamps extends DisplayNode {
 
 	private static final String CLEAR_STAMP = "ClearStamps ";
 
+	/**
+	 * Clears all the stamps on the canvas.
+	 */
 	@Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
             throws ClassNotFoundException {
@@ -13,6 +16,9 @@ public class ClearStamps extends DisplayNode {
 		return 1;
 	}
 				
+	/**
+	 * Not used for this class.
+	 */
 	@Override
 	protected void performCanvasOperation(GUICanvas canvas, double val) {
 		// do nothing
