@@ -5,7 +5,11 @@ import java.util.List;
 public class ID extends TurtleNode {
 
 	private static final String ID = "ID ";
+	
 	@Override
+	/**
+	 * Returns the ID of the current active turtle.
+	 */
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
             throws ClassNotFoundException {
 		List<Turtle> curTurtles = getTurtles();
@@ -17,11 +21,9 @@ public class ID extends TurtleNode {
 		return 0;
 	}
 
-	@Override
-	public String toString() {
-		return ID;
-	}
-
+	/**
+	 * Not used for this class.
+	 */
 	@Override
     protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
             throws ClassNotFoundException {
@@ -29,4 +31,12 @@ public class ID extends TurtleNode {
 		return 0;
 	}
 
+
+	/**
+	 * Returns the class name.
+	 */
+	@Override
+	public String toString() {
+		return ID;
+	}
 }

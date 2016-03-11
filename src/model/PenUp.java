@@ -11,8 +11,8 @@ public class PenUp extends TurtleNode {
 
 	/**
      * Lifts pen up for current turtle so trail will no longer show.
-     * @param commandDict
-     * @param varDict
+     * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
      */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
@@ -22,7 +22,7 @@ public class PenUp extends TurtleNode {
 	}
 
 	/**
-	 * Returns the required user input for this command. 
+	 * Returns the class name.
 	 */
 	@Override
 	public String toString() {

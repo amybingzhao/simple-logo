@@ -10,9 +10,9 @@ public class Or extends BooleanNode {
 	private static final String OR = "Or ";
 	
 	/**
-     * If expr1 or expr2 is true, returns 1; else 0.
-     * @param commandDict
-     * @param varDict
+     * If any of the child expressions are true, returns 1; else 0.
+     * @param commandDict: command dictionary of current workspace.
+     * @param varDict: variable dictionary of current workspace.
      */
 	@Override
 	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
@@ -21,7 +21,7 @@ public class Or extends BooleanNode {
 	}
 	
 	/**
-	 * Returns the required user input for this command. 
+	 * Returns the class name and its children.
 	 */
 	public String toString() {
 		return OR + childrenToString();
