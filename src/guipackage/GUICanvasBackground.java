@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
  *
  */
 public class GUICanvasBackground {
-	private static final Color DEFAULT_BACKGROUND_COLOR = Color.BISQUE;
+	private static final Color DEFAULT_BACKGROUND_COLOR = Color.WHITE;
 	private static final int DEFAULT_INT = 0;
 	private int canvasWidth;
 	private int canvasHeight;
