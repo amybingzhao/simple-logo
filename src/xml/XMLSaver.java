@@ -9,11 +9,14 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import model.*;
-import org.w3c.dom.*;
+import controller.Controller;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import model.CommandDictionary;
+import model.VariableDictionary;
 
 import java.io.File;
-import java.util.List;
 
 
 /**
@@ -32,13 +35,21 @@ public class XMLSaver {
     private static final String PROCEDURE = "Procedure";
     private static final String NUMBER_OF_ARGUMENTS = "NumberOfArguments";
     private static final String TURTLE_IMAGE = "TurtleImage";
+    private static final String SAVING_ERROR = "SavingError";
+    private static final String SLOGO_STATE = "SLogoState";
+    private static final String YES = "yes";
+    private static final String XML = "xml";
+    private static final String FOUR = "4";
     private DocumentBuilderFactory myFactory;
     private DocumentBuilder myBuilder;
     private Document myDocument;
     private CommandDictionary myCommandDict;
     private VariableDictionary myVarDict;
+    private Controller myController;
 
-    public XMLSaver(CommandDictionary comDict, VariableDictionary varDict) {
+    public XMLSaver(CommandDictionary comDict, VariableDictionary varDict, Controller controller) {
+
+        myController = controller;
 
         try {
             myFactory = DocumentBuilderFactory.newInstance();
@@ -52,7 +63,7 @@ public class XMLSaver {
 
     public void generateFile(String backgroundColor, String penColor, String turtleImage, File file) {
         myDocument = myBuilder.newDocument();
-        Element myRoot = myDocument.createElement("SLogoState");
+        Element myRoot = myDocument.createElement(SLOGO_STATE);
         myDocument.appendChild(myRoot);
         myRoot.appendChild(getConfig(backgroundColor, penColor, turtleImage));
         myRoot.appendChild(getVariables());
@@ -65,15 +76,14 @@ public class XMLSaver {
         Transformer myTransformer;
         try {
             myTransformer = myTransformerFactory.newTransformer();
-            myTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            myTransformer.setOutputProperty(OutputKeys.METHOD, "xml");
-            myTransformer.setOutputProperty(XML_STYLE, "4");
+            myTransformer.setOutputProperty(OutputKeys.INDENT, YES);
+            myTransformer.setOutputProperty(OutputKeys.METHOD, XML);
+            myTransformer.setOutputProperty(XML_STYLE, FOUR);
             DOMSource mySource = new DOMSource(myDocument);
             StreamResult myResult = new StreamResult(file);
             myTransformer.transform(mySource, myResult);
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("File Creation Error");
+            myController.displayAlert(SAVING_ERROR);
         }
     }
 
