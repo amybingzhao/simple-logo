@@ -11,7 +11,6 @@ public class Variable extends Node {
 
     /**
      * Sets the name of the variable of interest.
-     *
      * @param name: name of the variable the user wants to get.
      */
     public Variable(String name) {
@@ -20,11 +19,11 @@ public class Variable extends Node {
 
     /**
      * Returns the value for the given variable.
-     *  @param commandDict
-     * @param varDict*/
+     *  @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
+     */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
-        
         return varDict.getNodeFor(name);
     }
 

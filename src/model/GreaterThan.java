@@ -13,8 +13,8 @@ public class GreaterThan extends BooleanNode {
 
     /**
      * Returns 1 if expr1 is greater than expr2; 0 otherwise.
-     *  @param commandDict
-     * @param varDict
+     * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
      */
     @Override
     protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
@@ -23,8 +23,8 @@ public class GreaterThan extends BooleanNode {
 	}
 
     /**
-     * Returns the required user input for this command.
-     */
+	 * Returns the class name and its children.
+	 */
     public String toString() {
         return GREATER + childrenToString();
     }

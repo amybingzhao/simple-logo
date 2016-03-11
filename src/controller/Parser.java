@@ -41,6 +41,12 @@ public class Parser {
     private GUICanvas myCanvas;
     private String currentLanguage;
 
+    /**
+     * Creates a parser with the workspace's command dictionary, variable dictionary, and canvas.
+     * @param myComDict: current workspace's command dictionary.
+     * @param myVarDict: current workspace's variable dictionary.
+     * @param canvas: current workspace's canvas.
+     */
     public Parser(CommandDictionary myComDict, VariableDictionary myVarDict, GUICanvas canvas) {
         mySymbols = new ArrayList<>();
         myNumChildrenPerCommand = ResourceBundle.getBundle(NUM_CHILDREN_PER_COMMAND);
@@ -52,8 +58,7 @@ public class Parser {
     }
     
     /**
-     * From regex example
-     *
+     * From regex example--adds regex patterns for the parser to recognize.
      * @param syntax: path to properties file.
      */
     public void addPatterns(String syntax) {
@@ -65,11 +70,19 @@ public class Parser {
             mySymbols.add(new SimpleEntry<>(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
     }
-
+    
+    /**
+     * Clears all regex patterns stored in the parser.
+     */
     public void clearAllPatterns() {
         mySymbols.clear();
     }
 
+    /**
+     * From regex example--gets the class name that matches the input text based on regex patterns.
+     * @param text: text to interpret as a class name.
+     * @return class name that matches the text.
+     */
     public String getSymbol(String text) {
         final String ERROR = "NO MATCH";
         for (Entry<String, Pattern> e : mySymbols) {
@@ -80,7 +93,11 @@ public class Parser {
         return ERROR;
     }
 
-    // given text, determines corresponding function
+    /**
+     * Trims input text and parses it to find the corresponding class name. 
+     * @param text: text to interpret.
+     * @return class name that matches the text based on regex.
+     */
     private String parseText(String text) {
         if (text.trim().length() > 0) {
             return getSymbol(text);
@@ -90,22 +107,47 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates a tree of commands.
+     * @param commandList: user-inputed command split into a list of strings.
+     * @param curTurtles: list of existing turtles.
+     * @return the head node of the command tree.
+     * @throws ClassNotFoundException
+     */
     public IFunctions createCommandTree(List<String> commandList, List<Turtle> curTurtles) throws ClassNotFoundException {
         myCurTurtles = curTurtles;
         return createCommandTreeFromList(commandList);
     }
 
+    /**
+     * Creates a tree of commands from a list of strings.
+     * @param inputCommandList:  user-inputed command split into a list of strings.
+     * @return the head node of the command tree.
+     * @throws ClassNotFoundException
+     */
     private IFunctions createCommandTreeFromList(List<String> inputCommandList) throws ClassNotFoundException {
         String commandToBuild = inputCommandList.get(0);
         return createClass(commandToBuild, inputCommandList);
     }
 
+    /**
+     * Creates a list of commands (i.e. [ commands ]).
+     * @param inputList: remaining list of user input.
+     * @return a CommandList whose children are command trees made of the commands contained within the square brackets.
+     * @throws ClassNotFoundException
+     */
     private CommandList createList(List<String> inputList) throws ClassNotFoundException {
         CommandList list = new CommandList();
         addChildrenToListOrGroupNode(list, inputList, LIST_END);
         return list;
     }
     
+    /**
+     * Creates a group of commands for unlimited parameters (i.e. ( command param1 param2 ... paramN)).
+     * @param inputList: remaining list of user input.
+     * @return a Node whose children are its parameters.
+     * @throws ClassNotFoundException
+     */
     private Node createGroup (List<String> inputList) throws ClassNotFoundException {
         Node group = getFunctionObject(parseText(inputList.get(0)));
         inputList.remove(0);
@@ -113,6 +155,13 @@ public class Parser {
         return group;
     }
     
+    /**
+     * Adds child nodes to a command list or a group node.
+     * @param node: node to add children to.
+     * @param inputList: remaining list of user input.
+     * @param endDelimiter: "]" for list, ")" for group.
+     * @throws ClassNotFoundException
+     */
     private void addChildrenToListOrGroupNode(Node node, List<String> inputList, String endDelimiter) throws ClassNotFoundException {
     	while (!(parseText(inputList.get(0))).equals(endDelimiter)) {
         	Node childHead;
@@ -130,6 +179,13 @@ public class Parser {
         inputList.remove(0);
     }
 
+    /**
+     * Creates the next command corresponding to the remaining strings in the list of user input.
+     * @param commandToBuild: name of command to create.
+     * @param inputCommandList: remaining list of user-inputed command.
+     * @return the next command to be added to the command tree.
+     * @throws ClassNotFoundException
+     */
     private Node createClass(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
         String name = parseText(commandToBuild);
         Node node = null;
@@ -166,6 +222,13 @@ public class Parser {
         return node;
     }
 
+    /**
+     * Handles the parsing of a user-defined command.
+     * @param commandToBuild: user-defined command name.
+     * @param inputCommandList: remaining list of the user-inputed command string.
+     * @return Node for the desired user-defined command.
+     * @throws ClassNotFoundException
+     */
     private Node handleCommand(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
         Node node;
         if (commandDict.contains(commandToBuild)) {
@@ -178,14 +241,30 @@ public class Parser {
         return node;
     }
 
+    /**
+     * Checks if the given command requires a turtle.
+     * @param name: name of command.
+     * @return true if it requires a turtle; false o.w.
+     */
     private boolean isTurtleCommand(String name) {
     	return Arrays.asList(myTurtleCommands.getString(TURTLE_COMMANDS).split(",")).contains(name);
     }
     
+    /**
+     * Checks if the given command requires changing the display.
+     * @param name: name of command.
+     * @return true if it requires changing the display; false o.w.
+     */
     private boolean isDisplayCommand(String name) {
     	return Arrays.asList(myDisplayCommands.getString(DISPLAY_COMMANDS).split(",")).contains(name);
     }
     
+    /**
+     * Creates an object of the type specific to the command function being called.
+     * @param name: name of command.
+     * @return node object for the command.
+     * @throws ClassNotFoundException
+     */
     private Node getFunctionObject(String name) throws ClassNotFoundException {
         Class className = Class.forName(MODEL + name);
         try {
@@ -210,6 +289,12 @@ public class Parser {
         return null;
     }
     
+    /**
+     * Add children to a node based on the number of children required for the command.
+     * @param node: node to add children to.
+     * @param inputCommandList: remaining list of user input.
+     * @throws ClassNotFoundException
+     */
     private void addChildrenToNode(Node node, List<String> inputCommandList) throws ClassNotFoundException {
         for (int i = 0; i < node.getNumChildrenNeeded(); i++) {
             Node childNode = createClass(inputCommandList.get(0), inputCommandList);
@@ -219,14 +304,25 @@ public class Parser {
         }
     }
 
+    /**
+     * Sets the current language.
+     * @param language: language to set to.
+     */
     public void setCurrentLanguage(String language){
         currentLanguage = language;
     }
 
+    /**
+     * Checks for a match between text and a regex pattern.
+     */
     private boolean match(String text, Pattern regex) {
         return regex.matcher(text).matches();
     }
 
+    /**
+     * Gets the variable dictionary for this workspace.
+     * @return variable dictionary for this workspace.
+     */
     public VariableDictionary getVariables() {
         return varDict;
     }

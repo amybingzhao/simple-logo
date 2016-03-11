@@ -14,8 +14,8 @@ public class SetHeading extends TurtleNode {
 	
 	/**
      * Turns the turtle towards to the given degrees, where 0 is facing north and rotating CW is positive.
-     * @param commandDict
-     * @param varDict
+     * @param commandDict: command dictionary of current workspace.
+     * @param varDict: variable dictionary of current workspace.
      */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
@@ -27,7 +27,7 @@ public class SetHeading extends TurtleNode {
 	}
 
 	/**
-	 * Returns the required user input for this command. 
+	 * Returns the class name and its children.
 	 */
 	@Override
 	public String toString() {

@@ -14,6 +14,9 @@ public class MakeVariable extends Node {
     private static final int EXPRESSION = 1;
     private String name;
 
+    /**
+     * Updates the entry in the variable dictionary to the new value.
+     */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         List<IFunctions> children = getChildren();
@@ -23,14 +26,25 @@ public class MakeVariable extends Node {
         return value;
     }
 
+    /**
+     * Gets the variable name.
+     * @return variable name.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets a variable's name to a new name.
+     * @param newName: new name for variable.
+     */
     public void setName(String newName) {
         name = newName;
     }
 
+    /**
+	 * Returns the class name and its children.
+	 */
     @Override
     public String toString() {
         return MAKE + childrenToString();

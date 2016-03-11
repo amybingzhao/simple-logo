@@ -9,13 +9,17 @@ import java.util.ResourceBundle;
  */
 public class MakeUserInstruction extends Node {
 
-    private static final String TO = "to ";
     private static final int VARIABLES = 0;
     private static final int PROCEDURE = 1;
     public static final String MAKE_USER_INSTRUCTION = "MakeUserInstruction";
     private String myName;
     private String myCurrentLanguage;
 
+    /**
+     * Creates a MakeUserInstruction object for a command of the given name and in the user-selected language.
+     * @param name: name of command.
+     * @param language: user-selected language.
+     */
     public MakeUserInstruction(String name, String language) {
         myName = name;
         myCurrentLanguage = language;
@@ -51,6 +55,11 @@ public class MakeUserInstruction extends Node {
         return myName;
     }
 
+    /**
+     * Translates a string into the user-defined language.
+     * @param command: command to translate.
+     * @return translated string.
+     */
     private String translateToLanguage(String command){
         String translated = "";
         String[] splitCommand = command.split(" ");
@@ -60,6 +69,11 @@ public class MakeUserInstruction extends Node {
         return translated;
     }
 
+    /**
+     * Gets the translation of a word from the language-specific resource file.
+     * @param entry: word to translate.
+     * @return translation of entry.
+     */
     private String getTranslation(String entry){
         ResourceBundle languageBundle = ResourceBundle.getBundle(myCurrentLanguage);
         if (languageBundle.containsKey(entry)){

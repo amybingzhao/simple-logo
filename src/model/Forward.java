@@ -11,19 +11,19 @@ public class Forward extends TurtleNode {
 
 	/**
      * Moves the turtle forward the given distance.
-	 *  @param commandDict
-	 * @param varDict
+	 * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
      */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict,
 			VariableDictionary varDict)
             throws ClassNotFoundException {
-		double dist = applyChildren(0, commandDict, varDict);
+		double dist = combineChildren(0, commandDict, varDict);
 		return turtle.move(dist);
 	}
 
 	/**
-	 * Returns the required user input for this command.
+	 * Returns the class name and its children.
 	 */
 	@Override
 	public String toString() {

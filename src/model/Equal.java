@@ -11,9 +11,9 @@ public class Equal extends BooleanNode {
 	private static final int EXPR = 0;
 	
 	/**
-     * Returns 1 if the two expressions are equal; 0 otherwise.
-     * @param commandDict
-     * @param varDict
+     * Returns 1 if the all expressions are equal; 0 otherwise.
+     * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
      */
 	@Override
 	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
@@ -22,7 +22,7 @@ public class Equal extends BooleanNode {
 	}
 	
 	/**
-	 * Returns the required user input for this command. 
+	 * Returns the class name and its children.
 	 */
 	public String toString() {
 		return EQUAL + childrenToString();
