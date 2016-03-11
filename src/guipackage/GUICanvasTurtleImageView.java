@@ -17,6 +17,10 @@ import model.Turtle;
 public class GUICanvasTurtleImageView {
 	private static final String DEFAULT_TURTLE = "tortoise.png";
 	private static final int TURTLE_SIZE = 25;
+	private static final int CANVAS_WIDTH = 500;
+	private static final int CANVAS_HEIGHT = 500;
+	private static final int STARTING_X = CANVAS_WIDTH/2 - TURTLE_SIZE/2;
+	private static final int STARTING_Y = CANVAS_HEIGHT/2 - TURTLE_SIZE/2;
 	private Group root;
 	private List<String> myImagePalette;
 	private Image myTurtleShape;
@@ -135,5 +139,9 @@ public class GUICanvasTurtleImageView {
 				root.getChildren().remove(turtle.getImageView());
 			}
 		}
+	}
+	protected void resetLocation(Turtle turtle){
+		turtle.getImageView().setX(STARTING_X);
+		turtle.getImageView().setY(STARTING_Y);
 	}
 }
