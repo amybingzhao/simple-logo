@@ -205,7 +205,6 @@ public class GUICanvas implements Observer{
 		if (turtle.showing()) {
 			Double[] parameters = turtleParameters.get((int) turtle.getID());
 			ImageView currentImageView = turtle.getImageView();
-			myAnimation.pause();
 //			root.getChildren().remove(currentImageView);
 			myAnimation.addAnimation(currentImageView, normalizeCoordinates(parameters[0]), 
 					normalizeCoordinates(parameters[1]), normalizeCoordinates(myX),
@@ -213,7 +212,6 @@ public class GUICanvas implements Observer{
 //			currentImageView.setX(myX);
 //			currentImageView.setY(myY);
 //			root.getChildren().add(currentImageView);
-			myAnimation.play();
 		}
 		if (!turtle.isPenUp()) {
 			drawLine(gcDrawing, myX, myY);
