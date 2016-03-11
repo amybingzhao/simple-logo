@@ -23,8 +23,8 @@ public class GreaterThan extends BooleanNode {
 	}
 
     /**
-     * Returns the required user input for this command.
-     */
+	 * Returns the class name and its children.
+	 */
     public String toString() {
         return GREATER + childrenToString();
     }
