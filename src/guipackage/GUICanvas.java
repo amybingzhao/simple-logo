@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
@@ -48,10 +49,10 @@ public class GUICanvas implements Observer{
 	private Group root;
 	private GUICanvasTurtle myTurtleImageView;
 	private GUICanvasBackground myBackgroundCanvas;
+	private HBox toReturn;
 	
 	public GUICanvas(ResourceBundle myResources) {
 		this.myResources = myResources;
-		this.canvasRight = (GUICanvasRight) canvasRight;
 		myTurtles = new HashMap<>();
 		turtleParameters = new ArrayList<>();
 		canvasStamps = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -61,6 +62,7 @@ public class GUICanvas implements Observer{
 		myCanvasRoot = new Pane(myBackgroundCanvas.getCanvas(), canvasStamps);
 		root = new Group(myCanvasRoot);
 		myTurtleImageView = new GUICanvasTurtle(root);
+		setRightCanvas();
 	}
 	
 	/**
@@ -68,14 +70,23 @@ public class GUICanvas implements Observer{
 	 * @return Canvas Node
 	 */
 	public Node createNode() {
-		return root;
+		toReturn = new HBox();
+		toReturn.getChildren().addAll(root,canvasRight.createNode());
+		return toReturn;
 	}
 	/**
 	 * Adds object to position right of the canvas.
 	 * @param rightOfCanvas
 	 */
-	public void setRightCanvas(GUICanvasRight rightOfCanvas){
-		canvasRight = rightOfCanvas;
+	public void setRightCanvas(){
+		canvasRight = new GUICanvasRight(myResources, new GUIComboBoxColorB(this, myResources, myResources.getString("BackgroundColorPalettePromptText"),
+				myResources.getString("DefaultBackgroundColors")), new GUIComboBoxColorP(this, myResources, 
+						myResources.getString("PenColorPalettePromptText"), myResources.getString("DefaultPenColors")),
+				new GUIComboBoxImages(this, myResources, myResources.getString("ImageComboBoxPromptText")),
+				new GUIPenSettings(myResources, this),
+				new GUITurtleState(myResources, new GUILabeled(myResources, myResources.getString("TurtleLocation")),
+												new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
+												new GUILabeled(myResources, myResources.getString("TurtlePen"))));
 		myPen.setMyPenPalette(canvasRight.getPenPalette());
 		myBackgroundCanvas.setMyBackgroundPalette(canvasRight.getBackgroundPalette());
 		myTurtleImageView.setMyImagePalette(canvasRight.getImagePalette());
@@ -96,7 +107,6 @@ public class GUICanvas implements Observer{
 			drawTurtle(turtle);
 		}
 	}
-	
 	
 	/**
 	 * Resets Canvas. Deletes all of the Turtle's trails and changes the Turtle back to default.

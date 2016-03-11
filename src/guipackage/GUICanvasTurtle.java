@@ -40,6 +40,7 @@ public class GUICanvasTurtle {
 		turtleImageView.setY(y);
 		turtleImageView.setOnMouseEntered(event -> {
 				 canvasRight.showTurtleState(turtle);
+				 //canvasRight is null
 		});
 		turtleImageView.setOnMouseClicked(event -> {
 			turtle.setActive(!turtle.isActive());
@@ -79,7 +80,6 @@ public class GUICanvasTurtle {
 	 * @param Image
 	 */
 	public void setTurtleShape(Image image, String imageName){
-		System.out.println(imageName);
 		myTurtleShape = image;
 		myTurtleShapeName = imageName;
 		for(String turtleName:myImagePalette){

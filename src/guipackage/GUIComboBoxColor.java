@@ -23,7 +23,7 @@ abstract class GUIComboBoxColor extends GUIComboBox{
 	}
 
 	protected void fillDefaultPalette() {
-		List<String> defaultColors = new ArrayList<String>(Arrays.asList(paletteSource.split(",")));
+		List<String> defaultColors = new ArrayList<>(Arrays.asList(paletteSource.split(",")));
 		palette = defaultColors;
 	}
 

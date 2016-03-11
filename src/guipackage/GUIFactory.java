@@ -14,6 +14,7 @@ public class GUIFactory {
 	private GUICanvas canvas;
 	private Controller myController;
 	private GUICommandLine myCommandLine;
+	private static final String PROMPT_TEXT = "PromptText"; 
 
 	public GUIFactory(ResourceBundle myResources, Controller myController, GUICanvas canvas, GUICommandLine cLine){
 		this.myResources = myResources;
@@ -34,32 +35,26 @@ public class GUIFactory {
 			return new GUISaveLoad(myResources, myController, canvas);
 		}
 		case("ImageComboBox"):{
-			return new GUIComboBoxImages(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
+			return new GUIComboBoxImages(canvas, myResources, myResources.getString(nodeTypeKey+PROMPT_TEXT));
 		}
 		case("LanguageComboBox"):{
 			return new GUIComboBoxLanguages(canvas, myResources, myController, 
-					myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
+					myResources.getString(nodeTypeKey+PROMPT_TEXT), myCommandLine);
 		}
 		case("VariablesTableView"):{
 			return new GUITableView(myResources, myController.getVariableDictionary());
 		}
 		case("UserCommandsComboBox"):{
 			return new GUIComboBoxUserHist(canvas, myResources, myController,
-					myResources.getString(nodeTypeKey + "PromptText"), myCommandLine, myController.getCommandDictionary());
+					myResources.getString(nodeTypeKey + PROMPT_TEXT), myCommandLine, myController.getCommandDictionary());
 		}
 		case("PreviousCommandsComboBox"):{
 			return new GUIComboBoxCommandHist(canvas, myResources, myController, 
-					myResources.getString(nodeTypeKey+"PromptText"), myCommandLine);
+					myResources.getString(nodeTypeKey+PROMPT_TEXT), myCommandLine);
 		}
 		case("HelpTabPane"):{
 			return null;
 		}
-//		case("TurtleState"):{
-//			return new GUITurtleState(myResources,
-//					new GUILabeled(myResources, myResources.getString("TurtleLocation")),
-//					new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
-//					new GUILabeled(myResources, myResources.getString("TurtlePen")));
-//		}
 		case("CanvasRight"):{
 			return new GUICanvasRight(myResources, new GUIComboBoxColorB(canvas, myResources, myResources.getString("BackgroundColorPalettePromptText"),
 					myResources.getString("DefaultBackgroundColors")), new GUIComboBoxColorP(canvas, myResources, 
