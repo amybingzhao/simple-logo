@@ -140,7 +140,7 @@ public class Controller {
      * @param myFile: XML file to load.
      */
     public void loadXML(File myFile) {
-        myXMLParser = new XMLParser(this);
+        myXMLParser = new XMLParser();
         try {
             myXMLParser.parse(myFile);
         } catch (IOException | ParserConfigurationException | SAXException e) {

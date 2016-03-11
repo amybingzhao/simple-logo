@@ -32,18 +32,12 @@ public class XMLParser {
 	private DocumentBuilderFactory myFactory;
 	private DocumentBuilder myBuilder;
 
-	private Controller myController;
-
 	private String backgroundColor;
 	private String penColor;
 	private String turtleImage;
 	private List<String> extractedData;
 	private List<String> commandStrings;
 	private List<String> variableStrings;
-
-	public XMLParser(Controller controller) {
-		myController = controller;
-	}
 
 	/**
 	 * Given a file, extracts information from the DOM elements to use them for
