@@ -15,8 +15,8 @@ public class SetPosition extends TurtleNode {
 
     /**
      * Moves the turtle to the given position and returns the distance moved.
-     *  @param commandDict
-     * @param varDict
+     *  @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
      */
     @Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
@@ -30,8 +30,8 @@ public class SetPosition extends TurtleNode {
 	}
 
     /**
-     * Returns the required user input for this command.
-     */
+	 * Returns the class name and its children.
+	 */
     @Override
     public String toString() {
         return SETXY + childrenToString();

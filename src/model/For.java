@@ -18,8 +18,9 @@ public class For extends Node {
 
     /**
      * Repeats the given commands for the given start and end limits and the given increment.
-     *  @param commandDict
-     * @param varDict*/
+     * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
+     */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         List<IFunctions> children = getChildren();
@@ -42,8 +43,8 @@ public class For extends Node {
     }
 
     /**
-     * Returns the required user input for this command.
-     */
+	 * Returns the class name and its children.
+	 */
     public String toString() {
         return FOR + childrenToString();
     }

@@ -11,6 +11,9 @@ public class VariableDictionary {
     private static double DEFAULT = 0;
     private Map<String, Double> myVariables;
 
+    /**
+     * Creates a VariableDictionary and instantiates the myVariables map.
+     */
     public VariableDictionary() {
         myVariables = new HashMap<>();
     }
@@ -57,10 +60,18 @@ public class VariableDictionary {
         return myVariables.keySet();
     }
 
+    /**
+     * Replaces the variable map with new data.
+     * @param newData
+     */
     public void setVariableMap(Map<String, Double> newData){
         myVariables = newData;
     }
 
+    /**
+     * Creates a clone of the current variable dictionary.
+     * @return clone of current variable dictionary.
+     */
     public VariableDictionary createClone(){
         VariableDictionary newVarDict = new VariableDictionary();
         newVarDict.setVariableMap(new HashMap<>(myVariables));

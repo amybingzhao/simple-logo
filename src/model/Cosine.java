@@ -11,16 +11,17 @@ public class Cosine extends Node {
 
     /**
      * Returns the cosine of the expression, where the expression is given in degrees.
-     *  @param commandDict
-     * @param varDict*/
+    * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
+     * */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         return Math.cos(Math.toRadians(getChildren().get(DEGREES).interpret(commandDict, varDict)));
     }
 
     /**
-     * Returns the required user input for this command.
-     */
+	 * Returns the class name and its children.
+	 */
     @Override
     public String toString() {
         return COSINE + childrenToString();

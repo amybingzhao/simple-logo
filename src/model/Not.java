@@ -12,8 +12,8 @@ public class Not extends BooleanNode {
 
     /**
      * If the given expression is false, return 1; else return 0.
-     *  @param commandDict
-     * @param varDict
+     *  @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
      */
     @Override
     protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)
@@ -22,8 +22,8 @@ public class Not extends BooleanNode {
    	}
 
     /**
-     * Returns the required user input for this command.
-     */
+	 * Returns the class name and its children.
+	 */
     public String toString() {
         return NOT + childrenToString();
     }

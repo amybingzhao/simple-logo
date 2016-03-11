@@ -1,17 +1,22 @@
 package guipackage;
 
+import java.util.List;
+
 import javafx.scene.paint.Color;
 
 public class GUICanvasPen {
 	private static final String SOLID_LINE = "Solid Line";
 	private static final int DEFAULT_PEN_SIZE = 3;
 	private static final Color DEFAULT_PEN_COLOR = Color.BLACK;
+	private static final int DEFAULT_PEN_COUNTER = 0;
 	
 	private double myPenSize;
 	private String myPenType;
 	private int myPenColorIndex;
 	private String myPenRGB;
 	private Color myPenColor;
+	private int myPenCounter;
+	private List<String> myPenPalette;
 	
 	public GUICanvasPen(){
 		myPenSize = DEFAULT_PEN_SIZE;
@@ -19,7 +24,9 @@ public class GUICanvasPen {
 		myPenColorIndex = 0;
 		myPenRGB = DEFAULT_PEN_COLOR.getRed() + " " + DEFAULT_PEN_COLOR.getGreen() + " " + DEFAULT_PEN_COLOR.getBlue();
 		myPenColor = DEFAULT_PEN_COLOR;
+		myPenCounter = DEFAULT_PEN_COUNTER;
 	}
+	
 
 	protected double getMyPenSize() {
 		return myPenSize;
@@ -55,11 +62,38 @@ public class GUICanvasPen {
 
 	protected Color getMyPenColor() {
 		return myPenColor;
-	}
-
-	protected void setMyPenColor(Color myPenColor) {
-		this.myPenColor = myPenColor;
+	}	
+	
+	public void setMyPenColor(int index){
+		this.myPenColorIndex = index;
+		String[] rgb = myPenPalette.get(index).split(" ");
+		Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
+		setMyPenColor(col, myPenPalette.get(index));
 	}
 	
+	public void setMyPenColor(Color c, String penColorName) {
+		this.myPenColor = c;
+		this.myPenRGB = penColorName;
+		for(String turtleName:myPenPalette){
+			if(turtleName.equals(penColorName)){
+				this.myPenColorIndex = myPenPalette.indexOf(penColorName);
+			}
+		}
+	}
 	
+	protected void incrementMyPenCounter(){
+		this.myPenCounter++;
+	}
+	
+	protected int getMyPenCounter(){
+		return myPenCounter;
+	}
+	
+	protected void resetPenCounter(){
+		this.myPenCounter = DEFAULT_PEN_COUNTER;
+	}
+	
+	protected void setMyPenPalette(List<String> palette){
+		this.myPenPalette = palette;
+	}
 }
