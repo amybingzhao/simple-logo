@@ -10,7 +10,7 @@ public class SetShape extends DisplayNode {
 	 */
 	@Override
 	protected void performCanvasOperation(GUICanvas canvas, double val) {
-		canvas.setTurtleShape((int) val);
+		canvas.getTurtleImageView().setTurtleShape((int) val);
 	}
 
 	/**

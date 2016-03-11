@@ -12,7 +12,7 @@ public class GetShape extends DisplayNode {
 	@Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
             throws ClassNotFoundException {
-		return getCanvas().getTurtleShapeIndex();
+		return getCanvas().getTurtleImageView().getTurtleShapeIndex();
 	}
 	
 	/**
