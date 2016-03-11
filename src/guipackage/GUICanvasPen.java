@@ -2,7 +2,6 @@ package guipackage;
 
 import java.util.List;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class GUICanvasPen {
@@ -63,17 +62,8 @@ public class GUICanvasPen {
 
 	protected Color getMyPenColor() {
 		return myPenColor;
-	}
-
-//	protected void setMyPenColor(Color myPenColor) {
-//		this.myPenColor = myPenColor;
-//	}
+	}	
 	
-	
-	/**
-	 * Sets Pen color based on index within palette.
-	 * @param index of color in palette.
-	 */
 	public void setMyPenColor(int index){
 		this.myPenColorIndex = index;
 		String[] rgb = myPenPalette.get(index).split(" ");
@@ -81,10 +71,6 @@ public class GUICanvasPen {
 		setMyPenColor(col, myPenPalette.get(index));
 	}
 	
-	/**
-	 * Sets Pen color based on User preference.
-	 * @param Color that user chose.
-	 */
 	public void setMyPenColor(Color c, String penColorName) {
 		this.myPenColor = c;
 		this.myPenRGB = penColorName;
@@ -94,8 +80,6 @@ public class GUICanvasPen {
 			}
 		}
 	}
-	
-	
 	
 	protected void incrementMyPenCounter(){
 		this.myPenCounter++;

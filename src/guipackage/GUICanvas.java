@@ -312,9 +312,6 @@ public class GUICanvas implements Observer{
 		gcBackground.fillRect(DEFAULT, DEFAULT, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
 	
-	/**
-	 * Returns current background color of canvas.
-	 */
 	public String getBackgroundColor(){
 		return myBackgroundRGB;
 	}
