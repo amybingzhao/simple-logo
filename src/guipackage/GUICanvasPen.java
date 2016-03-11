@@ -21,7 +21,9 @@ public class GUICanvasPen {
 		myPenColorIndex = 0;
 		myPenRGB = DEFAULT_PEN_COLOR.getRed() + " " + DEFAULT_PEN_COLOR.getGreen() + " " + DEFAULT_PEN_COLOR.getBlue();
 		myPenColor = DEFAULT_PEN_COLOR;
+		myPenCounter = DEFAULT_PEN_COUNTER;
 	}
+	
 
 	protected double getMyPenSize() {
 		return myPenSize;

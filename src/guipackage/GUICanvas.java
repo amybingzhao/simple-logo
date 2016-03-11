@@ -266,8 +266,6 @@ public class GUICanvas implements Observer{
 		gc.clearRect(DEFAULT, DEFAULT, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
 	
-	//------------------------------------------------------------------------------------------------------------------------
-	
 	/**
 	 * returns index in given palette of given turtle image name.
 	 * @param String imageName
