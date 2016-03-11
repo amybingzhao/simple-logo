@@ -1,8 +1,5 @@
 package guipackage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.paint.Color;
 
@@ -20,7 +17,7 @@ public class GUIComboBoxColorP extends GUIComboBoxColor {
 
 	@Override
 	protected void setCanvasValues(Color col) {
-		canvas.setPenColor(col, comboBox.getValue());
+		canvas.getPen().setMyPenColor(col, comboBox.getValue());
 	}
 	
 }

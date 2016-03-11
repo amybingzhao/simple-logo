@@ -7,7 +7,9 @@ import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 public class GUISaveLoad implements IGUIObject {
@@ -59,13 +61,25 @@ public class GUISaveLoad implements IGUIObject {
     
     private void loadCanvasProperties() {
     	myController.loadXML(promptForFileName(false));
-    	myCanvas.setBackgroundColor(myCanvas.stringToColor(myController.getXMLParser().getBackgroundColor()),
+    	myCanvas.setBackgroundColor(stringToColor(myController.getXMLParser().getBackgroundColor()),
     			myController.getXMLParser().getBackgroundColor());
-    	myCanvas.setPenColor(myCanvas.stringToColor(myController.getXMLParser().getPenColor()),
+    	myCanvas.getPen().setMyPenColor(stringToColor(myController.getXMLParser().getPenColor()),
     			myController.getXMLParser().getPenColor());
-    	myCanvas.setTurtleShape(myCanvas.stringToImage(myController.getXMLParser().getTurtleImage()),
+    	myCanvas.setTurtleShape(stringToImage(myController.getXMLParser().getTurtleImage()),
     			myController.getXMLParser().getTurtleImage());
     }
+    
+    private Image stringToImage(String imageString){
+    	Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageString));
+		return image;
+    }
+    
+    private Color stringToColor(String colorString) {
+		String[] rgb = colorString.split(" ");
+		Color col = Color.rgb((int) Double.parseDouble(rgb[0]),
+				(int) Double.parseDouble(rgb[1]), (int) Double.parseDouble(rgb[2]));
+		return col;
+	}
 
 	@Override
 	public void updateNode() {
