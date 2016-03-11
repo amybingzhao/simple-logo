@@ -11,8 +11,9 @@ public class CommandList extends Node {
 
     /**
      * Interprets a list of commands, executing each command within the list.
-     *  @param commandDict
-     * @param varDict*/
+     * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
+     */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         List<IFunctions> children = getChildren();

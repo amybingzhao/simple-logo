@@ -11,8 +11,8 @@ public class Backward extends TurtleNode {
 
 	/**
      * Moves the turtle backwards a given distance and returns the distance moved.
-     * @param commandDict
-     * @param varDict
+     * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
      */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {

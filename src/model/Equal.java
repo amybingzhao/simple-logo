@@ -12,8 +12,8 @@ public class Equal extends BooleanNode {
 	
 	/**
      * Returns 1 if the all expressions are equal; 0 otherwise.
-     * @param commandDict
-     * @param varDict
+     * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
      */
 	@Override
 	protected boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict)

@@ -11,8 +11,8 @@ public class Forward extends TurtleNode {
 
 	/**
      * Moves the turtle forward the given distance.
-	 *  @param commandDict
-	 * @param varDict
+	 * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
      */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict,

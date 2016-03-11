@@ -11,8 +11,8 @@ public class And extends BooleanNode {
 
     /**
      * If all child expressions are true, returns true.
-     * @param commandDict
-     * @param varDict
+     * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
      * @throws IndexOutOfBoundsException
      * @throws NullPointerException 
      * @throws ClassNotFoundException 
