@@ -212,7 +212,7 @@ public class GUICanvas implements Observer{
 			myAnimation.addAnimation(currentImageView, normalizeCoordinates(parameters[0]), 
 					normalizeCoordinates(parameters[1]), normalizeCoordinates(myX),
 					normalizeCoordinates(myY), turtle.getDirection() - parameters[2]);
-			myTurtleImageView.updateImageView(currentImageView, myX, myY, turtle.getDirection(), turtleShape);
+//			myTurtleImageView.updateImageView(currentImageView, myX, myY, turtle.getDirection(), turtleShape);
 		}
 		if (!turtle.isPenUp()) {
 			drawLine(gcDrawing, myX, myY);
