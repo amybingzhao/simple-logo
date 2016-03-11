@@ -23,7 +23,7 @@ public class GUIComboBoxLanguages extends GUIComboBox {
 
 	@Override
 	protected List<String> optionsList() {
-		return new ArrayList<String>(Arrays.asList(myResources.getString("Languages").split(" ")));
+		return new ArrayList<>(Arrays.asList(myResources.getString("Languages").split(" ")));
 	}
 	
 	@Override

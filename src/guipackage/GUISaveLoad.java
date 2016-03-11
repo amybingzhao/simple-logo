@@ -70,21 +70,17 @@ public class GUISaveLoad implements IGUIObject {
     }
     
     private Image stringToImage(String imageString){
-    	Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageString));
-		return image;
+    	return new Image(getClass().getClassLoader().getResourceAsStream(imageString));
     }
     
     private Color stringToColor(String colorString) {
 		String[] rgb = colorString.split(" ");
-		Color col = Color.rgb((int) Double.parseDouble(rgb[0]),
+		return Color.rgb((int) Double.parseDouble(rgb[0]),
 				(int) Double.parseDouble(rgb[1]), (int) Double.parseDouble(rgb[2]));
-		return col;
 	}
 
 	@Override
 	public void updateNode() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

@@ -27,7 +27,7 @@ public class GUIComboBoxUserHist extends GUIComboBox {
 
     @Override
     protected List<String> optionsList() {
-        List<String> userDefinedCommands = new ArrayList<String>();
+        List<String> userDefinedCommands = new ArrayList<>();
         for (String s : myUserDefinedCommands.getCommandKeySet()) {
             userDefinedCommands.add(s);
         }

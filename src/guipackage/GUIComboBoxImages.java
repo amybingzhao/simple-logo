@@ -22,8 +22,8 @@ public class GUIComboBoxImages extends GUIComboBox {
 	
 	public GUIComboBoxImages(GUICanvas canvas, ResourceBundle myResources, String promptText) {
 		super(canvas, myResources, promptText);
-		imageMap = new HashMap<String, ImageView>();
-		imageNames = new ArrayList<String>();
+		imageMap = new HashMap<>();
+		imageNames = new ArrayList<>();
 		fillImageNames();
 		fillImageMap();
 	}

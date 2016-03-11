@@ -6,7 +6,6 @@ import java.util.Observer;
 import model.Turtle;
 
 public class TurtleObserver implements Observer{
-	private GUICanvas myCanvas;
 	private double myX;
 	private double myY;
 	private double myDirection;
@@ -16,10 +15,6 @@ public class TurtleObserver implements Observer{
 	private boolean reset;
 	private boolean showing;
 	private double myID;
-	
-	public TurtleObserver(GUICanvas canvas) {
-		myCanvas = canvas;
-	}
 
 	@Override
 	public void update(Observable o, Object arg) {
