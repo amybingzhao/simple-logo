@@ -266,7 +266,7 @@ public class Parser {
      * @throws ClassNotFoundException
      */
     private Node getFunctionObject(String name) throws ClassNotFoundException {
-        Class className = Class.forName(MODEL + name);
+        Class<?> className = Class.forName(MODEL + name);
         try {
             if (isTurtleCommand(name)) {
             	TurtleNode myNode = (TurtleNode) className.newInstance();
