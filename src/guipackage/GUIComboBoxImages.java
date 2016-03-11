@@ -47,8 +47,7 @@ public class GUIComboBoxImages extends GUIComboBox {
 	
 	@Override
 	protected Node getNodeForBox(String item){
-        ImageView imageView = imageMap.get(item);
-        return imageView;
+        return imageMap.get(item);
 	}
 	
 	@Override
