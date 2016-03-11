@@ -10,8 +10,7 @@ public class And extends BooleanNode {
     private static final String AND = "And ";
 
     /**
-     * If all expressions are true, returns true.
-     *
+     * If all child expressions are true, returns true.
      * @param commandDict
      * @param varDict
      * @throws IndexOutOfBoundsException
@@ -24,8 +23,8 @@ public class And extends BooleanNode {
 	}
 
     /**
-     * Returns the required user input for this command.
-     */
+	 * Returns the class name and its children.
+	 */
     public String toString() {
         return AND + childrenToString();
     }

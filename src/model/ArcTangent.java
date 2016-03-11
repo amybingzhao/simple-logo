@@ -6,7 +6,7 @@ package model;
  */
 public class ArcTangent extends Node {
 
-    private static final String ARC_TANGENT = "ArcTangent ";	// is there a reason why this is public?
+    private static final String ARC_TANGENT = "ArcTangent ";
     private static final int DEGREES = 0;
     
     /**
@@ -20,7 +20,7 @@ public class ArcTangent extends Node {
     }
 
     /**
-	 * Returns the required user input for this command. 
+	 * Returns the class name and its children.
 	 */
     @Override
     public String toString() {
