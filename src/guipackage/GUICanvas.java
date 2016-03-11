@@ -26,7 +26,7 @@ import model.Turtle;
  * Returns one Node that contains the Turtle Canvas and two ColorPicker objects
  * (for background and pen)
  *
- * @author AnnieTang, David Yang
+ * @author DavidYang
  */
 
 public class GUICanvas implements Observer{
@@ -206,12 +206,13 @@ public class GUICanvas implements Observer{
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 		if (turtle.showing()) {
-			Double[] parameters = turtleParameters.get((int) turtle.getID() - 1);
+//			Double[] parameters = turtleParameters.get((int) turtle.getID() - 1);
 			ImageView currentImageView = turtle.getImageView();
 			root.getChildren().remove(currentImageView);
 //			myAnimation.makeAnimation(currentImageView, parameters[0], parameters[1], myX, myY, turtle.getDirection() - parameters[2]);
 			currentImageView.setX(myX);
 			currentImageView.setY(myY);
+			currentImageView.setRotate(turtle.getDirection());
 			root.getChildren().add(currentImageView);
 //			myAnimation.play();
 		}
@@ -301,6 +302,8 @@ public class GUICanvas implements Observer{
 	public GraphicsContext getBackgroundGraphicsContext(){
 		return gcBackground;
 	}	
+	
+	//------------------------------------------------------------------------------------------------------------------------
 	
 	/**
 	 * returns index in given palette of given turtle image name.
@@ -433,7 +436,7 @@ public class GUICanvas implements Observer{
 	}
 	
 	/**
-	 * returns current pen color as space separated RGB
+	 * returns current Pen object
 	 * @return
 	 */
 	public GUICanvasPen getPen() {
