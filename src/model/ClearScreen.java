@@ -24,7 +24,7 @@ public class ClearScreen extends TurtleNode {
 	}
 
 	/**
-	 * Returns the required user input for this command. 
+	 * Returns the class name.
 	 */
 	@Override
 	public String toString() {

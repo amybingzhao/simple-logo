@@ -28,7 +28,7 @@ public class Constant extends Node {
     }
 
     /**
-	 * Returns the required user input for this command. 
+	 * Returns the value of this constant.
 	 */
     @Override
     public String toString() {

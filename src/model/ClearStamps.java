@@ -24,6 +24,9 @@ public class ClearStamps extends DisplayNode {
 		// do nothing
 	}
 
+	/**
+	 * Returns the class name.
+	 */
 	@Override
 	public String toString() {
 		return CLEAR_STAMP;
