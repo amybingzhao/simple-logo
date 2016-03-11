@@ -86,7 +86,8 @@ public class GUICanvas implements Observer{
 				new GUIPenSettings(myResources, this),
 				new GUITurtleState(myResources, new GUILabeled(myResources, myResources.getString("TurtleLocation")),
 												new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
-												new GUILabeled(myResources, myResources.getString("TurtlePen"))));
+												new GUILabeled(myResources, myResources.getString("TurtlePen")),
+												new GUILabeled(myResources, myResources.getString("TurtleActive"))));
 		myPen.setMyPenPalette(canvasRight.getPenPalette());
 		myBackgroundCanvas.setMyBackgroundPalette(canvasRight.getBackgroundPalette());
 		myTurtleImageView.setMyImagePalette(canvasRight.getImagePalette());
