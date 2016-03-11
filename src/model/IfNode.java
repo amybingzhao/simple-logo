@@ -5,9 +5,10 @@ import java.util.List;
 public abstract class IfNode extends Node {
 	private static final int EXPR = 0;
 	private static final int TRUE_COMMANDS = 1;
-	private static final int FALSE_COMMANDS = 2;
-	
-	/**
+    private static final int FALSE_COMMANDS = 2;
+    private static final int TWO_CHILDREN = 2;
+
+    /**
 	 * Checks if a value is non-zero.
 	 * @param val: value to check.
 	 * @return true if value is non-zero; false o.w.
@@ -30,7 +31,7 @@ public abstract class IfNode extends Node {
 			return children.get(TRUE_COMMANDS).interpret(commandDict, varDict);
 		}
 		else {
-			if (numChildren > 2) {
+			if (numChildren > TWO_CHILDREN) {
 				return children.get(FALSE_COMMANDS).interpret(commandDict, varDict);
 			} else {
 				return 0;
