@@ -21,7 +21,7 @@ public class Backward extends TurtleNode {
 	}
 	
 	/**
-	 * Returns the required user input for this command. 
+	 * Returns the class name and its children.
 	 */
 	@Override
 	public String toString() {
