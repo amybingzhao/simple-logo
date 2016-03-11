@@ -38,6 +38,8 @@ public class XMLParser {
 	private String penColor;
 	private String turtleImage;
 	private List<String> extractedData;
+	private List<String> commandStrings;
+	private List<String> variableStrings;
 
 	public XMLParser(Controller controller) {
 		myController = controller;
@@ -65,6 +67,8 @@ public class XMLParser {
 		for (int i = 0; i < categories.getLength(); i++) {
 			handleDocumentNode(categories.item(i));
 		}
+        getCommandStrings();
+        getVariableStrings();
 	}
 
 	/**
@@ -104,15 +108,16 @@ public class XMLParser {
 	}
 
 	/**
-	 * Parses the information contained in the variables DOM
+	 * Adds the variable string to the variableStrings list
 	 * 
 	 * @param variableElement
 	 *            The provided variables DOM
 	 */
 	private void parseVariables(Element variableElement) {
 		List<String> variableData = extract(variableElement);
+        variableStrings = new ArrayList<>();
 		for (String var : variableData) {
-			myController.processCommand(MAKE + getNameForEntry(var) + " " + getTextForEntry(var));
+			variableStrings.add(MAKE + getNameForEntry(var) + " " + getTextForEntry(var));
 		}
 	}
 
@@ -167,18 +172,19 @@ public class XMLParser {
 	 *            The provided commands DOM
 	 */
 	private void parseCommands(Element commandsElement) {
+        commandStrings = new ArrayList<>();
 		loopThroughNodelist(commandsElement, element -> parseMethodFromElement(element));
 	}
 
 	/**
-	 * Converts command text into a usable command tree
+	 * Adds the command string to the commandString list
 	 * 
 	 * @param myElement
 	 *            A provided command DOM
 	 */
 	private void parseMethodFromElement(Element myElement) {
 		List<String> data = extract(myElement);
-		myController.processCommand(getTextForEntry(data.get(1)));
+		commandStrings.add(getTextForEntry(data.get(1)));
 	}
 
 	/**
@@ -232,6 +238,28 @@ public class XMLParser {
 	 */
 	public String getTurtleImage() {
 		return turtleImage;
+	}
+
+	/**
+	 * Provides a list of the commands to be converted to command trees in the
+	 * controller
+	 * 
+	 * @return A list of command strings
+	 */
+	public List<String> getCommandStrings() {
+        System.out.println(commandStrings);
+		return commandStrings;
+	}
+
+	/**
+	 * Provides a list of the variables to be converted to a usable variable
+	 * object in the controller
+	 * 
+	 * @return A list of variable strings
+	 */
+	public List<String> getVariableStrings() {
+        System.out.println(variableStrings);
+		return variableStrings;
 	}
 
 }
