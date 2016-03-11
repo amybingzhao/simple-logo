@@ -54,8 +54,9 @@ public class GUIComboBoxImages extends GUIComboBox {
 	@Override
 	protected void setButtonAction() {
 		comboButton.setOnAction(event -> {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(comboBox.getValue()));
-		canvas.setTurtleShape(image, comboBox.getValue());
+			Image image = new Image(getClass().getClassLoader().getResourceAsStream(comboBox.getValue()));
+			canvas.getTurtleImageView().setTurtleShape(image, comboBox.getValue());
+			canvas.updateTurtleImageView();
 		});
 	}
 
