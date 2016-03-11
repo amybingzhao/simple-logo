@@ -63,7 +63,11 @@ public class GUIFactory {
 					new GUIPenSettings(myResources, canvas),
 					new GUITurtleState(myResources, new GUILabeled(myResources, myResources.getString("TurtleLocation")),
 													new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
-													new GUILabeled(myResources, myResources.getString("TurtlePen"))));
+													new GUILabeled(myResources, myResources.getString("TurtlePen")),
+													new GUILabeled(myResources, myResources.getString("TurtleActive"))));
+		}
+		case("ShowHide"):{
+			return new GUITurtleStateToggle(myResources, canvas);
 		}
 		}
 		return null;

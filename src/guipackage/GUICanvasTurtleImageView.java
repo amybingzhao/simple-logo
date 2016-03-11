@@ -2,23 +2,27 @@ package guipackage;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javafx.scene.Group;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Turtle;
 
-public class GUICanvasTurtle {
-	private static final String DEFAULT_TURTLE = "turtle_outline.png";
-	private static final int TURTLE_SIZE = 20;
+public class GUICanvasTurtleImageView {
+	private static final String DEFAULT_TURTLE = "tortoise.png";
+	private static final int TURTLE_SIZE = 25;
 	private Group root;
 	private List<String> myImagePalette;
 	private Image myTurtleShape;
 	private String myTurtleShapeName;
 	private int myTurtleShapeIndex;
+	private Map<Turtle, List<GraphicsContext>> myTurtles;
 	
-	public GUICanvasTurtle(Group root) {
+	public GUICanvasTurtleImageView(Group root, Map<Turtle, List<GraphicsContext>> myTurtles) {
 		this.root = root;
+		this.myTurtles = myTurtles;
 		myTurtleShape = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
 		myTurtleShapeName = DEFAULT_TURTLE;
 		myTurtleShapeIndex = 0;
@@ -40,7 +44,6 @@ public class GUICanvasTurtle {
 		turtleImageView.setY(y);
 		turtleImageView.setOnMouseEntered(event -> {
 				 canvasRight.showTurtleState(turtle);
-				 //canvasRight is null
 		});
 		turtleImageView.setOnMouseClicked(event -> {
 			turtle.setActive(!turtle.isActive());
@@ -104,4 +107,21 @@ public class GUICanvasTurtle {
 		return myTurtleShapeIndex;
 	}
 	
+	protected void setVisibility(String visibility){
+		boolean showInactive = Boolean.parseBoolean(visibility);
+		if(showInactive){
+			for(Turtle turtle:myTurtles.keySet()){
+				if(!root.getChildren().contains(turtle.getImageView())){
+					root.getChildren().add(turtle.getImageView());
+				}
+			}
+		}
+		else{
+			for(Turtle turtle:myTurtles.keySet()){
+				if(!turtle.isActive()){
+					root.getChildren().remove(turtle.getImageView());
+				}
+			}
+		}
+	}	
 }

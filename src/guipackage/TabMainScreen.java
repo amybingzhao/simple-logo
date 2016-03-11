@@ -31,6 +31,7 @@ public class TabMainScreen {
 	private IGUIObject variables;
 	private IGUIObject languageSelector;
 	private IGUIObject saveLoad;
+	private IGUIObject showHide;
 
     private Stage myStage;
     private String tabText;
@@ -86,9 +87,10 @@ public class TabMainScreen {
 		previousCommands = myFactory.createNewGUIObject("PreviousCommands");
 		languageSelector = myFactory.createNewGUIObject("LanguageSelector");
 		saveLoad = myFactory.createNewGUIObject("SaveLoad");
+		showHide = myFactory.createNewGUIObject("ShowHide");
 		leftPanel.getChildren().addAll(userCommands.createNode(), 
 				previousCommands.createNode(), languageSelector.createNode(), 
-				saveLoad.createNode());
+				saveLoad.createNode(), showHide.createNode());
 		myMainScreen.setLeft(leftPanel);
 	}
 	

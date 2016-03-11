@@ -47,7 +47,7 @@ public class GUICanvas implements Observer{
 	private GUICanvasPen myPen;
 	private GUICanvasRight canvasRight;
 	private Group root;
-	private GUICanvasTurtle myTurtleImageView;
+	private GUICanvasTurtleImageView myTurtleImageView;
 	private GUICanvasBackground myBackgroundCanvas;
 	private HBox toReturn;
 	
@@ -61,7 +61,7 @@ public class GUICanvas implements Observer{
 		myBackgroundCanvas = new GUICanvasBackground(CANVAS_WIDTH, CANVAS_HEIGHT);
 		myCanvasRoot = new Pane(myBackgroundCanvas.getCanvas(), canvasStamps);
 		root = new Group(myCanvasRoot);
-		myTurtleImageView = new GUICanvasTurtle(root);
+		myTurtleImageView = new GUICanvasTurtleImageView(root, myTurtles);
 		setRightCanvas();
 	}
 	
@@ -86,7 +86,8 @@ public class GUICanvas implements Observer{
 				new GUIPenSettings(myResources, this),
 				new GUITurtleState(myResources, new GUILabeled(myResources, myResources.getString("TurtleLocation")),
 												new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
-												new GUILabeled(myResources, myResources.getString("TurtlePen"))));
+												new GUILabeled(myResources, myResources.getString("TurtlePen")),
+												new GUILabeled(myResources, myResources.getString("TurtleActive"))));
 		myPen.setMyPenPalette(canvasRight.getPenPalette());
 		myBackgroundCanvas.setMyBackgroundPalette(canvasRight.getBackgroundPalette());
 		myTurtleImageView.setMyImagePalette(canvasRight.getImagePalette());
@@ -280,7 +281,7 @@ public class GUICanvas implements Observer{
 		return myBackgroundCanvas;
 	}
 	
-	public GUICanvasTurtle getTurtleImageView(){
+	public GUICanvasTurtleImageView getTurtleImageView(){
 		return myTurtleImageView;
 	}
 

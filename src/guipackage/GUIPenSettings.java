@@ -9,11 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class GUIPenSettings implements IGUIObject{
 	private static final int PADDING = 10;
-	private static final int VBOX_SPACING = 10;
+	private static final int BOX_SPACING = 10;
 	private ResourceBundle myResources;
 	private GUICanvas myCanvas;
 	private GUICanvasPen myPen;
@@ -37,21 +38,26 @@ public class GUIPenSettings implements IGUIObject{
 	}
 	@Override
 	public Node createNode() {
-		VBox myBox = new VBox(VBOX_SPACING);
-		
+		VBox vboxToReturn = new VBox(BOX_SPACING);
+		VBox vbox1 = new VBox(BOX_SPACING);
+		VBox vbox2 = new VBox(BOX_SPACING);
+		HBox hbox = new HBox(BOX_SPACING);
 		setPenUpDownNodes();
 		setPenTypeNodes();
 		setThicknessNodes();
-
-		myBox.getChildren().addAll(upDownLabel, penUp, penDown, penTypeLabel, penSolid, 
-				penDashed, penDotted, penLabel, penThickness, setThickness);
 		
-		for(Node child: myBox.getChildren()){
+		vbox1.getChildren().addAll(upDownLabel, penUp, penDown);
+		vbox2.getChildren().addAll(penTypeLabel, penSolid, 
+				penDashed, penDotted);
+		hbox.getChildren().addAll(vbox1,vbox2);
+		vboxToReturn.getChildren().addAll(hbox, penLabel, penThickness, setThickness);
+		
+		for(Node child: vboxToReturn.getChildren()){
 			child.setStyle(myResources.getString("FontStyle"));
 		}
 		
-		myBox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
-		return myBox;
+		vboxToReturn.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
+		return vboxToReturn;
 	}
 	
 	private void setPenUpDownNodes() {
