@@ -11,8 +11,8 @@ public class Left extends TurtleNode {
 
     /**
      * Rotates the turtle CCW the given number of degrees.
-     *  @param commandDict
-     * @param varDict
+     * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
      */
     @Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
@@ -22,8 +22,8 @@ public class Left extends TurtleNode {
 	}
 
     /**
-     * Returns the required user input for this command.
-     */
+	 * Returns the class name and its children.
+	 */
     @Override
     public String toString() {
         return LEFT + childrenToString();
