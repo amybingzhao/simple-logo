@@ -7,6 +7,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 /**
  * Create tab for main screen (canvas, command line, options, etc.) 
  * @author AnnieTang
@@ -75,10 +76,12 @@ public class TabMainScreen {
 	 * Next 5 methods all place GUIObjects on the Pane.
 	 */
 	private void setCenterPane() {
+		HBox hbox = new HBox();
 		Node canvasNode = canvas.createNode();
 		rightOfCanvas = (GUICanvasRight) myFactory.createNewGUIObject("CanvasRight");
-		canvas.addObjectToRight(rightOfCanvas);
-		myMainScreen.setCenter(canvasNode);
+		canvas.setRightCanvas(rightOfCanvas);
+		hbox.getChildren().addAll(canvasNode, rightOfCanvas.createNode());
+		myMainScreen.setCenter(hbox);
 	}
 
 	private void setLeftPane() {

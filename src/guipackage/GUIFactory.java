@@ -66,10 +66,9 @@ public class GUIFactory {
 							myResources.getString("PenColorPalettePromptText"), myResources.getString("DefaultPenColors")),
 					new GUIComboBoxImages(canvas, myResources, myResources.getString("ImageComboBoxPromptText")),
 					new GUIPenSettings(myResources, canvas),
-					new GUITurtleState(myResources,
-					new GUILabeled(myResources, myResources.getString("TurtleLocation")),
-					new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
-					new GUILabeled(myResources, myResources.getString("TurtlePen"))));
+					new GUITurtleState(myResources, new GUILabeled(myResources, myResources.getString("TurtleLocation")),
+													new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
+													new GUILabeled(myResources, myResources.getString("TurtlePen"))));
 		}
 		}
 		return null;

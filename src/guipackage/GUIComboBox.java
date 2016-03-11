@@ -99,7 +99,8 @@ public abstract class GUIComboBox implements IGUIObject {
 		                     setGraphic(null);
 		                 } else {
 		                	 HBox hbox = new HBox();
-		                	 Label lbl = new Label(item);
+		                	 int index = options.indexOf(item);
+		                	 Label lbl = new Label(item + " | " + index);
 		                     hbox.getChildren().addAll(getNodeForBox(item), lbl);
 		                     setGraphic(hbox);
 		                 }

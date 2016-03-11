@@ -10,7 +10,8 @@ public class SetPenColor extends DisplayNode {
 	 */
 	@Override
 	protected void performCanvasOperation(GUICanvas canvas, double val) {
-		canvas.setPenColor((int) val);
+		canvas.getPen().setMyPenColor((int) val);
+//		canvas.setPenColor((int) val);
 	}
 	
 	/**
