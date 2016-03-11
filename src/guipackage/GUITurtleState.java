@@ -20,6 +20,7 @@ public class GUITurtleState implements IGUIObject {
 	private Node penNode;
 	private Node activeNode;
 	private ResourceBundle myResources;
+	private String fontStyle;
 	
 	
 	public GUITurtleState(ResourceBundle myResources, GUILabeled locationLabel, GUILabeled headingLabel, 
@@ -29,6 +30,7 @@ public class GUITurtleState implements IGUIObject {
 		this.headingLabeled = headingLabel;
 		this.penLabeled = penLabel;
 		this.activeLabeled = activeLabel;
+		this.fontStyle = myResources.getString("FontStyle");
 	}
 
 	@Override
@@ -50,10 +52,10 @@ public class GUITurtleState implements IGUIObject {
 		headingNode = headingLabeled.createNode();
 		penNode = penLabeled.createNode();
 		activeNode = activeLabeled.createNode();
-		locationNode.setStyle(myResources.getString("FontStyle"));
-		headingNode.setStyle(myResources.getString("FontStyle"));
-		penNode.setStyle(myResources.getString("FontStyle"));
-		activeNode.setStyle(myResources.getString("FontStyle"));
+		locationNode.setStyle(fontStyle);
+		headingNode.setStyle(fontStyle);
+		penNode.setStyle(fontStyle);
+		activeNode.setStyle(fontStyle);
 	}
 
 	@Override
