@@ -19,8 +19,8 @@ public class Minus extends Node {
     }
 
     /**
-     * Returns the required user input for this command.
-     */
+	 * Returns the class name and its children.
+	 */
     @Override
     public String toString() {
         return MINUS + childrenToString();

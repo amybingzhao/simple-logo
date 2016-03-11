@@ -34,6 +34,11 @@ public class CommandDictionary {
         }
     }
     
+    /**
+     * Creates a placeholder entry for a command that is defined but not yet made.
+     * @param key: name of command.
+     * @param numParams: number of parameters.
+     */
     public void createPlaceholderCommand(String key, int numParams) {
     	Command placeHolder = new Command(key);
     	myNumArguments.put(key, numParams);
@@ -57,6 +62,11 @@ public class CommandDictionary {
     }
 
 
+    /**
+     * Stores the text that created the given command.
+     * @param key: command name.
+     * @param commandText: text that created the given command.
+     */
     public void storeCommandText(String key, String commandText) {
         myCommandText.put(key, commandText);
     }
@@ -73,8 +83,7 @@ public class CommandDictionary {
 
     /**
      * Sets the number of arguments required for a given command.
-     *
-     * @param key:     command name.
+     * @param key: command name.
      * @param numArgs: number of arguments required.
      */
     public void setNumArguments(String key, int numArgs) {
@@ -83,7 +92,6 @@ public class CommandDictionary {
 
     /**
      * Gets the number of arguments required for a given command.
-     *
      * @param key: command name.
      * @return number of arguments required.
      */
@@ -91,6 +99,11 @@ public class CommandDictionary {
         return myNumArguments.get(key);
     }
 
+    /**
+     * Gets the text used to create the command.
+     * @param key: command name.
+     * @return the String used to create the command.
+     */
     public String getCommandTextForKey(String key) { return myCommandText.get(key); }
 
     /**
@@ -102,6 +115,10 @@ public class CommandDictionary {
         return myCommands.keySet();
     }
 
+    /**
+     * Gets the set of command names already defined and whose command texts are available.
+     * @return existing set of command names whose command texts are available.
+     */
     public Set<String> getCommandTextKeySet() {
         return myCommandText.keySet();
     }

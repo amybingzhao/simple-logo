@@ -15,8 +15,8 @@ public class SetTowards extends TurtleNode {
 	
 	/**
      * Turns the turtle to face the given (x, y) position.
-     * @param commandDict
-     * @param varDict
+     * @param commandDict: command dictionary of current workspace.
+     * @param varDict: variable dictionary of current workspace.
      */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
@@ -26,7 +26,7 @@ public class SetTowards extends TurtleNode {
 	}
 
 	/**
-	 * Returns the required user input for this command. 
+	 * Returns the class name and its children.
 	 */
 	@Override
 	public String toString() {
