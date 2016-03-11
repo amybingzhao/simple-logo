@@ -1,5 +1,8 @@
 package guipackage;
 
+import java.util.List;
+
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class GUICanvasPen {
@@ -14,6 +17,7 @@ public class GUICanvasPen {
 	private String myPenRGB;
 	private Color myPenColor;
 	private int myPenCounter;
+	private List<String> myPenPalette;
 	
 	public GUICanvasPen(){
 		myPenSize = DEFAULT_PEN_SIZE;
@@ -61,9 +65,37 @@ public class GUICanvasPen {
 		return myPenColor;
 	}
 
-	protected void setMyPenColor(Color myPenColor) {
-		this.myPenColor = myPenColor;
+//	protected void setMyPenColor(Color myPenColor) {
+//		this.myPenColor = myPenColor;
+//	}
+	
+	
+	/**
+	 * Sets Pen color based on index within palette.
+	 * @param index of color in palette.
+	 */
+	public void setMyPenColor(int index){
+		this.myPenColorIndex = index;
+		String[] rgb = myPenPalette.get(index).split(" ");
+		Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
+		setMyPenColor(col, myPenPalette.get(index));
 	}
+	
+	/**
+	 * Sets Pen color based on User preference.
+	 * @param Color that user chose.
+	 */
+	public void setMyPenColor(Color c, String penColorName) {
+		this.myPenColor = c;
+		this.myPenRGB = penColorName;
+		for(String turtleName:myPenPalette){
+			if(turtleName.equals(penColorName)){
+				this.myPenColorIndex = myPenPalette.indexOf(penColorName);
+			}
+		}
+	}
+	
+	
 	
 	protected void incrementMyPenCounter(){
 		this.myPenCounter++;
@@ -75,5 +107,9 @@ public class GUICanvasPen {
 	
 	protected void resetPenCounter(){
 		this.myPenCounter = DEFAULT_PEN_COUNTER;
+	}
+	
+	protected void setMyPenPalette(List<String> palette){
+		this.myPenPalette = palette;
 	}
 }

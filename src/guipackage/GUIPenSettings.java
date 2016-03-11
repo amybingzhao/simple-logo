@@ -69,7 +69,7 @@ public class GUIPenSettings implements IGUIObject{
 		penDown.setUserData(myResources.getString("PenDown"));
 		
 		penUpDownGroup.selectedToggleProperty().addListener(
-				e -> myCanvas.setPenStatus(penUpDownGroup.getSelectedToggle().getUserData().toString()));
+				e -> myCanvas.setTurtlePenStatus(penUpDownGroup.getSelectedToggle().getUserData().toString()));
 	}
 	
 	private void setPenTypeNodes() {
