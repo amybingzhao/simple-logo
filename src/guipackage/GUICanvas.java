@@ -205,8 +205,9 @@ public class GUICanvas implements Observer{
 	}
 	
 	private double toroidalBounds(double coordinate) {
-		if (coordinate > MAX_COORDINATE || coordinate < MIN_COORDINATE) {
-			coordinate = coordinate%MAX_COORDINATE - MIN_COORDINATE;
+		if (coordinate > MAX_COORDINATE) {
+			coordinate = coordinate%MAX_COORDINATE;
+			System.out.print(coordinate);
 		}
 		else if(coordinate < MIN_COORDINATE){
 			

@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
  */
 public class GUICanvasBackground {
 	private static final Color DEFAULT_BACKGROUND_COLOR = Color.WHITE;
+	private static final int RGB_MAX = 255;
 	private static final int DEFAULT_INT = 0;
 	private int canvasWidth;
 	private int canvasHeight;
@@ -31,7 +32,7 @@ public class GUICanvasBackground {
 		gcBackground = canvasBackground.getGraphicsContext2D();
 		gcBackground.setFill(DEFAULT_BACKGROUND_COLOR);
 		gcBackground.fillRect(0, 0, canvasWidth, canvasHeight);
-		myBackgroundRGB = DEFAULT_BACKGROUND_COLOR.getRed() + " " + DEFAULT_BACKGROUND_COLOR.getGreen() + " " + DEFAULT_BACKGROUND_COLOR.getBlue();
+		myBackgroundRGB = DEFAULT_BACKGROUND_COLOR.getRed()*RGB_MAX + " " + DEFAULT_BACKGROUND_COLOR.getGreen()*RGB_MAX  + " " + DEFAULT_BACKGROUND_COLOR.getBlue()*RGB_MAX ;
 		return canvasBackground;
 	}
 

@@ -9,7 +9,7 @@ public class GUICanvasPen {
 	private static final int DEFAULT_PEN_SIZE = 3;
 	private static final Color DEFAULT_PEN_COLOR = Color.BLACK;
 	private static final int DEFAULT_PEN_COUNTER = 0;
-	
+	private static final int RGB_MAX = 255;
 	private double myPenSize;
 	private String myPenType;
 	private int myPenColorIndex;
@@ -22,7 +22,7 @@ public class GUICanvasPen {
 		myPenSize = DEFAULT_PEN_SIZE;
 		myPenType = SOLID_LINE;
 		myPenColorIndex = 0;
-		myPenRGB = DEFAULT_PEN_COLOR.getRed() + " " + DEFAULT_PEN_COLOR.getGreen() + " " + DEFAULT_PEN_COLOR.getBlue();
+		myPenRGB = DEFAULT_PEN_COLOR.getRed()*RGB_MAX  + " " + DEFAULT_PEN_COLOR.getGreen()*RGB_MAX  + " " + DEFAULT_PEN_COLOR.getBlue()*RGB_MAX ;
 		myPenColor = DEFAULT_PEN_COLOR;
 		myPenCounter = DEFAULT_PEN_COUNTER;
 	}
