@@ -51,12 +51,12 @@ public class GUI implements IGUI {
 		myTabs = new TabPane();
 		Button newTab = new Button(CREATE_NEW_TAB);
 		newTab.setOnAction(event -> createNewTab());
-
+		
 		TabMainScreen mainScreen = new TabMainScreen(myResources.getString(WORKSPACE) + (myTabs.getTabs().size()));
 		TabHelp help1 = new TabHelp(myResources.getString(BASIC_COMMANDS), HELP_TAB_TEXT1);
 		TabHelp help2 = new TabHelp(myResources.getString(EXTENDED_COMMANDS), HELP_TAB_TEXT2);
 		
-		myTabs.getTabs().addAll(mainScreen.getTab(myStage), help1.getTab(), help2.getTab());
+		myTabs.getTabs().add(mainScreen.getTab(myStage));
 		
 		AnchorPane.setTopAnchor(myTabs, TABS_OFFSET);
 		AnchorPane.setTopAnchor(newTab, NEWTAB_OFFSET);

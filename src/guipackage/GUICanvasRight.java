@@ -12,12 +12,12 @@ import model.Turtle;
  *
  */
 public class GUICanvasRight implements IGUIObject {
-	GUIComboBoxColor myBackgroundPalette;
-	GUIComboBoxColor myPenPalette;
-	GUIComboBoxImages myImagePalette;
-	GUIPenSettings myPenSettings;
-	GUITurtleState myTurtleState;
-	ResourceBundle myResources;
+	private GUIComboBoxColor myBackgroundPalette;
+	private GUIComboBoxColor myPenPalette;
+	private GUIComboBoxImages myImagePalette;
+	private GUIPenSettings myPenSettings;
+	private GUITurtleState myTurtleState;
+	private ResourceBundle myResources;
 	
 	public GUICanvasRight(ResourceBundle myResources, GUIComboBoxColor background, GUIComboBoxColor pen, 
 			GUIComboBoxImages images, GUIPenSettings penSettings, GUITurtleState turtleState) {
