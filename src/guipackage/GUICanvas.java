@@ -157,6 +157,10 @@ public class GUICanvas implements Observer{
 		}
 	}
 	
+	/**
+	 * Adds each new turtle to the map when created.
+	 * @param turtle
+	 */
 	private void addTurtleToMap(Turtle turtle){
 		if (!myTurtles.containsKey(turtle)) {
 			Canvas turtleCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -247,6 +251,12 @@ public class GUICanvas implements Observer{
 		return coordinate;
 	}
 	
+	/**
+	 * Draws the pen line by creating a circle every time the turtle is updated.
+	 * @param gcDrawing
+	 * @param myX
+	 * @param myY
+	 */
 	private void drawLine(GraphicsContext gcDrawing, double myX, double myY) {
 		int scaledPen = (int) myPen.getMyPenSize() * PEN_SCALE;
 		switch (myPen.getMyPenType()){
@@ -272,13 +282,23 @@ public class GUICanvas implements Observer{
 			}
 		}
 	}
-
+	
+	/**
+	 * Creates the circle on the canvas.
+	 * @param gcDrawing
+	 * @param myX
+	 * @param myY
+	 */
 	private void drawOval(GraphicsContext gcDrawing, double myX, double myY) {
 		long penSize = Math.round(myPen.getMyPenSize());
 		gcDrawing.fillOval(myX + CENTER_FACTOR - penSize/2, myY + CENTER_FACTOR - penSize/2,
 				penSize, penSize);
 	}
 	
+	/**
+	 * Creates stamps for each turtle when the stamp command is called.
+	 * @return
+	 */
 	public double drawStamps() {
 		for (Turtle turtle: myTurtles.keySet()) {
 			if (turtle.isActive()) {
@@ -289,14 +309,26 @@ public class GUICanvas implements Observer{
 		return myTurtleImageView.getTurtleShapeIndex();
 	}
 	
+	/**
+	 * Clears the stamps that have previously been created.
+	 */
 	public void clearStamps() {
 		clearGraphicsContext(gcStamps);
 	}
 	
+	/**
+	 * Clears the Graphics Context with a large clear rectangle.
+	 * @param gc
+	 */
 	private void clearGraphicsContext(GraphicsContext gc) {
 		gc.clearRect(DEFAULT, DEFAULT, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
 	
+	/**
+	 * Normalizes the coordinates to the center of the node.
+	 * @param coordinate
+	 * @return
+	 */
 	private double normalizeCoordinates(double coordinate) {
 		return coordinate + CENTER_FACTOR;
 	}
