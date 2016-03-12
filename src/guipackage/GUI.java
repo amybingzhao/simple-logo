@@ -56,7 +56,7 @@ public class GUI implements IGUI {
 		TabHelp help1 = new TabHelp(myResources.getString(BASIC_COMMANDS), HELP_TAB_TEXT1);
 		TabHelp help2 = new TabHelp(myResources.getString(EXTENDED_COMMANDS), HELP_TAB_TEXT2);
 		
-		myTabs.getTabs().add(mainScreen.getTab(myStage));
+		myTabs.getTabs().addAll(mainScreen.getTab(myStage), help1.getTab(), help2.getTab());
 		
 		AnchorPane.setTopAnchor(myTabs, TABS_OFFSET);
 		AnchorPane.setTopAnchor(newTab, NEWTAB_OFFSET);

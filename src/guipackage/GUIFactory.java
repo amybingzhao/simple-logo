@@ -31,6 +31,7 @@ public class GUIFactory {
 	protected IGUIObject createNewGUIObject(String nodeTypeKey){
 		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
+		case("AnimationControl"): return new GUIAnimationControl(myResources, canvas);
 		case("SaveLoadButtons"): return new GUISaveLoad(myResources, myController, canvas, myCommandLine);
 		case("ImageComboBox"): return new GUIComboBoxImages(canvas, myResources, myResources.getString(nodeTypeKey+PROMPT_TEXT));
 		case("LanguageComboBox"): return new GUIComboBoxLanguages(canvas, myResources, myController,myResources.getString(nodeTypeKey+PROMPT_TEXT), myCommandLine);
