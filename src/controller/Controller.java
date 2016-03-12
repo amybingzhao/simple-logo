@@ -38,6 +38,7 @@ public class Controller {
     private static final String GUI_RESOURCE = "GUI";
     public static final String PARSING_ERROR = "ParsingError";
     private static final String WHITESPACE = "\\p{Space}";
+    private static final String NO_FILE = "NoFile";
     private String myLanguageResource;
     private Parser myParser;
     private XMLParser myXMLParser;
@@ -145,6 +146,8 @@ public class Controller {
             myXMLParser.parse(myFile);
         } catch (IOException | ParserConfigurationException | SAXException e) {
             myAlert.displayAlert(PARSING_ERROR);
+        } catch (IllegalArgumentException e){
+            myAlert.displayAlert(NO_FILE);
         }
     }
 
