@@ -1,6 +1,7 @@
 package guipackage;
 
 import java.io.File;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import controller.Controller;
@@ -16,13 +17,15 @@ public class GUISaveLoad implements IGUIObject {
 	private ResourceBundle myResources;
 	private Controller myController;
 	private GUICanvas myCanvas;
+	private GUICommandLine myCommandLine;
 	
 	private static final int PADDING = 10;
 
-	public GUISaveLoad(ResourceBundle r, Controller c, GUICanvas canvas) {
+	public GUISaveLoad(ResourceBundle r, Controller c, GUICanvas canvas, GUICommandLine cLine) {
 		myResources = r;
 		myController = c;
 		myCanvas = canvas;
+		myCommandLine = cLine;
 	}
 	
 	@Override
@@ -67,6 +70,15 @@ public class GUISaveLoad implements IGUIObject {
     			myController.getXMLParser().getPenColor());
     	myCanvas.getTurtleImageView().setTurtleShape(stringToImage(myController.getXMLParser().getTurtleImage()),
     			myController.getXMLParser().getTurtleImage());
+    	inputCommands(myController.getXMLParser().getCommandStrings());
+    	inputCommands(myController.getXMLParser().getVariableStrings());
+    	
+    }
+    
+    private void inputCommands(List<String> commandList) {
+    	for (String command: commandList) {
+    		myCommandLine.runCommand(command);
+    	}
     }
     
     private Image stringToImage(String imageString){

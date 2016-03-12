@@ -62,6 +62,7 @@ public class GUICanvas implements Observer{
 		myCanvasRoot = new Pane(myBackgroundCanvas.getCanvas(), canvasStamps);
 		root = new Group(myCanvasRoot);
 		myTurtleImageView = new GUICanvasTurtle(root);
+		myAnimation = new GUICanvasAnimation(myCanvasRoot);
 	}
 	
 	/**
@@ -189,7 +190,7 @@ public class GUICanvas implements Observer{
 			myAnimation.addAnimation(currentImageView, normalizeCoordinates(parameters[0]), 
 					normalizeCoordinates(parameters[1]), normalizeCoordinates(myX),
 					normalizeCoordinates(myY), turtle.getDirection() - parameters[2]);
-			myTurtleImageView.updateImageView(currentImageView, myX, myY, turtle.getDirection(), myTurtleImageView.getTurtleShape());
+//			myTurtleImageView.updateImageView(currentImageView, myX, myY, turtle.getDirection(), myTurtleImageView.getTurtleShape());
 		}
 		if (!turtle.isPenUp()) {
 			drawLine(gcDrawing, myX, myY);

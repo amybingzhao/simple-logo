@@ -31,7 +31,7 @@ public class GUIFactory {
 		String nodeType = myResources.getString(nodeTypeKey);
 		switch(nodeType){
 		case("SaveLoadButtons"):{
-			return new GUISaveLoad(myResources, myController, canvas);
+			return new GUISaveLoad(myResources, myController, canvas, myCommandLine);
 		}
 		case("ImageComboBox"):{
 			return new GUIComboBoxImages(canvas, myResources, myResources.getString(nodeTypeKey+"PromptText"));
