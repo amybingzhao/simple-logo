@@ -4,12 +4,10 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
@@ -80,9 +78,9 @@ public class GUITableView implements IGUIObject {
         Callback<TableColumn<GUITableViewTableVariable, Double>, TableCell<GUITableViewTableVariable, Double>> cellFactory =
                 (event -> {
                 	return new GUITableViewEditingCell();
-                	});
+                });
         myValueColumn =
-                new TableColumn<GUITableViewTableVariable, Double>(myResources.getString("ValuesColumn"));
+                new TableColumn<>(myResources.getString("ValuesColumn"));
         myValueColumn.setMinWidth(TABLE_COLUMN_WIDTH);
         myValueColumn.setCellValueFactory(new PropertyValueFactory<GUITableViewTableVariable, Double>("variableValue"));
         myValueColumn.setCellFactory(cellFactory);
