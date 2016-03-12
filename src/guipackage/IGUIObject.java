@@ -22,7 +22,7 @@ public interface IGUIObject {
      * @return
      * @throws ClassNotFoundException 
      */
-    public Node createNode();
+    Node createNode();
 
     /**
      * This method updates the Node based on new information. For example, the
@@ -31,6 +31,6 @@ public interface IGUIObject {
      * for the PreviousCommands object so that the GUI can show that that command
      * has been called.
      */
-    public void updateNode();
+    void updateNode();
 
 }

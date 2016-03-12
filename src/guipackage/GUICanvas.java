@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
@@ -46,13 +47,13 @@ public class GUICanvas implements Observer{
 	private GUICanvasPen myPen;
 	private GUICanvasRight canvasRight;
 	private Group root;
-	private GUICanvasTurtle myTurtleImageView;
+	private GUICanvasTurtleImageView myTurtleImageView;
 	private GUICanvasBackground myBackgroundCanvas;
 	private GUICanvasAnimation myAnimation;
+	private HBox toReturn;
 	
 	public GUICanvas(ResourceBundle myResources) {
 		this.myResources = myResources;
-		this.canvasRight = (GUICanvasRight) canvasRight;
 		myTurtles = new HashMap<>();
 		turtleParameters = new ArrayList<>();
 		canvasStamps = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -61,8 +62,9 @@ public class GUICanvas implements Observer{
 		myBackgroundCanvas = new GUICanvasBackground(CANVAS_WIDTH, CANVAS_HEIGHT);
 		myCanvasRoot = new Pane(myBackgroundCanvas.getCanvas(), canvasStamps);
 		root = new Group(myCanvasRoot);
-		myTurtleImageView = new GUICanvasTurtle(root);
+		myTurtleImageView = new GUICanvasTurtleImageView(root, myTurtles);
 		myAnimation = new GUICanvasAnimation(myCanvasRoot);
+		setRightCanvas();
 	}
 	
 	/**
@@ -70,14 +72,24 @@ public class GUICanvas implements Observer{
 	 * @return Canvas Node
 	 */
 	public Node createNode() {
-		return root;
+		toReturn = new HBox();
+		toReturn.getChildren().addAll(root,canvasRight.createNode());
+		return toReturn;
 	}
 	/**
 	 * Adds object to position right of the canvas.
 	 * @param rightOfCanvas
 	 */
-	public void setRightCanvas(GUICanvasRight rightOfCanvas){
-		canvasRight = rightOfCanvas;
+	public void setRightCanvas(){
+		canvasRight = new GUICanvasRight(myResources, new GUIComboBoxColorB(this, myResources, myResources.getString("BackgroundColorPalettePromptText"),
+				myResources.getString("DefaultBackgroundColors")), new GUIComboBoxColorP(this, myResources, 
+						myResources.getString("PenColorPalettePromptText"), myResources.getString("DefaultPenColors")),
+				new GUIComboBoxImages(this, myResources, myResources.getString("ImageComboBoxPromptText")),
+				new GUIPenSettings(myResources, this),
+				new GUITurtleState(myResources, new GUILabeled(myResources, myResources.getString("TurtleLocation")),
+												new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
+												new GUILabeled(myResources, myResources.getString("TurtlePen")),
+												new GUILabeled(myResources, myResources.getString("TurtleActive"))));
 		myPen.setMyPenPalette(canvasRight.getPenPalette());
 		myBackgroundCanvas.setMyBackgroundPalette(canvasRight.getBackgroundPalette());
 		myTurtleImageView.setMyImagePalette(canvasRight.getImagePalette());
@@ -99,7 +111,6 @@ public class GUICanvas implements Observer{
 		}
 	}
 	
-	
 	/**
 	 * Resets Canvas. Deletes all of the Turtle's trails and changes the Turtle back to default.
 	 */
@@ -109,7 +120,7 @@ public class GUICanvas implements Observer{
 			lst.get(0).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 			lst.get(1).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 			drawTurtle(key);
-			myTurtleImageView.removeTurtleImageView(turtle);
+			myTurtleImageView.updateImageView(turtle.getImageView(), STARTING_X, STARTING_Y, DEFAULT, myTurtleImageView.getTurtleShape());
 			key.doneResetting();
 		}
 	}
@@ -200,8 +211,13 @@ public class GUICanvas implements Observer{
 	}
 	
 	private double toroidalBounds(double coordinate) {
-		if (coordinate > MAX_COORDINATE || coordinate < MIN_COORDINATE) {
-			coordinate = coordinate - MAX_COORDINATE * Math.floor(coordinate / MAX_COORDINATE);
+		if (coordinate > MAX_COORDINATE) {
+			coordinate = coordinate%MAX_COORDINATE;
+		}
+		else if(coordinate < MIN_COORDINATE){
+			double temp_pos = Math.abs(coordinate);
+			double temp_mod = temp_pos%MAX_COORDINATE;
+			coordinate = MAX_COORDINATE - temp_mod;
 		}
 		return coordinate;
 	}
@@ -280,7 +296,7 @@ public class GUICanvas implements Observer{
 		return myBackgroundCanvas;
 	}
 	
-	public GUICanvasTurtle getTurtleImageView(){
+	public GUICanvasTurtleImageView getTurtleImageView(){
 		return myTurtleImageView;
 	}
 

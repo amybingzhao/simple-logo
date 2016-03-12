@@ -2,26 +2,36 @@ package guipackage;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javafx.scene.Group;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Turtle;
-
-public class GUICanvasTurtle {
-	private static final String DEFAULT_TURTLE = "turtle_outline.png";
-	private static final int TURTLE_SIZE = 20;
+/**
+ * Turtle ImageView component of the main GUICanvas
+ * @author AnnieTang
+ *
+ */
+public class GUICanvasTurtleImageView {
+	private static final String DEFAULT_TURTLE = "tortoise.png";
+	private static final int TURTLE_SIZE = 25;
 	private Group root;
 	private List<String> myImagePalette;
 	private Image myTurtleShape;
 	private String myTurtleShapeName;
 	private int myTurtleShapeIndex;
+	private Map<Turtle, List<GraphicsContext>> myTurtles;
+	private boolean showInactive;
 	
-	public GUICanvasTurtle(Group root) {
+	public GUICanvasTurtleImageView(Group root, Map<Turtle, List<GraphicsContext>> myTurtles) {
 		this.root = root;
+		this.myTurtles = myTurtles;
 		myTurtleShape = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE));
 		myTurtleShapeName = DEFAULT_TURTLE;
 		myTurtleShapeIndex = 0;
+		showInactive = true;
 	}
 	
 	protected Group getGroup(){
@@ -43,6 +53,9 @@ public class GUICanvasTurtle {
 		});
 		turtleImageView.setOnMouseClicked(event -> {
 			turtle.setActive(!turtle.isActive());
+			if(!showInactive){
+				removeInactive();
+			}
 		});
 		turtle.setImageView(turtleImageView);
 		root.getChildren().add(turtle.getImageView());
@@ -79,7 +92,6 @@ public class GUICanvasTurtle {
 	 * @param Image
 	 */
 	public void setTurtleShape(Image image, String imageName){
-		System.out.println(imageName);
 		myTurtleShape = image;
 		myTurtleShapeName = imageName;
 		for(String turtleName:myImagePalette){
@@ -104,4 +116,24 @@ public class GUICanvasTurtle {
 		return myTurtleShapeIndex;
 	}
 	
+	protected void setVisibility(String visibility){
+		showInactive = Boolean.parseBoolean(visibility);
+		if(showInactive) showInactive();
+		else removeInactive();
+	}	
+	
+	private void showInactive(){
+		for(Turtle turtle:myTurtles.keySet()){
+			if(!root.getChildren().contains(turtle.getImageView())){
+				root.getChildren().add(turtle.getImageView());
+			}
+		}
+	}
+	private void removeInactive(){
+		for(Turtle turtle:myTurtles.keySet()){
+			if(!turtle.isActive()){
+				root.getChildren().remove(turtle.getImageView());
+			}
+		}
+	}
 }

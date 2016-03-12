@@ -14,7 +14,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
-import model.CommandDictionary;
 import model.VariableDictionary;
 
 /**
@@ -45,7 +44,8 @@ public class GUITableView implements IGUIObject {
     /**
      * Creates TableVariable node and populates it with cells that are editable.
      */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public Node createNode() {
         myTableView = new TableView<>();
         myTableView.setEditable(true);
@@ -66,7 +66,7 @@ public class GUITableView implements IGUIObject {
     
     public void createVariableColumn() {
         myVariableColumn =
-                new TableColumn<TableVariable, String>(myResources.getString("VariablesColumn"));
+                new TableColumn<>(myResources.getString("VariablesColumn"));
         myVariableColumn.setMinWidth(TABLE_COLUMN_WIDTH);
         myVariableColumn.setCellValueFactory(new PropertyValueFactory<TableVariable, String>("variableName"));
     }

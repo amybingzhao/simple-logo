@@ -53,8 +53,8 @@ public class GUI implements IGUI {
 		newTab.setOnAction(event -> createNewTab());
 		
 		TabMainScreen mainScreen = new TabMainScreen(myResources.getString(WORKSPACE) + (myTabs.getTabs().size()));
-		GUITab help1 = new GUITab(myResources.getString(BASIC_COMMANDS), HELP_TAB_TEXT1);
-		GUITab help2 = new GUITab(myResources.getString(EXTENDED_COMMANDS), HELP_TAB_TEXT2);
+		TabHelp help1 = new TabHelp(myResources.getString(BASIC_COMMANDS), HELP_TAB_TEXT1);
+		TabHelp help2 = new TabHelp(myResources.getString(EXTENDED_COMMANDS), HELP_TAB_TEXT2);
 		
 		myTabs.getTabs().add(mainScreen.getTab(myStage));
 		

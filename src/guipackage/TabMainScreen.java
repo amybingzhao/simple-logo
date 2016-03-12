@@ -7,7 +7,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+
 /**
  * Create tab for main screen (canvas, command line, options, etc.) 
  * @author AnnieTang
@@ -25,13 +25,13 @@ public class TabMainScreen {
 	private GUICommandLine commandLine;
 	private Controller myController;
 	private GUILabeled myOutput;
-	private GUICanvasRight rightOfCanvas;
 	
 	private IGUIObject userCommands;
 	private IGUIObject previousCommands;
 	private IGUIObject variables;
 	private IGUIObject languageSelector;
 	private IGUIObject saveLoad;
+	private IGUIObject showHide;
 
     private Stage myStage;
     private String tabText;
@@ -40,16 +40,6 @@ public class TabMainScreen {
     	this.tabText = tabText;
     }
 	
-	/**
-	 * Initializes Tab with all necessary components.
-	 */
-	private void initializeTab(Stage stage) {
-        myStage = stage;
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		canvas = new GUICanvas(myResources);
-		myController = new Controller(canvas, myStage);
-		commandLine = new GUICommandLine(myController, myResources, this);
-	}
 	
 	/**
 	 * Sets up all elements on Tab and returns the Tab
@@ -73,15 +63,22 @@ public class TabMainScreen {
 	}
 	
 	/**
+	 * Initializes Tab with all necessary components.
+	 */
+	private void initializeTab(Stage stage) {
+        myStage = stage;
+		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
+		canvas = new GUICanvas(myResources);
+		myController = new Controller(canvas, myStage);
+		commandLine = new GUICommandLine(myController, myResources, this);
+	}
+	
+	/**
 	 * Next 5 methods all place GUIObjects on the Pane.
 	 */
 	private void setCenterPane() {
-		HBox hbox = new HBox();
 		Node canvasNode = canvas.createNode();
-		rightOfCanvas = (GUICanvasRight) myFactory.createNewGUIObject("CanvasRight");
-		canvas.setRightCanvas(rightOfCanvas);
-		hbox.getChildren().addAll(canvasNode, rightOfCanvas.createNode());
-		myMainScreen.setCenter(hbox);
+		myMainScreen.setCenter(canvasNode);
 	}
 
 	private void setLeftPane() {
@@ -90,9 +87,10 @@ public class TabMainScreen {
 		previousCommands = myFactory.createNewGUIObject("PreviousCommands");
 		languageSelector = myFactory.createNewGUIObject("LanguageSelector");
 		saveLoad = myFactory.createNewGUIObject("SaveLoad");
+		showHide = myFactory.createNewGUIObject("ShowHide");
 		leftPanel.getChildren().addAll(userCommands.createNode(), 
 				previousCommands.createNode(), languageSelector.createNode(), 
-				saveLoad.createNode());
+				saveLoad.createNode(), showHide.createNode());
 		myMainScreen.setLeft(leftPanel);
 	}
 	

@@ -8,11 +8,11 @@ import javafx.scene.web.WebView;
  * @author AnnieTang
  *
  */
-public class GUITab {
+public class TabHelp {
 	private String webURL;
 	private String tabText;
 	
-	public GUITab(String webURL, String tabText) {
+	public TabHelp(String webURL, String tabText) {
 		this.webURL = webURL;
 		this.tabText = tabText;
 	}

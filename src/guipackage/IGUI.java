@@ -15,14 +15,14 @@ public interface IGUI {
      *
      * @return
      */
-    public int getWidth();
+    int getWidth();
 
-    public int getHeight();
+    int getHeight();
 
     /**
      * This method notifies the observers of the TurtleObservable object that it
      * has changed. Once the observers see that the object has changed, it can
      * update itself and match the changes of the TurtleObservable object.
      */
-    public void notifyAllObservers();
+    void notifyAllObservers();
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import controller.Controller;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import model.Command;
 import model.CommandDictionary;
@@ -27,7 +28,7 @@ public class GUIComboBoxUserHist extends GUIComboBox {
 
     @Override
     protected List<String> optionsList() {
-        List<String> userDefinedCommands = new ArrayList<String>();
+        List<String> userDefinedCommands = new ArrayList<>();
         for (String s : myUserDefinedCommands.getCommandKeySet()) {
             userDefinedCommands.add(s);
         }
@@ -61,12 +62,8 @@ public class GUIComboBoxUserHist extends GUIComboBox {
         return commandToRun;
     }
 
-	@Override
-	protected void setCellFactory() {
-	}
-
-	@Override
+    @Override
 	protected Node getNodeForBox(String item) {
-		return null;
+		return new Label(NO_NODE_FOR_BOX);
 	}
 }
