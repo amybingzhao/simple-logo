@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <SLogoState>
     <Config>
-        <BackgroundColor>0 255 255</BackgroundColor>
-        <PenColor>0 0 0</PenColor>
+        <BackgroundColor>0 0 255</BackgroundColor>
+        <PenColor>255 255 255</PenColor>
         <TurtleImage>turtle_outline.png</TurtleImage>
     </Config>
     <Variables>
-        <:x>20</:x>
+        <:y>25</:y>
     </Variables>
     <Commands>
         <Command>
             <Name>moveForwardBy</Name>
-            <Procedure>to moveForwardBy [ :a ] [ forward :a  ] </Procedure>
+            <Procedure>to moveForwardBy [ :x ] [ pendown  forward :x  ] </Procedure>
             <NumberOfArguments>1</NumberOfArguments>
         </Command>
     </Commands>
