@@ -16,6 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
 
@@ -63,7 +64,7 @@ public class GUICanvas implements Observer{
 		myCanvasRoot = new Pane(myBackgroundCanvas.getCanvas(), canvasStamps);
 		root = new Group(myCanvasRoot);
 		myTurtleImageView = new GUICanvasTurtleImageView(root, myTurtles);
-		myAnimation = new GUICanvasAnimation(myCanvasRoot);
+		myAnimation = new GUICanvasAnimation();
 		setRightCanvas();
 	}
 	
@@ -195,20 +196,29 @@ public class GUICanvas implements Observer{
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-		if (turtle.showing()) {
-			Double[] parameters = turtleParameters.get((int) turtle.getID() - 1);
-			ImageView currentImageView = turtle.getImageView();
-//			myAnimation.addAnimation(currentImageView, normalizeCoordinates(parameters[0]), 
-//					normalizeCoordinates(parameters[1]), normalizeCoordinates(myX),
-//					normalizeCoordinates(myY), turtle.getDirection() - parameters[2]);
-//			myTurtleImageView.onlyUpdateImage(currentImageView, myTurtleImageView.getTurtleShape());
-			myTurtleImageView.updateImageView(currentImageView, myX, myY, turtle.getDirection(), myTurtleImageView.getTurtleShape());
-		}
 		if (!turtle.isPenUp()) {
 			drawLine(gcDrawing, myX, myY);
 		}
+		if (turtle.showing()) {
+			checkForAnimation(turtle, myX, myY);
+		}
 		gc.restore();
 		setOldCoordinates(turtle, myX, myY, turtle.getDirection());
+	}
+	
+	private void checkForAnimation(Turtle turtle, double myX, double myY) {
+		Double[] parameters = turtleParameters.get((int) turtle.getID() - 1);
+		ImageView currentImageView = turtle.getImageView();
+		if (myAnimation.willAnimate()) {
+			myAnimation.addAnimation(currentImageView, normalizeCoordinates(parameters[0]), 
+					normalizeCoordinates(parameters[1]), normalizeCoordinates(myX),
+					normalizeCoordinates(myY), turtle.getDirection() - parameters[2]);
+			myTurtleImageView.updateImageViewLocation(currentImageView, myX,
+					myY, myTurtleImageView.getTurtleShape());
+		} else {
+			myTurtleImageView.updateImageView(currentImageView, myX, myY,
+					turtle.getDirection(), myTurtleImageView.getTurtleShape());
+		}
 	}
 	
 	private double toroidalBounds(double coordinate) {

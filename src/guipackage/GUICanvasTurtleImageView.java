@@ -62,13 +62,13 @@ public class GUICanvasTurtleImageView {
 	}
 
 	protected void updateImageView(ImageView imageView, double x, double y, double rotation, Image newShape){
-		imageView.setX(x);
-		imageView.setY(y);
+		updateImageViewLocation(imageView, x, y, newShape);
 		imageView.setRotate(rotation);
-		imageView.setImage(newShape);
 	}
 	
-	protected void onlyUpdateImage(ImageView imageView, Image newShape) {
+	protected void updateImageViewLocation(ImageView imageView, double x, double y, Image newShape) {
+		imageView.setX(x);
+		imageView.setY(y);
 		imageView.setImage(newShape);
 	}
 	

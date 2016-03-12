@@ -11,7 +11,6 @@ import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Animation.Status;
 import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -21,20 +20,21 @@ import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 public class GUICanvasAnimation {
+	private static final double ANIMATION_THRESHOLD = 0.5;
+	private static final int DEFAULT_ROTATE_SPEED = 1000;
+	private static final int DEFAULT_PATH_SPEED = 15;
 	private Queue<Animation> myAnimationQueue;
 	private Animation myAnimation;
-	private Pane myRoot;
-	private Queue<Queue<Animation>> myLineAnimationQueue;
-	private Queue<Animation> myLineAnimation;
-	private boolean drawPen;
+	private double pathSpeed;
+	private double rotateSpeed;
+	private boolean animate;
 	
-	public GUICanvasAnimation(Pane root) {
+	public GUICanvasAnimation() {
 		myAnimation = new SequentialTransition();
 		myAnimationQueue = new LinkedList<Animation>();
-		myLineAnimation = new LinkedList<Animation>();
-		myLineAnimationQueue = new LinkedList<Queue<Animation>>();
-		myRoot = root;
-		drawPen = true;
+		pathSpeed = DEFAULT_PATH_SPEED;
+		rotateSpeed = DEFAULT_ROTATE_SPEED;
+		animate = true;
 	}
 	
 	protected void runAnimation() {
@@ -50,64 +50,42 @@ public class GUICanvasAnimation {
 		Path path = new Path();
 		path.getElements().addAll(new MoveTo(oldX, oldY), new LineTo(x, y));
 		if (oldX != x || oldY != y) {
-			PathTransition pt = new PathTransition(Duration.millis(10), path, agent);
+			PathTransition pt = new PathTransition(Duration.millis(pathSpeed), path, agent);
 			newAnimation.getChildren().add(pt);
-			createLineAnimations(oldX, oldY, x, y);
-			drawPen = true;
 		}
 		
 		if (direction != 0) {
-			RotateTransition rt = new RotateTransition(Duration.millis(1000), agent);
+			RotateTransition rt = new RotateTransition(Duration.millis(rotateSpeed), agent);
 			rt.setByAngle((int) direction);
 			newAnimation.getChildren().add(rt);
-			drawPen = false;
 		}
 		newAnimation.setOnFinished(event -> playNextAnimation());
 		myAnimationQueue.add(newAnimation);
 		runAnimation();
 	}
 	
-	private void createLineAnimations(double oldX, double oldY, double x, double y) {
-		double totalDistance = Math.sqrt( Math.pow((x - oldX), 2) + Math.pow((y - oldY), 2));
-		
-		double xOffset = (x - oldX) / totalDistance;
-		double yOffset = (y - oldY) / totalDistance;
-		
-		Queue<Animation> penLines = new LinkedList<Animation>();
-		
-		for (int i = 0; i <= totalDistance; i++) {
-			FadeTransition lineAnimation = new FadeTransition(Duration.millis(1000),
-					new Line(oldX, oldY, oldX + i * xOffset, oldY + i * yOffset));
-			lineAnimation.setFromValue(1.0);
-		    lineAnimation.setToValue(1.0);
-			penLines.add(lineAnimation);
-		}
-		myLineAnimationQueue.add(penLines);
-	}
-	
 	protected void playNextAnimation() {
 		if (!myAnimationQueue.isEmpty()) {
 			myAnimation = myAnimationQueue.poll();
-//			if (!myLineAnimationQueue.isEmpty()) {
-//				myLineAnimation = myLineAnimationQueue.poll();
-//			}
 			play();
+		}
+	}
+	
+	protected void setSpeed(double multiplier) {
+		if (multiplier <= ANIMATION_THRESHOLD) {
+			animate = false;
+		} else {
+			animate = true;
+			pathSpeed = DEFAULT_PATH_SPEED * multiplier;
+			rotateSpeed = DEFAULT_ROTATE_SPEED * multiplier;
 		}
 	}
 	
 	protected void play() {
 		myAnimation.play();
-//		ParallelTransition parallelTransition = new ParallelTransition();
-//		parallelTransition.getChildren().add(myAnimation);
-//		if (!myLineAnimation.isEmpty()) {
-//			for (Animation f: myLineAnimation) {
-//				parallelTransition.getChildren().add(f);
-//			}
-//		}
-//		parallelTransition.play();
 	}
 	
-	protected void pause() {
-		myAnimation.pause();
+	protected boolean willAnimate() {
+		return animate;
 	}
 }
