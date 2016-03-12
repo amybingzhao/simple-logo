@@ -11,7 +11,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-
+/**
+ * Pair of save/load buttons so the user can load an XML to define the workspace, or save the current workspace. 
+ * @author DavidYang, AnnieTang
+ *
+ */
 public class GUISaveLoad implements IGUIObject {
 	private ResourceBundle myResources;
 	private Controller myController;
@@ -26,7 +30,9 @@ public class GUISaveLoad implements IGUIObject {
 		myCanvas = canvas;
 		this.myCommandLine = myCommandLine;
 	}
-	
+	/**
+	 * Returns two buttons for saving and loading XML.
+	 */
 	@Override
 	public Node createNode() {
 		VBox myBox = new VBox(PADDING);
@@ -61,6 +67,9 @@ public class GUISaveLoad implements IGUIObject {
         return fileName;
     }
     
+    /**
+     * Sets workspace preferences to those specified by the given XML. 
+     */
     private void loadCanvasProperties() {
     	myController.loadXML(promptForFileName(false));
     	myCanvas.getBackgroundCanvas().setBackgroundColor(stringToColor(myController.getXMLParser().getBackgroundColor()),
@@ -75,12 +84,20 @@ public class GUISaveLoad implements IGUIObject {
     	for(String commString: myController.getXMLParser().getCommandStrings()){
     		myCommandLine.runCommand(commString);
     	}
-    }
-    
+    }    
+    /**
+     * Converts image name to Image. 
+     * @param imageString
+     * @return
+     */
     private Image stringToImage(String imageString){
     	return new Image(getClass().getClassLoader().getResourceAsStream(imageString));
     }
-    
+    /**
+     * Converts color String to a JavaFX Color. 
+     * @param colorString
+     * @return
+     */
     private Color stringToColor(String colorString) {
 		String[] rgb = colorString.split(" ");
 		return Color.rgb((int) Double.parseDouble(rgb[0]),

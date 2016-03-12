@@ -33,15 +33,13 @@ public class GUICanvasTurtleImageView {
 		myTurtleShapeIndex = 0;
 		showInactive = true;
 	}
-	
-	protected Group getGroup(){
-		return root;
-	}
-	
-	protected void removeTurtleImageView(Turtle turtle){
-		root.getChildren().remove(turtle.getImageView());
-	}
-	
+	/**
+	 * Places ImageView of given turtle onto the canvas. 
+	 * @param turtle
+	 * @param x
+	 * @param y
+	 * @param canvasRight
+	 */
 	protected void createImageViewForTurtle(Turtle turtle, double x, double y, GUICanvasRight canvasRight){
 		ImageView turtleImageView = new ImageView(myTurtleShape);
 		turtleImageView.setFitHeight(TURTLE_SIZE);
@@ -60,18 +58,31 @@ public class GUICanvasTurtleImageView {
 		turtle.setImageView(turtleImageView);
 		root.getChildren().add(turtle.getImageView());
 	}
-
+	/**
+	 * Updates coordinates, rotation, and image of given ImageView.
+	 * @param imageView
+	 * @param x
+	 * @param y
+	 * @param rotation
+	 * @param newShape
+	 */
 	protected void updateImageView(ImageView imageView, double x, double y, double rotation, Image newShape){
 		imageView.setX(x);
 		imageView.setY(y);
 		imageView.setRotate(rotation);
 		imageView.setImage(newShape);
 	}
-	
+	/**
+	 * Set current palette of images to given palette.
+	 * @param palette
+	 */
 	protected void setMyImagePalette(List<String> palette){
 		this.myImagePalette = palette;
 	}
-	
+	/**
+	 * Returns current image being used for the turtle. 
+	 * @return
+	 */
 	protected Image getTurtleShape(){
 		return myTurtleShape;
 	}
@@ -115,13 +126,18 @@ public class GUICanvasTurtleImageView {
 	public int getTurtleShapeIndex() {
 		return myTurtleShapeIndex;
 	}
-	
+	/**
+	 * Based on given visibility string (true/false), either show inactive turtles or hide them. 
+	 * @param visibility
+	 */
 	protected void setVisibility(String visibility){
 		showInactive = Boolean.parseBoolean(visibility);
 		if(showInactive) showInactive();
 		else removeInactive();
 	}	
-	
+	/**
+	 * Show all turtles on canvas, including inactive.
+	 */
 	private void showInactive(){
 		for(Turtle turtle:myTurtles.keySet()){
 			if(!root.getChildren().contains(turtle.getImageView())){
@@ -129,6 +145,9 @@ public class GUICanvasTurtleImageView {
 			}
 		}
 	}
+	/**
+	 * Hide inactive turtles on canvas.
+	 */
 	private void removeInactive(){
 		for(Turtle turtle:myTurtles.keySet()){
 			if(!turtle.isActive()){

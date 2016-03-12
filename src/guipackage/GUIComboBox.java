@@ -15,10 +15,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 
 /**
- * Abstract class to implement different types of ComboBoxes. 
- * "In Java, an abstract class can implement an interface, and not provide implementations of 
- * all of the interface's methods. It is the responsibility of the first concrete class that 
- * has that abstract class as an ancestor to implement all of the methods in the interface."
+ * Abstract class to implement different types of ComboBoxes.
  * @author AnnieTang
  */
 
@@ -86,7 +83,7 @@ public abstract class GUIComboBox implements IGUIObject {
 	protected abstract void setButtonAction();
 	
 	/**
-	 * creates custom cell factory for ComboBox
+	 * Creates custom cell factory for ComboBox
 	 * @author AnnieTang
 	 */
 	private class MyCustomCell extends ListCell<String> {
@@ -133,7 +130,10 @@ public abstract class GUIComboBox implements IGUIObject {
 		currentPalette.set(index, RGB);
 		updateNode();
 	}
-	
+	/**
+	 * Returns list of items in the ComboBox.
+	 * @return
+	 */
 	public List<String> getOptionsList(){
 		return optionsList();
 	}
