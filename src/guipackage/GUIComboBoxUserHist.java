@@ -25,7 +25,10 @@ public class GUIComboBoxUserHist extends GUIComboBox {
         super(canvas, myResources, myController, promptText, myCommandLine);
         myUserDefinedCommands = myComDict;
     }
-
+    
+    /**
+     * Returns list of user defined commands.
+     */
     @Override
     protected List<String> optionsList() {
         List<String> userDefinedCommands = new ArrayList<>();
@@ -34,7 +37,9 @@ public class GUIComboBoxUserHist extends GUIComboBox {
         }
         return userDefinedCommands;
     }
-
+    /**
+     * Sets action so that on comboButton click, selected user defined command will be executed.
+     */
     @Override
     protected void setButtonAction() {
         comboButton.setOnAction(event -> {
@@ -43,7 +48,9 @@ public class GUIComboBoxUserHist extends GUIComboBox {
             myController.processCommand(getCommandToRun());
         });
     }
-
+    /**
+     * For user defined commands that require input of arguments, creates popup dialog to get arguments from user.
+     */
     private void createDialog() {
         Command command = myUserDefinedCommands.getCommandFor(comboBox.getValue());
         int numArgs = command.getParams().size();
@@ -52,7 +59,10 @@ public class GUIComboBoxUserHist extends GUIComboBox {
         dialog.setHeaderText(myResources.getString("ArgumentsNeeded") + command.getParams());
         dialog.setContentText(myResources.getString("RequestArguments"));
     }
-
+    /**
+     * Gets executable user defined command filled in with appropriate arguments from the user. 
+     * @return
+     */
     private String getCommandToRun() {
         String commandToRun = comboBox.getValue();
         String[] parameters = dialog.getResult().split(" ");
@@ -61,7 +71,9 @@ public class GUIComboBoxUserHist extends GUIComboBox {
         }
         return commandToRun;
     }
-
+    /**
+	 * Returns empty (not null) Node to be used as icon in the CommandHistory ComboBox.
+	 */
     @Override
 	protected Node getNodeForBox(String item) {
 		return new Label(NO_NODE_FOR_BOX);

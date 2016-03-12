@@ -11,7 +11,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
+/**
+ * Creates toggles to graphically select pen settings. 
+ * @author AnnieTang, DavidYang
+ *
+ */
 public class GUIPenSettings implements IGUIObject{
 	private static final int PADDING = 10;
 	private static final int BOX_SPACING = 10;
@@ -31,6 +35,9 @@ public class GUIPenSettings implements IGUIObject{
 		myCanvas = c;
 		myPen = myCanvas.getPen();
 	}
+	/**
+	 * Returns VBox with ToggleGroup for each type of pen setting. 
+	 */
 	@Override
 	public Node createNode() {
 		VBox vboxToReturn = new VBox(BOX_SPACING);
@@ -43,7 +50,9 @@ public class GUIPenSettings implements IGUIObject{
 		vboxToReturn.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
 		return vboxToReturn;
 	}
-	
+	/**
+	 * Create ToggleGroup for pen up/down status.
+	 */
 	private void setPenUpDownVBox() {
 		penUpDownGroup = new ToggleGroup();
 		penUpDownGroup.selectedToggleProperty().addListener(
@@ -53,7 +62,9 @@ public class GUIPenSettings implements IGUIObject{
 											myResources.getString("PenDown"))), 0);
 		vbox1 = newGroup.createToggleGroupVBox();		
 	}
-	
+	/**
+	 * Create ToggleGroup for pen type.
+	 */
 	private void setPenTypeVBox() {
 		penTypeGroup = new ToggleGroup();
 		penTypeGroup.selectedToggleProperty().addListener(
@@ -64,7 +75,9 @@ public class GUIPenSettings implements IGUIObject{
 											myResources.getString("DottedPen"))), 0);
 		vbox2 = newGroup.createToggleGroupVBox();
 	}
-	
+	/**
+	 * Create textfield so user can set pen thickness. 
+	 */
 	private void setThicknessNodes() {
 		penLabel = new Label(myResources.getString("ThicknessFieldLabel"));
 		penThickness = new TextField();

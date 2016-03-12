@@ -32,7 +32,9 @@ public class GUITurtleState implements IGUIObject {
 		this.activeLabeled = activeLabel;
 		this.fontStyle = myResources.getString("FontStyle");
 	}
-
+	/**
+	 * Returns VBox that shows state of turtle: location, heading, pen status, active status. 
+	 */
 	@Override
 	public Node createNode() {
 		VBox vbox = new VBox();
@@ -47,6 +49,9 @@ public class GUITurtleState implements IGUIObject {
 		return vbox;
 	}
 	
+	/**
+	 * Sets font style of text in this state viewer. 
+	 */
 	private void setFontStyle(){
 		locationNode = locationLabeled.createNode();
 		headingNode = headingLabeled.createNode();
@@ -62,6 +67,10 @@ public class GUITurtleState implements IGUIObject {
 	public void updateNode() {
 	}
 	
+	/**
+	 * Update turtle state viewer to show state of given Turtle. 
+	 * @param turtle
+	 */
 	public void showTurtleState(Turtle turtle){
 		locationLabeled.setOutputText(Math.round(turtle.getCurX()) + "," + Math.round(turtle.getCurY()));
 		headingLabeled.setOutputText(""+Math.round(turtle.getDirection()));

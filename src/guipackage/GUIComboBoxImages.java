@@ -29,14 +29,18 @@ public class GUIComboBoxImages extends GUIComboBox {
 		fillImageNames();
 		fillImageMap();
 	}
-
+	/**
+	 * Sets default image palette based on which images are in /Images file directory.
+	 */
 	private void fillImageNames(){
 		File imageDir = new File(IMAGE_RESOURCE);
 		for(File imageFile: imageDir.listFiles()){
 			imageNames.add(imageFile.getName());
 		}
 	}
-	
+	/**
+	 * Maps image name String to its ImageView. 
+	 */
 	private void fillImageMap(){
 		for(String imageName: imageNames){
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageName));
@@ -46,7 +50,9 @@ public class GUIComboBoxImages extends GUIComboBox {
 			imageMap.put(imageName, imageView);
 		}
 	}
-	
+	/**
+	 * Returns an HBox containing the ImageView and a Label indicating index to be set as ComboBox icon.
+	 */
 	@Override
 	protected Node getNodeForBox(String item){
         HBox hbox = new HBox();
@@ -54,6 +60,9 @@ public class GUIComboBoxImages extends GUIComboBox {
         return hbox;
 	}
 	
+	/**
+	 * On comboButton click, turtle ImageViews will be updated with new Image. 
+	 */
 	@Override
 	protected void setButtonAction() {
 		comboButton.setOnAction(event -> {
@@ -62,14 +71,11 @@ public class GUIComboBoxImages extends GUIComboBox {
 			canvas.updateTurtleImageView();
 		});
 	}
-
+	/**
+	 * Return current list of image names. 
+	 */
 	@Override
 	protected List<String> optionsList() {
 		return imageNames;
 	}
-	
-	public List<String> getPalette(){
-		return imageNames;
-	}
-
 }

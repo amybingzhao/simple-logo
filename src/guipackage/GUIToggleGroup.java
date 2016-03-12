@@ -10,7 +10,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 /**
- * returns VBox containing toggle group and its RadioButtons
+ * Returns VBox containing toggle group and a constructor specified number of RadioButtons
  * @author AnnieTang
  *
  */
@@ -34,7 +34,10 @@ public class GUIToggleGroup {
 		this.myButtonData = buttonUserData;
 		this.myTrueButtonIndex = trueButtonIndex;
 	}
-	
+	/**
+	 * Returns VBox containing ToggleGroup of RadioButtons.
+	 * @return
+	 */
 	public VBox createToggleGroupVBox(){
 		toReturn = new VBox(BOX_SPACING);
 		toReturn.setPadding(new Insets(PADDING,PADDING,PADDING,PADDING));
@@ -46,7 +49,10 @@ public class GUIToggleGroup {
 		setFontStyle();
 		return toReturn;
 	}
-	
+	/**
+	 * Based on the constructor specified number of RadioButtons desired, creates this many RadioButtons with data as specified
+	 * by given list of button data. 
+	 */
 	private void initButtons(){
 		for(int i=0;i<numButtons;i++){
 			RadioButton newBT = new RadioButton(myButtonData.get(i));
@@ -58,7 +64,9 @@ public class GUIToggleGroup {
 			myButtons.add(newBT);
 		}
 	}
-	
+	/**
+	 * Sets font style of all text in this VBox.
+	 */
 	private void setFontStyle(){
 		for(Node child: toReturn.getChildren()){
 			child.setStyle(FONT_STYLE);

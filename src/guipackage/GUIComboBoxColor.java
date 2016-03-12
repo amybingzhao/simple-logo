@@ -23,23 +23,33 @@ abstract class GUIComboBoxColor extends GUIComboBox{
 		super(canvas, myResources, promptText, paletteSource);
 		fillDefaultPalette();
 	}
-
+	/**
+	 * Sets default color palette based on paletteSource, which is a list of colors from resource file.
+	 */
 	protected void fillDefaultPalette() {
 		List<String> defaultColors = new ArrayList<>(Arrays.asList(paletteSource.split(",")));
 		palette = defaultColors;
 	}
-
+	/**
+	 * On comboButton click, specific features on canvas will have their color set to the ComboBox value.
+	 */
 	@Override
 	protected void setButtonAction() {
 		comboButton.setOnAction(event -> {
 			String[] rgb = comboBox.getValue().split(" ");
-       	 	Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
-			setCanvasValues(col);
+			setCanvasValues(Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2])));
 			});
 	}
 	
+	/**
+	 * Specifies which canvas features will have color set. 
+	 * @param col
+	 */
 	protected abstract void setCanvasValues(Color col);
 
+	/**
+	 * Create icon for each entry in the ComboBox that will show up next to its String value. 
+	 */
 	@Override
 	protected Node getNodeForBox(String item){
 		HBox hbox = new HBox();
@@ -50,12 +60,17 @@ abstract class GUIComboBoxColor extends GUIComboBox{
 	   	hbox.getChildren().addAll(new Label(options.indexOf(item) + " "), rectangle); 
 	   	return hbox;
 	}
-
+	
+	/**
+	 *Returns current palette of colors. 
+	 */
 	@Override
 	protected List<String> optionsList() {
 		return palette;
 	}
-	
+	/**
+	 * Sets color at given index in current palette to given RGB value. 
+	 */
 	public void changePalette(String RGB, int index) {
 		List<String> currentPalette = comboBox.getItems();
 		if(index<currentPalette.size()){

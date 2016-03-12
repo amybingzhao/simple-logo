@@ -5,7 +5,11 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.scene.Node;
 import javafx.scene.control.ToggleGroup;
-
+/**
+ * Allows user to graphically select whether or not to show inactive Turtles on the canvas.
+ * @author AnnieTang
+ *
+ */
 public class GUITurtleStateToggle implements IGUIObject {
 	private ToggleGroup toggleGroup;
 	private ResourceBundle myResources;
@@ -15,7 +19,9 @@ public class GUITurtleStateToggle implements IGUIObject {
 		this.myResources = myResources;
 		this.canvas = canvas;
 	}
-
+	/**
+	 * Returns ToggleGroup and two RadioButtons to allow user to show or hide inactive Turtles. 
+	 */
 	@Override
 	public Node createNode() {
 		toggleGroup = new ToggleGroup();
