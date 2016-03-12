@@ -72,6 +72,11 @@ public class GUICanvasTurtleImageView {
 		imageView.setRotate(rotation);
 		imageView.setImage(newShape);
 	}
+	
+	protected void onlyUpdateImage(ImageView imageView, Image newShape) {
+		imageView.setImage(newShape);
+	}
+	
 	/**
 	 * Set current palette of images to given palette.
 	 * @param palette
@@ -105,7 +110,7 @@ public class GUICanvasTurtleImageView {
 	public void setTurtleShape(Image image, String imageName){
 		myTurtleShape = image;
 		myTurtleShapeName = imageName;
-		for(String turtleName:myImagePalette){
+		for(String turtleName: myImagePalette){
 			if(turtleName.equals(imageName)){
 				myTurtleShapeIndex = myImagePalette.indexOf(turtleName);
 			}

@@ -34,7 +34,7 @@ public class GUICanvas implements Observer{
 	private static final int CANVAS_HEIGHT = 500;
 	private static final int STARTING_X = CANVAS_WIDTH/2 - TURTLE_SIZE/2;
 	private static final int STARTING_Y = CANVAS_HEIGHT/2 - TURTLE_SIZE/2;	
-	private static final int PEN_SCALE = 100;
+	private static final int PEN_SCALE = 10;
 	private static final int DEFAULT = 0;
 	private static final int MAX_COORDINATE = 500;
 	private static final int MIN_COORDINATE = 0;
@@ -49,6 +49,7 @@ public class GUICanvas implements Observer{
 	private Group root;
 	private GUICanvasTurtleImageView myTurtleImageView;
 	private GUICanvasBackground myBackgroundCanvas;
+	private GUICanvasAnimation myAnimation;
 	private HBox toReturn;
 	
 	public GUICanvas(ResourceBundle myResources) {
@@ -62,6 +63,7 @@ public class GUICanvas implements Observer{
 		myCanvasRoot = new Pane(myBackgroundCanvas.getCanvas(), canvasStamps);
 		root = new Group(myCanvasRoot);
 		myTurtleImageView = new GUICanvasTurtleImageView(root, myTurtles);
+		myAnimation = new GUICanvasAnimation(myCanvasRoot);
 		setRightCanvas();
 	}
 	
@@ -149,11 +151,11 @@ public class GUICanvas implements Observer{
 	 */
 	private void updatePenColors(){
 		for(List<GraphicsContext> lst: myTurtles.values()){
-		if (lst != null){
-			GraphicsContext gcPen = lst.get(1);
-			gcPen.setFill(myPen.getMyPenColor());
+			if (lst != null){
+				GraphicsContext gcPen = lst.get(1);
+				gcPen.setFill(myPen.getMyPenColor());
+			}
 		}
-	}
 	}
 	
 	private void addTurtleToMap(Turtle turtle){
@@ -199,7 +201,12 @@ public class GUICanvas implements Observer{
 		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 		if (turtle.showing()) {
+			Double[] parameters = turtleParameters.get((int) turtle.getID() - 1);
 			ImageView currentImageView = turtle.getImageView();
+//			myAnimation.addAnimation(currentImageView, normalizeCoordinates(parameters[0]), 
+//					normalizeCoordinates(parameters[1]), normalizeCoordinates(myX),
+//					normalizeCoordinates(myY), turtle.getDirection() - parameters[2]);
+//			myTurtleImageView.onlyUpdateImage(currentImageView, myTurtleImageView.getTurtleShape());
 			myTurtleImageView.updateImageView(currentImageView, myX, myY, turtle.getDirection(), myTurtleImageView.getTurtleShape());
 		}
 		if (!turtle.isPenUp()) {
@@ -276,6 +283,10 @@ public class GUICanvas implements Observer{
 		gc.clearRect(DEFAULT, DEFAULT, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
 	
+	private double normalizeCoordinates(double coordinate) {
+		return coordinate + TURTLE_SIZE/2;
+	}
+	
 	/**
 	 * Update both pen and background color palette at given index to given RGB color.
 	 * @param Space separated string of RGB values
@@ -298,6 +309,10 @@ public class GUICanvas implements Observer{
 	
 	public GUICanvasTurtleImageView getTurtleImageView(){
 		return myTurtleImageView;
+	}
+	
+	protected GUICanvasAnimation getAnimation(){
+		return myAnimation;
 	}
 	/**
 	 * Set pen state (up/down) of every turtle on the canvas. 

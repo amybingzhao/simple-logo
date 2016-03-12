@@ -1,6 +1,7 @@
 package guipackage;
 
 import java.io.File;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import controller.Controller;
@@ -24,11 +25,11 @@ public class GUISaveLoad implements IGUIObject {
 	
 	private static final int PADDING = 10;
 
-	public GUISaveLoad(ResourceBundle r, Controller c, GUICommandLine myCommandLine, GUICanvas canvas) {
+	public GUISaveLoad(ResourceBundle r, Controller c, GUICanvas canvas, GUICommandLine cLine) {
 		myResources = r;
 		myController = c;
 		myCanvas = canvas;
-		this.myCommandLine = myCommandLine;
+		myCommandLine = cLine;
 	}
 	/**
 	 * Returns two buttons for saving and loading XML.
@@ -78,11 +79,15 @@ public class GUISaveLoad implements IGUIObject {
     			myController.getXMLParser().getPenColor());
     	myCanvas.getTurtleImageView().setTurtleShape(stringToImage(myController.getXMLParser().getTurtleImage()),
     			myController.getXMLParser().getTurtleImage());
-    	for(String varString: myController.getXMLParser().getVariableStrings()){
-    		myCommandLine.runCommand(varString);
-    	}
-    	for(String commString: myController.getXMLParser().getCommandStrings()){
-    		myCommandLine.runCommand(commString);
+    	myCanvas.updateTurtleImageView();
+    	inputCommands(myController.getXMLParser().getCommandStrings());
+    	inputCommands(myController.getXMLParser().getVariableStrings());
+    	
+    }
+    
+    private void inputCommands(List<String> commandList) {
+    	for (String command: commandList) {
+    		myCommandLine.runCommand(command);
     	}
     }    
     /**
