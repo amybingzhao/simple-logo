@@ -209,6 +209,12 @@ public class GUICanvas implements Observer{
 		setOldCoordinates(turtle, myX, myY, turtle.getDirection());
 	}
 	
+	/**
+	 * Checks to see if the user wants to 
+	 * @param turtle
+	 * @param myX
+	 * @param myY
+	 */
 	private void checkForAnimation(Turtle turtle, double myX, double myY) {
 		Double[] parameters = turtleParameters.get((int) turtle.getID() - 1);
 		ImageView currentImageView = turtle.getImageView();
