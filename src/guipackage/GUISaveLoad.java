@@ -70,6 +70,7 @@ public class GUISaveLoad implements IGUIObject {
     			myController.getXMLParser().getPenColor());
     	myCanvas.getTurtleImageView().setTurtleShape(stringToImage(myController.getXMLParser().getTurtleImage()),
     			myController.getXMLParser().getTurtleImage());
+    	myCanvas.updateTurtleImageView();
     	inputCommands(myController.getXMLParser().getCommandStrings());
     	inputCommands(myController.getXMLParser().getVariableStrings());
     	

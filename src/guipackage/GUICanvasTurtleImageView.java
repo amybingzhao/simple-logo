@@ -68,6 +68,10 @@ public class GUICanvasTurtleImageView {
 		imageView.setImage(newShape);
 	}
 	
+	protected void onlyUpdateImage(ImageView imageView, Image newShape) {
+		imageView.setImage(newShape);
+	}
+	
 	protected void setMyImagePalette(List<String> palette){
 		this.myImagePalette = palette;
 	}
@@ -94,7 +98,7 @@ public class GUICanvasTurtleImageView {
 	public void setTurtleShape(Image image, String imageName){
 		myTurtleShape = image;
 		myTurtleShapeName = imageName;
-		for(String turtleName:myImagePalette){
+		for(String turtleName: myImagePalette){
 			if(turtleName.equals(imageName)){
 				myTurtleShapeIndex = myImagePalette.indexOf(turtleName);
 			}
