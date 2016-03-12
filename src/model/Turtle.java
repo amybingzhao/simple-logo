@@ -58,9 +58,6 @@ public class Turtle extends Observable {
             myY = myY + inc * Math.cos(Math.toRadians(myDirection));
             updateObservers();
         }
-//        myX = myX + dist * Math.sin(Math.toRadians(myDirection));
-//        myY = myY + dist * Math.cos(Math.toRadians(myDirection));
-//        updateObservers();
         return dist;
     }
 

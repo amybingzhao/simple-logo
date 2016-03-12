@@ -137,8 +137,12 @@ public class GUICanvasTurtleImageView {
 	 */
 	protected void setVisibility(String visibility){
 		showInactive = Boolean.parseBoolean(visibility);
-		if(showInactive) showInactive();
-		else removeInactive();
+		if (showInactive) {
+			showInactive();
+		}
+		else {
+			removeInactive();
+		}
 	}	
 	/**
 	 * Show all turtles on canvas, including inactive.

@@ -8,7 +8,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-//import javafx.animation.Animation;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
@@ -16,7 +15,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
 
@@ -31,10 +29,13 @@ public class GUICanvas implements Observer{
 	private static final String DASHED_LINE = "Dashed Line";
 	private static final String SOLID_LINE = "Solid Line";
 	private static final int TURTLE_SIZE = 20;
+	private static final int CENTER_FACTOR = TURTLE_SIZE/2;
 	private static final int CANVAS_WIDTH = 500;
+	private static final int CANVAS_X_TRANSFORM = CANVAS_WIDTH/2;
 	private static final int CANVAS_HEIGHT = 500;
-	private static final int STARTING_X = CANVAS_WIDTH/2 - TURTLE_SIZE/2;
-	private static final int STARTING_Y = CANVAS_HEIGHT/2 - TURTLE_SIZE/2;	
+	private static final int CANVAS_Y_TRANSFORM = CANVAS_HEIGHT/2;
+	private static final int STARTING_X = CANVAS_X_TRANSFORM - CENTER_FACTOR;
+	private static final int STARTING_Y = CANVAS_Y_TRANSFORM - CENTER_FACTOR;	
 	private static final int PEN_SCALE = 10;
 	private static final int DEFAULT = 0;
 	private static final int MAX_COORDINATE = 500;
@@ -130,10 +131,7 @@ public class GUICanvas implements Observer{
 	 * Keeps track of the old coordinates after updating the Turtle.
 	 */
 	private void setOldCoordinates(Turtle turtle, double x, double y, double direction) {
-		Double[] coordinates = new Double[3];
-		coordinates[0] = x;
-		coordinates[1] = y;
-		coordinates[2] = direction;
+		Double[] coordinates = {x, y, direction};
 		if (turtleParameters.size() <= turtle.getID())
 			turtleParameters.add((int) turtle.getID() - 1, coordinates);
 		else turtleParameters.set((int) turtle.getID() - 1, coordinates);
@@ -184,7 +182,7 @@ public class GUICanvas implements Observer{
 		double myOldY = turtleParameters.get((int) turtle.getID() - 1)[1].doubleValue();
 		double myOldDirection = turtleParameters.get((int) turtle.getID() - 1)[2].doubleValue();
 		gc.save(); // saves the current state on stack, including the current transform
-		Rotate r = new Rotate(myOldDirection, myOldX + TURTLE_SIZE/2, myOldY + TURTLE_SIZE/2);
+		Rotate r = new Rotate(myOldDirection, myOldX + CENTER_FACTOR, myOldY + CENTER_FACTOR);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 		gc.clearRect(myOldX, myOldY, TURTLE_SIZE, TURTLE_SIZE);
 		gc.restore();
@@ -196,10 +194,10 @@ public class GUICanvas implements Observer{
 	private void drawTurtle(Turtle turtle) {
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		GraphicsContext gcDrawing = myTurtles.get(turtle).get(1);
-		double myX = toroidalBounds(turtle.getCurX() + CANVAS_WIDTH/2 - TURTLE_SIZE/2);
-		double myY = toroidalBounds(-(turtle.getCurY() - CANVAS_HEIGHT/2 + TURTLE_SIZE/2));
+		double myX = toroidalBounds(turtle.getCurX() + CANVAS_X_TRANSFORM - CENTER_FACTOR);
+		double myY = toroidalBounds(-(turtle.getCurY() - CANVAS_Y_TRANSFORM + CENTER_FACTOR));
 		gc.save(); // saves the current state on stack, including the current transform
-		Rotate r = new Rotate(turtle.getDirection(), myX + TURTLE_SIZE/2, myY + TURTLE_SIZE/2);
+		Rotate r = new Rotate(turtle.getDirection(), myX + CENTER_FACTOR, myY + CENTER_FACTOR);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
 		if (!turtle.isPenUp()) {
 			drawLine(gcDrawing, myX, myY);
@@ -253,9 +251,9 @@ public class GUICanvas implements Observer{
 				if (myPen.getMyPenCounter() < scaledPen / 2) {
 					drawOval(gcDrawing, myX, myY);
 				} else if (myPen.getMyPenCounter() == scaledPen) {
-					myPen.resetPenCounter();;
+					myPen.resetPenCounter();
 				}
-				myPen.incrementMyPenCounter();;
+				myPen.incrementMyPenCounter();
 			}
 			case DOTTED_LINE: {
 				if (myPen.getMyPenCounter() == scaledPen / 2) {
@@ -264,14 +262,14 @@ public class GUICanvas implements Observer{
 					drawOval(gcDrawing, myX, myY);
 					myPen.resetPenCounter();
 				}
-				myPen.incrementMyPenCounter();;
+				myPen.incrementMyPenCounter();
 			}
 		}
 	}
 
 	private void drawOval(GraphicsContext gcDrawing, double myX, double myY) {
 		long penSize = Math.round(myPen.getMyPenSize());
-		gcDrawing.fillOval(myX + TURTLE_SIZE/2 - penSize/2, myY + TURTLE_SIZE/2 - penSize/2,
+		gcDrawing.fillOval(myX + CENTER_FACTOR - penSize/2, myY + CENTER_FACTOR - penSize/2,
 				penSize, penSize);
 	}
 	
@@ -294,7 +292,7 @@ public class GUICanvas implements Observer{
 	}
 	
 	private double normalizeCoordinates(double coordinate) {
-		return coordinate + TURTLE_SIZE/2;
+		return coordinate + CENTER_FACTOR;
 	}
 	
 	/**

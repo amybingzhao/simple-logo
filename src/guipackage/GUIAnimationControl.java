@@ -9,6 +9,10 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 
 public class GUIAnimationControl implements IGUIObject {
+	private static final float TICK_UNITS = 0.2f;
+	private static final int SLIDER_DEFAULT = 1;
+	private static final int SLIDER_MIN = 0;
+	private static final double SLIDER_MAX = 1.6;
 	private static final int PADDING = 10;
 	private static final int VBOX_SPACING = 5;
 	private GUICanvas myCanvas;
@@ -25,10 +29,10 @@ public class GUIAnimationControl implements IGUIObject {
 		
 		Label sliderLabel = new Label(myResources.getString("AnimationSlider"));
 		Slider animationSpeed = new Slider();
-		animationSpeed.setMin(0);
-		animationSpeed.setMax(1.6);
-		animationSpeed.setValue(1);
-		animationSpeed.setMajorTickUnit(0.2f);
+		animationSpeed.setMin(SLIDER_MIN);
+		animationSpeed.setMax(SLIDER_MAX);
+		animationSpeed.setValue(SLIDER_DEFAULT);
+		animationSpeed.setMajorTickUnit(TICK_UNITS);
 		animationSpeed.setShowTickMarks(true);
 		animationSpeed.setShowTickLabels(true);
 		

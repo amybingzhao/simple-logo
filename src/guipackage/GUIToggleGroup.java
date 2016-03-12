@@ -26,7 +26,8 @@ public class GUIToggleGroup {
 	private VBox toReturn;
 	private int numButtons;
 	
-	public GUIToggleGroup(String toggleLabelString, ToggleGroup group, int numButtons, List<String> buttonUserData, int trueButtonIndex) {
+	public GUIToggleGroup(String toggleLabelString, ToggleGroup group, int numButtons,
+			List<String> buttonUserData, int trueButtonIndex) {
 		this.myToggleLabel = new Label(toggleLabelString);
 		this.myGroup = group;
 		this.numButtons = numButtons;
