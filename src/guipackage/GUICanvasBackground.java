@@ -26,7 +26,10 @@ public class GUICanvasBackground {
 		this.canvasWidth = canvasWidth;
 		this.canvasHeight = canvasHeight;
 	}
-	
+	/**
+	 * Returns background Canvas object.
+	 * @return
+	 */
 	public Canvas getCanvas(){
 		canvasBackground = new Canvas(canvasWidth, canvasHeight);
 		gcBackground = canvasBackground.getGraphicsContext2D();
@@ -35,14 +38,18 @@ public class GUICanvasBackground {
 		myBackgroundRGB = DEFAULT_BACKGROUND_COLOR.getRed()*RGB_MAX + " " + DEFAULT_BACKGROUND_COLOR.getGreen()*RGB_MAX  + " " + DEFAULT_BACKGROUND_COLOR.getBlue()*RGB_MAX ;
 		return canvasBackground;
 	}
-
+	
+	/**
+	 * Sets current background color palette to given color palette.
+	 * @param backgroundPalette
+	 */
 	public void setMyBackgroundPalette(List<String> backgroundPalette) {
 		this.myBackgroundPalette = backgroundPalette;
 	}
 	
 	/**
 	 * Sets background color based on index within palette.
-	 * @param index of color in palette.
+	 * @param index
 	 */
 	public void setBackgroundColor(int index) {
 		String[] rgb = myBackgroundPalette.get(index).split(" ");
@@ -60,6 +67,10 @@ public class GUICanvasBackground {
 		gcBackground.fillRect(DEFAULT_INT, DEFAULT_INT, canvasWidth, canvasHeight);
 	}
 	
+	/**
+	 * Returns space separated RGB string for the current background color of the canvas. 
+	 * @return
+	 */
 	public String getBackgroundColor(){
 		return myBackgroundRGB;
 	}

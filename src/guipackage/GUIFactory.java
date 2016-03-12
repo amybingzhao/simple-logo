@@ -24,7 +24,7 @@ public class GUIFactory {
 	}
 
 	/**
-	 * Creates new GUIObject based on nodeType passed in. 
+	 * Creates new GUIObject based on nodeTypeKey passed in. 
 	 * @param nodeTypeKey
 	 * @return Specified IGUIObject
 	 */
@@ -37,17 +37,6 @@ public class GUIFactory {
 		case("VariablesTableView"): return new GUITableView(myResources, myController.getVariableDictionary());
 		case("UserCommandsComboBox"): return new GUIComboBoxUserHist(canvas, myResources, myController,myResources.getString(nodeTypeKey + PROMPT_TEXT), myCommandLine, myController.getCommandDictionary());
 		case("PreviousCommandsComboBox"): return new GUIComboBoxCommandHist(canvas, myResources, myController, myResources.getString(nodeTypeKey+PROMPT_TEXT), myCommandLine);
-		case("CanvasRight"):{
-			return new GUICanvasRight(myResources, new GUIComboBoxColorB(canvas, myResources, myResources.getString("BackgroundColorPalettePromptText"),
-					myResources.getString("DefaultBackgroundColors")), new GUIComboBoxColorP(canvas, myResources, 
-							myResources.getString("PenColorPalettePromptText"), myResources.getString("DefaultPenColors")),
-					new GUIComboBoxImages(canvas, myResources, myResources.getString("ImageComboBoxPromptText")),
-					new GUIPenSettings(myResources, canvas),
-					new GUITurtleState(myResources, new GUILabeled(myResources, myResources.getString("TurtleLocation")),
-													new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
-													new GUILabeled(myResources, myResources.getString("TurtlePen")),
-													new GUILabeled(myResources, myResources.getString("TurtleActive"))));
-		}
 		case("ShowHide"):return new GUITurtleStateToggle(myResources, canvas);
 		}
 		return null;

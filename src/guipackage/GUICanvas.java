@@ -138,12 +138,17 @@ public class GUICanvas implements Observer{
 		else turtleParameters.set((int) turtle.getID() - 1, coordinates);
 	}
 	
+	/**
+	 * Updates image for each turtle on the canvas.
+	 */
 	protected void updateTurtleImageView(){
 		for(Turtle turtle: myTurtles.keySet()){
 				drawTurtle(turtle);
 		}
 	}
-	
+	/**
+	 * Updates pen color for each turtle on the canvas.
+	 */
 	private void updatePenColors(){
 		for(List<GraphicsContext> lst: myTurtles.values()){
 			if (lst != null){
@@ -211,6 +216,11 @@ public class GUICanvas implements Observer{
 		setOldCoordinates(turtle, myX, myY, turtle.getDirection());
 	}
 	
+	/**
+	 * Converts coordinate to its toroidal coordinate if it is greater than the maximum or less than the minimum coordinate.
+	 * @param coordinate
+	 * @return
+	 */
 	private double toroidalBounds(double coordinate) {
 		if (coordinate > MAX_COORDINATE) {
 			coordinate = coordinate%MAX_COORDINATE;
@@ -304,12 +314,15 @@ public class GUICanvas implements Observer{
 	protected GUICanvasAnimation getAnimation(){
 		return myAnimation;
 	}
-
-	protected void setTurtlePenStatus(String penUp) {
+	/**
+	 * Set pen state (up/down) of every turtle on the canvas. 
+	 * @param penState
+	 */
+	protected void setTurtlePenStatus(String penState) {
 		for (Turtle t: myTurtles.keySet()) {
-			if (t.isActive() && penUp.equals(myResources.getString("PenUp"))) {
+			if (t.isActive() && penState.equals(myResources.getString("PenUp"))) {
 				t.setPenUp(true);
-			} else if (t.isActive() && penUp.equals(myResources.getString("PenDown"))){
+			} else if (t.isActive() && penState.equals(myResources.getString("PenDown"))){
 				t.setPenUp(false);
 			}
 		}

@@ -74,13 +74,15 @@ public class TabMainScreen {
 	}
 	
 	/**
-	 * Next 5 methods all place GUIObjects on the Pane.
+	 * Set center pane of BorderPane.
 	 */
 	private void setCenterPane() {
 		Node canvasNode = canvas.createNode();
 		myMainScreen.setCenter(canvasNode);
 	}
-
+	/**
+	 * Set left pane of BorderPane.
+	 */
 	private void setLeftPane() {
 		VBox leftPanel = new VBox(PANEL_PADDING);
 		userCommands = myFactory.createNewGUIObject("UserCommands");
@@ -93,18 +95,24 @@ public class TabMainScreen {
 				saveLoad.createNode(), showHide.createNode());
 		myMainScreen.setLeft(leftPanel);
 	}
-	
+	/**
+	 * Set right pane of BorderPane.
+	 */
 	private void setRightPane() {
 		VBox rightPanel = new VBox(PANEL_PADDING);
 		variables = myFactory.createNewGUIObject("Variables");
 		rightPanel.getChildren().addAll(variables.createNode());
 		myMainScreen.setRight(rightPanel);
 	}
-	
+	/**
+	 * Set bottom pane of BorderPane.
+	 */
 	private void setBottomPane(){
 		myMainScreen.setBottom(commandLine.createNode());
 	}
-
+	/**
+	 * Set top pane of BorderPane.
+	 */
 	private void setTopPane() {
 		myOutput = myController.getGUIOutput();
 		myMainScreen.setTop(myOutput.createNode());

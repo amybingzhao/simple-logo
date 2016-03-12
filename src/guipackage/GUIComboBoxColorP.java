@@ -14,7 +14,9 @@ public class GUIComboBoxColorP extends GUIComboBoxColor {
 			String promptText, String paletteSource) {
 		super(canvas, myResources, promptText, paletteSource);
 	}
-
+	/**
+	 * On comboButton click, canvas pen will be set to new color. 
+	 */
 	@Override
 	protected void setCanvasValues(Color col) {
 		canvas.getPen().setMyPenColor(col, comboBox.getValue());
