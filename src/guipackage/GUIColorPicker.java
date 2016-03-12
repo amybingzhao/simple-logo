@@ -32,12 +32,7 @@ abstract class GUIColorPicker implements IGUIObject {
 		VBox box = new VBox();
         box.setPadding(new Insets(VBOX_PADDING, VBOX_PADDING, VBOX_PADDING, VBOX_PADDING));          
     	ColorPicker colorPicker = new ColorPicker(getStartColor());
-		colorPicker.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				handleEvent(colorPicker);
-			}
-        });
+		colorPicker.setOnAction(event -> handleEvent(colorPicker));
         
         Label text = new Label(pickerLabel);
         box.getChildren().addAll(text, colorPicker);

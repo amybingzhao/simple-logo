@@ -78,27 +78,19 @@ public class GUITableView implements IGUIObject {
      */
     public void createValueColumn() {
         Callback<TableColumn<GUITableViewTableVariable, Double>, TableCell<GUITableViewTableVariable, Double>> cellFactory =
-                new Callback<TableColumn<GUITableViewTableVariable, Double>, TableCell<GUITableViewTableVariable, Double>>() {
-                    public TableCell<GUITableViewTableVariable, Double> call(TableColumn<GUITableViewTableVariable, Double> p) {
-                        return new GUITableViewEditingCell();
-                    }
-                };
+                (event -> {
+                	return new GUITableViewEditingCell();
+                	});
         myValueColumn =
                 new TableColumn<GUITableViewTableVariable, Double>(myResources.getString("ValuesColumn"));
         myValueColumn.setMinWidth(TABLE_COLUMN_WIDTH);
         myValueColumn.setCellValueFactory(new PropertyValueFactory<GUITableViewTableVariable, Double>("variableValue"));
         myValueColumn.setCellFactory(cellFactory);
-        myValueColumn.setOnEditCommit(
-                new EventHandler<CellEditEvent<GUITableViewTableVariable, Double>>() {
-                    @Override
-                    public void handle(CellEditEvent<GUITableViewTableVariable, Double> t) {
-                        ((GUITableViewTableVariable) t.getTableView().getItems().get(t.getTablePosition().getRow()))
-                                .setVariableValue(t.getNewValue());
-                        varDict.makeVariable(t.getTableView().getItems().get(t.getTablePosition().getRow())
-                                .getVariableName(), t.getNewValue());
-                    }
-                }
-        );
+        myValueColumn.setOnEditCommit(event -> {
+        	event.getTableView().getItems().get(event.getTablePosition().getRow()).setVariableValue(event.getNewValue());
+        	varDict.makeVariable(event.getTableView().getItems().get(event.getTablePosition().getRow())
+        			.getVariableName(), event.getNewValue());
+        });
     }
     /**
      * Updates node when new data is available.
@@ -106,7 +98,7 @@ public class GUITableView implements IGUIObject {
     @Override
     public void updateNode() {
         data.clear();
-        for (String s : varDict.getKeySet()) {
+        for (String s: varDict.getKeySet()) {
             data.add(new GUITableViewTableVariable(s, varDict.getNodeFor(s)));
         }
     }

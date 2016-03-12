@@ -11,6 +11,7 @@ import javafx.scene.control.ToggleGroup;
  *
  */
 public class GUITurtleStateToggle implements IGUIObject {
+	private static final int TURTLE_STATE_BUTTONS = 2;
 	private ToggleGroup toggleGroup;
 	private ResourceBundle myResources;
 	private GUICanvas canvas;
@@ -27,7 +28,7 @@ public class GUITurtleStateToggle implements IGUIObject {
 		toggleGroup = new ToggleGroup();
 		toggleGroup.selectedToggleProperty().addListener(
 				e -> canvas.getTurtleImageView().setVisibility(toggleGroup.getSelectedToggle().getUserData().toString()));
-		GUIToggleGroup toggleGroupObj = new GUIToggleGroup(myResources.getString("ShowHideLabel"),toggleGroup,2,
+		GUIToggleGroup toggleGroupObj = new GUIToggleGroup(myResources.getString("ShowHideLabel"), toggleGroup, TURTLE_STATE_BUTTONS,
 				new ArrayList<>(Arrays.asList(myResources.getString("Show"),myResources.getString("Hide"))),
 				0);
 		return toggleGroupObj.createToggleGroupVBox();

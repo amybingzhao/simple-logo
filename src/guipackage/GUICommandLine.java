@@ -25,6 +25,7 @@ public class GUICommandLine {
 	private Button runButton;
 	private VBox commandLine;
 	
+	private static final int TEXT_AREA_ROWS = 3;
 	private static final int COMMAND_LINE_SPACING = 5;
 	private static final double PADDING_TOP = 0;
 	private static final double PADDING_RIGHT = 10;
@@ -44,7 +45,7 @@ public class GUICommandLine {
 	protected Node createNode() {
 		commandLabel = new Label(myResources.getString("Command"));
 		commandInputLine = new TextArea();
-		commandInputLine.setPrefRowCount(3);
+		commandInputLine.setPrefRowCount(TEXT_AREA_ROWS);
 		runButton = new Button(myResources.getString("Run"));
 		runButton.setOnAction(evt -> runCommand(commandInputLine.getText()));
 		

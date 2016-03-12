@@ -16,6 +16,7 @@ import javafx.scene.shape.Rectangle;
  *
  */
 abstract class GUIComboBoxColor extends GUIComboBox{
+	private static final int RECTANGLE_SIDE_SIZE = 20;
 	protected List<String> palette;
 	
 	public GUIComboBoxColor(GUICanvas canvas, ResourceBundle myResources,
@@ -55,7 +56,7 @@ abstract class GUIComboBoxColor extends GUIComboBox{
 		HBox hbox = new HBox();
 		String[] rgb = item.split(" ");
 	   	Color col = Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
-	   	Rectangle rectangle = new Rectangle(20, 20);
+	   	Rectangle rectangle = new Rectangle(RECTANGLE_SIDE_SIZE, RECTANGLE_SIDE_SIZE);
 	   	rectangle.setFill(col);
 	   	hbox.getChildren().addAll(new Label(options.indexOf(item) + " "), rectangle); 
 	   	return hbox;

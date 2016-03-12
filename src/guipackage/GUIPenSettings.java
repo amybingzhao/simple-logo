@@ -17,6 +17,8 @@ import javafx.scene.layout.VBox;
  *
  */
 public class GUIPenSettings implements IGUIObject{
+	private static final int PEN_TYPE_BUTTONS = 3;
+	private static final int PEN_UPDOWN_BUTTONS = 2;
 	private static final int PADDING = 10;
 	private static final int BOX_SPACING = 10;
 	private ResourceBundle myResources;
@@ -57,8 +59,8 @@ public class GUIPenSettings implements IGUIObject{
 		penUpDownGroup = new ToggleGroup();
 		penUpDownGroup.selectedToggleProperty().addListener(
 				e -> myCanvas.setTurtlePenStatus(penUpDownGroup.getSelectedToggle().getUserData().toString()));
-		GUIToggleGroup newGroup = new GUIToggleGroup(myResources.getString("UpDownLabel"), penUpDownGroup, 2,
-				new ArrayList<>(Arrays.asList(myResources.getString("PenUp"),
+		GUIToggleGroup newGroup = new GUIToggleGroup(myResources.getString("UpDownLabel"), penUpDownGroup,
+				PEN_UPDOWN_BUTTONS, new ArrayList<>(Arrays.asList(myResources.getString("PenUp"),
 											myResources.getString("PenDown"))), 0);
 		vbox1 = newGroup.createToggleGroupVBox();		
 	}
@@ -69,8 +71,8 @@ public class GUIPenSettings implements IGUIObject{
 		penTypeGroup = new ToggleGroup();
 		penTypeGroup.selectedToggleProperty().addListener(
 				e -> myPen.setMyPenType(penTypeGroup.getSelectedToggle().getUserData().toString()));
-		GUIToggleGroup newGroup = new GUIToggleGroup(myResources.getString("PenTypeLabel"), penTypeGroup,3,
-				new ArrayList<>(Arrays.asList(myResources.getString("SolidPen"),
+		GUIToggleGroup newGroup = new GUIToggleGroup(myResources.getString("PenTypeLabel"), penTypeGroup,
+				PEN_TYPE_BUTTONS, new ArrayList<>(Arrays.asList(myResources.getString("SolidPen"),
 											myResources.getString("DashedPen"),
 											myResources.getString("DottedPen"))), 0);
 		vbox2 = newGroup.createToggleGroupVBox();
