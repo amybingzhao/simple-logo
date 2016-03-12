@@ -50,14 +50,14 @@ public class GUICanvasAnimation {
 		Path path = new Path();
 		path.getElements().addAll(new MoveTo(oldX, oldY), new LineTo(x, y));
 		if (oldX != x || oldY != y) {
-			PathTransition pt = new PathTransition(Duration.millis(100), path, agent);
+			PathTransition pt = new PathTransition(Duration.millis(10), path, agent);
 			newAnimation.getChildren().add(pt);
 			createLineAnimations(oldX, oldY, x, y);
 			drawPen = true;
 		}
 		
 		if (direction != 0) {
-			RotateTransition rt = new RotateTransition(Duration.millis(50), agent);
+			RotateTransition rt = new RotateTransition(Duration.millis(1000), agent);
 			rt.setByAngle((int) direction);
 			newAnimation.getChildren().add(rt);
 			drawPen = false;
@@ -75,7 +75,7 @@ public class GUICanvasAnimation {
 		
 		Queue<Animation> penLines = new LinkedList<Animation>();
 		
-		for (int i = 0; i < totalDistance; i++) {
+		for (int i = 0; i <= totalDistance; i++) {
 			FadeTransition lineAnimation = new FadeTransition(Duration.millis(1000),
 					new Line(oldX, oldY, oldX + i * xOffset, oldY + i * yOffset));
 			lineAnimation.setFromValue(1.0);
@@ -88,22 +88,23 @@ public class GUICanvasAnimation {
 	protected void playNextAnimation() {
 		if (!myAnimationQueue.isEmpty()) {
 			myAnimation = myAnimationQueue.poll();
-			if (!myLineAnimationQueue.isEmpty()) {
-				myLineAnimation = myLineAnimationQueue.poll();
-			}
+//			if (!myLineAnimationQueue.isEmpty()) {
+//				myLineAnimation = myLineAnimationQueue.poll();
+//			}
 			play();
 		}
 	}
 	
 	protected void play() {
-		ParallelTransition parallelTransition = new ParallelTransition();
-		parallelTransition.getChildren().add(myAnimation);
-		if (drawPen && !myLineAnimation.isEmpty()) {
-			for (Animation f: myLineAnimation) {
-				parallelTransition.getChildren().add(f);
-			}
-		}
-		parallelTransition.play();
+		myAnimation.play();
+//		ParallelTransition parallelTransition = new ParallelTransition();
+//		parallelTransition.getChildren().add(myAnimation);
+//		if (!myLineAnimation.isEmpty()) {
+//			for (Animation f: myLineAnimation) {
+//				parallelTransition.getChildren().add(f);
+//			}
+//		}
+//		parallelTransition.play();
 	}
 	
 	protected void pause() {

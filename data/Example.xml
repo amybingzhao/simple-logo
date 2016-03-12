@@ -3,7 +3,7 @@
     <Config>
         <BackgroundColor>0 255 255</BackgroundColor>
         <PenColor>0 0 0</PenColor>
-        <TurtleImage>turtle_outline.png</TurtleImage>
+        <TurtleImage>olaf.png</TurtleImage>
     </Config>
     <Variables>
         <:x>20</:x>

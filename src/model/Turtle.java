@@ -25,7 +25,7 @@ public class Turtle extends Observable {
     private boolean reset;
     private ImageView turtleImageView;
     private static final double ONE_REVOLUTION = 360;
-    private static final double INCREMENT = 0.1;
+    private static final double INCREMENT = 1;
     private static final int SQUARE = 2;
 
     /**
@@ -53,13 +53,13 @@ public class Turtle extends Observable {
             inc = -inc;
         }
 
-//        for (double i = 0; i < Math.abs(dist); i = i + INCREMENT) {
-//            myX = myX + inc * Math.sin(Math.toRadians(myDirection));
-//            myY = myY + inc * Math.cos(Math.toRadians(myDirection));
-//            updateObservers();
-//        }
-        myX = myX + dist * Math.sin(Math.toRadians(myDirection));
-        myY = myY + dist *  Math.cos(Math.toRadians(myDirection));
+        for (double i = 0; i < Math.abs(dist); i = i + INCREMENT) {
+            myX = myX + inc * Math.sin(Math.toRadians(myDirection));
+            myY = myY + inc * Math.cos(Math.toRadians(myDirection));
+            updateObservers();
+        }
+//        myX = myX + dist * Math.sin(Math.toRadians(myDirection));
+//        myY = myY + dist * Math.cos(Math.toRadians(myDirection));
         updateObservers();
         return dist;
     }
@@ -263,6 +263,7 @@ public class Turtle extends Observable {
      */
     public void setImageView(ImageView iv){
     	turtleImageView = iv;
+    	updateObservers();
     }
     
     /**

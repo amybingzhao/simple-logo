@@ -34,7 +34,7 @@ public class GUICanvas implements Observer{
 	private static final int CANVAS_HEIGHT = 500;
 	private static final int STARTING_X = CANVAS_WIDTH/2 - TURTLE_SIZE/2;
 	private static final int STARTING_Y = CANVAS_HEIGHT/2 - TURTLE_SIZE/2;	
-	private static final int PEN_SCALE = 100;
+	private static final int PEN_SCALE = 10;
 	private static final int DEFAULT = 0;
 	private static final int MAX_COORDINATE = 500;
 	private static final int MIN_COORDINATE = 0;
@@ -298,6 +298,10 @@ public class GUICanvas implements Observer{
 	
 	public GUICanvasTurtleImageView getTurtleImageView(){
 		return myTurtleImageView;
+	}
+	
+	protected GUICanvasAnimation getAnimation(){
+		return myAnimation;
 	}
 
 	protected void setTurtlePenStatus(String penUp) {
