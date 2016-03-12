@@ -1,8 +1,6 @@
 package guipackage;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 import javafx.animation.Animation;
@@ -10,16 +8,14 @@ import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Animation.Status;
-import javafx.animation.FadeTransition;
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 public class GUICanvasAnimation {
+	private static final double FLOAT_MARGIN_OF_ERROR = 0.01;
 	private static final double ANIMATION_THRESHOLD = 0.5;
 	private static final int DEFAULT_ROTATE_SPEED = 1000;
 	private static final int DEFAULT_PATH_SPEED = 15;
@@ -31,7 +27,7 @@ public class GUICanvasAnimation {
 	
 	public GUICanvasAnimation() {
 		myAnimation = new SequentialTransition();
-		myAnimationQueue = new LinkedList<Animation>();
+		myAnimationQueue = new LinkedList<>();
 		pathSpeed = DEFAULT_PATH_SPEED;
 		rotateSpeed = DEFAULT_ROTATE_SPEED;
 		animate = true;
@@ -49,12 +45,12 @@ public class GUICanvasAnimation {
 		
 		Path path = new Path();
 		path.getElements().addAll(new MoveTo(oldX, oldY), new LineTo(x, y));
-		if (oldX != x || oldY != y) {
+		if (Math.abs(oldX - x) > FLOAT_MARGIN_OF_ERROR || Math.abs(oldY - y) > FLOAT_MARGIN_OF_ERROR) {
 			PathTransition pt = new PathTransition(Duration.millis(pathSpeed), path, agent);
 			newAnimation.getChildren().add(pt);
 		}
 		
-		if (direction != 0) {
+		if (Math.abs(direction) > FLOAT_MARGIN_OF_ERROR) {
 			RotateTransition rt = new RotateTransition(Duration.millis(rotateSpeed), agent);
 			rt.setByAngle((int) direction);
 			newAnimation.getChildren().add(rt);
