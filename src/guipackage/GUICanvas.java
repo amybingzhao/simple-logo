@@ -118,7 +118,7 @@ public class GUICanvas implements Observer{
 			lst.get(0).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 			lst.get(1).clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 			drawTurtle(key);
-			myTurtleImageView.removeTurtleImageView(turtle);
+			myTurtleImageView.updateImageView(turtle.getImageView(), STARTING_X, STARTING_Y, DEFAULT, myTurtleImageView.getTurtleShape());
 			key.doneResetting();
 		}
 	}
