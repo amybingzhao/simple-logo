@@ -16,7 +16,7 @@ public class Sum extends Node{
      */
 	@Override
 	public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
-		return combineChildren(0, commandDict, varDict);
+		return combineAllChildValues(0, commandDict, varDict);
 	}
 	
 	/**

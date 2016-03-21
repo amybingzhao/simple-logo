@@ -16,14 +16,14 @@ public class Difference extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
-        return combineChildren(getChildren().get(START).interpret(commandDict, varDict) * 2, commandDict, varDict);
+        return combineAllChildValues(getChildren().get(START).interpret(commandDict, varDict) * 2, commandDict, varDict);
     }
     
     /**
      * Subtracts the child's value from the current value.
      */
     @Override
-    protected double addChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+    protected double addNextChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         return val - child.interpret(commandDict, varDict);
     }
 

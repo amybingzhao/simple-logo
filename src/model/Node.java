@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Amy Zhao
+
 package model;
 
 import java.util.ArrayList;
@@ -13,7 +16,7 @@ public abstract class Node implements IFunctions {
     private int numChildrenNeeded;
 
     /**
-     * Initializes the node's turtle and list of children nodes.
+     * Initializes the node's list of children.
      */
     public Node() {
         myChildren = new ArrayList<>();
@@ -24,7 +27,9 @@ public abstract class Node implements IFunctions {
      * @param child: node representing one of the current node's parameters.
      */
     public void addChild(Node child) {
-        myChildren.add(child);
+    	if (child != null) {
+    		myChildren.add(child);
+    	}
     }
 
     /**
@@ -52,21 +57,14 @@ public abstract class Node implements IFunctions {
     }
 
     /**
-     * Interprets the function.
-     * @param commandDict: command dictionary for current workspace.
-     * @param varDict: variable dictionary for current workspace.
-     */
-    public abstract double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException;
-
-    /**
-     * Creates a list of values that the children of a command list interpret to.
+     * Creates a list of values that the children of a command list evaluate to.
      * @param commandList: CommandList object to be interpreted.
      * @param commandDict: command dictionary for current workspace.
      * @param varDict: variable dictionary for current workspace.
      * @return list of values that the children of a command list interpret to.
      * @throws ClassNotFoundException
      */
-    public List<Double> createListFromCommandList(CommandList commandList, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+    public List<Double> createValueListFromCommandList(CommandList commandList, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         List<Double> list = new ArrayList<>();
     	for (int i = 0; i < commandList.getChildren().size(); i++) {
     		list.add(commandList.getChildren().get(i).interpret(commandDict, varDict));
@@ -75,22 +73,22 @@ public abstract class Node implements IFunctions {
     }
     
     /**
-     * Applies all child nodes by combining their values.
+     * Combines the values that each child node evaluates to.
      * @param val: starting value.
      * @param commandDict: command dictionary for current workspace.
      * @param varDict: variable dictionary for current workspace.
      * @return resultant value of combining child nodes' values.
      * @throws ClassNotFoundException
      */
-    protected double combineChildren(double val, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+    protected double combineAllChildValues(double val, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
 		for (int i = 0; i < myChildren.size(); i++) {
-			val = addChildValue(val, myChildren.get(i), commandDict, varDict);
+			val = addNextChildValue(val, myChildren.get(i), commandDict, varDict);
 		}
 		return val;
     }
     
     /**
-     * Default operation for combing child values (sums them).
+     * Default operation for combining child values (sums them).
      * @param val: starting val.
      * @param child: child to be combined.
      * @param commandDict: command dictionary for current workspace.
@@ -98,7 +96,7 @@ public abstract class Node implements IFunctions {
      * @return sum of starting val and child val.
      * @throws ClassNotFoundException
      */
-    protected double addChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+    protected double addNextChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         return val + child.interpret(commandDict, varDict);
     }
     
@@ -114,9 +112,4 @@ public abstract class Node implements IFunctions {
     	}
     	return sb.toString();
     }
-    
-    /**
-	 * Returns the class name and its children.
-	 */
-    public abstract String toString();
 }

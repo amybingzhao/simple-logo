@@ -15,7 +15,7 @@ public class Product extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
-        return combineChildren(1, commandDict, varDict);
+        return combineAllChildValues(1, commandDict, varDict);
 
     }
     
@@ -23,7 +23,7 @@ public class Product extends Node {
      * Combines the child node's value by multiplying it with the current value.
      */
     @Override
-    protected double addChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+    protected double addNextChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         return val * child.interpret(commandDict, varDict);
     }
     

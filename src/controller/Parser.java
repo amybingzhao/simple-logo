@@ -197,8 +197,6 @@ public class Parser {
             case VARIABLE:
                 node = new Variable(commandToBuild);
                 break;
-            case COMMENT:
-                break;
             case LIST_START:
             	node = createList(inputCommandList);
             	break;

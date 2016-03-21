@@ -14,7 +14,7 @@ public class Ask extends TurtleNode {
 	@Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
             throws ClassNotFoundException {
-		List<Double> turtleIDs = createListFromCommandList((CommandList) getChildren().get(TURTLE_IDS), commandDict, varDict);
+		List<Double> turtleIDs = createValueListFromCommandList((CommandList) getChildren().get(TURTLE_IDS), commandDict, varDict);
 		return applyToTurtlesInList(turtleIDs, getActiveTurtles(), commandDict, varDict);
 	}
 

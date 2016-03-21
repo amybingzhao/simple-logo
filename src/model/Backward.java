@@ -16,7 +16,7 @@ public class Backward extends TurtleNode {
      */
 	@Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
-		double dist = combineChildren(0, commandDict, varDict);
+		double dist = combineAllChildValues(0, commandDict, varDict);
 		return turtle.move(-dist);
 	}
 	

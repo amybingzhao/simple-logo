@@ -17,8 +17,8 @@ public class Left extends TurtleNode {
     @Override
 	protected double applyToIndividualTurtle(Turtle turtle, CommandDictionary commandDict, VariableDictionary varDict)
             throws ClassNotFoundException {
-		turtle.setDirection(turtle.getDirection() - combineChildren(0, commandDict, varDict));
-		return combineChildren(0, commandDict, varDict);
+		turtle.setDirection(turtle.getDirection() - combineAllChildValues(0, commandDict, varDict));
+		return combineAllChildValues(0, commandDict, varDict);
 	}
 
     /**

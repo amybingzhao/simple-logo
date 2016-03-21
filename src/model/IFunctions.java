@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Amy Zhao
+
 package model;
 
 import java.util.List;
@@ -9,7 +12,7 @@ import java.util.List;
  */
 public interface IFunctions {
 	/**
-	 * Interprets the function.
+	 * Interprets and executes the function.
 	 * @param commandDict: command dictionary for current workspace.
 	 * @param varDict: variable dictionary for current workspace.
 	 * @return value that the function evaluates to.

@@ -15,14 +15,14 @@ public class Quotient extends Node {
      */
     @Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
-        return combineChildren(Math.pow(getChildren().get(0).interpret(commandDict, varDict), 2), commandDict, varDict);
+        return combineAllChildValues(Math.pow(getChildren().get(0).interpret(commandDict, varDict), 2), commandDict, varDict);
     }
 
     /**
      * Combines the child node's value by dividing the current value by it.
      */
     @Override
-    protected double addChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+    protected double addNextChildValue(double val, IFunctions child, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
         return val / child.interpret(commandDict, varDict);
     }
     
