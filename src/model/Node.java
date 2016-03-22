@@ -1,6 +1,19 @@
 // This entire file is part of my masterpiece.
 // Amy Zhao
 
+// The Node class is an abstract base class for all of the SLogo functions. It implements the IFunctions interface, and thus by extension, 
+// all of the SLogo functions implement the IFunctions interface.
+
+// The use of this inheritance hierarchy allowed for significant flexibility in terms of adding new SLogo functions, and also allowed us
+// to build a tree of Nodes for ease of executing the user-entered commands once they'd been parsed. This makes it open to extension since
+// a new SLogo function can be added simply by creating a subclass of this hierarchy, which will ensure that it can be parsed into a node of
+// the expression tree and thus interpreted and executed, and it also makes it closed to modifications in that it restricts SLogo functions
+// to being implemented as nodes of a tree with only IFunctions as their children.
+
+// The code in this class is also very concise and well-documented. The short list of instance variables are all private, and interfaces 
+// are used to improve clarity. Additionally, the setter for adding a child to myChildren (addChild()), contains checks for bad input, increasing
+// its functionality beyond just setting a value, and the childrenToString() method uses a StringBuffer to improve efficiency.
+
 package model;
 
 import java.util.ArrayList;

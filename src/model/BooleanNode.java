@@ -1,6 +1,7 @@
 // This entire file is part of my masterpiece.
 // Amy Zhao
 
+// The purpose of
 package model;
 
 import java.util.List;
