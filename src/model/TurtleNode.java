@@ -194,4 +194,21 @@ public abstract class TurtleNode extends Node {
     		return 0;
     	}
     }
+    
+
+    /**
+     * Creates a list of values that the children of a command list evaluate to.
+     * @param commandList: CommandList object to be interpreted.
+     * @param commandDict: command dictionary for current workspace.
+     * @param varDict: variable dictionary for current workspace.
+     * @return list of values that the children of a command list interpret to.
+     * @throws ClassNotFoundException
+     */
+    public List<Double> createValueListFromCommandList(CommandList commandList, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
+        List<Double> list = new ArrayList<>();
+    	for (int i = 0; i < commandList.getChildren().size(); i++) {
+    		list.add(commandList.getChildren().get(i).interpret(commandDict, varDict));
+    	}
+    	return list;
+    }
 }
