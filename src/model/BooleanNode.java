@@ -1,7 +1,17 @@
 // This entire file is part of my masterpiece.
 // Amy Zhao
 
-// The purpose of
+// The purpose of this class is to provide an intermediate level of inheritance between Nodes and subclasses that evaluate boolean conditions.
+// It reduces the bulkiness of both its subclasses and the Node superclass, as it reduces duplicate code in its subclasses while also isolating
+// methods that are only useful for a subset of Node subclasses. By utilizing lambda expressions in countNumTrue() and countNumEqual(),
+// it reduces duplicate code in the And, Or, Equal, and NotEqual subclasses, and also takes advantage of the fact that all of the boolean 
+// functions return 1 for true and 0 for false to reduce duplicate code in the Not, LessThan, and GreaterThan subclasses as well. Similar intermediate
+// superclasses are also implemented for Turtle functions (TurtleNode) and Display functions (DisplayNode), as these also had a great degree of
+// similarity in the requirements of their subclasses. The methods in this class are also short and well-documented, with no instance variables required,
+// making it closed to modification in that there are no getters and setters and thus no vulnerable data, but it is open to modification as it can be
+// used to implement any SLogo function that evaluates a condition to true or false simply by adding a subclass to this superclass.
+
+
 package model;
 
 import java.util.List;
@@ -21,6 +31,11 @@ public abstract class BooleanNode extends Node {
 		}
 	}
 
+	/**
+	 * Abstract method for all boolean nodes that checks whether or not a condition specific to that function is satisfied.
+	 */
+	protected abstract boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException;
+	
 	/**
 	 * Counts the number of children nodes that evaluate to a non-zero number.
 	 * @param commandDict: command dictionary for current workspace.
@@ -64,9 +79,4 @@ public abstract class BooleanNode extends Node {
 		}
 		return numMatching;
 	}
-
-	/**
-	 * Abstract method for all boolean nodes that checks whether or not a condition specific to that function is satisfied.
-	 */
-	protected abstract boolean checkCondition(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException;
 }
