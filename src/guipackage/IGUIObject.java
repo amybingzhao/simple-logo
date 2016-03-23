@@ -1,3 +1,12 @@
+// This entire file is part of my masterpiece.
+// David Yang
+
+/**
+ * I chose to put this interface in the code masterpiece because it is the
+ * central piece of the front end design. This API makes it easy for future
+ * developers to add additional GUI elements to the slogo window. 
+ */
+
 package guipackage;
 import javafx.scene.Node;
 

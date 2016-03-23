@@ -1,3 +1,13 @@
+// This entire file ispart of my masterpiece
+// David Yang
+
+/**
+ * I chose to include this class in my masterpiece because it is one of the GUI elements
+ * that implements the IGUIObject interface. It shows the IGUIObject interface in action
+ * and how easy it is to add a new element to the GUI. This class also demonstrates the
+ * use of lambda functions as well as following all the normal coding conventions such as
+ * short methods, constants, and private instance variables.
+ */
 package guipackage;
 
 import java.util.ResourceBundle;
@@ -21,22 +31,22 @@ import model.VariableDictionary;
  */
 public class GUITableView implements IGUIObject {
 
-    private static final int TABLE_COLUMN_WIDTH = 130;
     private ResourceBundle myResources;
     private TableView<GUITableViewVariable> myTableView;
     private TableColumn<GUITableViewVariable, String> myVariableColumn;
     private TableColumn<GUITableViewVariable, Double> myValueColumn;
     private VariableDictionary varDict;
+    private ObservableList<GUITableViewVariable> data;
+    private static final int TABLE_COLUMN_WIDTH = 130;
 	private static final double PADDING_TOP = 0;
 	private static final double PADDING_RIGHT = 0;
 	private static final double PADDING_BOTTOM = 0;
 	private static final double PADDING_LEFT = 10;
 
-    private ObservableList<GUITableViewVariable> data = FXCollections.observableArrayList();
-
     public GUITableView(ResourceBundle r, VariableDictionary myVarDict) {
         myResources = r;
         varDict = myVarDict;
+        data = FXCollections.observableArrayList();
     }
 
     /**
@@ -63,7 +73,7 @@ public class GUITableView implements IGUIObject {
     /**
      * Create column to hold variable names.
      */
-    public void createVariableColumn() {
+    private void createVariableColumn() {
         myVariableColumn =
                 new TableColumn<>(myResources.getString("VariablesColumn"));
         myVariableColumn.setMinWidth(TABLE_COLUMN_WIDTH);
@@ -74,7 +84,7 @@ public class GUITableView implements IGUIObject {
     /**
      * Create column to hold variable values. 
      */
-    public void createValueColumn() {
+    private void createValueColumn() {
         Callback<TableColumn<GUITableViewVariable, Double>, 
         TableCell<GUITableViewVariable, Double>> cellFactory =
                 (event -> {
@@ -93,6 +103,7 @@ public class GUITableView implements IGUIObject {
         			event.getTablePosition().getRow()).getVariableName(), event.getNewValue());
         });
     }
+    
     /**
      * Updates node when new data is available.
      */
