@@ -7,11 +7,11 @@ import javafx.beans.property.SimpleDoubleProperty;
  * @author David
  *
  */
-public class GUITableViewTableVariable {
+public class GUITableViewVariable {
 	private final SimpleStringProperty variableName;
 	private final SimpleDoubleProperty variableValue;
 	
-	public GUITableViewTableVariable (String name, Double value) {
+	public GUITableViewVariable (String name, Double value) {
 		this.variableName = new SimpleStringProperty(name);
 		this.variableValue = new SimpleDoubleProperty(value);
 	}

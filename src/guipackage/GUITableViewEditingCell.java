@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
  *
  */
 
-public class GUITableViewEditingCell extends TableCell<GUITableViewTableVariable, Double>{
+public class GUITableViewEditingCell extends TableCell<GUITableViewVariable, Double>{
 	private static final int TEXT_FIELD_MULTIPLIER = 2;
 	private TextField textField;
 	

@@ -23,16 +23,16 @@ public class GUITableView implements IGUIObject {
 
     private static final int TABLE_COLUMN_WIDTH = 130;
     private ResourceBundle myResources;
-    private TableView<GUITableViewTableVariable> myTableView;
-    private TableColumn<GUITableViewTableVariable, String> myVariableColumn;
-    private TableColumn<GUITableViewTableVariable, Double> myValueColumn;
+    private TableView<GUITableViewVariable> myTableView;
+    private TableColumn<GUITableViewVariable, String> myVariableColumn;
+    private TableColumn<GUITableViewVariable, Double> myValueColumn;
     private VariableDictionary varDict;
 	private static final double PADDING_TOP = 0;
 	private static final double PADDING_RIGHT = 0;
 	private static final double PADDING_BOTTOM = 0;
 	private static final double PADDING_LEFT = 10;
 
-    private ObservableList<GUITableViewTableVariable> data = FXCollections.observableArrayList();
+    private ObservableList<GUITableViewVariable> data = FXCollections.observableArrayList();
 
     public GUITableView(ResourceBundle r, VariableDictionary myVarDict) {
         myResources = r;
@@ -49,7 +49,6 @@ public class GUITableView implements IGUIObject {
         myTableView.setEditable(true);
         
         createVariableColumn();
-        
         createValueColumn();
 
         myTableView.setItems(data);
@@ -68,26 +67,30 @@ public class GUITableView implements IGUIObject {
         myVariableColumn =
                 new TableColumn<>(myResources.getString("VariablesColumn"));
         myVariableColumn.setMinWidth(TABLE_COLUMN_WIDTH);
-        myVariableColumn.setCellValueFactory(new PropertyValueFactory<GUITableViewTableVariable, String>("variableName"));
+        myVariableColumn.setCellValueFactory(
+        		new PropertyValueFactory<GUITableViewVariable, String>("variableName"));
     }
     
     /**
      * Create column to hold variable values. 
      */
     public void createValueColumn() {
-        Callback<TableColumn<GUITableViewTableVariable, Double>, TableCell<GUITableViewTableVariable, Double>> cellFactory =
+        Callback<TableColumn<GUITableViewVariable, Double>, 
+        TableCell<GUITableViewVariable, Double>> cellFactory =
                 (event -> {
                 	return new GUITableViewEditingCell();
                 });
         myValueColumn =
                 new TableColumn<>(myResources.getString("ValuesColumn"));
         myValueColumn.setMinWidth(TABLE_COLUMN_WIDTH);
-        myValueColumn.setCellValueFactory(new PropertyValueFactory<GUITableViewTableVariable, Double>("variableValue"));
+        myValueColumn.setCellValueFactory(
+        		new PropertyValueFactory<GUITableViewVariable, Double>("variableValue"));
         myValueColumn.setCellFactory(cellFactory);
         myValueColumn.setOnEditCommit(event -> {
-        	event.getTableView().getItems().get(event.getTablePosition().getRow()).setVariableValue(event.getNewValue());
-        	varDict.makeVariable(event.getTableView().getItems().get(event.getTablePosition().getRow())
-        			.getVariableName(), event.getNewValue());
+        	event.getTableView().getItems().get(
+        			event.getTablePosition().getRow()).setVariableValue(event.getNewValue());
+        	varDict.makeVariable(event.getTableView().getItems().get(
+        			event.getTablePosition().getRow()).getVariableName(), event.getNewValue());
         });
     }
     /**
@@ -97,7 +100,7 @@ public class GUITableView implements IGUIObject {
     public void updateNode() {
         data.clear();
         for (String s: varDict.getKeySet()) {
-            data.add(new GUITableViewTableVariable(s, varDict.getNodeFor(s)));
+            data.add(new GUITableViewVariable(s, varDict.getNodeFor(s)));
         }
     }
 }
