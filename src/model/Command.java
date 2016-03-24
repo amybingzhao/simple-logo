@@ -1,3 +1,23 @@
+// This entire file is part of my masterpiece.
+// Blake Kaplan
+
+/**
+ * I chose to include this class in my masterpiece because it shows how adaptable our design was.
+ * This class showcases both the extensibility of our class hierarchy and how well our design
+ * incorporated variable scope.
+ *
+ * When interpret is called, the code retrieves the procedure and parameters from the
+ * CommandDictionary and executes it accordingly. The Command class is able to serve as a placeholder
+ * for user defined commands while the expression tree is being built. It then takes on the user defined
+ * command's procedure during execution. This class is, therefore, well suited for our design.
+ *
+ * During execution in the interpret method, we also see that the code goes through a series of
+ * variable creation calls to initialize the arguments. In order to keep these new variables in
+ * a more local scope, we can see that a clone of the VariableDictionary is passed so that these
+ * new variables remain local to the function, the only place were the VariableDictionary clone exists.
+ * It is this cloned VariableDictionary that is passed into the children Nodes during execution.
+ */
+
 package model;
 
 import java.util.ArrayList;
@@ -50,8 +70,9 @@ public class Command extends Node {
 				myProcedure = commandDict.getCommandFor(myName).getProcedure();
 			} 
 			VariableDictionary scopedDictionary = varDict.createClone();
-			parameters = commandDict.getCommandFor(myName).getParams();
-			myProcedure = commandDict.getCommandFor(myName).getProcedure();
+            Command myCommand = commandDict.getCommandFor(myName);
+			parameters = myCommand.getParams();
+			myProcedure = myCommand.getProcedure();
 
 			List<IFunctions> children = getChildren();
 			for (int i = 0; i < parameters.size(); i++) {
@@ -63,7 +84,7 @@ public class Command extends Node {
 				myNode.interpret(commandDict, scopedDictionary);
 			}
 		}
-		return 0;
+		return 1;
 	}
 
 	/**

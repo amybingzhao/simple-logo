@@ -1,3 +1,19 @@
+// This entire file is part of my masterpiece.
+// Blake Kaplan
+
+/**
+ * I chose to include this class because because it shows how extensible our design is.
+ *
+ * When interpret is called, the code adds the new procedure and its related information
+ * to the CommandDictionary whose reference is passed into the interpret command.
+ *
+ * In addition, I also made the toString method adapt to all languages. The translateToLanguage
+ * and getTranslation methods allow the toString method to convert an expression tree into a
+ * translated string version that can be stored and later parsed to regenerate the same exact expression tree.
+ * This model works for all of the languages provided in the resource files and was
+ * very helpful for saving and loading the workspace's user defined commands.
+ */
+
 package model;
 
 import java.util.List;
@@ -15,6 +31,8 @@ public class MakeUserInstruction extends Node {
     private static final String SPACE = " ";
     private static final String SLASHES = "\\";
     private static final String OPTION_SEPARATOR = "\\|";
+    private static final String EMPTY_STRING = "";
+    private static final int FIRST_CHOICE = 0;
     private String myName;
     private String myCurrentLanguage;
 
@@ -64,7 +82,7 @@ public class MakeUserInstruction extends Node {
      * @return translated string.
      */
     private String translateToLanguage(String command){
-        String translated = "";
+        String translated = EMPTY_STRING;
         String[] splitCommand = command.split(SPACE);
         for (String entry : splitCommand){
             translated = translated + getTranslation(entry) + SPACE;
@@ -80,9 +98,7 @@ public class MakeUserInstruction extends Node {
     private String getTranslation(String entry){
         ResourceBundle languageBundle = ResourceBundle.getBundle(myCurrentLanguage);
         if (languageBundle.containsKey(entry)){
-            String options = languageBundle.getString(entry);
-            String[] splitOptions = options.split(OPTION_SEPARATOR);
-            return splitOptions[0].replace(SLASHES, "");
+            return languageBundle.getString(entry).split(OPTION_SEPARATOR)[FIRST_CHOICE].replace(SLASHES, EMPTY_STRING);
         }
         else{
             return entry;
@@ -90,7 +106,7 @@ public class MakeUserInstruction extends Node {
     }
 
     /**
-     * Returns the required user input for this command.
+     * Returns the string representation of the procedure tree
      */
     @Override
     public String toString() {
