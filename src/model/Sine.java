@@ -4,7 +4,7 @@ package model;
  * Sine function.
  * Created by blakekaplan on 2/27/16.
  */
-public class Sine extends Node {
+public class Sine extends TreeNode {
 
     private static final String SINE = "Sine ";
     private static final int DEGREES = 0;

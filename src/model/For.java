@@ -6,7 +6,7 @@ import java.util.List;
  * For function.
  * Created by blakekaplan on 2/25/16.
  */
-public class For extends Node {
+public class For extends TreeNode {
 
     private static final String FOR = "For ";
     private static final int VARIABLE_AND_LIMITS = 0;

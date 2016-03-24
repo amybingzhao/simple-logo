@@ -5,7 +5,7 @@ package model;
  * @author amyzhao
  *
  */
-public class Sum extends Node{
+public class Sum extends TreeNode{
 	
 	private static final String SUM = "Sum ";
 	

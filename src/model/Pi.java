@@ -4,7 +4,7 @@ package model;
  * Pi function.
  * Created by blakekaplan on 2/27/16.
  */
-public class Pi extends Node {
+public class Pi extends TreeNode {
 
     private static final String PI = "Pi ";
 

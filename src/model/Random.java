@@ -4,7 +4,7 @@ package model;
  * Random number function.
  * Created by blakekaplan on 2/27/16.
  */
-public class Random extends Node {
+public class Random extends TreeNode {
 
     private static final String RANDOM = "Random ";
     private static final int MAX = 0;

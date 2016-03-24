@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class DoTimes extends Node {
+public class DoTimes extends TreeNode {
 
     private static final String DOTIMES = "DoTimes ";
     private static final int VARIABLE_AND_LIMIT = 0;

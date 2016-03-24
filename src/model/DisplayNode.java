@@ -3,7 +3,7 @@ package model;
 import guipackage.GUICanvas;
 import guipackage.GUICanvasPen;
 
-public abstract class DisplayNode extends Node {
+public abstract class DisplayNode extends TreeNode {
 	
 	private GUICanvas myCanvas;
 

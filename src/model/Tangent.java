@@ -4,7 +4,7 @@ package model;
  * Tangent function.
  * Created by blakekaplan on 2/27/16.
  */
-public class Tangent extends Node {
+public class Tangent extends TreeNode {
 
     private static final String TANGENT = "Tangent ";
     private static final int DEGREES = 0;

@@ -6,7 +6,7 @@ import java.util.List;
  * Power function.
  * Created by blakekaplan on 2/27/16.
  */
-public class Power extends Node {
+public class Power extends TreeNode {
 
 	private static final String POWER = "Power ";
 	private static final int BASE = 0;

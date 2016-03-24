@@ -4,7 +4,7 @@ package model;
  * Difference function.
  * Created by blakekaplan on 2/27/16.
  */
-public class Difference extends Node {
+public class Difference extends TreeNode {
 
     private static final String DIFFERENCE = "Difference ";
     private static final int START = 0;

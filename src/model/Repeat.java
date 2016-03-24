@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class Repeat extends Node {
+public class Repeat extends TreeNode {
 
     private static final String REPEAT = "Repeat ";
     private static final int EXPR = 0;

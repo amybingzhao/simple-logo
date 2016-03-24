@@ -4,7 +4,7 @@ package model;
  * Quotient function.
  * Created by blakekaplan on 2/27/16.
  */
-public class Quotient extends Node {
+public class Quotient extends TreeNode {
 
     private static final String QUOTIENT = "Quotient ";
 

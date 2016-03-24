@@ -24,14 +24,14 @@ import java.util.List;
  * @author amyzhao
  *
  */
-public abstract class Node implements IFunctions {
+public abstract class TreeNode implements IFunctions {
     private List<IFunctions> myChildren;
     private int numChildrenNeeded;
 
     /**
      * Initializes the node's list of children.
      */
-    public Node() {
+    public TreeNode() {
         myChildren = new ArrayList<>();
     }
 
@@ -39,7 +39,7 @@ public abstract class Node implements IFunctions {
      * Adds a child node to the node's list.
      * @param child: node representing one of the current node's parameters.
      */
-    public void addChild(Node child) {
+    public void addChild(TreeNode child) {
     	if (child != null) {
     		myChildren.add(child);
     	}

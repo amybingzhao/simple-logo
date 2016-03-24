@@ -148,8 +148,8 @@ public class Parser {
      * @return a Node whose children are its parameters.
      * @throws ClassNotFoundException
      */
-    private Node createGroup (List<String> inputList) throws ClassNotFoundException {
-        Node group = getFunctionObject(parseText(inputList.get(0)));
+    private TreeNode createGroup (List<String> inputList) throws ClassNotFoundException {
+        TreeNode group = getFunctionObject(parseText(inputList.get(0)));
         inputList.remove(0);
         addChildrenToListOrGroupNode(group, inputList, GROUP_END);
         return group;
@@ -162,9 +162,9 @@ public class Parser {
      * @param endDelimiter: "]" for list, ")" for group.
      * @throws ClassNotFoundException
      */
-    private void addChildrenToListOrGroupNode(Node node, List<String> inputList, String endDelimiter) throws ClassNotFoundException {
+    private void addChildrenToListOrGroupNode(TreeNode node, List<String> inputList, String endDelimiter) throws ClassNotFoundException {
     	while (!(parseText(inputList.get(0))).equals(endDelimiter)) {
-        	Node childHead;
+        	TreeNode childHead;
         	if (parseText(inputList.get(0)).equals(LIST_START)) {
         		inputList.remove(0);
         		childHead = createList(inputList);
@@ -186,9 +186,9 @@ public class Parser {
      * @return the next command to be added to the command tree.
      * @throws ClassNotFoundException
      */
-    private Node createClass(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
+    private TreeNode createClass(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
         String name = parseText(commandToBuild);
-        Node node = null;
+        TreeNode node = null;
         inputCommandList.remove(0);
         switch (name) {
             case CONSTANT:
@@ -227,8 +227,8 @@ public class Parser {
      * @return Node for the desired user-defined command.
      * @throws ClassNotFoundException
      */
-    private Node handleCommand(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
-        Node node;
+    private TreeNode handleCommand(String commandToBuild, List<String> inputCommandList) throws ClassNotFoundException {
+        TreeNode node;
         if (commandDict.contains(commandToBuild)) {
             node = commandDict.getCommandFor(commandToBuild);
             node.setNumChildrenNeeded(commandDict.getNumArgsForkey(commandToBuild));
@@ -263,7 +263,7 @@ public class Parser {
      * @return node object for the command.
      * @throws ClassNotFoundException
      */
-    private Node getFunctionObject(String name) throws ClassNotFoundException {
+    private TreeNode getFunctionObject(String name) throws ClassNotFoundException {
         Class<?> className = Class.forName(MODEL + name);
         try {
             if (isTurtleCommand(name)) {
@@ -277,7 +277,7 @@ public class Parser {
                 myNode.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
                 return myNode;
             } else {
-            	Node myNode = (Node) className.newInstance();
+            	TreeNode myNode = (TreeNode) className.newInstance();
                 myNode.setNumChildrenNeeded(Integer.parseInt(myNumChildrenPerCommand.getString(name)));
                 return myNode;
             }
@@ -293,9 +293,9 @@ public class Parser {
      * @param inputCommandList: remaining list of user input.
      * @throws ClassNotFoundException
      */
-    private void addChildrenToNode(Node node, List<String> inputCommandList) throws ClassNotFoundException {
+    private void addChildrenToNode(TreeNode node, List<String> inputCommandList) throws ClassNotFoundException {
         for (int i = 0; i < node.getNumChildrenNeeded(); i++) {
-            Node childNode = createClass(inputCommandList.get(0), inputCommandList);
+            TreeNode childNode = createClass(inputCommandList.get(0), inputCommandList);
             if (childNode != null) {
                 node.addChild(childNode);
             }

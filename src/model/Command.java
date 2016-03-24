@@ -7,7 +7,7 @@ import java.util.List;
  * Command object
  * Created by blakekaplan on 2/26/16.
  */
-public class Command extends Node {
+public class Command extends TreeNode {
 
 	private String myName;
 	private List<String> parameters;

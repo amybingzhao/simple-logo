@@ -4,7 +4,7 @@ package model;
  * Minus function.
  * Created by blakekaplan on 2/27/16.
  */
-public class Minus extends Node {
+public class Minus extends TreeNode {
 
     private static final String MINUS = "Minus ";
     private static final int EXPR = 0;

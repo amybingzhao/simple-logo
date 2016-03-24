@@ -4,7 +4,7 @@ package model;
  * Cosine function.
  * Created by blakekaplan on 2/27/16.
  */
-public class Cosine extends Node {
+public class Cosine extends TreeNode {
 
     private static final String COSINE = "Cosine ";
     private static final int DEGREES = 0;

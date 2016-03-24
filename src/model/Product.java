@@ -4,7 +4,7 @@ package model;
  * Product function.
  * Created by blakekaplan on 2/27/16.
  */
-public class Product extends Node {
+public class Product extends TreeNode {
 
     private static final String PRODUCT = "Product ";
 

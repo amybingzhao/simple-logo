@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by blakekaplan on 3/10/16.
  */
-public class Define extends Node {
+public class Define extends TreeNode {
 
     public static final String DEFINE = "Define ";
 

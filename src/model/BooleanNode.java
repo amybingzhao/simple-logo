@@ -17,7 +17,7 @@ package model;
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class BooleanNode extends Node {
+public abstract class BooleanNode extends TreeNode {
 
 	/**
 	 * Returns 1 if given condition is satisfied; 0 o.w.

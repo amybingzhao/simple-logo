@@ -4,7 +4,7 @@ package model;
  * ArcTangent function.
  * Created by blakekaplan on 2/27/16.
  */
-public class ArcTangent extends Node {
+public class ArcTangent extends TreeNode {
 
     private static final String ARC_TANGENT = "ArcTangent ";
     private static final int DEGREES = 0;

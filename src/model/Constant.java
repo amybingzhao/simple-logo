@@ -5,7 +5,7 @@ package model;
  * @author amyzhao
  *
  */
-public class Constant extends Node {
+public class Constant extends TreeNode {
 
     private int val;
 

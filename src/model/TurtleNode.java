@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class TurtleNode extends Node {
+public abstract class TurtleNode extends TreeNode {
     private List<Turtle> myTurtles;
 
     /**

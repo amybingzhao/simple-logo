@@ -7,7 +7,7 @@ import java.util.List;
  * Created by blakekaplan
  */
 
-public class MakeVariable extends Node {
+public class MakeVariable extends TreeNode {
 
     private static final String MAKE = "MakeVariable ";
     private static final int VARIABLE_NAME = 0;

@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author amyzhao
  */
-public class CommandList extends Node {
+public class CommandList extends TreeNode {
 
     /**
      * Interprets a list of commands, executing each command within the list.

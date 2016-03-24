@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public abstract class IfNode extends Node {
+public abstract class IfNode extends TreeNode {
 	private static final int EXPR = 0;
 	private static final int TRUE_COMMANDS = 1;
     private static final int FALSE_COMMANDS = 2;

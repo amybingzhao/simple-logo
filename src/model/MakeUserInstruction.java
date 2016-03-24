@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
  * MakeUserInstruction function to implement To.
  * Created by blakekaplan on 2/25/16.
  */
-public class MakeUserInstruction extends Node {
+public class MakeUserInstruction extends TreeNode {
 
     private static final int VARIABLES = 0;
     private static final int PROCEDURE = 1;

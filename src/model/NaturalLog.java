@@ -4,7 +4,7 @@ package model;
  * NaturalLog function.
  * Created by blakekaplan on 2/27/16.
  */
-public class NaturalLog extends Node {
+public class NaturalLog extends TreeNode {
 
     private static final String NATURAL_LOG = "NaturalLog ";
     private static final int EXPR = 0;

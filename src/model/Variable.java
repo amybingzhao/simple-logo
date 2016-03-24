@@ -5,7 +5,7 @@ package model;
  *
  * @author blakekaplan
  */
-public class Variable extends Node {
+public class Variable extends TreeNode {
 
     private String name;
 
