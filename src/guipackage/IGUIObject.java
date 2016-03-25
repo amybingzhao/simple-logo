@@ -13,8 +13,7 @@ import javafx.scene.Node;
 /**
  * This interface is the core of the internal API. In order to add new features, you
  * can create a new class that implements this interface. Once the GUI knows to
- * create the new element in the GUIObjectFactory, the new feature will essentially
- * be added.
+ * create the new element in the GUIFactory, the new feature will essentially be added.
  *
  * @author David
  */
@@ -22,14 +21,9 @@ public interface IGUIObject {
 
     /**
      * This method creates the GUI element and passes it to the GUI class as a Node
-     * type. This method takes in the controller because some of the subclasses will
-     * need the controller and its methods once its event is triggered. The nodeType
-     * String will tell the GUIObjectFactory which type of Node to create.
+     * type. All of the IGUIObject types will include this class because the TabMainScreen
+     * class will create the Nodes from the IGUIObjects by calling this method.
      *
-     * @param c
-     * @param nodeType
-     * @return
-     * @throws ClassNotFoundException 
      */
     public Node createNode();
 
