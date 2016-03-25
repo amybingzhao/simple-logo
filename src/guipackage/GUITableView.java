@@ -31,12 +31,14 @@ import model.VariableDictionary;
  */
 public class GUITableView implements IGUIObject {
 
-    private ResourceBundle myResources;
+	private ResourceBundle myResources;
     private TableView<GUITableViewVariable> myTableView;
     private TableColumn<GUITableViewVariable, String> myVariableColumn;
     private TableColumn<GUITableViewVariable, Double> myValueColumn;
     private VariableDictionary varDict;
     private ObservableList<GUITableViewVariable> data;
+    private static final String VARIABLE_VALUE = "variableValue";
+	private static final String VARIABLE_NAME = "variableName";
     private static final int TABLE_COLUMN_WIDTH = 130;
 	private static final double PADDING_TOP = 0;
 	private static final double PADDING_RIGHT = 0;
@@ -78,7 +80,7 @@ public class GUITableView implements IGUIObject {
                 new TableColumn<>(myResources.getString("VariablesColumn"));
         myVariableColumn.setMinWidth(TABLE_COLUMN_WIDTH);
         myVariableColumn.setCellValueFactory(
-        		new PropertyValueFactory<GUITableViewVariable, String>("variableName"));
+        		new PropertyValueFactory<GUITableViewVariable, String>(VARIABLE_NAME));
     }
     
     /**
@@ -94,7 +96,7 @@ public class GUITableView implements IGUIObject {
                 new TableColumn<>(myResources.getString("ValuesColumn"));
         myValueColumn.setMinWidth(TABLE_COLUMN_WIDTH);
         myValueColumn.setCellValueFactory(
-        		new PropertyValueFactory<GUITableViewVariable, Double>("variableValue"));
+        		new PropertyValueFactory<GUITableViewVariable, Double>(VARIABLE_VALUE));
         myValueColumn.setCellFactory(cellFactory);
         myValueColumn.setOnEditCommit(event -> {
         	event.getTableView().getItems().get(
