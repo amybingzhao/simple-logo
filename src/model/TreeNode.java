@@ -1,8 +1,9 @@
 // This entire file is part of my masterpiece.
 // Amy Zhao
 
-// The Node class is an abstract base class for all of the SLogo functions. It implements the IFunctions interface, and thus by extension, 
-// all of the SLogo functions implement the IFunctions interface.
+// The TreeNode class is an abstract base class for all of the SLogo functions. It was refactored to be named TreeNode instead of Node to avoid
+// confusion and conflict with the JavaFX node class. It implements the IFunctions interface, and thus by extension, all of the SLogo functions
+// implement the IFunctions interface.
 
 // The use of this inheritance hierarchy allowed for significant flexibility in terms of adding new SLogo functions, and also allowed us
 // to build a tree of Nodes for ease of executing the user-entered commands once they'd been parsed. This makes it open to extension since

@@ -2,7 +2,7 @@
 // Amy Zhao
 
 // For my code masterpiece, I chose to refactor the IFunctions interface, the Node superclass, the BooleanNode superclass, and
-// the Equal subclass to highlight some of our back-end design choices in implementing different SLogo functions.
+// the Equal subclass to demonstrate some of our back-end design choices for implementing a single SLogo function.
 
 // The purpose of this interface is to provide a clear, concise overview of the methods that are common to all SLogo functions.
 // We used the interpreter design pattern to take advantage of polymorphism, since all functions have a subset of common methods
@@ -10,7 +10,7 @@
 // know that this interface only has these 3 methods. Thus, when passing lists and trees of IFunctions in the Parser, the 
 // Controller, and in the children of different IFunctions nodes, the programmer knows exactly what behavior the object has 
 // available for them to use without having to understand the implementation of each SLogo function because of the abstraction 
-// provided by the IFunctions interface.
+// provided to them by the IFunctions interface.
 
 package model;
 
