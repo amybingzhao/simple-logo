@@ -22,5 +22,4 @@ public class GUIComboBoxColorB extends GUIComboBoxColor {
 	protected void setCanvasValues(Color col) {
 		canvas.getBackgroundCanvas().setBackgroundColor(col, comboBox.getValue());
 	}
-	
 }

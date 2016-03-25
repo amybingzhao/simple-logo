@@ -137,5 +137,4 @@ public abstract class GUIComboBox implements IGUIObject {
 	public List<String> getOptionsList(){
 		return optionsList();
 	}
-
 }

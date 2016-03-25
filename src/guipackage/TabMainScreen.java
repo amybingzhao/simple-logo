@@ -1,3 +1,17 @@
+// This entire file is part of my masterpiece.
+// Annie Tang
+/**
+ * Purpose: This class sets up the main workspace and places the GUI elements on the screen, utilizing
+ * the GUIFactory class I created. 
+ * 
+ * Why it's good: All the methods are short and succinct and only do what the method name suggests.
+ * I think this demonstrates well the idea of separating functionality. The class itself is also not overly
+ * large. It only contains what is strictly needed in the main Tab. There are also no magic values, because
+ * all the Strings are either constants of ResourceBundle String keys. Finally, instead of containing instantiation
+ * details for EVERY GUI object that is placed into the workspace, this class utilizes a separate Factory class to
+ * hide these details and keep the code readable.  
+ */
+
 package guipackage;
 
 import controller.Controller;
@@ -40,7 +54,6 @@ public class TabMainScreen {
     public TabMainScreen(String tabText){
     	this.tabText = tabText;
     }
-	
 	
 	/**
 	 * Sets up all elements on Tab and returns the Tab

@@ -1,3 +1,15 @@
+// This entire file is part of my masterpiece.
+// Annie Tang
+/**
+ * Purpose: This class uses the Factory design pattern to return instances of a GUI object, based on
+ * the resource bundle String key that is given. 
+ *  
+ * Why it's good: This Factory class is very readable with its switch statements and provides a level of abstraction.
+ * It hides instantiation details of each type of GUI object, so that the class where this factory is used (TabMainScreen)
+ * need not worry about it. Rather than include an instantiation loop in TabMainScreen,
+ * this Factory class ensures that each class has a distinct job. It also prevents bloated classes. 
+ */
+
 package guipackage;
 
 import java.util.ResourceBundle;

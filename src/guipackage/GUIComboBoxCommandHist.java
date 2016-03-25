@@ -42,5 +42,4 @@ public class GUIComboBoxCommandHist extends GUIComboBox {
 	protected Node getNodeForBox(String item) {
 		return new Label(NO_NODE_FOR_BOX);
 	}
-	
 }
