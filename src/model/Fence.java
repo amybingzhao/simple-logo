@@ -17,6 +17,7 @@ public class Fence extends DisplayNode{
      */
     @Override
     protected void performCanvasOperation(GUICanvas canvas, double val) {
+        //Changes the Bounds type in the GUICanvas
         canvas.setBoundsType(Bounds.Fence);
     }
 

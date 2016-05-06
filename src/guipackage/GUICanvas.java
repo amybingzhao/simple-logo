@@ -236,11 +236,13 @@ public class GUICanvas implements Observer{
 	}
 	
 	/**
-	 * Converts coordinate to its toroidal coordinate if it is greater than the maximum or less than the minimum coordinate.
-	 * @param coordinate
-	 * @return
+	 * Sets the Turtle's coordinate based on the Wrap logic
+     *
+	 * @param coordinate    The incoming coordinate from the Turtle
+	 * @return  The new coordinate following the Wrap logic
+     *
 	 */
-	private double toroidalBounds(double coordinate) {
+	private double wrapBounds(double coordinate) {
 		if (coordinate > MAX_COORDINATE) {
 			coordinate = coordinate%MAX_COORDINATE;
 		}
@@ -252,6 +254,12 @@ public class GUICanvas implements Observer{
 		return coordinate;
 	}
 
+    /**
+     * Sets the Turtle's coordinate based on the Fence logic
+     *
+     * @param coordinate    The original coordinate from the Turtle
+     * @return  The new coordinate following Fence logic
+     */
     private double fenceBounds(double coordinate){
         if (coordinate >= MAX_COORDINATE) {
             coordinate = MAX_COORDINATE;
@@ -262,6 +270,11 @@ public class GUICanvas implements Observer{
         return coordinate;
     }
 
+    /**
+     * Sets the Turtle's coordinate based on the desired Bound logic
+     * @param coordinate    The incoming Turtle coordinate
+     * @return  The Turtle's new coordinate following the desired Bound logic
+     */
     private double getCoordinate(double coordinate) {
         double ret = 0;
         Class[] myParams = new Class<?>[1];
@@ -278,6 +291,11 @@ public class GUICanvas implements Observer{
         }
     }
 
+    /**
+     * Sets the Bound behavior for the GUICanvas
+     *
+     * @param type  The desired Bound behavior
+     */
     public void setBoundsType(Bounds type){
         myBoundsType = type;
     }

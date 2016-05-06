@@ -3,9 +3,14 @@ package model;
 import guipackage.GUICanvas;
 import guipackage.GUICanvasPen;
 
+import java.util.ResourceBundle;
+
 public abstract class DisplayNode extends Node {
-	
-	private GUICanvas myCanvas;
+
+    private static final String VALUE = "Value";
+    private static final int DEFAULT = 0;
+    private static final String BOUNDS_BUNDLE = "model/boundshandling";
+    private GUICanvas myCanvas;
 
 	/**
 	 * Sets the canvas for this node to the current canvas.
@@ -47,7 +52,12 @@ public abstract class DisplayNode extends Node {
 		GUICanvas myCanvas = getCanvas();
         if (getChildren().isEmpty()) {
             performCanvasOperation(myCanvas, 0);
-            return 0;
+            if (ResourceBundle.getBundle(BOUNDS_BUNDLE).containsKey(toString())){
+                return Double.parseDouble(ResourceBundle.getBundle(BOUNDS_BUNDLE).getString(toString() + VALUE));
+            }
+            else{
+                return DEFAULT;
+            }
         }
         else{
             performCanvasOperation(myCanvas, getChildren().get(0).interpret(commandDict, varDict));
