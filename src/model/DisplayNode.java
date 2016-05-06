@@ -45,11 +45,15 @@ public abstract class DisplayNode extends Node {
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
             throws ClassNotFoundException {
 		GUICanvas myCanvas = getCanvas();
-		performCanvasOperation(myCanvas, getChildren().get(0).interpret(commandDict, varDict));
-		if (getChildren().isEmpty()) {
-			
-		}
-		return getChildren().get(0).interpret(commandDict, varDict);
+        if (getChildren().isEmpty()) {
+            performCanvasOperation(myCanvas, 0);
+            return 0;
+        }
+        else{
+            performCanvasOperation(myCanvas, getChildren().get(0).interpret(commandDict, varDict));
+            return getChildren().get(0).interpret(commandDict, varDict);
+        }
+
 	}
 
 }

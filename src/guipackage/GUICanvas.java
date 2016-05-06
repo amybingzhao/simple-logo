@@ -1,12 +1,7 @@
 package guipackage;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.*;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -16,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Rotate;
+import model.Bounds;
 import model.Turtle;
 
 
@@ -40,12 +36,15 @@ public class GUICanvas implements Observer{
 	private static final int DEFAULT = 0;
 	private static final int MAX_COORDINATE = 500;
 	private static final int MIN_COORDINATE = 0;
+    private static final String BOUNDSHANDLING = "model/boundshandling";
+    private Bounds myBoundsType;
 	private Canvas canvasStamps;
 	private Pane myCanvasRoot;
 	private GraphicsContext gcStamps;
 	private Map<Turtle, List<GraphicsContext>> myTurtles;
 	private List<Double[]> turtleParameters;	
 	private ResourceBundle myResources;
+    private ResourceBundle boundsResource;
 	private GUICanvasPen myPen;
 	private GUICanvasRight canvasRight;
 	private Group root;
@@ -67,6 +66,8 @@ public class GUICanvas implements Observer{
 		myTurtleImageView = new GUICanvasTurtleImageView(root, myTurtles);
 		myAnimation = new GUICanvasAnimation();
 		setRightCanvas();
+        boundsResource = ResourceBundle.getBundle(BOUNDSHANDLING);
+        myBoundsType = Bounds.Wrap;
 	}
 	
 	/**
@@ -173,7 +174,7 @@ public class GUICanvas implements Observer{
 			int myX = STARTING_X;
 			int myY = STARTING_Y;
 			setOldCoordinates(turtle, myX, myY, DEFAULT);
-			myTurtleImageView.createImageViewForTurtle(turtle, toroidalBounds(myX), toroidalBounds(myY), canvasRight);
+			myTurtleImageView.createImageViewForTurtle(turtle, getCoordinate(myX), getCoordinate(myY), canvasRight);
 		}
 	}
 	
@@ -198,8 +199,8 @@ public class GUICanvas implements Observer{
 	private void drawTurtle(Turtle turtle) {
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		GraphicsContext gcDrawing = myTurtles.get(turtle).get(1);
-		double myX = toroidalBounds(turtle.getCurX() + CANVAS_X_TRANSFORM - CENTER_FACTOR);
-		double myY = toroidalBounds(-(turtle.getCurY() - CANVAS_Y_TRANSFORM + CENTER_FACTOR));
+		double myX = getCoordinate(turtle.getCurX() + CANVAS_X_TRANSFORM - CENTER_FACTOR);
+		double myY = getCoordinate(-(turtle.getCurY() - CANVAS_Y_TRANSFORM + CENTER_FACTOR));
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(turtle.getDirection(), myX + CENTER_FACTOR, myY + CENTER_FACTOR);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
@@ -250,6 +251,37 @@ public class GUICanvas implements Observer{
 		}
 		return coordinate;
 	}
+
+    private double fenceBounds(double coordinate){
+        if (coordinate >= MAX_COORDINATE) {
+            coordinate = MAX_COORDINATE;
+        }
+        else if (coordinate <= MIN_COORDINATE){
+            coordinate = MIN_COORDINATE;
+        }
+        return coordinate;
+    }
+
+    private double getCoordinate(double coordinate) {
+        double ret = 0;
+        Class[] myParams = new Class<?>[1];
+        myParams[0] = double.class;
+        Object[] myArgs = new Object[1];
+        myArgs[0] = coordinate;
+        try {
+            Method myMethod = this.getClass().getDeclaredMethod(boundsResource.getString(myBoundsType.toString()), myParams);
+            ret = (double) myMethod.invoke(this, myArgs);
+            return ret;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    public void setBoundsType(Bounds type){
+        myBoundsType = type;
+    }
 	
 	/**
 	 * Draws the pen line by creating a circle every time the turtle is updated.
@@ -302,8 +334,8 @@ public class GUICanvas implements Observer{
 	public double drawStamps() {
 		for (Turtle turtle: myTurtles.keySet()) {
 			if (turtle.isActive()) {
-				gcStamps.drawImage(myTurtleImageView.getTurtleShape(), toroidalBounds(turtle.getCurX() + STARTING_X),
-						toroidalBounds(-turtle.getCurY() + STARTING_Y), TURTLE_SIZE, TURTLE_SIZE);
+				gcStamps.drawImage(myTurtleImageView.getTurtleShape(), getCoordinate(turtle.getCurX() + STARTING_X),
+						getCoordinate(-turtle.getCurY() + STARTING_Y), TURTLE_SIZE, TURTLE_SIZE);
 			}
 		}
 		return myTurtleImageView.getTurtleShapeIndex();
