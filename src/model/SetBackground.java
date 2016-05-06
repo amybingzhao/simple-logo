@@ -1,6 +1,6 @@
 package model;
 
-import guipackage.GUICanvas;
+import guipackage.CanvasMain;
 
 public class SetBackground extends DisplayNode {
 
@@ -10,8 +10,8 @@ public class SetBackground extends DisplayNode {
 	 * Sets the canvas's background color to the color on the palette and index val.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
-		canvas.getBackgroundCanvas().setBackgroundColor((int) val);
+	protected void performCanvasOperation(CanvasMain canvas, double val) {
+		canvas.getCanvasBackground().setBackgroundColor((int) val);
 	}
 
 	/**

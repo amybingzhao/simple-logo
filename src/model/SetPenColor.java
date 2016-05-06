@@ -1,6 +1,6 @@
 package model;
 
-import guipackage.GUICanvas;
+import guipackage.CanvasMain;
 
 public class SetPenColor extends DisplayNode {
 	private static final String SET_PEN_COLOR = "SetPenColor ";
@@ -9,7 +9,7 @@ public class SetPenColor extends DisplayNode {
 	 * Sets the pen color to the one specified by the index val in the palette.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
+	protected void performCanvasOperation(CanvasMain canvas, double val) {
 		canvas.getPen().setMyPenColor((int) val);
 	}
 	

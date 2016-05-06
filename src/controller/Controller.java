@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import guipackage.GUIAlert;
-import guipackage.GUICanvas;
+import guipackage.CanvasMain;
 import guipackage.GUILabeled;
 import javafx.stage.Stage;
 import model.CommandDictionary;
@@ -46,7 +46,7 @@ public class Controller {
     private List<String> myCommandHistory;
     private GUILabeled myOutput;
     private GUIAlert myAlert;
-    private GUICanvas myCanvas;
+    private CanvasMain myCanvas;
     private ResourceBundle myGUIResource;
     private CommandDictionary commandDict;
     private VariableDictionary varDict;
@@ -57,7 +57,7 @@ public class Controller {
      * @param canvas: workspace's canvas.
      * @param stage: workspace's stage.
      */
-    public Controller(GUICanvas canvas, Stage stage) {
+    public Controller(CanvasMain canvas, Stage stage) {
         myCanvas = canvas;
         myStage = stage;
         init();
@@ -267,8 +267,8 @@ public class Controller {
      */
     public void save(File file) {
         XMLSaver mySaver = new XMLSaver(commandDict, varDict, this);
-        mySaver.generateFile(myCanvas.getBackgroundCanvas().getBackgroundColor(), myCanvas.getPen().getMyPenRGB(), 
-        		myCanvas.getTurtleImageView().getTurtleImageName(), file);
+        mySaver.generateFile(myCanvas.getCanvasBackground().getBackgroundColor(), myCanvas.getPen().getMyPenRGB(), 
+        		myCanvas.getImageManager().getTurtleImageName(), file);
     }
 
     /**
@@ -278,4 +278,8 @@ public class Controller {
     public Stage getStage() {
         return myStage;
     }
+    
+//    public void goBackToGamePlayer(){
+//    	
+//    }
 }

@@ -1,6 +1,6 @@
 package model;
 
-import guipackage.GUICanvas;
+import guipackage.CanvasMain;
 
 public class GetShape extends DisplayNode {
 
@@ -12,14 +12,14 @@ public class GetShape extends DisplayNode {
 	@Override
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
             throws ClassNotFoundException {
-		return getCanvas().getTurtleImageView().getTurtleShapeIndex();
+		return getCanvas().getImageManager().getTurtleImageIndex();
 	}
 	
 	/**
 	 * Not used for this function.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
+	protected void performCanvasOperation(CanvasMain canvas, double val) {
 		//not used
 	}
 

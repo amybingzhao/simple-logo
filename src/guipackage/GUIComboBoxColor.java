@@ -19,7 +19,7 @@ abstract class GUIComboBoxColor extends GUIComboBox{
 	private static final int RECTANGLE_SIDE_SIZE = 20;
 	protected List<String> palette;
 	
-	public GUIComboBoxColor(GUICanvas canvas, ResourceBundle myResources,
+	public GUIComboBoxColor(CanvasMain canvas, ResourceBundle myResources,
 			String promptText, String paletteSource) {
 		super(canvas, myResources, promptText, paletteSource);
 		fillDefaultPalette();

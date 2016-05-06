@@ -15,10 +15,10 @@ public class GUIAnimationControl implements IGUIObject {
 	private static final double SLIDER_MAX = 1.6;
 	private static final int PADDING = 10;
 	private static final int VBOX_SPACING = 5;
-	private GUICanvas myCanvas;
+	private CanvasMain myCanvas;
 	private ResourceBundle myResources;
 	
-	public GUIAnimationControl(ResourceBundle r, GUICanvas canvas) {
+	public GUIAnimationControl(ResourceBundle r, CanvasMain canvas) {
 		myResources = r;
 		myCanvas = canvas;
 	}

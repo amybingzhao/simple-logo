@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 
 public class GUIComboBoxLanguages extends GUIComboBox {
 
-	public GUIComboBoxLanguages(GUICanvas canvas, ResourceBundle myResources, Controller myController,
+	public GUIComboBoxLanguages(CanvasMain canvas, ResourceBundle myResources, Controller myController,
 			String promptText, GUICommandLine myCommandLine) {
 		super(canvas, myResources, myController, promptText, myCommandLine);
 	}

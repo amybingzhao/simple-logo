@@ -1,3 +1,7 @@
+/**
+ * Modified for VOOGASalad addition
+ */
+
 package guipackage;
 
 import java.util.List;
@@ -11,22 +15,35 @@ import model.Turtle;
  * @author AnnieTang
  *
  */
-public class GUICanvasRight {
+public class CanvasRight {
 	GUIComboBoxColor myBackgroundPalette;
 	GUIComboBoxColor myPenPalette;
 	GUIComboBoxImages myImagePalette;
 	GUIPenSettings myPenSettings;
 	GUITurtleState myTurtleState;
 	ResourceBundle myResources;
+	private CanvasMain myCanvas;
 	
-	public GUICanvasRight(ResourceBundle myResources, GUIComboBoxColor background, GUIComboBoxColor pen, 
-			GUIComboBoxImages images, GUIPenSettings penSettings, GUITurtleState turtleState) {
+	public CanvasRight(ResourceBundle myResources, CanvasMain myCanvas) {
 		this.myResources = myResources;
-		this.myBackgroundPalette = background;
-		this.myPenPalette = pen;
-		this.myImagePalette = images;
-		this.myPenSettings = penSettings;
-		this.myTurtleState = turtleState;
+		this.myCanvas = myCanvas;
+		initializeEnvironment();
+	}
+	
+	private void initializeEnvironment(){
+		myBackgroundPalette = new GUIComboBoxColorB(myCanvas, myResources, 
+				myResources.getString("BackgroundColorPalettePromptText"),
+				myResources.getString("DefaultBackgroundColors"));
+		myPenPalette = new GUIComboBoxColorP(myCanvas, myResources, 
+				myResources.getString("PenColorPalettePromptText"), 
+				myResources.getString("DefaultPenColors"));
+		myImagePalette = new GUIComboBoxImages(myCanvas, myResources, myResources.getString("ImageComboBoxPromptText"));
+		myPenSettings = new GUIPenSettings(myResources, myCanvas);
+		myTurtleState = new GUITurtleState(myResources, 
+				new GUILabeled(myResources, myResources.getString("TurtleLocation")),
+				new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
+				new GUILabeled(myResources, myResources.getString("TurtlePen")),
+				new GUILabeled(myResources, myResources.getString("TurtleActive")));
 	}
 	/**
 	 * Returns VBox containing ComboBoxes for background color palette, pen color palette, 
@@ -64,7 +81,7 @@ public class GUICanvasRight {
 	 * @param RGB
 	 * @param index
 	 */
-	public void changePalettes(String RGB, int index){
+	public void setPalettes(String RGB, int index){
 		myBackgroundPalette.changePalette(RGB, index);
 		myPenPalette.changePalette(RGB, index);
 	}

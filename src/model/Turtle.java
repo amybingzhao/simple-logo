@@ -1,3 +1,6 @@
+/**
+ * Modified for VOOGASalad addition
+ */
 package model;
 
 import java.util.Observable;
@@ -27,6 +30,7 @@ public class Turtle extends Observable {
     private static final double ONE_REVOLUTION = 360;
     private static final double INCREMENT = 1;
     private static final int SQUARE = 2;
+    private static final String DEFAULT_IMAGE = "tortoise.png";
 
     /**
      * Creates a turtle at the origin with the given ID.
@@ -40,6 +44,8 @@ public class Turtle extends Observable {
         isVisible = true;
         myDirection = 0;
         isCurrentTurtle = false;
+        myImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
+        turtleImageView = new ImageView(myImage);
     }
 
     /**
@@ -270,4 +276,8 @@ public class Turtle extends Observable {
     public ImageView getImageView(){
     	return turtleImageView;
     }
+
+	public void setImage(Image image) {
+		this.myImage = image;
+	}
 }

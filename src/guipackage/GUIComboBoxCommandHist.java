@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
  */
 
 public class GUIComboBoxCommandHist extends GUIComboBox {
-	public GUIComboBoxCommandHist(GUICanvas canvas, ResourceBundle myResources, Controller myController,
+	public GUIComboBoxCommandHist(CanvasMain canvas, ResourceBundle myResources, Controller myController,
 			String promptText, GUICommandLine myCommandLine) {
 		super(canvas, myResources, myController, promptText, myCommandLine);
 	}

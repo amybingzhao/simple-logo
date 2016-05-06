@@ -1,3 +1,7 @@
+/**
+ * Modified for VOOGASalad addition
+ */
+
 package guipackage;
 
 import java.io.File;
@@ -22,7 +26,7 @@ public class GUIComboBoxImages extends GUIComboBox {
 	private static final int STANDARD_IMAGE_HEIGHT = 20;
 	private static final String IMAGE_RESOURCE = "Images";
 	
-	public GUIComboBoxImages(GUICanvas canvas, ResourceBundle myResources, String promptText) {
+	public GUIComboBoxImages(CanvasMain canvas, ResourceBundle myResources, String promptText) {
 		super(canvas, myResources, promptText);
 		imageMap = new HashMap<>();
 		imageNames = new ArrayList<>();
@@ -67,8 +71,8 @@ public class GUIComboBoxImages extends GUIComboBox {
 	protected void setButtonAction() {
 		comboButton.setOnAction(event -> {
 			Image image = new Image(getClass().getClassLoader().getResourceAsStream(comboBox.getValue()));
-			canvas.getTurtleImageView().setTurtleShape(image, comboBox.getValue());
-			canvas.updateTurtleImageView();
+			canvas.getImageManager().setTurtleImage(image, comboBox.getValue());
+			canvas.setCenterPane();
 		});
 	}
 	/**

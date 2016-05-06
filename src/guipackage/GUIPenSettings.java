@@ -22,8 +22,8 @@ public class GUIPenSettings implements IGUIObject{
 	private static final int PADDING = 10;
 	private static final int BOX_SPACING = 10;
 	private ResourceBundle myResources;
-	private GUICanvas myCanvas;
-	private GUICanvasPen myPen;
+	private CanvasMain myCanvas;
+	private CanvasPen myPen;
 	private ToggleGroup penUpDownGroup;
 	private ToggleGroup penTypeGroup;
 	private Label penLabel;
@@ -32,7 +32,7 @@ public class GUIPenSettings implements IGUIObject{
 	private VBox vbox1;
 	private VBox vbox2;
 	
-	public GUIPenSettings(ResourceBundle r, GUICanvas c) {
+	public GUIPenSettings(ResourceBundle r, CanvasMain c) {
 		myResources = r;
 		myCanvas = c;
 		myPen = myCanvas.getPen();

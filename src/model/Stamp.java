@@ -1,6 +1,6 @@
 package model;
 
-import guipackage.GUICanvas;
+import guipackage.CanvasMain;
 
 public class Stamp extends DisplayNode {
 
@@ -19,7 +19,7 @@ public class Stamp extends DisplayNode {
 	 * Not used in this class.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
+	protected void performCanvasOperation(CanvasMain canvas, double val) {
 		// do nothing
 	}
 

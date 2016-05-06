@@ -20,12 +20,12 @@ import javafx.stage.FileChooser;
 public class GUISaveLoad implements IGUIObject {
 	private ResourceBundle myResources;
 	private Controller myController;
-	private GUICanvas myCanvas;
+	private CanvasMain myCanvas;
 	private GUICommandLine myCommandLine;
 	
 	private static final int PADDING = 10;
 
-	public GUISaveLoad(ResourceBundle r, Controller c, GUICanvas canvas, GUICommandLine cLine) {
+	public GUISaveLoad(ResourceBundle r, Controller c, CanvasMain canvas, GUICommandLine cLine) {
 		myResources = r;
 		myController = c;
 		myCanvas = canvas;
@@ -73,11 +73,11 @@ public class GUISaveLoad implements IGUIObject {
      */
     private void loadCanvasProperties() {
     	myController.loadXML(promptForFileName(false));
-    	myCanvas.getBackgroundCanvas().setBackgroundColor(stringToColor(myController.getXMLParser().getBackgroundColor()),
+    	myCanvas.getCanvasBackground().setBackgroundColor(stringToColor(myController.getXMLParser().getBackgroundColor()),
     			myController.getXMLParser().getBackgroundColor());
     	myCanvas.getPen().setMyPenColor(stringToColor(myController.getXMLParser().getPenColor()),
     			myController.getXMLParser().getPenColor());
-    	myCanvas.getTurtleImageView().setTurtleShape(stringToImage(myController.getXMLParser().getTurtleImage()),
+    	myCanvas.getImageManager().setTurtleImage(stringToImage(myController.getXMLParser().getTurtleImage()),
     			myController.getXMLParser().getTurtleImage());
     	myCanvas.updateTurtleImageView();
     	inputCommands(myController.getXMLParser().getCommandStrings());

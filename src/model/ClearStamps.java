@@ -1,6 +1,6 @@
 package model;
 
-import guipackage.GUICanvas;
+import guipackage.CanvasMain;
 
 public class ClearStamps extends DisplayNode {
 
@@ -20,7 +20,7 @@ public class ClearStamps extends DisplayNode {
 	 * Not used for this class.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
+	protected void performCanvasOperation(CanvasMain canvas, double val) {
 		// do nothing
 	}
 

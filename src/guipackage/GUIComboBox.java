@@ -32,10 +32,10 @@ public abstract class GUIComboBox implements IGUIObject {
 	protected ComboBox<String> comboBox;
 	protected GUICommandLine myCommandLine;
 	protected Button comboButton;
-	protected GUICanvas canvas;
+	protected CanvasMain canvas;
 	protected String paletteSource;
 	
-	public GUIComboBox(GUICanvas canvas, ResourceBundle myResources, Controller myController, String promptText, GUICommandLine myCommandLine) {
+	public GUIComboBox(CanvasMain canvas, ResourceBundle myResources, Controller myController, String promptText, GUICommandLine myCommandLine) {
 		this.canvas = canvas;
 		this.myResources = myResources;
 		this.myController = myController;
@@ -43,13 +43,13 @@ public abstract class GUIComboBox implements IGUIObject {
 		this.myCommandLine = myCommandLine;
 	}
 	
-	public GUIComboBox(GUICanvas canvas, ResourceBundle myResources, String promptText){
+	public GUIComboBox(CanvasMain canvas, ResourceBundle myResources, String promptText){
 		this.canvas = canvas;
 		this.myResources = myResources;
 		this.promptText = promptText;
 	}
 	
-	public GUIComboBox(GUICanvas canvas, ResourceBundle myResources, String promptText, String paletteSource){
+	public GUIComboBox(CanvasMain canvas, ResourceBundle myResources, String promptText, String paletteSource){
 		this.canvas = canvas;
 		this.myResources = myResources;
 		this.promptText = promptText;

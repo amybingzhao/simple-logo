@@ -5,7 +5,7 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
-import guipackage.GUICanvas;
+import guipackage.CanvasMain;
 import model.*;
 
 /**
@@ -38,7 +38,7 @@ public class Parser {
     private List<Turtle> myCurTurtles;
     private VariableDictionary varDict;
     private CommandDictionary commandDict;
-    private GUICanvas myCanvas;
+    private CanvasMain myCanvas;
     private String currentLanguage;
 
     /**
@@ -47,7 +47,7 @@ public class Parser {
      * @param myVarDict: current workspace's variable dictionary.
      * @param canvas: current workspace's canvas.
      */
-    public Parser(CommandDictionary myComDict, VariableDictionary myVarDict, GUICanvas canvas) {
+    public Parser(CommandDictionary myComDict, VariableDictionary myVarDict, CanvasMain canvas) {
         mySymbols = new ArrayList<>();
         myNumChildrenPerCommand = ResourceBundle.getBundle(NUM_CHILDREN_PER_COMMAND);
         myTurtleCommands = ResourceBundle.getBundle(TURTLE_COMMANDS_RESOURCE);

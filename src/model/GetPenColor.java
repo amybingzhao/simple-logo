@@ -1,6 +1,6 @@
 package model;
 
-import guipackage.GUICanvas;
+import guipackage.CanvasMain;
 
 public class GetPenColor extends DisplayNode {
 
@@ -19,7 +19,7 @@ public class GetPenColor extends DisplayNode {
 	 * Not used for this function.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
+	protected void performCanvasOperation(CanvasMain canvas, double val) {
 		//not used
 	}
 

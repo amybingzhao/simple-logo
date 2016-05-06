@@ -12,7 +12,7 @@ import model.Turtle;
 
 /**
  * Main GUI class. Creates main JavaFX components for GUI.
- * @author 
+ * @author AnnieTang
  *
  */
 public class GUI implements IGUI {
@@ -74,27 +74,23 @@ public class GUI implements IGUI {
 	}
 	
 	/**
-	 * Returns width of window
-	 */
-	@Override
-	public int getWidth() {
-		return windowWidth;
-	}
-
-	/**
-	 * Returns height of window
-	 */
-	@Override
-	public int getHeight() {
-		return windowHeight;
-	}
-	
-	/**
 	 * Notifies the turtle's observers that the turtle has changed.
 	 */
 	@Override
 	public void notifyAllObservers() {
 		myTurtle.notifyObservers();
+	}
+
+	@Override
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

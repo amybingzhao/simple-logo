@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
  */
 public class GUIComboBoxColorB extends GUIComboBoxColor {	
 	
-	public GUIComboBoxColorB(GUICanvas canvas, ResourceBundle myResources,
+	public GUIComboBoxColorB(CanvasMain canvas, ResourceBundle myResources,
 			String promptText, String paletteSource) {
 		super(canvas, myResources, promptText, paletteSource);
 	}
@@ -20,6 +20,6 @@ public class GUIComboBoxColorB extends GUIComboBoxColor {
 	 */
 	@Override
 	protected void setCanvasValues(Color col) {
-		canvas.getBackgroundCanvas().setBackgroundColor(col, comboBox.getValue());
+		canvas.getCanvasBackground().setBackgroundColor(col, comboBox.getValue());
 	}
 }

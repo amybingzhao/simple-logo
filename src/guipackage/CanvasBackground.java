@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
  * @author AnnieTang
  *
  */
-public class GUICanvasBackground {
+public class CanvasBackground {
 	private static final Color DEFAULT_BACKGROUND_COLOR = Color.WHITE;
 	private static final int RGB_MAX = 255;
 	private static final int DEFAULT_INT = 0;
@@ -22,7 +22,7 @@ public class GUICanvasBackground {
 	private List<String> myBackgroundPalette;
 	
 	
-	public GUICanvasBackground(int canvasWidth, int canvasHeight) {
+	public CanvasBackground(int canvasWidth, int canvasHeight) {
 		this.canvasWidth = canvasWidth;
 		this.canvasHeight = canvasHeight;
 	}

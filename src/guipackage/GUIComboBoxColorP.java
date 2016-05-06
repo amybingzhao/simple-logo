@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
  */
 public class GUIComboBoxColorP extends GUIComboBoxColor {
 
-	public GUIComboBoxColorP(GUICanvas canvas, ResourceBundle myResources,
+	public GUIComboBoxColorP(CanvasMain canvas, ResourceBundle myResources,
 			String promptText, String paletteSource) {
 		super(canvas, myResources, promptText, paletteSource);
 	}

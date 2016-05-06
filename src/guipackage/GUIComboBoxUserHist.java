@@ -20,7 +20,7 @@ public class GUIComboBoxUserHist extends GUIComboBox {
     private CommandDictionary myUserDefinedCommands;
     private TextInputDialog dialog;
 
-    public GUIComboBoxUserHist(GUICanvas canvas, ResourceBundle myResources, Controller myController,
+    public GUIComboBoxUserHist(CanvasMain canvas, ResourceBundle myResources, Controller myController,
                                      String promptText, GUICommandLine myCommandLine, CommandDictionary myComDict) {
         super(canvas, myResources, myController, promptText, myCommandLine);
         myUserDefinedCommands = myComDict;

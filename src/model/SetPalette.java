@@ -1,7 +1,7 @@
 package model;
 
 import java.util.List;
-import guipackage.GUICanvas;
+import guipackage.CanvasMain;
 
 public class SetPalette extends DisplayNode {
 
@@ -29,7 +29,7 @@ public class SetPalette extends DisplayNode {
 	 * Not used in this class.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
+	protected void performCanvasOperation(CanvasMain canvas, double val) {
 		//not used
 	}
 	

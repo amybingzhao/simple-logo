@@ -1,15 +1,23 @@
+/**
+ * Modified for VOOGASalad addition
+ */
+
 package guipackage;
 
 import java.util.List;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 /**
  * Pen component of the main canvas. 
  * @author AnnieTang, DavidYang
  *
  */
-public class GUICanvasPen {
+public class CanvasPen {
+	private static final String DOTTED_LINE = "Dotted Line";
+	private static final String DASHED_LINE = "Dashed Line";
 	private static final String SOLID_LINE = "Solid Line";
+	private static final int PEN_SCALE = 10;
 	private static final int DEFAULT_PEN_SIZE = 3;
 	private static final Color DEFAULT_PEN_COLOR = Color.BLACK;
 	private static final int DEFAULT_PEN_COUNTER = 0;
@@ -22,7 +30,7 @@ public class GUICanvasPen {
 	private int myPenCounter;
 	private List<String> myPenPalette;
 	
-	public GUICanvasPen(){
+	public CanvasPen(){
 		myPenSize = DEFAULT_PEN_SIZE;
 		myPenType = SOLID_LINE;
 		myPenColorIndex = 0;
@@ -143,5 +151,47 @@ public class GUICanvasPen {
 	 */
 	protected void setMyPenPalette(List<String> palette){
 		this.myPenPalette = palette;
+	}
+
+	/**
+	 * Creates the circle on the canvas.
+	 * @param gcDrawing
+	 * @param myX
+	 * @param myY
+	 */
+	protected void drawOval(GraphicsContext gcDrawing, double myX, double myY, int centerFactor) {
+		long penSize = Math.round(getMyPenSize());
+		gcDrawing.fillOval(myX + centerFactor - penSize/2, myY + centerFactor - penSize/2,
+				penSize, penSize);
+	}
+	
+	/**
+	 * Draws the pen line by creating a circle every time the turtle is updated.
+	 * @param gcDrawing
+	 * @param myX
+	 * @param myY
+	 */
+	protected void drawLine(GraphicsContext gcDrawing, double myX, double myY, int centerFactor) {
+		int scaledPen = (int) myPenSize * PEN_SCALE;
+		switch (getMyPenType()){
+			case SOLID_LINE: drawOval(gcDrawing, myX, myY, centerFactor);
+			case DASHED_LINE: {
+				if (myPenCounter < scaledPen / 2) {
+					drawOval(gcDrawing, myX, myY, centerFactor);
+				} else if (myPenCounter == scaledPen) {
+					resetPenCounter();
+				}
+				incrementMyPenCounter();
+			}
+			case DOTTED_LINE: {
+				if (myPenCounter == scaledPen / 2) {
+					drawOval(gcDrawing, myX, myY, centerFactor);
+				} else if (myPenCounter== scaledPen) {
+					drawOval(gcDrawing, myX, myY, centerFactor);
+					resetPenCounter();
+				}
+				incrementMyPenCounter();
+			}
+		}
 	}
 }

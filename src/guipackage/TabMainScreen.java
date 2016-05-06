@@ -1,3 +1,7 @@
+/**
+ * Modified for VOOGASalad addition
+ */
+
 // This entire file is part of my masterpiece.
 // Annie Tang
 /**
@@ -35,7 +39,7 @@ public class TabMainScreen {
 	private BorderPane myMainScreen;
 	private ResourceBundle myResources;
 	private GUIFactory myFactory;
-	private GUICanvas canvas;
+	private CanvasMain canvas;
 	private GUICommandLine commandLine;
 	private Controller myController;
 	private GUILabeled myOutput;
@@ -50,7 +54,7 @@ public class TabMainScreen {
 
     private Stage myStage;
     private String tabText;
-    
+       
     public TabMainScreen(String tabText){
     	this.tabText = tabText;
     }
@@ -82,7 +86,7 @@ public class TabMainScreen {
 	private void initializeTab(Stage stage) {
         myStage = stage;
 		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		canvas = new GUICanvas(myResources);
+		canvas = new CanvasMain(myResources);
 		myController = new Controller(canvas, myStage);
 		commandLine = new GUICommandLine(myController, myResources, this);
 	}
@@ -91,8 +95,7 @@ public class TabMainScreen {
 	 * Set center pane of BorderPane.
 	 */
 	private void setCenterPane() {
-		Node canvasNode = canvas.createNode();
-		myMainScreen.setCenter(canvasNode);
+		myMainScreen.setCenter(canvas.getNode());
 	}
 	/**
 	 * Set left pane of BorderPane.

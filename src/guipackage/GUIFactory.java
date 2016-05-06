@@ -23,12 +23,12 @@ import controller.Controller;
  */
 public class GUIFactory {
 	private ResourceBundle myResources;
-	private GUICanvas canvas;
+	private CanvasMain canvas;
 	private Controller myController;
 	private GUICommandLine myCommandLine;
 	private static final String PROMPT_TEXT = "PromptText"; 
 
-	public GUIFactory(ResourceBundle myResources, Controller myController, GUICanvas canvas, GUICommandLine cLine){
+	public GUIFactory(ResourceBundle myResources, Controller myController, CanvasMain canvas, GUICommandLine cLine){
 		this.myResources = myResources;
 		this.canvas = canvas; 
 		this.myController = myController;
