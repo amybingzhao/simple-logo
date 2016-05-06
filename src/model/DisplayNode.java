@@ -4,7 +4,7 @@ import guipackage.GUICanvas;
 import guipackage.GUICanvasPen;
 
 public abstract class DisplayNode extends Node {
-	
+	private static final int VALUE = 0;
 	private GUICanvas myCanvas;
 
 	/**
@@ -35,8 +35,9 @@ public abstract class DisplayNode extends Node {
 	 * Abstract method that performs some operation on the canvas.
 	 * @param canvas: canvas to act on.
 	 * @param val: value to use for operation (may be value or index).
+	 * @return 
 	 */
-	protected abstract void performCanvasOperation(GUICanvas canvas, double val);
+	protected abstract double performCanvasOperation(GUICanvas canvas, double val);
 	
 	/**
 	 * Gets the canvas for this workspace and performs an operation on it.
@@ -45,11 +46,15 @@ public abstract class DisplayNode extends Node {
     public double interpret(CommandDictionary commandDict, VariableDictionary varDict)
             throws ClassNotFoundException {
 		GUICanvas myCanvas = getCanvas();
-		performCanvasOperation(myCanvas, getChildren().get(0).interpret(commandDict, varDict));
+		return performCanvasOperation(myCanvas, setVal(commandDict, varDict));
+	}
+	
+	private double setVal(CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
 		if (getChildren().isEmpty()) {
-			
+			return 0;
+		} else {
+			return getChildren().get(VALUE).interpret(commandDict, varDict);
 		}
-		return getChildren().get(0).interpret(commandDict, varDict);
 	}
 
 }

@@ -10,8 +10,9 @@ public class SetBackground extends DisplayNode {
 	 * Sets the canvas's background color to the color on the palette and index val.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
+	protected double performCanvasOperation(GUICanvas canvas, double val) {
 		canvas.getBackgroundCanvas().setBackgroundColor((int) val);
+		return val;
 	}
 
 	/**

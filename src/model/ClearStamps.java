@@ -20,8 +20,8 @@ public class ClearStamps extends DisplayNode {
 	 * Not used for this class.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
-		// do nothing
+	protected double performCanvasOperation(GUICanvas canvas, double val) {
+		return val;
 	}
 
 	/**

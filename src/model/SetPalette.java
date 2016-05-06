@@ -29,8 +29,8 @@ public class SetPalette extends DisplayNode {
 	 * Not used in this class.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
-		//not used
+	protected double performCanvasOperation(GUICanvas canvas, double val) {
+		return val;
 	}
 	
 	/**

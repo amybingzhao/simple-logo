@@ -9,8 +9,9 @@ public class SetShape extends DisplayNode {
 	 * Sets the turtle image to that indicated by the given index.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
+	protected double performCanvasOperation(GUICanvas canvas, double val) {
 		canvas.getTurtleImageView().setTurtleShape((int) val);
+		return val;
 	}
 
 	/**

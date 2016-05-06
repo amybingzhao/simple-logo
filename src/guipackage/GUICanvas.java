@@ -1,4 +1,6 @@
 package guipackage;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Rotate;
 import model.Turtle;
+import sun.security.tools.keytool.Resources;
 
 
 /**
@@ -40,6 +43,10 @@ public class GUICanvas implements Observer{
 	private static final int DEFAULT = 0;
 	private static final int MAX_COORDINATE = 500;
 	private static final int MIN_COORDINATE = 0;
+	private static final String MAX = "MaxBounds";
+	private static final String MIN = "MinBounds";
+	private static final String BOUNDS_RESOURCE = "canvasBounds";
+	private Bounds myBounds;
 	private Canvas canvasStamps;
 	private Pane myCanvasRoot;
 	private GraphicsContext gcStamps;
@@ -53,9 +60,12 @@ public class GUICanvas implements Observer{
 	private GUICanvasBackground myBackgroundCanvas;
 	private GUICanvasAnimation myAnimation;
 	private HBox toReturn;
-	
+	private ResourceBundle myBoundsResource;
+
 	public GUICanvas(ResourceBundle myResources) {
 		this.myResources = myResources;
+		myBoundsResource = Resources.getBundle(BOUNDS_RESOURCE);
+		myBounds = Bounds.Wrap;
 		myTurtles = new HashMap<>();
 		turtleParameters = new ArrayList<>();
 		canvasStamps = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -68,7 +78,7 @@ public class GUICanvas implements Observer{
 		myAnimation = new GUICanvasAnimation();
 		setRightCanvas();
 	}
-	
+
 	/**
 	 * Creates the Canvas Node to be displayed.
 	 * @return Canvas Node
@@ -89,14 +99,14 @@ public class GUICanvas implements Observer{
 				new GUIComboBoxImages(this, myResources, myResources.getString("ImageComboBoxPromptText")),
 				new GUIPenSettings(myResources, this),
 				new GUITurtleState(myResources, new GUILabeled(myResources, myResources.getString("TurtleLocation")),
-												new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
-												new GUILabeled(myResources, myResources.getString("TurtlePen")),
-												new GUILabeled(myResources, myResources.getString("TurtleActive"))));
+						new GUILabeled(myResources, myResources.getString("TurtleHeading")), 
+						new GUILabeled(myResources, myResources.getString("TurtlePen")),
+						new GUILabeled(myResources, myResources.getString("TurtleActive"))));
 		myPen.setMyPenPalette(canvasRight.getPenPalette());
 		myBackgroundCanvas.setMyBackgroundPalette(canvasRight.getBackgroundPalette());
 		myTurtleImageView.setMyImagePalette(canvasRight.getImagePalette());
 	}
-	
+
 	/**
 	 * Updates the Canvas when the Turtle is updated.
 	 */
@@ -112,7 +122,7 @@ public class GUICanvas implements Observer{
 			drawTurtle(turtle);
 		}
 	}
-	
+
 	/**
 	 * Resets Canvas. Deletes all of the Turtle's trails and changes the Turtle back to default.
 	 */
@@ -126,7 +136,7 @@ public class GUICanvas implements Observer{
 			key.doneResetting();
 		}
 	}
-	
+
 	/**
 	 * Keeps track of the old coordinates after updating the Turtle.
 	 */
@@ -136,13 +146,13 @@ public class GUICanvas implements Observer{
 			turtleParameters.add((int) turtle.getID() - 1, coordinates);
 		else turtleParameters.set((int) turtle.getID() - 1, coordinates);
 	}
-	
+
 	/**
 	 * Updates image for each turtle on the canvas.
 	 */
 	protected void updateTurtleImageView(){
 		for(Turtle turtle: myTurtles.keySet()){
-				drawTurtle(turtle);
+			drawTurtle(turtle);
 		}
 	}
 	/**
@@ -156,7 +166,7 @@ public class GUICanvas implements Observer{
 			}
 		}
 	}
-	
+
 	/**
 	 * Adds each new turtle to the map when created.
 	 * @param turtle
@@ -173,10 +183,10 @@ public class GUICanvas implements Observer{
 			int myX = STARTING_X;
 			int myY = STARTING_Y;
 			setOldCoordinates(turtle, myX, myY, DEFAULT);
-			myTurtleImageView.createImageViewForTurtle(turtle, toroidalBounds(myX), toroidalBounds(myY), canvasRight);
+			myTurtleImageView.createImageViewForTurtle(turtle, updateTurtleCoordinate(myX), updateTurtleCoordinate(myY), canvasRight);
 		}
 	}
-	
+
 	/**
 	 * Clears the previous instance of the Turtle on the canvas.
 	 */
@@ -198,8 +208,8 @@ public class GUICanvas implements Observer{
 	private void drawTurtle(Turtle turtle) {
 		GraphicsContext gc = myTurtles.get(turtle).get(0);
 		GraphicsContext gcDrawing = myTurtles.get(turtle).get(1);
-		double myX = toroidalBounds(turtle.getCurX() + CANVAS_X_TRANSFORM - CENTER_FACTOR);
-		double myY = toroidalBounds(-(turtle.getCurY() - CANVAS_Y_TRANSFORM + CENTER_FACTOR));
+		double myX = updateTurtleCoordinate(turtle.getCurX() + CANVAS_X_TRANSFORM - CENTER_FACTOR);
+		double myY = updateTurtleCoordinate(-(turtle.getCurY() - CANVAS_Y_TRANSFORM + CENTER_FACTOR));
 		gc.save(); // saves the current state on stack, including the current transform
 		Rotate r = new Rotate(turtle.getDirection(), myX + CENTER_FACTOR, myY + CENTER_FACTOR);
 		gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
@@ -212,7 +222,7 @@ public class GUICanvas implements Observer{
 		gc.restore();
 		setOldCoordinates(turtle, myX, myY, turtle.getDirection());
 	}
-	
+
 	/**
 	 * Checks to see if the user wants to 
 	 * @param turtle
@@ -233,22 +243,81 @@ public class GUICanvas implements Observer{
 					turtle.getDirection(), myTurtleImageView.getTurtleShape());
 		}
 	}
-	
+
 	/**
-	 * Converts coordinate to its toroidal coordinate if it is greater than the maximum or less than the minimum coordinate.
-	 * @param coordinate
-	 * @return
+	 * Converts coordinate based on the bound type selected by the user if it is greater than the maximum or less than the minimum coordinate.
+	 * @param coordinate: x- or y-coordinate of turtle.
+	 * @return coordinate to render the turtle at.
 	 */
-	private double toroidalBounds(double coordinate) {
+	private double updateTurtleCoordinate(double coordinate) {
 		if (coordinate > MAX_COORDINATE) {
-			coordinate = coordinate%MAX_COORDINATE;
+			coordinate = handleBoundsExceeded(coordinate, myBoundsResource.getString(myBounds.toString()) + MAX);
 		}
 		else if(coordinate < MIN_COORDINATE){
-			double temp_pos = Math.abs(coordinate);
-			double temp_mod = temp_pos%MAX_COORDINATE;
-			coordinate = MAX_COORDINATE - temp_mod;
-		}
+			coordinate = handleBoundsExceeded(coordinate, myBoundsResource.getString(myBounds.toString()) + MIN);
+		}	
 		return coordinate;
+	}
+
+	/**
+	 * Set the bound type.
+	 * @param newBounds: updated bound type.
+	 */
+	public void setBounds(Bounds newBounds) {
+		myBounds = newBounds;
+	}
+	
+	/**
+	 * Handle the situation when the coordinates are outside of the canvas based on the bounds type selected by the user.
+	 * @param coordinate: coordinate to handle.
+	 * @param methodName: name of bound handling method (e.g. wrapMinBound).
+	 * @return updated coordinate to render on the canvas.
+	 */
+	private double handleBoundsExceeded(double coordinate, String methodName) {
+		try {
+			Method boundsHandlingMethod = this.getClass().getDeclaredMethod(methodName, double.class);
+			return (double) boundsHandlingMethod.invoke(this, coordinate);
+		} catch (Exception e) {
+			return coordinate;
+		}
+	}
+
+	/**
+	 * Handles the situation when the coordinate is smaller than the minimum visible coordinate on the canvas for a wrapped canvas.
+	 * @param coordinate: coordinate to handle.
+	 * @return: updated coordinate to render on the canvas.
+	 */
+	private double wrapMinBounds(double coordinate) {
+		double temp_pos = Math.abs(coordinate);
+		double temp_mod = temp_pos % MAX_COORDINATE;
+		return MAX_COORDINATE - temp_mod;	
+	}
+
+	/**
+	 * Handles the situation when the coordinate is larger than the maximum visible coordinate on the canvas for a wrapped canvas.
+	 * @param coordinate: coordinate to handle.
+	 * @return: updated coordinate to render on the canvas.
+	 */
+	private double wrapMaxBounds(double coordinate) {
+		return coordinate % MAX_COORDINATE;
+	}
+
+	/**
+	 * Handles the situation when the coordinate is smaller than the minimum visible coordinate on the canvas for a fenced canvas.
+	 * @param coordinate: coordinate to handle.
+	 * @return: updated coordinate to render on the canvas.
+	 */
+	private double fenceMinBounds(double coordinate) {
+		return MIN_COORDINATE;
+	}
+	
+	/**
+	 * Handles the situation when the coordinate is larger than the maximum visible coordinate on the canvas for a fenced canvas.
+	 * @param coordinate: coordinate to handle.
+	 * @return: updated coordinate to render on the canvas.
+	 */
+	private double fenceMaxBounds(double coordinate) {
+		return MAX_COORDINATE;
 	}
 	
 	/**
@@ -260,29 +329,29 @@ public class GUICanvas implements Observer{
 	private void drawLine(GraphicsContext gcDrawing, double myX, double myY) {
 		int scaledPen = (int) myPen.getMyPenSize() * PEN_SCALE;
 		switch (myPen.getMyPenType()){
-			case SOLID_LINE: {
+		case SOLID_LINE: {
+			drawOval(gcDrawing, myX, myY);
+		}
+		case DASHED_LINE: {
+			if (myPen.getMyPenCounter() < scaledPen / 2) {
 				drawOval(gcDrawing, myX, myY);
+			} else if (myPen.getMyPenCounter() == scaledPen) {
+				myPen.resetPenCounter();
 			}
-			case DASHED_LINE: {
-				if (myPen.getMyPenCounter() < scaledPen / 2) {
-					drawOval(gcDrawing, myX, myY);
-				} else if (myPen.getMyPenCounter() == scaledPen) {
-					myPen.resetPenCounter();
-				}
-				myPen.incrementMyPenCounter();
+			myPen.incrementMyPenCounter();
+		}
+		case DOTTED_LINE: {
+			if (myPen.getMyPenCounter() == scaledPen / 2) {
+				drawOval(gcDrawing, myX, myY);
+			} else if (myPen.getMyPenCounter()== scaledPen) {
+				drawOval(gcDrawing, myX, myY);
+				myPen.resetPenCounter();
 			}
-			case DOTTED_LINE: {
-				if (myPen.getMyPenCounter() == scaledPen / 2) {
-					drawOval(gcDrawing, myX, myY);
-				} else if (myPen.getMyPenCounter()== scaledPen) {
-					drawOval(gcDrawing, myX, myY);
-					myPen.resetPenCounter();
-				}
-				myPen.incrementMyPenCounter();
-			}
+			myPen.incrementMyPenCounter();
+		}
 		}
 	}
-	
+
 	/**
 	 * Creates the circle on the canvas.
 	 * @param gcDrawing
@@ -294,7 +363,7 @@ public class GUICanvas implements Observer{
 		gcDrawing.fillOval(myX + CENTER_FACTOR - penSize/2, myY + CENTER_FACTOR - penSize/2,
 				penSize, penSize);
 	}
-	
+
 	/**
 	 * Creates stamps for each turtle when the stamp command is called.
 	 * @return
@@ -302,20 +371,20 @@ public class GUICanvas implements Observer{
 	public double drawStamps() {
 		for (Turtle turtle: myTurtles.keySet()) {
 			if (turtle.isActive()) {
-				gcStamps.drawImage(myTurtleImageView.getTurtleShape(), toroidalBounds(turtle.getCurX() + STARTING_X),
-						toroidalBounds(-turtle.getCurY() + STARTING_Y), TURTLE_SIZE, TURTLE_SIZE);
+				gcStamps.drawImage(myTurtleImageView.getTurtleShape(), updateTurtleCoordinate(turtle.getCurX() + STARTING_X),
+						updateTurtleCoordinate(-turtle.getCurY() + STARTING_Y), TURTLE_SIZE, TURTLE_SIZE);
 			}
 		}
 		return myTurtleImageView.getTurtleShapeIndex();
 	}
-	
+
 	/**
 	 * Clears the stamps that have previously been created.
 	 */
 	public void clearStamps() {
 		clearGraphicsContext(gcStamps);
 	}
-	
+
 	/**
 	 * Clears the Graphics Context with a large clear rectangle.
 	 * @param gc
@@ -323,7 +392,7 @@ public class GUICanvas implements Observer{
 	private void clearGraphicsContext(GraphicsContext gc) {
 		gc.clearRect(DEFAULT, DEFAULT, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
-	
+
 	/**
 	 * Normalizes the coordinates to the center of the node.
 	 * @param coordinate
@@ -332,7 +401,7 @@ public class GUICanvas implements Observer{
 	private double normalizeCoordinates(double coordinate) {
 		return coordinate + CENTER_FACTOR;
 	}
-	
+
 	/**
 	 * Update both pen and background color palette at given index to given RGB color.
 	 * @param Space separated string of RGB values
@@ -341,22 +410,22 @@ public class GUICanvas implements Observer{
 	public void setPalette(String RGB, int index){
 		canvasRight.changePalettes(RGB, index);
 	}
-	
+
 	/**
 	 * returns current Pen object
 	 */
 	public GUICanvasPen getPen() {
 		return myPen;
 	}
-	
+
 	public GUICanvasBackground getBackgroundCanvas(){
 		return myBackgroundCanvas;
 	}
-	
+
 	public GUICanvasTurtleImageView getTurtleImageView(){
 		return myTurtleImageView;
 	}
-	
+
 	protected GUICanvasAnimation getAnimation(){
 		return myAnimation;
 	}
