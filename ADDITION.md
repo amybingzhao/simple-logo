@@ -20,6 +20,10 @@ While implementing the new feature, I added or modified 9 files total. First, I 
 
 I did not get it completely right on my first try because I made a small mistake with reflection and had also not entirely understood how the front end worked. My approach had been correct and I just had to make small tweaks to fix the bugs I encountered.
 
+**My Approach**
+
+I made it so that the Wrap and Fence commands change a value for the Bounds enum in the GUICanvas. This enum served as the key for a resource file. Using the data in the resource file and reflection, I made the GUICanvas follow the correct bounds behavior in determining the coordinates for a Turtle's visual representation. I set the default bounds behavior to wrap around the edges of the canvas.
+
 
 
 ## Analysis
