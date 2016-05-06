@@ -11,7 +11,7 @@ public class SetBackground extends DisplayNode {
 	 */
 	@Override
 	protected void performCanvasOperation(GUICanvas canvas, double val) {
-		canvas.setBackgroundColor((int) val);
+		canvas.getBackgroundCanvas().setBackgroundColor((int) val);
 	}
 
 	/**

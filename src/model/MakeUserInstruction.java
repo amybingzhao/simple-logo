@@ -12,6 +12,9 @@ public class MakeUserInstruction extends Node {
     private static final int VARIABLES = 0;
     private static final int PROCEDURE = 1;
     public static final String MAKE_USER_INSTRUCTION = "MakeUserInstruction";
+    private static final String SPACE = " ";
+    private static final String SLASHES = "\\";
+    private static final String OPTION_SEPARATOR = "\\|";
     private String myName;
     private String myCurrentLanguage;
 
@@ -62,9 +65,9 @@ public class MakeUserInstruction extends Node {
      */
     private String translateToLanguage(String command){
         String translated = "";
-        String[] splitCommand = command.split(" ");
+        String[] splitCommand = command.split(SPACE);
         for (String entry : splitCommand){
-            translated = translated + getTranslation(entry) + " ";
+            translated = translated + getTranslation(entry) + SPACE;
         }
         return translated;
     }
@@ -78,8 +81,8 @@ public class MakeUserInstruction extends Node {
         ResourceBundle languageBundle = ResourceBundle.getBundle(myCurrentLanguage);
         if (languageBundle.containsKey(entry)){
             String options = languageBundle.getString(entry);
-            String[] splitOptions = options.split("\\|");
-            return splitOptions[0].replace("\\", "");
+            String[] splitOptions = options.split(OPTION_SEPARATOR);
+            return splitOptions[0].replace(SLASHES, "");
         }
         else{
             return entry;
@@ -91,6 +94,6 @@ public class MakeUserInstruction extends Node {
      */
     @Override
     public String toString() {
-        return translateToLanguage(MAKE_USER_INSTRUCTION + " " + myName + " " + childrenToString());
+        return translateToLanguage(MAKE_USER_INSTRUCTION + SPACE + myName + SPACE + childrenToString());
     }
 }

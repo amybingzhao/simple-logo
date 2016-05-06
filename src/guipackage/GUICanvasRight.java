@@ -11,7 +11,7 @@ import model.Turtle;
  * @author AnnieTang
  *
  */
-public class GUICanvasRight implements IGUIObject {
+public class GUICanvasRight {
 	GUIComboBoxColor myBackgroundPalette;
 	GUIComboBoxColor myPenPalette;
 	GUIComboBoxImages myImagePalette;
@@ -28,36 +28,50 @@ public class GUICanvasRight implements IGUIObject {
 		this.myPenSettings = penSettings;
 		this.myTurtleState = turtleState;
 	}
-
-	@Override
+	/**
+	 * Returns VBox containing ComboBoxes for background color palette, pen color palette, 
+	 * image palette, pen settings, and view of turtle state.
+	 */
 	public Node createNode() {
 		VBox vbox = new VBox();
 		vbox.getChildren().addAll(myBackgroundPalette.createNode(), myPenPalette.createNode(), myImagePalette.createNode(),
 				myPenSettings.createNode(), myTurtleState.createNode());
 		return vbox;
 	}
-
-	@Override
-	public void updateNode() {
-	}
-	
+	/**
+	 * Return current set of colors in pen color palette. 
+	 * @return
+	 */
 	public List<String> getPenPalette(){
 		return myPenPalette.getOptionsList();
 	}
-	
+	/**
+	 * Return current set of colors in background color palette. 
+	 * @return
+	 */
 	public List<String> getBackgroundPalette(){
 		return myBackgroundPalette.getOptionsList();
 	}
-	
+	/**
+	 * Return current set of images in image palette. 
+	 * @return
+	 */
 	public List<String> getImagePalette(){
 		return myImagePalette.getOptionsList();
 	}
-	
+	/**
+	 * Change color and given index in both background and pen palettes to the given RGB color.
+	 * @param RGB
+	 * @param index
+	 */
 	public void changePalettes(String RGB, int index){
 		myBackgroundPalette.changePalette(RGB, index);
 		myPenPalette.changePalette(RGB, index);
 	}
-	
+	/**
+	 * Set turtle state viewer to current state (location, direction, pen status, active status) of given turtle. 
+	 * @param turtle
+	 */
 	public void showTurtleState(Turtle turtle){
 		myTurtleState.showTurtleState(turtle);
 	}

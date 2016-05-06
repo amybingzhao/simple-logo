@@ -11,7 +11,8 @@ import javafx.scene.control.TextField;
  *
  */
 
-public class EditingCell extends TableCell<TableVariable, Double>{
+public class GUITableViewEditingCell extends TableCell<GUITableViewTableVariable, Double>{
+	private static final int TEXT_FIELD_MULTIPLIER = 2;
 	private TextField textField;
 	
 	/**
@@ -68,7 +69,7 @@ public class EditingCell extends TableCell<TableVariable, Double>{
      */
     private void createTextField() {
         textField = new TextField(getString());
-        textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()* 2);
+        textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()* TEXT_FIELD_MULTIPLIER);
         textField.focusedProperty().addListener(new ChangeListener<Boolean>(){
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, 

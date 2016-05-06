@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.HBox;
 /**
- * Allows editable text to show up on console in various places. 
+ * Creates Label to allow editable text to show up on console in various places. 
  * @author AnnieTang
  *
  */
@@ -23,7 +23,9 @@ public class GUILabeled implements IGUIObject {
 		outputText = new Label();
 		
 	}
-
+	/**
+	 * Returns HBox with immutable text Label and mutable text Label.
+	 */
 	@Override
 	public Node createNode() {
 		HBox hbox = new HBox();
@@ -39,7 +41,7 @@ public class GUILabeled implements IGUIObject {
 	}
 	
 	/**
-	 * sets the output text as the passed in parameter.
+	 * Sets the mutable output text as the given String.
 	 * @param val
 	 */
 	public void setOutputText(String val){

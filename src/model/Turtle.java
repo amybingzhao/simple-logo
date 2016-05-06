@@ -25,7 +25,7 @@ public class Turtle extends Observable {
     private boolean reset;
     private ImageView turtleImageView;
     private static final double ONE_REVOLUTION = 360;
-    private static final double INCREMENT = 0.1;
+    private static final double INCREMENT = 1;
     private static final int SQUARE = 2;
 
     /**
@@ -260,6 +260,7 @@ public class Turtle extends Observable {
      */
     public void setImageView(ImageView iv){
     	turtleImageView = iv;
+    	updateObservers();
     }
     
     /**

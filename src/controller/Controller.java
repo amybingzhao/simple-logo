@@ -38,6 +38,7 @@ public class Controller {
     private static final String GUI_RESOURCE = "GUI";
     public static final String PARSING_ERROR = "ParsingError";
     private static final String WHITESPACE = "\\p{Space}";
+    private static final String NO_FILE = "NoFile";
     private String myLanguageResource;
     private Parser myParser;
     private XMLParser myXMLParser;
@@ -140,11 +141,13 @@ public class Controller {
      * @param myFile: XML file to load.
      */
     public void loadXML(File myFile) {
-        myXMLParser = new XMLParser(this);
+        myXMLParser = new XMLParser();
         try {
             myXMLParser.parse(myFile);
         } catch (IOException | ParserConfigurationException | SAXException e) {
             myAlert.displayAlert(PARSING_ERROR);
+        } catch (IllegalArgumentException e){
+            myAlert.displayAlert(NO_FILE);
         }
     }
 
@@ -263,8 +266,9 @@ public class Controller {
      * @param file: file to write to.
      */
     public void save(File file) {
-        XMLSaver mySaver = new XMLSaver(commandDict, varDict);
-        mySaver.generateFile(myCanvas.getBackgroundColor(), myCanvas.getPen().getMyPenRGB(), myCanvas.getTurtleImageName(), file);
+        XMLSaver mySaver = new XMLSaver(commandDict, varDict, this);
+        mySaver.generateFile(myCanvas.getBackgroundCanvas().getBackgroundColor(), myCanvas.getPen().getMyPenRGB(), 
+        		myCanvas.getTurtleImageView().getTurtleImageName(), file);
     }
 
     /**

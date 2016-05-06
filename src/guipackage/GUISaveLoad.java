@@ -1,28 +1,39 @@
 package guipackage;
 
 import java.io.File;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-
+/**
+ * Pair of save/load buttons so the user can load an XML to define the workspace, or save the current workspace. 
+ * @author DavidYang, AnnieTang
+ *
+ */
 public class GUISaveLoad implements IGUIObject {
 	private ResourceBundle myResources;
 	private Controller myController;
 	private GUICanvas myCanvas;
+	private GUICommandLine myCommandLine;
 	
 	private static final int PADDING = 10;
 
-	public GUISaveLoad(ResourceBundle r, Controller c, GUICanvas canvas) {
+	public GUISaveLoad(ResourceBundle r, Controller c, GUICanvas canvas, GUICommandLine cLine) {
 		myResources = r;
 		myController = c;
 		myCanvas = canvas;
+		myCommandLine = cLine;
 	}
-	
+	/**
+	 * Returns two buttons for saving and loading XML.
+	 */
 	@Override
 	public Node createNode() {
 		VBox myBox = new VBox(PADDING);
@@ -57,20 +68,49 @@ public class GUISaveLoad implements IGUIObject {
         return fileName;
     }
     
+    /**
+     * Sets workspace preferences to those specified by the given XML. 
+     */
     private void loadCanvasProperties() {
     	myController.loadXML(promptForFileName(false));
-    	myCanvas.setBackgroundColor(myCanvas.stringToColor(myController.getXMLParser().getBackgroundColor()),
+    	myCanvas.getBackgroundCanvas().setBackgroundColor(stringToColor(myController.getXMLParser().getBackgroundColor()),
     			myController.getXMLParser().getBackgroundColor());
-    	myCanvas.setPenColor(myCanvas.stringToColor(myController.getXMLParser().getPenColor()),
+    	myCanvas.getPen().setMyPenColor(stringToColor(myController.getXMLParser().getPenColor()),
     			myController.getXMLParser().getPenColor());
-    	myCanvas.setTurtleShape(myCanvas.stringToImage(myController.getXMLParser().getTurtleImage()),
+    	myCanvas.getTurtleImageView().setTurtleShape(stringToImage(myController.getXMLParser().getTurtleImage()),
     			myController.getXMLParser().getTurtleImage());
+    	myCanvas.updateTurtleImageView();
+    	inputCommands(myController.getXMLParser().getCommandStrings());
+    	inputCommands(myController.getXMLParser().getVariableStrings());
+    	
     }
+    
+    private void inputCommands(List<String> commandList) {
+    	for (String command: commandList) {
+    		myCommandLine.runCommand(command);
+    	}
+    }    
+    /**
+     * Converts image name to Image. 
+     * @param imageString
+     * @return
+     */
+    private Image stringToImage(String imageString){
+    	return new Image(getClass().getClassLoader().getResourceAsStream(imageString));
+    }
+    /**
+     * Converts color String to a JavaFX Color. 
+     * @param colorString
+     * @return
+     */
+    private Color stringToColor(String colorString) {
+		String[] rgb = colorString.split(" ");
+		return Color.rgb((int) Double.parseDouble(rgb[0]),
+				(int) Double.parseDouble(rgb[1]), (int) Double.parseDouble(rgb[2]));
+	}
 
 	@Override
 	public void updateNode() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

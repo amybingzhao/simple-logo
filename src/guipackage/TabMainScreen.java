@@ -7,6 +7,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
+
 /**
  * Create tab for main screen (canvas, command line, options, etc.) 
  * @author AnnieTang
@@ -24,13 +25,14 @@ public class TabMainScreen {
 	private GUICommandLine commandLine;
 	private Controller myController;
 	private GUILabeled myOutput;
-	private GUICanvasRight rightOfCanvas;
 	
 	private IGUIObject userCommands;
 	private IGUIObject previousCommands;
 	private IGUIObject variables;
 	private IGUIObject languageSelector;
 	private IGUIObject saveLoad;
+	private IGUIObject showHide;
+	private IGUIObject animationControl;
 
     private Stage myStage;
     private String tabText;
@@ -39,16 +41,6 @@ public class TabMainScreen {
     	this.tabText = tabText;
     }
 	
-	/**
-	 * Initializes Tab with all necessary components.
-	 */
-	private void initializeTab(Stage stage) {
-        myStage = stage;
-		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
-		canvas = new GUICanvas(myResources);
-		myController = new Controller(canvas, myStage);
-		commandLine = new GUICommandLine(myController, myResources, this);
-	}
 	
 	/**
 	 * Sets up all elements on Tab and returns the Tab
@@ -72,38 +64,57 @@ public class TabMainScreen {
 	}
 	
 	/**
-	 * Next 5 methods all place GUIObjects on the Pane.
+	 * Initializes Tab with all necessary components.
+	 */
+	private void initializeTab(Stage stage) {
+        myStage = stage;
+		this.myResources = ResourceBundle.getBundle(GUI_RESOURCE);
+		canvas = new GUICanvas(myResources);
+		myController = new Controller(canvas, myStage);
+		commandLine = new GUICommandLine(myController, myResources, this);
+	}
+	
+	/**
+	 * Set center pane of BorderPane.
 	 */
 	private void setCenterPane() {
 		Node canvasNode = canvas.createNode();
-		rightOfCanvas = (GUICanvasRight) myFactory.createNewGUIObject("CanvasRight");
-		canvas.addObjectToRight(rightOfCanvas);
 		myMainScreen.setCenter(canvasNode);
 	}
-
+	/**
+	 * Set left pane of BorderPane.
+	 */
 	private void setLeftPane() {
 		VBox leftPanel = new VBox(PANEL_PADDING);
 		userCommands = myFactory.createNewGUIObject("UserCommands");
 		previousCommands = myFactory.createNewGUIObject("PreviousCommands");
 		languageSelector = myFactory.createNewGUIObject("LanguageSelector");
 		saveLoad = myFactory.createNewGUIObject("SaveLoad");
+		showHide = myFactory.createNewGUIObject("ShowHide");
+		animationControl = myFactory.createNewGUIObject("AnimationControl");
 		leftPanel.getChildren().addAll(userCommands.createNode(), 
 				previousCommands.createNode(), languageSelector.createNode(), 
-				saveLoad.createNode());
+				saveLoad.createNode(), showHide.createNode(), animationControl.createNode());
 		myMainScreen.setLeft(leftPanel);
 	}
-	
+	/**
+	 * Set right pane of BorderPane.
+	 */
 	private void setRightPane() {
 		VBox rightPanel = new VBox(PANEL_PADDING);
 		variables = myFactory.createNewGUIObject("Variables");
 		rightPanel.getChildren().addAll(variables.createNode());
 		myMainScreen.setRight(rightPanel);
 	}
-	
+	/**
+	 * Set bottom pane of BorderPane.
+	 */
 	private void setBottomPane(){
 		myMainScreen.setBottom(commandLine.createNode());
 	}
-
+	/**
+	 * Set top pane of BorderPane.
+	 */
 	private void setTopPane() {
 		myOutput = myController.getGUIOutput();
 		myMainScreen.setTop(myOutput.createNode());

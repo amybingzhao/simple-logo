@@ -1,7 +1,5 @@
 package guipackage;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
@@ -16,7 +14,7 @@ import javafx.scene.paint.Color;
 
 abstract class GUIColorPicker implements IGUIObject {
 	private static final int VBOX_PADDING = 5;
-	protected String pickerLabel;
+	private String pickerLabel;
 	protected GUICanvas canvas;
 	
 	public GUIColorPicker(GUICanvas canvas, String pickerLabel) {
@@ -32,12 +30,7 @@ abstract class GUIColorPicker implements IGUIObject {
 		VBox box = new VBox();
         box.setPadding(new Insets(VBOX_PADDING, VBOX_PADDING, VBOX_PADDING, VBOX_PADDING));          
     	ColorPicker colorPicker = new ColorPicker(getStartColor());
-		colorPicker.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				handleEvent(colorPicker);
-			}
-        });
+		colorPicker.setOnAction(event -> handleEvent(colorPicker));
         
         Label text = new Label(pickerLabel);
         box.getChildren().addAll(text, colorPicker);

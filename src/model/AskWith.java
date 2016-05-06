@@ -31,7 +31,7 @@ public class AskWith extends TurtleNode {
 	 * @throws IndexOutOfBoundsException
 	 */
 	private List<Double> checkTurtlesForCondition(List<Turtle> allTurtles, CommandDictionary commandDict, VariableDictionary varDict) throws ClassNotFoundException {
-		List<Double> turtleIDs = new ArrayList<Double>();
+		List<Double> turtleIDs = new ArrayList<>();
 		inactivateAllTurtles();
 		for (int i = 0; i < allTurtles.size(); i++) {
 			allTurtles.get(i).setActive(true);
