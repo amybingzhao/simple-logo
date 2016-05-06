@@ -274,9 +274,8 @@ public class GUICanvas implements Observer{
             return ret;
         }
         catch (Exception e){
-            e.printStackTrace();
+            return ret;
         }
-        return ret;
     }
 
     public void setBoundsType(Bounds type){
