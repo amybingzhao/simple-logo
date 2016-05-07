@@ -8,6 +8,7 @@ import guipackage.GUICanvas;
 public class Wrap extends DisplayNode {
 
     private static final String WRAP = "Wrap";
+    private static final int WRAP_VALUE = 1;
 
     /**
      * Abstract method that performs some operation on the canvas.
@@ -16,9 +17,10 @@ public class Wrap extends DisplayNode {
      * @param val    : value to use for operation (may be value or index).
      */
     @Override
-    protected void performCanvasOperation(GUICanvas canvas, double val) {
+    protected double performCanvasOperation(GUICanvas canvas, double val) {
         //Changes the Bounds type in the GUICanvas
         canvas.setBoundsType(Bounds.Wrap);
+        return WRAP_VALUE;
     }
 
     /**

@@ -19,8 +19,8 @@ public class Stamp extends DisplayNode {
 	 * Not used in this class.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
-		// do nothing
+	protected double performCanvasOperation(GUICanvas canvas, double val) {
+		return 1;
 	}
 
 	/**

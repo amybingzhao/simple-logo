@@ -7,9 +7,7 @@ import java.util.ResourceBundle;
 
 public abstract class DisplayNode extends Node {
 
-    private static final String VALUE = "Value";
-    private static final int DEFAULT = 0;
-    private static final String BOUNDS_BUNDLE = "model/boundshandling";
+    private static final int ZERO_VALUE = 0;
     private GUICanvas myCanvas;
 
 	/**
@@ -41,7 +39,7 @@ public abstract class DisplayNode extends Node {
 	 * @param canvas: canvas to act on.
 	 * @param val: value to use for operation (may be value or index).
 	 */
-	protected abstract void performCanvasOperation(GUICanvas canvas, double val);
+	protected abstract double performCanvasOperation(GUICanvas canvas, double val);
 	
 	/**
 	 * Gets the canvas for this workspace and performs an operation on it.
@@ -51,13 +49,7 @@ public abstract class DisplayNode extends Node {
             throws ClassNotFoundException {
 		GUICanvas myCanvas = getCanvas();
         if (getChildren().isEmpty()) {
-            performCanvasOperation(myCanvas, 0);
-            if (ResourceBundle.getBundle(BOUNDS_BUNDLE).containsKey(toString())){
-                return Double.parseDouble(ResourceBundle.getBundle(BOUNDS_BUNDLE).getString(toString() + VALUE));
-            }
-            else{
-                return DEFAULT;
-            }
+            return performCanvasOperation(myCanvas, ZERO_VALUE);
         }
         else{
             performCanvasOperation(myCanvas, getChildren().get(0).interpret(commandDict, varDict));

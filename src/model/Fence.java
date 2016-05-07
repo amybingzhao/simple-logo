@@ -8,6 +8,7 @@ import guipackage.GUICanvas;
 public class Fence extends DisplayNode{
 
     private static final String FENCE = "Fence";
+    private static final int FENCE_VALUE = 3;
 
     /**
      * Abstract method that performs some operation on the canvas.
@@ -16,9 +17,10 @@ public class Fence extends DisplayNode{
      * @param val    : value to use for operation (may be value or index).
      */
     @Override
-    protected void performCanvasOperation(GUICanvas canvas, double val) {
+    protected double performCanvasOperation(GUICanvas canvas, double val) {
         //Changes the Bounds type in the GUICanvas
         canvas.setBoundsType(Bounds.Fence);
+        return FENCE_VALUE;
     }
 
     /**

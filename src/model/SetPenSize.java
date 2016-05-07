@@ -9,8 +9,9 @@ public class SetPenSize extends DisplayNode {
 	 * Sets the pen size to the given size.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
+	protected double performCanvasOperation(GUICanvas canvas, double val) {
 		canvas.getPen().setMyPenSize(val);
+        return val;
 	}
 
 	/**

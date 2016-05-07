@@ -19,8 +19,8 @@ public class GetShape extends DisplayNode {
 	 * Not used for this function.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
-		//not used
+	protected double performCanvasOperation(GUICanvas canvas, double val) {
+		return 1;
 	}
 
 	/**

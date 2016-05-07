@@ -9,8 +9,9 @@ public class SetPenColor extends DisplayNode {
 	 * Sets the pen color to the one specified by the index val in the palette.
 	 */
 	@Override
-	protected void performCanvasOperation(GUICanvas canvas, double val) {
+	protected double performCanvasOperation(GUICanvas canvas, double val) {
 		canvas.getPen().setMyPenColor((int) val);
+        return val;
 	}
 	
 	/**
