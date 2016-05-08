@@ -1,6 +1,7 @@
 package guipackage;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -66,15 +67,16 @@ public class GUICanvasTurtleImageView {
 	 * @param rotation
 	 * @param newShape
 	 */
-	protected void updateImageView(ImageView imageView, double x, double y, double rotation, Image newShape){
-		updateImageViewLocation(imageView, x, y, newShape);
+	protected void updateImageView(ImageView imageView, double x, double y, double rotation, Image newShape, boolean update){
+		updateImageViewLocation(imageView, x, y, newShape, update);
 		imageView.setRotate(rotation);
 	}
 	
-	protected void updateImageViewLocation(ImageView imageView, double x, double y, Image newShape) {
+	protected void updateImageViewLocation(ImageView imageView, double x, double y, Image newShape, boolean update) {
 		imageView.setX(x);
 		imageView.setY(y);
-		imageView.setImage(newShape);
+		if (update) 
+			imageView.setImage(newShape);
 	}
 	
 	/**
@@ -115,6 +117,7 @@ public class GUICanvasTurtleImageView {
 				myTurtleShapeIndex = myImagePalette.indexOf(turtleName);
 			}
 		}
+		
 	}
 	
 	/**
@@ -164,4 +167,20 @@ public class GUICanvasTurtleImageView {
 			}
 		}
 	}
+	
+//	private void updateImageViews(ImageView image) {
+//		for (Turtle t: myTurtleImages.keySet()) {
+//			myTurtleImages.put(t, image);
+//		}
+//	}
+//	
+//	protected void setImageViews(Map<Turtle, ImageView> images) {
+//		myTurtleImages = images;
+//	}
+//	
+//	protected List<ImageView> getTurtleImages() {
+//		List<ImageView> list = new ArrayList<>();
+//		list.addAll(myTurtleImages.values());
+//		return list;
+//	}
 }

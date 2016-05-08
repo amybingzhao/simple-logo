@@ -39,6 +39,7 @@ public class GUIFactory {
 		case("UserCommandsComboBox"): return new GUIComboBoxUserHist(canvas, myResources, myController,myResources.getString(nodeTypeKey + PROMPT_TEXT), myCommandLine, myController.getCommandDictionary());
 		case("PreviousCommandsComboBox"): return new GUIComboBoxCommandHist(canvas, myResources, myController, myResources.getString(nodeTypeKey+PROMPT_TEXT), myCommandLine);
 		case("ShowHide"):return new GUITurtleStateToggle(myResources, canvas);
+		case("ImageViewChooser"): return new GUITurtleImageViewChanger(myResources, canvas);
 		}
 		return null;
 	}

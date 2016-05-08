@@ -259,8 +259,12 @@ public class Turtle extends Observable {
      * @param iv: imageview for turtle.
      */
     public void setImageView(ImageView iv){
-    	turtleImageView = iv;
+    	setImageViewWithoutNotification(iv);
     	updateObservers();
+    }
+    
+    public void setImageViewWithoutNotification(ImageView iv) {
+    	turtleImageView = iv;
     }
     
     /**

@@ -33,6 +33,7 @@ public class TabMainScreen {
 	private IGUIObject saveLoad;
 	private IGUIObject showHide;
 	private IGUIObject animationControl;
+	private IGUIObject imageViewPicker;
 
     private Stage myStage;
     private String tabText;
@@ -103,7 +104,8 @@ public class TabMainScreen {
 	private void setRightPane() {
 		VBox rightPanel = new VBox(PANEL_PADDING);
 		variables = myFactory.createNewGUIObject("Variables");
-		rightPanel.getChildren().addAll(variables.createNode());
+		imageViewPicker = myFactory.createNewGUIObject("ImageViewChooser");
+		rightPanel.getChildren().addAll(variables.createNode(), imageViewPicker.createNode());
 		myMainScreen.setRight(rightPanel);
 	}
 	/**

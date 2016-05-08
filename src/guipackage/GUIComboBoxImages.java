@@ -66,9 +66,7 @@ public class GUIComboBoxImages extends GUIComboBox {
 	@Override
 	protected void setButtonAction() {
 		comboButton.setOnAction(event -> {
-			Image image = new Image(getClass().getClassLoader().getResourceAsStream(comboBox.getValue()));
-			canvas.getTurtleImageView().setTurtleShape(image, comboBox.getValue());
-			canvas.updateTurtleImageView();
+			performAction();
 		});
 	}
 	/**
@@ -77,5 +75,12 @@ public class GUIComboBoxImages extends GUIComboBox {
 	@Override
 	protected List<String> optionsList() {
 		return imageNames;
+	}
+	
+	protected void performAction() {
+		canvas.setUpdateAllTurtles(true);
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(comboBox.getValue()));
+		canvas.getTurtleImageView().setTurtleShape(image, comboBox.getValue());
+		canvas.updateTurtleImageView();
 	}
 }

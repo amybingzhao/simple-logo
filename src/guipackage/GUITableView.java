@@ -56,6 +56,8 @@ public class GUITableView implements IGUIObject {
 
         myTableView.getColumns().addAll(myVariableColumn, myValueColumn);
         
+        myTableView.setPrefHeight(Double.valueOf(myResources.getString("ListViewHeight")));
+        
         HBox tableView = new HBox();
 		tableView.getChildren().addAll(myTableView);
 		tableView.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
